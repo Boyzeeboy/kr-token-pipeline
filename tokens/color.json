@@ -1,0 +1,68 @@
+{
+  "color": {
+    "brand": {
+      "primary": {
+        "$value": "#0055FF",
+        "$type": "color",
+        "$description": "Primary brand colour"
+      },
+      "secondary": {
+        "$value": "#FF6B00",
+        "$type": "color",
+        "$description": "Secondary brand colour"
+      }
+    },
+    "neutral": {
+      "0": {
+        "$value": "#FFFFFF",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "#F5F5F5",
+        "$type": "color"
+      },
+      "200": {
+        "$value": "#E0E0E0",
+        "$type": "color"
+      },
+      "300": {
+        "$value": "#BDBDBD",
+        "$type": "color"
+      },
+      "400": {
+        "$value": "#9E9E9E",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#757575",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#212121",
+        "$type": "color"
+      },
+      "1000": {
+        "$value": "#000000",
+        "$type": "color"
+      }
+    },
+    "semantic": {
+      "success": {
+        "$value": "#2E7D32",
+        "$type": "color"
+      },
+      "warning": {
+        "$value": "#F57F17",
+        "$type": "color"
+      },
+      "error": {
+        "$value": "#C62828",
+        "$type": "color"
+      },
+      "info": {
+        "$value": "#0277BD",
+        "$type": "color"
+      }
+    }
+  }
+}

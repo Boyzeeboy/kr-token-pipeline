@@ -1,0 +1,49 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --idem-color-brand-primary: #0055ff; /** Primary brand colour */
+  --idem-color-brand-secondary: #ff6b00; /** Secondary brand colour */
+  --idem-color-neutral-0: #ffffff;
+  --idem-color-neutral-100: #f5f5f5;
+  --idem-color-neutral-200: #e0e0e0;
+  --idem-color-neutral-300: #bdbdbd;
+  --idem-color-neutral-400: #9e9e9e;
+  --idem-color-neutral-500: #757575;
+  --idem-color-neutral-900: #212121;
+  --idem-color-neutral-1000: #000000;
+  --idem-color-semantic-success: #2e7d32;
+  --idem-color-semantic-warning: #f57f17;
+  --idem-color-semantic-error: #c62828;
+  --idem-color-semantic-info: #0277bd;
+  --idem-size-spacing-1: 4px;
+  --idem-size-spacing-2: 8px;
+  --idem-size-spacing-3: 12px;
+  --idem-size-spacing-4: 16px;
+  --idem-size-spacing-5: 20px;
+  --idem-size-spacing-6: 24px;
+  --idem-size-spacing-8: 32px;
+  --idem-size-spacing-10: 40px;
+  --idem-size-spacing-12: 48px;
+  --idem-size-border-radius-sm: 4px;
+  --idem-size-border-radius-md: 8px;
+  --idem-size-border-radius-lg: 16px;
+  --idem-size-border-radius-full: 9999px;
+  --idem-font-family-sans: 'Inter', sans-serif;
+  --idem-font-family-mono: 'JetBrains Mono', monospace;
+  --idem-font-size-xs: 12px;
+  --idem-font-size-sm: 14px;
+  --idem-font-size-md: 16px;
+  --idem-font-size-lg: 20px;
+  --idem-font-size-xl: 24px;
+  --idem-font-size-2xl: 32px;
+  --idem-font-size-3xl: 48px;
+  --idem-font-weight-regular: 400;
+  --idem-font-weight-medium: 500;
+  --idem-font-weight-semibold: 600;
+  --idem-font-weight-bold: 700;
+  --idem-font-line-height-tight: 1.2;
+  --idem-font-line-height-normal: 1.5;
+  --idem-font-line-height-loose: 1.8;
+}
