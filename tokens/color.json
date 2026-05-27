@@ -1,66 +1,294 @@
 {
-  "color": {
-    "brand": {
-      "primary": {
-        "$value": "#0055FF",
+  "primitives": {
+    "teal": {
+      "25": {
+        "$value": "#f5fafa",
         "$type": "color",
-        "$description": "Primary brand colour"
+        "$description": "Purpose: The lightest step in the teal primitive scale; a near-white tinted surface value.\nUsage: Referenced by semantic tokens requiring a very subtle teal-tinted wash, such as colour/state/selected in light mode.\nGuidelines: Do not apply directly to component design. All usage must flow through a semantic alias. Reserve for contexts where the tint is barely perceptible against a white background."
       },
-      "secondary": {
-        "$value": "#FF6B00",
+      "50": {
+        "$value": "#e6f2f3",
         "$type": "color",
-        "$description": "Secondary brand colour"
+        "$description": "Purpose: A soft, low-saturation teal primitive establishing the second lightest step in the scale.\nUsage: Consumed by semantic tokens that require a light teal background, such as state and hover overlays.\nGuidelines: Not for direct use in layouts or components. Should always be aliased through a semantic token."
+      },
+      "100": {
+        "$value": "#cfe6e8",
+        "$type": "color",
+        "$description": "Purpose: A light teal primitive representing the third step of the scale.\nUsage: Available for aliasing into semantic tokens where a light but visible teal fill is required.\nGuidelines: Use only as a primitive source value. Do not hard-code into component styles."
+      },
+      "200": {
+        "$value": "#a8d3d7",
+        "$type": "color",
+        "$description": "Purpose: A medium-light teal primitive at the fourth step of the scale.\nUsage: Provides a mid-range light value for teal; usable as a source for subtle border or tinted fill tokens.\nGuidelines: Primitive-layer only. Must be consumed via a semantic token alias."
+      },
+      "300": {
+        "$value": "#7fbfc6",
+        "$type": "color",
+        "$description": "Purpose: A mid-range teal primitive establishing a clearly visible, unsaturated teal.\nUsage: Aliased into semantic tokens for interactive borders, icon fills, and link text in dark mode contexts.\nGuidelines: Not for direct application. Check contrast ratio when aliasing to text or icon tokens — minimum 4.5:1 required for WCAG AA compliance."
+      },
+      "400": {
+        "$value": "#4faab3",
+        "$type": "color",
+        "$description": "Purpose: A medium teal primitive at the fifth-brightest step of the scale.\nUsage: Source value for semantic action, icon, and interactive element tokens in dark mode.\nGuidelines: Validate contrast when used as foreground on dark surfaces. Not for direct use in component design."
+      },
+      "500": {
+        "$value": "#007582",
+        "$type": "color",
+        "$description": "Purpose: The core brand teal; the primary mid-point of the scale and the anchor for the brand identity.\nUsage: Aliased into colour/action/primary (light mode) and colour/background/brand. The single brand-colour source value provided by the brand designer.\nGuidelines: Treat as the canonical brand colour. When aliasing to text or icon contexts, verify WCAG AA compliance. Do not substitute other primitives where teal/500 is expected."
+      },
+      "600": {
+        "$value": "#0c5f6a",
+        "$type": "color",
+        "$description": "Purpose: A darkened brand teal primitive one step below the mid-point.\nUsage: Aliased into hover state tokens for primary actions in light mode (colour/action/primary/hover).\nGuidelines: Use to communicate interaction depth on primary actions. Maintain at least one step of contrast against the resting-state primitive."
+      },
+      "700": {
+        "$value": "#083f47",
+        "$type": "color",
+        "$description": "Purpose: A dark teal primitive providing strong contrast against light surfaces.\nUsage: Aliased into pressed/active state tokens for primary actions in light mode, and into colour/background/promo.\nGuidelines: Reserved for pressed states and promotional backgrounds. Do not use where a softer brand presence is required."
+      },
+      "800": {
+        "$value": "#062f35",
+        "$type": "color",
+        "$description": "Purpose: A very dark teal primitive approaching near-black saturation.\nUsage: Available for aliasing into dark, high-contrast teal surfaces such as deep brand backgrounds.\nGuidelines: Primitive-layer only. Ensure any foreground aliased against this value meets 4.5:1 contrast for text."
+      },
+      "900": {
+        "$value": "#041f24",
+        "$type": "color",
+        "$description": "Purpose: The darkest teal near the bottom of the scale, suitable for deep inverse backgrounds.\nUsage: Aliased into colour/background/inverse to provide the dark branded surface in light mode.\nGuidelines: Only use in contexts where maximum teal depth is required. Foreground on this surface must be a near-white neutral."
+      },
+      "950": {
+        "$value": "#021316",
+        "$type": "color",
+        "$description": "Purpose: The absolute darkest step of the teal scale; near-black with a teal undertone.\nUsage: Available as a source value for the very deepest teal surfaces if required by future component needs.\nGuidelines: Primitive-layer only. Use sparingly — prefer teal/900 unless maximum depth is explicitly required."
       }
     },
     "neutral": {
       "0": {
-        "$value": "#FFFFFF",
+        "$value": "#ffffff",
+        "$type": "color",
+        "$description": "Purpose: The zero-point anchor of the neutral scale; pure white in light mode and the deepest dark-mode base in dark mode.\nUsage: Aliased into colour/background/default and colour/background/raised in light mode; inverted to the darkest surface in dark mode.\nGuidelines: A special-case primitive. Never substitute another step where neutral/0 is expected, as it carries structural meaning as both the lightest and darkest extremes depending on mode."
+      },
+      "50": {
+        "$value": "#f4f5f5",
+        "$type": "color",
+        "$description": "Purpose: The lightest non-white step of the neutral scale; a very subtle off-white.\nUsage: Aliased into colour/background/subtle and colour/background/surface to distinguish page-level tinted regions and component backgrounds from the default canvas.\nGuidelines: Primitive-layer only. Note that subtle and surface share this primitive intentionally — semantic differentiation is achieved through borders and elevation, not colour alone."
+      },
+      "100": {
+        "$value": "#e6e9ea",
+        "$type": "color",
+        "$description": "Purpose: A light neutral primitive providing a soft, visible background distinction.\nUsage: Aliased into colour/background/muted, colour/border/subtle, and colour/state/disabled/bg.\nGuidelines: Not for direct use. When aliased to border tokens, ensure visual separation from adjacent surfaces is sufficient without relying on this colour alone."
+      },
+      "200": {
+        "$value": "#d5dbdd",
+        "$type": "color",
+        "$description": "Purpose: A slightly darker light neutral, providing a clearly visible but low-contrast value.\nUsage: Aliased into colour/border/default and colour/action/secondary for default borders and secondary action fills.\nGuidelines: Primitive-layer only. Border tokens aliasing this value must maintain a minimum 3:1 contrast ratio against adjacent surfaces per WCAG AA."
+      },
+      "300": {
+        "$value": "#c3cccf",
+        "$type": "color",
+        "$description": "Purpose: A mid-light neutral sitting at a clearly visible step between light and mid tones.\nUsage: Aliased into colour/border/strong and colour/action/secondary/hover.\nGuidelines: Not for direct use. When aliased to interactive controls, verify that hover states provide sufficient visual change from the resting state."
+      },
+      "400": {
+        "$value": "#aeb9bd",
+        "$type": "color",
+        "$description": "Purpose: A mid neutral at the boundary between light and medium tones.\nUsage: Aliased into colour/text/tertiary (light mode), colour/state/disabled/text, and colour/action/secondary/pressed.\nGuidelines: Primitive-layer only. When aliased to text tokens, ensure the resulting combination meets WCAG AA contrast against its background context."
+      },
+      "500": {
+        "$value": "#7f9096",
+        "$type": "color",
+        "$description": "Purpose: The true mid-point of the neutral scale; a balanced grey with equal contrast in both directions.\nUsage: Aliased into colour/text/secondary (light mode) and colour/onBackground/muted in light mode.\nGuidelines: Not for direct use. The mirror relationship between neutral/500 and neutral/400 across modes is intentional — validate both mode outputs when modifying this token."
+      },
+      "600": {
+        "$value": "#66797f",
+        "$type": "color",
+        "$description": "Purpose: A mid-dark neutral providing stronger contrast than the mid-point.\nUsage: Aliased into colour/text/secondary (light mode) and colour/onBackground/subtle in light mode.\nGuidelines: Primitive-layer only. Confirm WCAG AA compliance (4.5:1 for body text) against all background contexts where this value is applied via semantic aliases."
+      },
+      "700": {
+        "$value": "#4d6167",
+        "$type": "color",
+        "$description": "Purpose: A dark neutral close to the deep anchor, suitable for icon and secondary heading values.\nUsage: Aliased into colour/icon/default to ensure icons read clearly against light surfaces.\nGuidelines: Not for direct use. As an icon colour source, the semantic token should maintain 3:1 contrast against the surface it appears on."
+      },
+      "800": {
+        "$value": "#354a50",
+        "$type": "color",
+        "$description": "Purpose: A very dark neutral near the bottom of the light-mode scale.\nUsage: Aliased into component-layer tokens and dark-mode background tokens requiring high-contrast dark fills.\nGuidelines: Primitive-layer only. Use to support elevation distinctions in dark mode through subtle tonal differences."
+      },
+      "900": {
+        "$value": "#1f343a",
+        "$type": "color",
+        "$description": "Purpose: The near-darkest neutral in the scale; a deep, ink-like tone for primary text and strong foreground elements.\nUsage: Aliased into colour/text/primary and colour/onBackground/default in light mode.\nGuidelines: Not for direct use. Always verify 7:1 contrast against the default background for AAA compliance, and minimum 4.5:1 for AA."
+      },
+      "950": {
+        "$value": "#0f2328",
+        "$type": "color",
+        "$description": "Purpose: The darkest step in the neutral scale; the primary dark-mode base surface colour.\nUsage: Aliased into colour/background/default in dark mode and colour/text/inverse in light mode.\nGuidelines: A structural anchor primitive. Changes to this value propagate broadly — always audit all downstream semantic aliases before modifying."
+      }
+    },
+    "blue": {
+      "50": {
+        "$value": "#eff6ff",
         "$type": "color"
       },
       "100": {
-        "$value": "#F5F5F5",
+        "$value": "#dbeafe",
         "$type": "color"
       },
       "200": {
-        "$value": "#E0E0E0",
+        "$value": "#bfdbfe",
         "$type": "color"
       },
       "300": {
-        "$value": "#BDBDBD",
+        "$value": "#93c5fd",
         "$type": "color"
       },
       "400": {
-        "$value": "#9E9E9E",
+        "$value": "#60a5fa",
         "$type": "color"
       },
       "500": {
-        "$value": "#757575",
+        "$value": "#3b82f6",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#2563eb",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#1d4ed8",
+        "$type": "color"
+      },
+      "800": {
+        "$value": "#1e40af",
         "$type": "color"
       },
       "900": {
-        "$value": "#212121",
-        "$type": "color"
-      },
-      "1000": {
-        "$value": "#000000",
+        "$value": "#1e3a8a",
         "$type": "color"
       }
     },
-    "semantic": {
-      "success": {
-        "$value": "#2E7D32",
+    "green": {
+      "50": {
+        "$value": "#e6f6f3",
         "$type": "color"
       },
-      "warning": {
-        "$value": "#F57F17",
+      "100": {
+        "$value": "#ccf3ef",
         "$type": "color"
       },
-      "error": {
-        "$value": "#C62828",
+      "200": {
+        "$value": "#99ddd3",
         "$type": "color"
       },
-      "info": {
-        "$value": "#0277BD",
+      "300": {
+        "$value": "#66cbbe",
+        "$type": "color"
+      },
+      "400": {
+        "$value": "#33b8a8",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#0fa38f",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#0c8272",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#096458",
+        "$type": "color"
+      },
+      "800": {
+        "$value": "#06463e",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#032824",
+        "$type": "color"
+      }
+    },
+    "red": {
+      "50": {
+        "$value": "#fdecec",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "#f9cfcf",
+        "$type": "color"
+      },
+      "200": {
+        "$value": "#f4afaf",
+        "$type": "color"
+      },
+      "300": {
+        "$value": "#ed8a8a",
+        "$type": "color"
+      },
+      "400": {
+        "$value": "#e35c5c",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#d92d2d",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#b42323",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#8f1a1a",
+        "$type": "color"
+      },
+      "800": {
+        "$value": "#6a1212",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#450909",
+        "$type": "color"
+      }
+    },
+    "amber": {
+      "50": {
+        "$value": "#fff6e5",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "#ffe7bf",
+        "$type": "color"
+      },
+      "200": {
+        "$value": "#ffd699",
+        "$type": "color"
+      },
+      "300": {
+        "$value": "#ffc266",
+        "$type": "color"
+      },
+      "400": {
+        "$value": "#ffad33",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#f79009",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#d97706",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#b65f04",
+        "$type": "color"
+      },
+      "800": {
+        "$value": "#8c4603",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#5c2e01",
         "$type": "color"
       }
     }

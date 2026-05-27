@@ -1,21 +1,160 @@
 {
-  "size": {
-    "spacing": {
-      "1":  { "$value": "4px",  "$type": "dimension" },
-      "2":  { "$value": "8px",  "$type": "dimension" },
-      "3":  { "$value": "12px", "$type": "dimension" },
-      "4":  { "$value": "16px", "$type": "dimension" },
-      "5":  { "$value": "20px", "$type": "dimension" },
-      "6":  { "$value": "24px", "$type": "dimension" },
-      "8":  { "$value": "32px", "$type": "dimension" },
-      "10": { "$value": "40px", "$type": "dimension" },
-      "12": { "$value": "48px", "$type": "dimension" }
+  "spacing": {
+    "scale": {
+      "4": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "8": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "12": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "16": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "20": {
+        "$value": "20px",
+        "$type": "dimension"
+      },
+      "24": {
+        "$value": "24px",
+        "$type": "dimension"
+      },
+      "32": {
+        "$value": "32px",
+        "$type": "dimension"
+      },
+      "40": {
+        "$value": "40px",
+        "$type": "dimension"
+      },
+      "48": {
+        "$value": "48px",
+        "$type": "dimension"
+      },
+      "56": {
+        "$value": "56px",
+        "$type": "dimension"
+      },
+      "64": {
+        "$value": "64px",
+        "$type": "dimension"
+      },
+      "80": {
+        "$value": "80px",
+        "$type": "dimension"
+      },
+      "104": {
+        "$value": "104px",
+        "$type": "dimension"
+      }
     },
-    "border-radius": {
-      "sm":   { "$value": "4px",  "$type": "dimension" },
-      "md":   { "$value": "8px",  "$type": "dimension" },
-      "lg":   { "$value": "16px", "$type": "dimension" },
-      "full": { "$value": "9999px", "$type": "dimension" }
+    "xs": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "4px — icon gaps, tight internal spacing"
+    },
+    "s": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "8px — inline gaps, compact padding"
+    },
+    "m": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "16px — standard component padding"
+    },
+    "l": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "24px — card padding, section gaps"
+    },
+    "xl": {
+      "$value": "40px",
+      "$type": "dimension",
+      "$description": "40px — layout section gaps"
+    },
+    "2xl": {
+      "$value": "56px",
+      "$type": "dimension",
+      "$description": "56px — between major layout areas"
+    },
+    "page": {
+      "$value": "104px",
+      "$type": "dimension",
+      "$description": "104px — horizontal page padding"
+    }
+  },
+  "radius": {
+    "scale": {
+      "0": {
+        "$value": "0px",
+        "$type": "dimension"
+      },
+      "4": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "8": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "12": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "16": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "24": {
+        "$value": "24px",
+        "$type": "dimension"
+      },
+      "9999": {
+        "$value": "9999px",
+        "$type": "dimension"
+      }
+    },
+    "none": {
+      "$value": "0px",
+      "$type": "dimension",
+      "$description": "0px — tables, full-width inputs"
+    },
+    "xs": {
+      "$value": "4px",
+      "$type": "dimension",
+      "$description": "4px — badges, tags, tooltips"
+    },
+    "s": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "8px — buttons, small inputs"
+    },
+    "m": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "12px — inputs, selects, dropdowns"
+    },
+    "l": {
+      "$value": "16px",
+      "$type": "dimension",
+      "$description": "16px — cards, modals, panels"
+    },
+    "xl": {
+      "$value": "24px",
+      "$type": "dimension",
+      "$description": "24px — feature cards, cover surfaces"
+    },
+    "full": {
+      "$value": "9999px",
+      "$type": "dimension",
+      "$description": "9999px — pills, avatars, circular shapes"
     }
   }
 }

@@ -3,30 +3,160 @@
  */
 
 :root {
+  /**
+   * Purpose: The lightest step in the teal primitive scale; a near-white tinted surface value.
+   * Usage: Referenced by semantic tokens requiring a very subtle teal-tinted wash, such as colour/state/selected in light mode.
+   * Guidelines: Do not apply directly to component design. All usage must flow through a semantic alias. Reserve for contexts where the tint is barely perceptible against a white background.
+   */
   --idem-primitives-teal-25: #f5fafa;
+  /**
+   * Purpose: A soft, low-saturation teal primitive establishing the second lightest step in the scale.
+   * Usage: Consumed by semantic tokens that require a light teal background, such as state and hover overlays.
+   * Guidelines: Not for direct use in layouts or components. Should always be aliased through a semantic token.
+   */
   --idem-primitives-teal-50: #e6f2f3;
+  /**
+   * Purpose: A light teal primitive representing the third step of the scale.
+   * Usage: Available for aliasing into semantic tokens where a light but visible teal fill is required.
+   * Guidelines: Use only as a primitive source value. Do not hard-code into component styles.
+   */
   --idem-primitives-teal-100: #cfe6e8;
+  /**
+   * Purpose: A medium-light teal primitive at the fourth step of the scale.
+   * Usage: Provides a mid-range light value for teal; usable as a source for subtle border or tinted fill tokens.
+   * Guidelines: Primitive-layer only. Must be consumed via a semantic token alias.
+   */
   --idem-primitives-teal-200: #a8d3d7;
+  /**
+   * Purpose: A mid-range teal primitive establishing a clearly visible, unsaturated teal.
+   * Usage: Aliased into semantic tokens for interactive borders, icon fills, and link text in dark mode contexts.
+   * Guidelines: Not for direct application. Check contrast ratio when aliasing to text or icon tokens — minimum 4.5:1 required for WCAG AA compliance.
+   */
   --idem-primitives-teal-300: #7fbfc6;
+  /**
+   * Purpose: A medium teal primitive at the fifth-brightest step of the scale.
+   * Usage: Source value for semantic action, icon, and interactive element tokens in dark mode.
+   * Guidelines: Validate contrast when used as foreground on dark surfaces. Not for direct use in component design.
+   */
   --idem-primitives-teal-400: #4faab3;
+  /**
+   * Purpose: The core brand teal; the primary mid-point of the scale and the anchor for the brand identity.
+   * Usage: Aliased into colour/action/primary (light mode) and colour/background/brand. The single brand-colour source value provided by the brand designer.
+   * Guidelines: Treat as the canonical brand colour. When aliasing to text or icon contexts, verify WCAG AA compliance. Do not substitute other primitives where teal/500 is expected.
+   */
   --idem-primitives-teal-500: #007582;
+  /**
+   * Purpose: A darkened brand teal primitive one step below the mid-point.
+   * Usage: Aliased into hover state tokens for primary actions in light mode (colour/action/primary/hover).
+   * Guidelines: Use to communicate interaction depth on primary actions. Maintain at least one step of contrast against the resting-state primitive.
+   */
   --idem-primitives-teal-600: #0c5f6a;
+  /**
+   * Purpose: A dark teal primitive providing strong contrast against light surfaces.
+   * Usage: Aliased into pressed/active state tokens for primary actions in light mode, and into colour/background/promo.
+   * Guidelines: Reserved for pressed states and promotional backgrounds. Do not use where a softer brand presence is required.
+   */
   --idem-primitives-teal-700: #083f47;
+  /**
+   * Purpose: A very dark teal primitive approaching near-black saturation.
+   * Usage: Available for aliasing into dark, high-contrast teal surfaces such as deep brand backgrounds.
+   * Guidelines: Primitive-layer only. Ensure any foreground aliased against this value meets 4.5:1 contrast for text.
+   */
   --idem-primitives-teal-800: #062f35;
+  /**
+   * Purpose: The darkest teal near the bottom of the scale, suitable for deep inverse backgrounds.
+   * Usage: Aliased into colour/background/inverse to provide the dark branded surface in light mode.
+   * Guidelines: Only use in contexts where maximum teal depth is required. Foreground on this surface must be a near-white neutral.
+   */
   --idem-primitives-teal-900: #041f24;
+  /**
+   * Purpose: The absolute darkest step of the teal scale; near-black with a teal undertone.
+   * Usage: Available as a source value for the very deepest teal surfaces if required by future component needs.
+   * Guidelines: Primitive-layer only. Use sparingly — prefer teal/900 unless maximum depth is explicitly required.
+   */
   --idem-primitives-teal-950: #021316;
+  /**
+   * Purpose: The zero-point anchor of the neutral scale; pure white in light mode and the deepest dark-mode base in dark mode.
+   * Usage: Aliased into colour/background/default and colour/background/raised in light mode; inverted to the darkest surface in dark mode.
+   * Guidelines: A special-case primitive. Never substitute another step where neutral/0 is expected, as it carries structural meaning as both the lightest and darkest extremes depending on mode.
+   */
   --idem-primitives-neutral-0: #ffffff;
+  /**
+   * Purpose: The lightest non-white step of the neutral scale; a very subtle off-white.
+   * Usage: Aliased into colour/background/subtle and colour/background/surface to distinguish page-level tinted regions and component backgrounds from the default canvas.
+   * Guidelines: Primitive-layer only. Note that subtle and surface share this primitive intentionally — semantic differentiation is achieved through borders and elevation, not colour alone.
+   */
   --idem-primitives-neutral-50: #f4f5f5;
+  /**
+   * Purpose: A light neutral primitive providing a soft, visible background distinction.
+   * Usage: Aliased into colour/background/muted, colour/border/subtle, and colour/state/disabled/bg.
+   * Guidelines: Not for direct use. When aliased to border tokens, ensure visual separation from adjacent surfaces is sufficient without relying on this colour alone.
+   */
   --idem-primitives-neutral-100: #e6e9ea;
+  /**
+   * Purpose: A slightly darker light neutral, providing a clearly visible but low-contrast value.
+   * Usage: Aliased into colour/border/default and colour/action/secondary for default borders and secondary action fills.
+   * Guidelines: Primitive-layer only. Border tokens aliasing this value must maintain a minimum 3:1 contrast ratio against adjacent surfaces per WCAG AA.
+   */
   --idem-primitives-neutral-200: #d5dbdd;
+  /**
+   * Purpose: A mid-light neutral sitting at a clearly visible step between light and mid tones.
+   * Usage: Aliased into colour/border/strong and colour/action/secondary/hover.
+   * Guidelines: Not for direct use. When aliased to interactive controls, verify that hover states provide sufficient visual change from the resting state.
+   */
   --idem-primitives-neutral-300: #c3cccf;
+  /**
+   * Purpose: A mid neutral at the boundary between light and medium tones.
+   * Usage: Aliased into colour/text/tertiary (light mode), colour/state/disabled/text, and colour/action/secondary/pressed.
+   * Guidelines: Primitive-layer only. When aliased to text tokens, ensure the resulting combination meets WCAG AA contrast against its background context.
+   */
   --idem-primitives-neutral-400: #aeb9bd;
+  /**
+   * Purpose: The true mid-point of the neutral scale; a balanced grey with equal contrast in both directions.
+   * Usage: Aliased into colour/text/secondary (light mode) and colour/onBackground/muted in light mode.
+   * Guidelines: Not for direct use. The mirror relationship between neutral/500 and neutral/400 across modes is intentional — validate both mode outputs when modifying this token.
+   */
   --idem-primitives-neutral-500: #7f9096;
+  /**
+   * Purpose: A mid-dark neutral providing stronger contrast than the mid-point.
+   * Usage: Aliased into colour/text/secondary (light mode) and colour/onBackground/subtle in light mode.
+   * Guidelines: Primitive-layer only. Confirm WCAG AA compliance (4.5:1 for body text) against all background contexts where this value is applied via semantic aliases.
+   */
   --idem-primitives-neutral-600: #66797f;
+  /**
+   * Purpose: A dark neutral close to the deep anchor, suitable for icon and secondary heading values.
+   * Usage: Aliased into colour/icon/default to ensure icons read clearly against light surfaces.
+   * Guidelines: Not for direct use. As an icon colour source, the semantic token should maintain 3:1 contrast against the surface it appears on.
+   */
   --idem-primitives-neutral-700: #4d6167;
+  /**
+   * Purpose: A very dark neutral near the bottom of the light-mode scale.
+   * Usage: Aliased into component-layer tokens and dark-mode background tokens requiring high-contrast dark fills.
+   * Guidelines: Primitive-layer only. Use to support elevation distinctions in dark mode through subtle tonal differences.
+   */
   --idem-primitives-neutral-800: #354a50;
+  /**
+   * Purpose: The near-darkest neutral in the scale; a deep, ink-like tone for primary text and strong foreground elements.
+   * Usage: Aliased into colour/text/primary and colour/onBackground/default in light mode.
+   * Guidelines: Not for direct use. Always verify 7:1 contrast against the default background for AAA compliance, and minimum 4.5:1 for AA.
+   */
   --idem-primitives-neutral-900: #1f343a;
+  /**
+   * Purpose: The darkest step in the neutral scale; the primary dark-mode base surface colour.
+   * Usage: Aliased into colour/background/default in dark mode and colour/text/inverse in light mode.
+   * Guidelines: A structural anchor primitive. Changes to this value propagate broadly — always audit all downstream semantic aliases before modifying.
+   */
   --idem-primitives-neutral-950: #0f2328;
+  --idem-primitives-blue-50: #eff6ff;
+  --idem-primitives-blue-100: #dbeafe;
+  --idem-primitives-blue-200: #bfdbfe;
+  --idem-primitives-blue-300: #93c5fd;
+  --idem-primitives-blue-400: #60a5fa;
+  --idem-primitives-blue-500: #3b82f6;
+  --idem-primitives-blue-600: #2563eb;
+  --idem-primitives-blue-700: #1d4ed8;
+  --idem-primitives-blue-800: #1e40af;
+  --idem-primitives-blue-900: #1e3a8a;
   --idem-primitives-green-50: #e6f6f3;
   --idem-primitives-green-100: #ccf3ef;
   --idem-primitives-green-200: #99ddd3;
@@ -57,141 +187,207 @@
   --idem-primitives-amber-700: #b65f04;
   --idem-primitives-amber-800: #8c4603;
   --idem-primitives-amber-900: #5c2e01;
-  --idem-primitives-blue-50: #eff6ff;
-  --idem-primitives-blue-100: #dbeafe;
-  --idem-primitives-blue-200: #bfdbfe;
-  --idem-primitives-blue-300: #93c5fd;
-  --idem-primitives-blue-400: #60a5fa;
-  --idem-primitives-blue-500: #3b82f6;
-  --idem-primitives-blue-600: #2563eb;
-  --idem-primitives-blue-700: #1d4ed8;
-  --idem-primitives-blue-800: #1e40af;
-  --idem-primitives-blue-900: #1e3a8a;
-  --idem-semantic-colour-background-default: #ffffff;
-  --idem-semantic-colour-background-subtle: #f4f5f5;
-  --idem-semantic-colour-background-muted: #e6e9ea;
-  --idem-semantic-colour-background-surface: #f4f5f5;
-  --idem-semantic-colour-background-raised: #ffffff;
-  --idem-semantic-colour-background-inverse: #041f24;
-  --idem-semantic-colour-background-brand: #007582;
-  --idem-semantic-colour-background-promo: #083f47;
-  --idem-semantic-colour-background-success: #e6f6f3;
-  --idem-semantic-colour-background-error: #fdecec;
-  --idem-semantic-colour-background-warning: #fff6e5;
-  --idem-semantic-colour-background-info: #eff6ff;
-  --idem-semantic-colour-text-primary: #1f343a;
-  --idem-semantic-colour-text-secondary: #4d6167;
-  --idem-semantic-colour-text-tertiary: #66797f;
-  --idem-semantic-colour-text-inverse: #ffffff;
-  --idem-semantic-colour-text-link: #007582;
-  --idem-semantic-colour-border-subtle: #7f9096;
-  --idem-semantic-colour-border-default: #66797f;
-  --idem-semantic-colour-border-strong: #4d6167;
-  --idem-semantic-colour-border-interactive: #007582;
-  --idem-semantic-colour-border-success: #0c8272;
-  --idem-semantic-colour-border-error: #b42323;
-  --idem-semantic-colour-border-warning: #b65f04;
-  --idem-semantic-colour-border-info: #2563eb;
-  --idem-semantic-colour-action-primary: #007582;
-  --idem-semantic-colour-action-secondary: #d5dbdd;
-  --idem-semantic-colour-state-focus: #007582;
-  --idem-semantic-colour-state-hover: #e6f2f3;
-  --idem-semantic-colour-state-selected: #f5fafa;
-  --idem-semantic-colour-state-active: #e6f2f3;
-  --idem-semantic-colour-state-disabled-bg: #e6e9ea;
-  --idem-semantic-colour-state-disabled-text: #aeb9bd;
-  --idem-semantic-colour-on-background-default: #1f343a;
-  --idem-semantic-colour-on-background-subtle: #4d6167;
-  --idem-semantic-colour-on-background-muted: #66797f;
-  --idem-semantic-colour-on-background-inverse: #ffffff;
-  --idem-semantic-colour-on-background-brand: #ffffff;
-  --idem-semantic-colour-on-background-promo: #ffffff;
-  --idem-semantic-colour-on-background-success: #096458;
-  --idem-semantic-colour-on-background-error: #8f1a1a;
-  --idem-semantic-colour-on-background-warning: #8c4603;
-  --idem-semantic-colour-on-background-info: #1d4ed8;
-  --idem-semantic-colour-icon-default: #4d6167;
-  --idem-semantic-colour-icon-subtle: #7f9096;
-  --idem-semantic-colour-icon-brand: #007582;
-  --idem-semantic-colour-icon-inverse: #ffffff;
-  --idem-semantic-colour-icon-success: #0c8272;
-  --idem-semantic-colour-icon-error: #b42323;
-  --idem-semantic-colour-icon-warning: #b65f04;
-  --idem-semantic-colour-icon-info: #2563eb;
-  --idem-semantic-colour-divider-subtle: #e6e9ea;
-  --idem-semantic-colour-divider-default: #d5dbdd;
-  --idem-semantic-colour-divider-strong: #c3cccf;
-  --idem-semantic-colour-ink-on-brand: #ffffff;
-  --idem-semantic-colour-ink-on-neutral: #1f343a;
-  --idem-semantic-colour-dataviz-sequential-teal-weakest: #cfe6e8;
-  --idem-semantic-colour-dataviz-sequential-teal-weak: #a8d3d7;
-  --idem-semantic-colour-dataviz-sequential-teal-mid: #7fbfc6;
-  --idem-semantic-colour-dataviz-sequential-teal-strong: #007582;
-  --idem-semantic-colour-dataviz-sequential-teal-strongest: #083f47;
-  --idem-semantic-colour-dataviz-sequential-neutral-weakest: #f4f5f5;
-  --idem-semantic-colour-dataviz-sequential-neutral-weak: #d5dbdd;
-  --idem-semantic-colour-dataviz-sequential-neutral-mid: #aeb9bd;
-  --idem-semantic-colour-dataviz-sequential-neutral-strong: #66797f;
-  --idem-semantic-colour-dataviz-sequential-neutral-strongest: #354a50;
-  --idem-components-button-primary-bg: #007582;
-  --idem-components-button-primary-text: #ffffff;
-  --idem-components-button-primary-border: #007582;
-  --idem-components-button-primary-hover: #0c5f6a;
-  --idem-components-button-primary-pressed: #083f47;
-  --idem-components-button-primary-disabled-bg: #e6e9ea;
-  --idem-components-button-primary-disabled-text: #aeb9bd;
-  --idem-components-button-secondary-bg: #d5dbdd;
-  --idem-components-button-secondary-text: #1f343a;
-  --idem-components-button-secondary-border: #66797f;
-  --idem-components-button-secondary-hover: #c3cccf;
-  --idem-components-button-secondary-pressed: #aeb9bd;
-  --idem-components-button-secondary-disabled-bg: #e6e9ea;
-  --idem-components-button-secondary-disabled-text: #aeb9bd;
-  --idem-components-input-bg: #f4f5f5;
-  --idem-components-input-text: #1f343a;
-  --idem-components-input-placeholder: #66797f;
-  --idem-components-input-border: #66797f;
-  --idem-components-nav-bg: #ffffff;
-  --idem-components-nav-border: #7f9096;
-  --idem-components-nav-text: #4d6167;
-  --idem-components-nav-indicator: #007582;
-  --idem-components-nav-item-hover-bg: #e6f2f3;
-  --idem-components-nav-item-active-bg: #f5fafa;
-  --idem-components-nav-mega-bg: #f4f5f5;
-  --idem-components-nav-mega-border: #7f9096;
-  --idem-components-nav-mega-section-title: #66797f;
-  --idem-components-card-bg: #ffffff;
-  --idem-components-card-border: #7f9096;
-  --idem-components-card-title: #1f343a;
-  --idem-components-card-meta: #4d6167;
-  --idem-components-badge-info-bg: #eff6ff;
-  --idem-components-badge-info-text: #1d4ed8;
-  --idem-components-badge-info-icon: #2563eb;
-  --idem-components-badge-success-bg: #e6f6f3;
-  --idem-components-badge-success-text: #096458;
-  --idem-components-badge-success-icon: #0c8272;
-  --idem-components-badge-error-bg: #fdecec;
-  --idem-components-badge-error-text: #8f1a1a;
-  --idem-components-badge-error-icon: #b42323;
-  --idem-components-badge-warning-bg: #fff6e5;
-  --idem-components-badge-warning-text: #8c4603;
-  --idem-components-badge-warning-icon: #b65f04;
-  --idem-components-badge-promo-bg: #083f47;
-  --idem-components-badge-promo-text: #ffffff;
-  --idem-components-alert-info-bg: #eff6ff;
-  --idem-components-alert-info-text: #1d4ed8;
-  --idem-components-alert-info-border: #2563eb;
-  --idem-components-alert-info-icon: #2563eb;
-  --idem-components-alert-success-bg: #e6f6f3;
-  --idem-components-alert-success-text: #096458;
-  --idem-components-alert-success-border: #0c8272;
-  --idem-components-alert-success-icon: #0c8272;
-  --idem-components-alert-error-bg: #fdecec;
-  --idem-components-alert-error-text: #8f1a1a;
-  --idem-components-alert-error-border: #b42323;
-  --idem-components-alert-error-icon: #b42323;
-  --idem-components-alert-warning-bg: #fff6e5;
-  --idem-components-alert-warning-text: #8c4603;
-  --idem-components-alert-warning-border: #b65f04;
-  --idem-components-alert-warning-icon: #b65f04;
+  /**
+   * Purpose: The primary canvas background; the base surface of every page and layout.
+   * Usage: Applied to the root body background, full-page layouts, and any area that represents the default visual plane of the UI.
+   * Guidelines: Do not use for elevated or contained surfaces — use colour/background/surface or colour/background/raised instead. This token must always produce the highest (or lowest in dark mode) surface in the visual hierarchy.
+   */
+  --idem-colour-background-default: #ffffff;
+  /**
+   * Purpose: A gently tinted background for page-level regions that need subtle visual separation from the default canvas.
+   * Usage: Applied to secondary page areas, sidebar backgrounds, table row stripes, or any region-level tint that should not draw focus.
+   * Guidelines: Shares the same primitive as colour/background/surface — differentiation in practice is achieved through borders and elevation. Do not rely on colour contrast alone to distinguish subtle regions.
+   */
+  --idem-colour-background-subtle: #f4f5f5;
+  /**
+   * Purpose: A clearly tinted background for suppressed or de-emphasised surface areas.
+   * Usage: Used for disabled container backgrounds, inactive panel fills, or any surface that communicates reduced visual prominence.
+   * Guidelines: Not for active, interactive surfaces. Ensure foreground content on muted backgrounds meets WCAG AA contrast requirements using the appropriate text token.
+   */
+  --idem-colour-background-muted: #e6e9ea;
+  /**
+   * Purpose: The standard component background; the expected fill for contained UI surfaces such as cards, modals, and panels.
+   * Usage: Applied to card backgrounds, dialog surfaces, dropdown panels, and any component-level container that sits above the default canvas.
+   * Guidelines: Shares the same primitive as colour/background/subtle — border and elevation are the primary differentiators in practice. Use consistently across all card and panel components to maintain visual coherence.
+   */
+  --idem-colour-background-surface: #f4f5f5;
+  /**
+   * Purpose: A background for elevated components that sit above the standard surface layer.
+   * Usage: Applied to tooltips, floating menus, overlays, and components with a perceptible drop shadow that indicates elevation above sibling surfaces.
+   * Guidelines: Reserve for components with visual elevation cues (shadow, border). Do not use in place of surface for flat components.
+   */
+  --idem-colour-background-raised: #ffffff;
+  /**
+   * Purpose: A dark, branded background for inverted UI regions where the surface adopts the brand's deep teal tone.
+   * Usage: Applied to page headers, hero sections, promotional banners, or callout components that require a strong brand presence.
+   * Guidelines: Always pair with colour/onBackground/inverse or colour/text/inverse for foreground content on this surface to ensure contrast. Do not use for large body content areas.
+   */
+  --idem-colour-background-inverse: #041f24;
+  /**
+   * Purpose: The primary brand-coloured surface; a teal fill for brand-forward components.
+   * Usage: Applied to primary action surfaces, brand tiles, and any component where the full brand teal should fill the background.
+   * Guidelines: Always use colour/onBackground/brand for foreground content on this surface. Validate contrast for all text and icon content placed on this background.
+   */
+  --idem-colour-background-brand: #007582;
+  /**
+   * Purpose: A deep teal promotional surface for high-impact, campaign-style UI regions.
+   * Usage: Applied to promotional cards, marketing banners, and feature highlight sections requiring deeper brand emphasis than brand.
+   * Guidelines: Use sparingly to preserve its visual impact. Always pair with colour/onBackground/promo for legible foreground content.
+   */
+  --idem-colour-background-promo: #083f47;
+  --idem-colour-background-info: #eff6ff;
+  --idem-colour-background-success: #e6f6f3;
+  --idem-colour-background-error: #fdecec;
+  --idem-colour-background-warning: #fff6e5;
+  /**
+   * Purpose: The default colour for all primary body text and high-emphasis typographic content.
+   * Usage: Applied to headings, paragraph body copy, input field text, and any text requiring maximum legibility.
+   * Guidelines: Use as the default text colour throughout. Ensure it maintains 4.5:1 contrast against all background contexts it appears on. Do not use for decorative or subordinate text.
+   */
+  --idem-colour-text-primary: #1f343a;
+  /**
+   * Purpose: A reduced-emphasis text colour for supporting content and secondary labels.
+   * Usage: Applied to subheadings, metadata, helper text, table secondary data, and any text that supports but does not replace primary content.
+   * Guidelines: Verify WCAG AA contrast against the surface it appears on. Not suitable for critical user-facing content where maximum legibility is required.
+   */
+  --idem-colour-text-secondary: #4d6167;
+  /**
+   * Purpose: The lowest-emphasis text colour for minimally significant labels and placeholder content.
+   * Usage: Applied to input placeholder text, timestamp metadata, supplementary annotations, and visually subordinate labels.
+   * Guidelines: Do not use for interactive text or content that conveys essential meaning. Placeholder usage should rely on other design cues to remain intelligible.
+   */
+  --idem-colour-text-tertiary: #66797f;
+  /**
+   * Purpose: A light text colour for use on dark or branded surfaces where standard dark text would fail contrast.
+   * Usage: Applied to text on colour/background/inverse, dark overlay surfaces, and any dark-filled container requiring light foreground text.
+   * Guidelines: Only use on surfaces dark enough to maintain 4.5:1 contrast. Do not apply to standard light backgrounds.
+   */
+  --idem-colour-text-inverse: #ffffff;
+  /**
+   * Purpose: The standard colour for inline hyperlinks and interactive text elements.
+   * Usage: Applied to anchor text, inline navigational links, and any text that initiates navigation or opens contextual content.
+   * Guidelines: Ensure links are distinguishable from surrounding body text through underline or other non-colour cues, per WCAG 1.4.1. Verify 4.5:1 contrast on all background contexts.
+   */
+  --idem-colour-text-link: #007582;
+  --idem-colour-on-background-default: #1f343a;
+  --idem-colour-on-background-subtle: #4d6167;
+  --idem-colour-on-background-muted: #66797f;
+  --idem-colour-on-background-inverse: #ffffff;
+  --idem-colour-on-background-brand: #ffffff;
+  --idem-colour-on-background-promo: #ffffff;
+  --idem-colour-on-background-info: #1d4ed8;
+  --idem-colour-on-background-success: #096458;
+  --idem-colour-on-background-error: #8f1a1a;
+  --idem-colour-on-background-warning: #8c4603;
+  --idem-colour-border-subtle: #7f9096;
+  --idem-colour-border-default: #66797f;
+  --idem-colour-border-strong: #4d6167;
+  --idem-colour-border-interactive: #007582;
+  --idem-colour-border-info: #2563eb;
+  --idem-colour-border-success: #0c8272;
+  --idem-colour-border-error: #b42323;
+  --idem-colour-border-warning: #b65f04;
+  /**
+   * Purpose: The brand-teal fill for primary interactive action controls in their resting state.
+   * Usage: Applied to primary button backgrounds and any control representing the most prominent call to action.
+   * Guidelines: Use for the single most important action in a given context. Do not apply to multiple sibling actions of equal weight — reserve primary emphasis for one action per area.
+   */
+  --idem-colour-action-primary: #007582;
+  --idem-colour-action-secondary: #d5dbdd;
+  /**
+   * Purpose: The brand-teal colour used to render focus ring indicators on all interactive elements.
+   * Usage: Applied to focus ring outlines (typically via outline or box-shadow) on buttons, inputs, links, and any focusable control.
+   * Guidelines: Must be applied to all keyboard-navigable interactive elements to satisfy WCAG 2.4.7. The focus indicator must be clearly visible and must not be suppressed in any production context.
+   */
+  --idem-colour-state-focus: #007582;
+  --idem-colour-state-hover: #e6f2f3;
+  --idem-colour-state-selected: #f5fafa;
+  --idem-colour-state-active: #e6f2f3;
+  --idem-colour-state-disabled-text: #aeb9bd;
+  --idem-colour-state-disabled-bg: #e6e9ea;
+  --idem-colour-icon-default: #4d6167;
+  --idem-colour-icon-subtle: #7f9096;
+  --idem-colour-icon-brand: #007582;
+  --idem-colour-icon-inverse: #ffffff;
+  --idem-colour-icon-info: #2563eb;
+  --idem-colour-icon-success: #0c8272;
+  --idem-colour-icon-error: #b42323;
+  --idem-colour-icon-warning: #b65f04;
+  --idem-colour-dataviz-sequential-teal-weakest: #cfe6e8;
+  --idem-colour-dataviz-sequential-teal-weak: #a8d3d7;
+  --idem-colour-dataviz-sequential-teal-mid: #7fbfc6;
+  --idem-colour-dataviz-sequential-teal-strong: #007582;
+  --idem-colour-dataviz-sequential-teal-strongest: #083f47;
+  --idem-colour-dataviz-sequential-neutral-weakest: #f4f5f5;
+  --idem-colour-dataviz-sequential-neutral-weak: #d5dbdd;
+  --idem-colour-dataviz-sequential-neutral-mid: #aeb9bd;
+  --idem-colour-dataviz-sequential-neutral-strong: #66797f;
+  --idem-colour-dataviz-sequential-neutral-strongest: #354a50;
+  --idem-colour-divider-subtle: #e6e9ea;
+  --idem-colour-divider-default: #d5dbdd;
+  --idem-colour-divider-strong: #c3cccf;
+  --idem-colour-ink-on-brand: #ffffff;
+  --idem-colour-ink-on-neutral: #1f343a;
+  --idem-input-bg: #f4f5f5;
+  --idem-input-text: #1f343a;
+  --idem-input-placeholder: #66797f;
+  --idem-input-border: #66797f;
+  --idem-button-primary-bg: #007582;
+  --idem-button-primary-text: #ffffff;
+  --idem-button-primary-border: #007582;
+  --idem-button-primary-hover: #0c5f6a;
+  --idem-button-primary-pressed: #083f47;
+  --idem-button-primary-disabled-bg: #e6e9ea;
+  --idem-button-primary-disabled-text: #aeb9bd;
+  --idem-button-secondary-bg: #d5dbdd;
+  --idem-button-secondary-text: #1f343a;
+  --idem-button-secondary-border: #66797f;
+  --idem-button-secondary-hover: #c3cccf;
+  --idem-button-secondary-pressed: #aeb9bd;
+  --idem-button-secondary-disabled-bg: #e6e9ea;
+  --idem-button-secondary-disabled-text: #aeb9bd;
+  --idem-button-secondary-disabled-border: #7f9096;
+  --idem-nav-bg: #ffffff;
+  --idem-nav-border: #7f9096;
+  --idem-nav-text: #4d6167;
+  --idem-nav-indicator: #007582;
+  --idem-nav-item-active-bg: #f5fafa;
+  --idem-nav-item-hover-bg: #e6f2f3;
+  --idem-nav-mega-bg: #f4f5f5;
+  --idem-nav-mega-border: #7f9096;
+  --idem-nav-mega-section-title: #66797f;
+  --idem-card-bg: #ffffff;
+  --idem-card-border: #7f9096;
+  --idem-card-title: #1f343a;
+  --idem-card-meta: #4d6167;
+  --idem-badge-success-bg: #e6f6f3;
+  --idem-badge-success-text: #096458;
+  --idem-badge-success-icon: #0c8272;
+  --idem-badge-error-bg: #fdecec;
+  --idem-badge-error-text: #8f1a1a;
+  --idem-badge-error-icon: #b42323;
+  --idem-badge-warning-bg: #fff6e5;
+  --idem-badge-warning-text: #8c4603;
+  --idem-badge-warning-icon: #b65f04;
+  --idem-badge-info-bg: #eff6ff;
+  --idem-badge-info-text: #1d4ed8;
+  --idem-badge-info-icon: #2563eb;
+  --idem-badge-promo-bg: #083f47;
+  --idem-badge-promo-text: #ffffff;
+  --idem-alert-error-bg: #fdecec;
+  --idem-alert-error-text: #8f1a1a;
+  --idem-alert-error-border: #b42323;
+  --idem-alert-error-icon: #b42323;
+  --idem-alert-success-bg: #e6f6f3;
+  --idem-alert-success-text: #096458;
+  --idem-alert-success-border: #0c8272;
+  --idem-alert-success-icon: #0c8272;
+  --idem-alert-warning-bg: #fff6e5;
+  --idem-alert-warning-text: #8c4603;
+  --idem-alert-warning-border: #b65f04;
+  --idem-alert-warning-icon: #b65f04;
+  --idem-alert-info-bg: #eff6ff;
+  --idem-alert-info-text: #1d4ed8;
+  --idem-alert-info-border: #2563eb;
+  --idem-alert-info-icon: #2563eb;
 }

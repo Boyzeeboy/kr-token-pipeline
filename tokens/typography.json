@@ -1,28 +1,265 @@
 {
-  "font": {
+  "fonts": {
     "family": {
-      "sans":  { "$value": "'Inter', sans-serif",  "$type": "fontFamily" },
-      "mono":  { "$value": "'JetBrains Mono', monospace", "$type": "fontFamily" }
-    },
-    "size": {
-      "xs":   { "$value": "12px", "$type": "dimension" },
-      "sm":   { "$value": "14px", "$type": "dimension" },
-      "md":   { "$value": "16px", "$type": "dimension" },
-      "lg":   { "$value": "20px", "$type": "dimension" },
-      "xl":   { "$value": "24px", "$type": "dimension" },
-      "2xl":  { "$value": "32px", "$type": "dimension" },
-      "3xl":  { "$value": "48px", "$type": "dimension" }
+      "base": {
+        "$value": "Inter Tight",
+        "$type": "fontFamily",
+        "$description": "Primary typeface used across all UI text"
+      },
+      "annotation": {
+        "$value": "Roboto Mono",
+        "$type": "fontFamily",
+        "$description": "Monospace typeface for code, annotations, and technical labels"
+      }
     },
     "weight": {
-      "regular":  { "$value": "400", "$type": "fontWeight" },
-      "medium":   { "$value": "500", "$type": "fontWeight" },
-      "semibold": { "$value": "600", "$type": "fontWeight" },
-      "bold":     { "$value": "700", "$type": "fontWeight" }
+      "regular": {
+        "$value": 400,
+        "$type": "fontWeight"
+      },
+      "medium": {
+        "$value": 500,
+        "$type": "fontWeight"
+      },
+      "semi-bold": {
+        "$value": 600,
+        "$type": "fontWeight"
+      },
+      "bold": {
+        "$value": 700,
+        "$type": "fontWeight"
+      }
+    },
+    "size": {
+      "display": {
+        "large": {
+          "$value": "56px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "44px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "36px",
+          "$type": "dimension"
+        }
+      },
+      "headline": {
+        "large": {
+          "$value": "32px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "18px",
+          "$type": "dimension"
+        }
+      },
+      "title": {
+        "large": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "12px",
+          "$type": "dimension"
+        }
+      },
+      "body": {
+        "large": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "12px",
+          "$type": "dimension"
+        }
+      },
+      "label": {
+        "large": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "11px",
+          "$type": "dimension"
+        }
+      }
     },
     "line-height": {
-      "tight":  { "$value": "1.2", "$type": "number" },
-      "normal": { "$value": "1.5", "$type": "number" },
-      "loose":  { "$value": "1.8", "$type": "number" }
+      "display": {
+        "large": {
+          "$value": "64px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "52px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "44px",
+          "$type": "dimension"
+        }
+      },
+      "headline": {
+        "large": {
+          "$value": "40px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "32px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "24px",
+          "$type": "dimension"
+        }
+      },
+      "title": {
+        "large": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      },
+      "body": {
+        "large": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      },
+      "label": {
+        "large": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "letter-spacing": {
+      "display": {
+        "large": {
+          "$value": -0.25,
+          "$type": "number",
+          "$description": "-0.25px letter spacing"
+        },
+        "medium": {
+          "$value": -0.1,
+          "$type": "number",
+          "$description": "-0.1px letter spacing"
+        },
+        "small": {
+          "$value": 0,
+          "$type": "number",
+          "$description": "0px letter spacing"
+        }
+      },
+      "headline": {
+        "large": {
+          "$value": 0,
+          "$type": "number",
+          "$description": "0px letter spacing"
+        },
+        "medium": {
+          "$value": 0,
+          "$type": "number",
+          "$description": "0px letter spacing"
+        },
+        "small": {
+          "$value": 0,
+          "$type": "number",
+          "$description": "0px letter spacing"
+        }
+      },
+      "title": {
+        "large": {
+          "$value": 0,
+          "$type": "number",
+          "$description": "0px letter spacing"
+        },
+        "medium": {
+          "$value": 0.1,
+          "$type": "number",
+          "$description": "0.1px letter spacing"
+        },
+        "small": {
+          "$value": 0.1,
+          "$type": "number",
+          "$description": "0.1px letter spacing"
+        }
+      },
+      "body": {
+        "large": {
+          "$value": 0.5,
+          "$type": "number",
+          "$description": "0.5px letter spacing"
+        },
+        "medium": {
+          "$value": 0.25,
+          "$type": "number",
+          "$description": "0.25px letter spacing"
+        },
+        "small": {
+          "$value": 0.4,
+          "$type": "number",
+          "$description": "0.4px letter spacing"
+        }
+      },
+      "label": {
+        "large": {
+          "$value": 0.1,
+          "$type": "number",
+          "$description": "0.1px letter spacing"
+        },
+        "medium": {
+          "$value": 0.5,
+          "$type": "number",
+          "$description": "0.5px letter spacing"
+        },
+        "small": {
+          "$value": 0.5,
+          "$type": "number",
+          "$description": "0.5px letter spacing"
+        }
+      }
     }
   }
 }
