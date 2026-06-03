@@ -311,75 +311,75 @@
   "colour": {
     "background": {
       "default": {
-        "$value": "{primitives.neutral.950}",
+        "$value": "{primitives.neutral.0}",
         "$type": "color",
         "$description": "Purpose: The primary canvas background; the base surface of every page and layout.\nUsage: Applied to the root body background, full-page layouts, and any area that represents the default visual plane of the UI.\nGuidelines: Do not use for elevated or contained surfaces — use colour/background/surface or colour/background/raised instead. This token must always produce the highest (or lowest in dark mode) surface in the visual hierarchy."
       },
       "subtle": {
-        "$value": "{primitives.neutral.900}",
+        "$value": "{primitives.neutral.50}",
         "$type": "color",
         "$description": "Purpose: A gently tinted background for page-level regions that need subtle visual separation from the default canvas.\nUsage: Applied to secondary page areas, sidebar backgrounds, table row stripes, or any region-level tint that should not draw focus.\nGuidelines: Shares the same primitive as colour/background/surface — differentiation in practice is achieved through borders and elevation. Do not rely on colour contrast alone to distinguish subtle regions."
       },
       "muted": {
-        "$value": "{primitives.neutral.800}",
+        "$value": "{primitives.neutral.100}",
         "$type": "color",
         "$description": "Purpose: A clearly tinted background for suppressed or de-emphasised surface areas.\nUsage: Used for disabled container backgrounds, inactive panel fills, or any surface that communicates reduced visual prominence.\nGuidelines: Not for active, interactive surfaces. Ensure foreground content on muted backgrounds meets WCAG AA contrast requirements using the appropriate text token."
       },
       "surface": {
-        "$value": "{primitives.neutral.900}",
+        "$value": "{primitives.neutral.50}",
         "$type": "color",
         "$description": "Purpose: The standard component background; the expected fill for contained UI surfaces such as cards, modals, and panels.\nUsage: Applied to card backgrounds, dialog surfaces, dropdown panels, and any component-level container that sits above the default canvas.\nGuidelines: Shares the same primitive as colour/background/subtle — border and elevation are the primary differentiators in practice. Use consistently across all card and panel components to maintain visual coherence."
       },
       "raised": {
-        "$value": "{primitives.neutral.800}",
+        "$value": "{primitives.neutral.0}",
         "$type": "color",
         "$description": "Purpose: A background for elevated components that sit above the standard surface layer.\nUsage: Applied to tooltips, floating menus, overlays, and components with a perceptible drop shadow that indicates elevation above sibling surfaces.\nGuidelines: Reserve for components with visual elevation cues (shadow, border). Do not use in place of surface for flat components."
       },
       "inverse": {
-        "$value": "{primitives.neutral.0}",
+        "$value": "{primitives.teal.900}",
         "$type": "color",
         "$description": "Purpose: A dark, branded background for inverted UI regions where the surface adopts the brand's deep teal tone.\nUsage: Applied to page headers, hero sections, promotional banners, or callout components that require a strong brand presence.\nGuidelines: Always pair with colour/onBackground/inverse or colour/text/inverse for foreground content on this surface to ensure contrast. Do not use for large body content areas."
       },
       "brand": {
-        "$value": "{primitives.teal.400}",
+        "$value": "{primitives.teal.500}",
         "$type": "color",
         "$description": "Purpose: The primary brand-coloured surface; a teal fill for brand-forward components.\nUsage: Applied to primary action surfaces, brand tiles, and any component where the full brand teal should fill the background.\nGuidelines: Always use colour/onBackground/brand for foreground content on this surface. Validate contrast for all text and icon content placed on this background."
       },
       "promo": {
-        "$value": "{primitives.teal.500}",
+        "$value": "{primitives.teal.700}",
         "$type": "color",
         "$description": "Purpose: A deep teal promotional surface for high-impact, campaign-style UI regions.\nUsage: Applied to promotional cards, marketing banners, and feature highlight sections requiring deeper brand emphasis than brand.\nGuidelines: Use sparingly to preserve its visual impact. Always pair with colour/onBackground/promo for legible foreground content."
       },
       "info": {
-        "$value": "{primitives.blue.900}",
+        "$value": "{primitives.blue.50}",
         "$type": "color"
       },
       "success": {
-        "$value": "{primitives.green.900}",
+        "$value": "{primitives.green.50}",
         "$type": "color"
       },
       "error": {
-        "$value": "{primitives.red.900}",
+        "$value": "{primitives.red.50}",
         "$type": "color"
       },
       "warning": {
-        "$value": "{primitives.amber.900}",
+        "$value": "{primitives.amber.50}",
         "$type": "color"
       }
     },
     "text": {
       "primary": {
-        "$value": "{primitives.neutral.50}",
+        "$value": "{primitives.neutral.900}",
         "$type": "color",
         "$description": "Purpose: The default colour for all primary body text and high-emphasis typographic content.\nUsage: Applied to headings, paragraph body copy, input field text, and any text requiring maximum legibility.\nGuidelines: Use as the default text colour throughout. Ensure it maintains 4.5:1 contrast against all background contexts it appears on. Do not use for decorative or subordinate text."
       },
       "secondary": {
-        "$value": "{primitives.neutral.300}",
+        "$value": "{primitives.neutral.700}",
         "$type": "color",
         "$description": "Purpose: A reduced-emphasis text colour for supporting content and secondary labels.\nUsage: Applied to subheadings, metadata, helper text, table secondary data, and any text that supports but does not replace primary content.\nGuidelines: Verify WCAG AA contrast against the surface it appears on. Not suitable for critical user-facing content where maximum legibility is required."
       },
       "tertiary": {
-        "$value": "{primitives.neutral.400}",
+        "$value": "{primitives.neutral.600}",
         "$type": "color",
         "$description": "Purpose: The lowest-emphasis text colour for minimally significant labels and placeholder content.\nUsage: Applied to input placeholder text, timestamp metadata, supplementary annotations, and visually subordinate labels.\nGuidelines: Do not use for interactive text or content that conveys essential meaning. Placeholder usage should rely on other design cues to remain intelligible."
       },
@@ -389,11 +389,11 @@
         "$description": "Purpose: A light text colour for use on dark or branded surfaces where standard dark text would fail contrast.\nUsage: Applied to text on colour/background/inverse, dark overlay surfaces, and any dark-filled container requiring light foreground text.\nGuidelines: Only use on surfaces dark enough to maintain 4.5:1 contrast. Do not apply to standard light backgrounds."
       },
       "link": {
-        "$value": "{primitives.teal.300}",
+        "$value": "{primitives.teal.500}",
         "$type": "color",
         "$description": "Purpose: The standard colour for inline hyperlinks and interactive text elements.\nUsage: Applied to anchor text, inline navigational links, and any text that initiates navigation or opens contextual content.\nGuidelines: Ensure links are distinguishable from surrounding body text through underline or other non-colour cues, per WCAG 1.4.1. Verify 4.5:1 contrast on all background contexts.",
         "hover": {
-          "$value": "{primitives.teal.200}",
+          "$value": "{primitives.teal.600}",
           "$type": "color",
           "$description": "Purpose: The hover-state colour for inline links; communicates interactivity on cursor entry.\nUsage: Applied exclusively as the link text colour on :hover and :focus states.\nGuidelines: Maintain sufficient contrast from colour/text/link (resting) to communicate a visible state change. Also verify contrast against the background surface."
         }
@@ -401,15 +401,15 @@
     },
     "onBackground": {
       "default": {
-        "$value": "{primitives.neutral.50}",
+        "$value": "{primitives.neutral.900}",
         "$type": "color"
       },
       "subtle": {
-        "$value": "{primitives.neutral.300}",
+        "$value": "{primitives.neutral.700}",
         "$type": "color"
       },
       "muted": {
-        "$value": "{primitives.neutral.400}",
+        "$value": "{primitives.neutral.600}",
         "$type": "color"
       },
       "inverse": {
@@ -417,27 +417,27 @@
         "$type": "color"
       },
       "brand": {
-        "$value": "{primitives.neutral.0}",
+        "$value": "{primitives.neutral.950}",
         "$type": "color"
       },
       "promo": {
-        "$value": "{primitives.neutral.0}",
+        "$value": "{primitives.neutral.950}",
         "$type": "color"
       },
       "info": {
-        "$value": "{primitives.blue.300}",
+        "$value": "{primitives.blue.700}",
         "$type": "color"
       },
       "success": {
-        "$value": "{primitives.green.300}",
+        "$value": "{primitives.green.700}",
         "$type": "color"
       },
       "error": {
-        "$value": "{primitives.red.300}",
+        "$value": "{primitives.red.700}",
         "$type": "color"
       },
       "warning": {
-        "$value": "{primitives.amber.200}",
+        "$value": "{primitives.amber.800}",
         "$type": "color"
       }
     },
@@ -447,31 +447,31 @@
         "$type": "color"
       },
       "default": {
-        "$value": "{primitives.neutral.400}",
+        "$value": "{primitives.neutral.600}",
         "$type": "color"
       },
       "strong": {
-        "$value": "{primitives.neutral.300}",
+        "$value": "{primitives.neutral.700}",
         "$type": "color"
       },
       "interactive": {
-        "$value": "{primitives.teal.300}",
+        "$value": "{primitives.teal.500}",
         "$type": "color"
       },
       "info": {
-        "$value": "{primitives.blue.400}",
+        "$value": "{primitives.blue.600}",
         "$type": "color"
       },
       "success": {
-        "$value": "{primitives.green.400}",
+        "$value": "{primitives.green.600}",
         "$type": "color"
       },
       "error": {
-        "$value": "{primitives.red.400}",
+        "$value": "{primitives.red.600}",
         "$type": "color"
       },
       "warning": {
-        "$value": "{primitives.amber.400}",
+        "$value": "{primitives.amber.700}",
         "$type": "color"
       }
     },
@@ -490,58 +490,58 @@
         }
       },
       "secondary": {
-        "$value": "{primitives.neutral.700}",
+        "$value": "{primitives.neutral.200}",
         "$type": "color",
         "hover": {
-          "$value": "{primitives.neutral.800}",
+          "$value": "{primitives.neutral.300}",
           "$type": "color"
         },
         "pressed": {
-          "$value": "{primitives.neutral.900}",
+          "$value": "{primitives.neutral.400}",
           "$type": "color"
         }
       }
     },
     "state": {
       "focus": {
-        "$value": "{primitives.teal.300}",
+        "$value": "{primitives.teal.500}",
         "$type": "color",
         "$description": "Purpose: The brand-teal colour used to render focus ring indicators on all interactive elements.\nUsage: Applied to focus ring outlines (typically via outline or box-shadow) on buttons, inputs, links, and any focusable control.\nGuidelines: Must be applied to all keyboard-navigable interactive elements to satisfy WCAG 2.4.7. The focus indicator must be clearly visible and must not be suppressed in any production context."
       },
       "hover": {
-        "$value": "{primitives.teal.900}",
+        "$value": "{primitives.teal.50}",
         "$type": "color"
       },
       "selected": {
-        "$value": "{primitives.teal.800}",
+        "$value": "{primitives.teal.25}",
         "$type": "color"
       },
       "active": {
-        "$value": "{primitives.teal.700}",
+        "$value": "{primitives.teal.50}",
         "$type": "color"
       },
       "disabled": {
         "text": {
-          "$value": "{primitives.neutral.500}",
+          "$value": "{primitives.neutral.400}",
           "$type": "color"
         },
         "bg": {
-          "$value": "{primitives.neutral.800}",
+          "$value": "{primitives.neutral.100}",
           "$type": "color"
         }
       }
     },
     "icon": {
       "default": {
-        "$value": "{primitives.neutral.200}",
+        "$value": "{primitives.neutral.700}",
         "$type": "color"
       },
       "subtle": {
-        "$value": "{primitives.neutral.400}",
+        "$value": "{primitives.neutral.500}",
         "$type": "color"
       },
       "brand": {
-        "$value": "{primitives.teal.400}",
+        "$value": "{primitives.teal.500}",
         "$type": "color"
       },
       "inverse": {
@@ -549,19 +549,19 @@
         "$type": "color"
       },
       "info": {
-        "$value": "{primitives.blue.400}",
+        "$value": "{primitives.blue.600}",
         "$type": "color"
       },
       "success": {
-        "$value": "{primitives.green.400}",
+        "$value": "{primitives.green.600}",
         "$type": "color"
       },
       "error": {
-        "$value": "{primitives.red.400}",
+        "$value": "{primitives.red.600}",
         "$type": "color"
       },
       "warning": {
-        "$value": "{primitives.amber.300}",
+        "$value": "{primitives.amber.700}",
         "$type": "color"
       }
     },
@@ -569,45 +569,45 @@
       "sequential": {
         "teal": {
           "weakest": {
-            "$value": "{primitives.teal.900}",
+            "$value": "{primitives.teal.100}",
             "$type": "color"
           },
           "weak": {
-            "$value": "{primitives.teal.800}",
+            "$value": "{primitives.teal.200}",
             "$type": "color"
           },
           "mid": {
-            "$value": "{primitives.teal.600}",
+            "$value": "{primitives.teal.300}",
             "$type": "color"
           },
           "strong": {
-            "$value": "{primitives.teal.400}",
+            "$value": "{primitives.teal.500}",
             "$type": "color"
           },
           "strongest": {
-            "$value": "{primitives.teal.300}",
+            "$value": "{primitives.teal.700}",
             "$type": "color"
           }
         },
         "neutral": {
           "weakest": {
-            "$value": "{primitives.neutral.800}",
+            "$value": "{primitives.neutral.50}",
             "$type": "color"
           },
           "weak": {
-            "$value": "{primitives.neutral.700}",
+            "$value": "{primitives.neutral.200}",
             "$type": "color"
           },
           "mid": {
-            "$value": "{primitives.neutral.500}",
+            "$value": "{primitives.neutral.400}",
             "$type": "color"
           },
           "strong": {
-            "$value": "{primitives.neutral.300}",
+            "$value": "{primitives.neutral.600}",
             "$type": "color"
           },
           "strongest": {
-            "$value": "{primitives.neutral.100}",
+            "$value": "{primitives.neutral.800}",
             "$type": "color"
           }
         }
@@ -615,25 +615,25 @@
     },
     "divider": {
       "subtle": {
-        "$value": "{primitives.neutral.800}",
+        "$value": "{primitives.neutral.100}",
         "$type": "color"
       },
       "default": {
-        "$value": "{primitives.neutral.700}",
+        "$value": "{primitives.neutral.200}",
         "$type": "color"
       },
       "strong": {
-        "$value": "{primitives.neutral.600}",
+        "$value": "{primitives.neutral.300}",
         "$type": "color"
       }
     },
     "ink": {
       "onBrand": {
-        "$value": "{primitives.neutral.0}",
+        "$value": "{primitives.neutral.950}",
         "$type": "color"
       },
       "onNeutral": {
-        "$value": "{primitives.neutral.50}",
+        "$value": "{primitives.neutral.900}",
         "$type": "color"
       }
     }
