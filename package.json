@@ -4,9 +4,10 @@
   "description": "Design token pipeline for IDEM using Style Dictionary",
   "type": "module",
   "scripts": {
-    "build": "node sd.config.js && node scripts/snapshot-tokens.mjs",
+    "build": "node sd.config.mjs && node scripts/snapshot-tokens.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "chromatic": "chromatic --project-token=chpt_29fa20d2f21a5c7",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,13 +19,14 @@
     "@storybook/react": "^8.6.18",
     "@storybook/react-vite": "^8.6.18",
     "@vitejs/plugin-react": "^6.0.2",
+    "chromatic": "^17.0.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "storybook": "^8.6.18",
     "style-dictionary": "^4.4.0",
     "vite": "^8.0.13"
   },
-  "main": "sd.config.js",
+  "main": "sd.config.mjs",
   "dependencies": {
     "assert": "^2.1.0",
     "available-typed-arrays": "^1.0.7",

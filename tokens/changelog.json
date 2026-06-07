@@ -1,5 +1,50 @@
 [
   {
+    "id": 8,
+    "timestamp": "2026-06-07T16:48:55.314Z",
+    "isFirstRun": false,
+    "tokenCount": 831,
+    "changeCount": 6,
+    "changes": [
+      {
+        "type": "modified",
+        "token": "tokens.dark/primitives/amber/900",
+        "before": "#ffe8bf",
+        "after": "#fff6e5"
+      },
+      {
+        "type": "modified",
+        "token": "tokens/components/button/primary/border",
+        "before": "#007582",
+        "after": "#00000000"
+      },
+      {
+        "type": "added",
+        "token": "tokens/components/button/primary/focus",
+        "before": null,
+        "after": "#007582"
+      },
+      {
+        "type": "added",
+        "token": "tokens/components/button/primary/focus[dark]",
+        "before": null,
+        "after": "#7fbfc6"
+      },
+      {
+        "type": "added",
+        "token": "tokens/components/button/secondary/focus",
+        "before": null,
+        "after": "#007582"
+      },
+      {
+        "type": "added",
+        "token": "tokens/components/button/secondary/focus[dark]",
+        "before": null,
+        "after": "#7fbfc6"
+      }
+    ]
+  },
+  {
     "id": 7,
     "timestamp": "2026-06-03T21:34:15.828Z",
     "isFirstRun": false,
