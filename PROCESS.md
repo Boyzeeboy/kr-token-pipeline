@@ -103,6 +103,23 @@ git diff dist/ tokens/changelog.json
 > CSS variables under new names) — treat it as its own task with a Storybook
 > visual check, not part of a routine value sync.
 
+### Commit and push
+
+Once the build is clean and the diff matches intent, stage the source **and** the
+rebuilt `dist/` outputs together, commit, and push:
+
+```bash
+find .git -name '*.lock' -delete   # clear any stale lock from an interrupted git step
+git add tokens/ dist/
+git commit -m "sync: update tokens from Figma + rebuild"
+git push origin main
+```
+
+Also `git add sd.config.mjs` when the build config changed (e.g. a structural
+build fix). Pushing triggers Chromatic CI (Step 5). If git reports
+`index.lock`/`HEAD.lock` exists, a previous git step was interrupted — the
+`find … -delete` line above clears the stale lock so the commit can proceed.
+
 ## Step 4 — Spot-check `design.md` routing
 
 Do **not** regenerate `design.md` on every build — it is a router. It points at
@@ -172,5 +189,8 @@ prevent.
 | Build static Storybook | `npm run build-storybook` |
 | Review source token changes | `git diff tokens/` |
 | Review built output changes | `git diff dist/ tokens/changelog.json` |
+| Clear a stale git lock | `find .git -name '*.lock' -delete` |
+| Stage source + outputs | `git add tokens/ dist/` (add `sd.config.mjs` if build config changed) |
+| Commit & push | `git commit -m "…"` then `git push origin main` |
 
 **Never hand-edit `dist/`.** It is auto-generated and overwritten on every build.
