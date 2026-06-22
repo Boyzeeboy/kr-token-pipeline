@@ -188,6 +188,12 @@
   --idem-primitives-amber-800: #8c4603;
   --idem-primitives-amber-900: #5c2e01;
   /**
+   * Purpose: A fully transparent colour primitive; the zero-alpha anchor of the colour system.
+   * Usage: Referenced by any token that requires a genuinely invisible fill or border — e.g. button/primary/border where no visible border is desired.
+   * Guidelines: Do not substitute with a colour-matched value (e.g. same colour as bg) when true transparency is the intent. Changes to this value would propagate broadly — treat as immutable.
+   */
+  --idem-primitives-transparent: rgba(0, 0, 0, 0);
+  /**
    * Purpose: The primary canvas background; the base surface of every page and layout.
    * Usage: Applied to the root body background, full-page layouts, and any area that represents the default visual plane of the UI.
    * Guidelines: Do not use for elevated or contained surfaces — use colour/background/surface or colour/background/raised instead. This token must always produce the highest (or lowest in dark mode) surface in the visual hierarchy.
@@ -334,7 +340,7 @@
   --idem-input-border: #66797f;
   --idem-button-primary-bg: #007582;
   --idem-button-primary-text: #ffffff;
-  --idem-button-primary-border: #007582;
+  --idem-button-primary-border: rgba(0, 0, 0, 0);
   --idem-button-primary-hover: #0c5f6a;
   --idem-button-primary-pressed: #083f47;
   --idem-button-primary-disabled-bg: #e6e9ea;
