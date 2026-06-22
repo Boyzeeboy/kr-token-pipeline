@@ -35,10 +35,29 @@ actually consume.
 
 ## Step 2 — Sync into `tokens/*.json`
 
-The Figma changes land in the DTCG source files: `tokens/color.json`,
-`tokens/typography.json`, `tokens/size.json`, the mode files
-`tokens/tokens.{light,dark}.json`, and `tokens/guidelines.json` for the prose.
-This is the source of truth in the repo.
+**How the sync actually reads Figma.** Use the Figma **`use_figma`** tool, which
+runs the Figma Plugin API. Call
+`figma.variables.getLocalVariableCollectionsAsync()` and
+`getLocalVariablesAsync()` to read **every** local variable and collection —
+this works with **nothing selected** in Figma. Resolve aliases per mode and
+convert colors to hex, then diff against the source files.
+
+> ⚠️ **Do not use the selection-based reader** (`get_variable_defs` /
+> "get design context") for a full sync. It only returns variables used by the
+> layer *currently selected* in the Figma desktop app and errors with
+> `"nothing selected"`. This caused significant confusion during the
+> 2026-06-22 sync before switching to `use_figma`. Figma's Variables REST API
+> would read the whole panel too, but it is **Enterprise-only** — the Plugin API
+> path via `use_figma` works on any plan.
+
+The Figma values land in the DTCG source files. Note which file does what:
+
+- **`tokens/tokens.{light,dark}.json` are the only files Style Dictionary
+  compiles into `dist/`.** These are what the build, the CSS/JS outputs, and
+  consuming UIs actually use. Edit these for any value that must reach `dist/`.
+- `tokens/color.json`, `tokens/typography.json`, `tokens/size.json`, and
+  `tokens/guidelines.json` feed **Storybook** and the **changelog snapshot** —
+  they are not compiled into the CSS/JS build.
 
 Before building, review the diff so you can see exactly what changed:
 
@@ -72,6 +91,17 @@ structurally sound. Confirm the outputs and changelog match intent:
 ```bash
 git diff dist/ tokens/changelog.json
 ```
+
+> ⚠️ **Build gotcha — nested-on-token tokens are dropped.** Style Dictionary
+> only emits a token's value when its node is a leaf. If a node has its own
+> `$value` *and* nested children (e.g. `input.border` carries a value and also
+> `focus` / `error` / `disabled` children), only the parent (`input-border`) is
+> emitted; the children never reach `dist/`. Several Figma variables
+> (`input/*` states, `colour/action/primary/hover`, `button/*/focus`, etc.)
+> already exist in the source but are invisible in `dist/` for this reason.
+> Surfacing them is a **build/structure change** (it also re-emits some existing
+> CSS variables under new names) — treat it as its own task with a Storybook
+> visual check, not part of a routine value sync.
 
 ## Step 4 — Spot-check `design.md` routing
 

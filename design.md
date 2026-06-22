@@ -37,8 +37,10 @@ open the right one for the task:
   prose, including WCAG contrast requirements and "primitive-layer only" notes.
   The same prose is mirrored as comments in `dist/{mode}/variables.css`.
 - **Source token definitions (edit only via Figma sync, see below):**
-  `tokens/color.json`, `tokens/typography.json`, `tokens/size.json`,
-  `tokens/tokens.{light,dark}.json`.
+  `tokens/tokens.{light,dark}.json` are the **only** files Style Dictionary
+  compiles into `dist/` — they drive every CSS/JS value consumers use.
+  `tokens/color.json`, `tokens/typography.json`, and `tokens/size.json` feed
+  Storybook and the changelog snapshot, not the built outputs.
 - **Visual reference and live examples:** Storybook
   (`npm run storybook`) — stories for Colors, Typography, Spacing, BorderRadius,
   and the token Changelog.
@@ -47,11 +49,17 @@ open the right one for the task:
 
 ## Foundations (summary — values are authoritative in `dist/`)
 
-- **Color:** Teal primitive scale (`25`–`950`) anchored on brand `teal/500`, a
-  neutral scale (`0`–…), plus semantic aliases for background, text, border,
-  action, and state. 28 colors total. Resolve every color through a semantic
-  token; check `guidelines.json` for the contrast rule before using a color as
-  text or icon foreground (4.5:1 AA for text, 3:1 for borders/large text).
+- **Color:** Primitive scales for `teal` (`25`–`950`, anchored on brand
+  `teal/500`), `neutral`, `blue`, `green`, `red`, `amber`, plus a `transparent`
+  primitive — aliased into semantic tokens (background, text, border, action,
+  state, icon, dataviz) and component tokens. Light and dark each resolve to the
+  same names; the built `dist/` is the authoritative list of emitted color
+  variables. Resolve every color through a semantic token; check
+  `guidelines.json` for the contrast rule before using a color as text or icon
+  foreground (4.5:1 AA for text, 3:1 for borders/large text).
+  *Note:* not every token defined in source reaches `dist/` — a token whose node
+  has both a `$value` and nested children only emits the parent (see
+  `PROCESS.md`, Step 3 build gotcha).
 - **Typography:** `Inter Tight` for all UI text; `Roboto Mono` for code and
   technical annotations. Weights: 400 / 500 / 600 / 700. Full type scale
   (display → body → caption) defined in `tokens/typography.json` and shown in the

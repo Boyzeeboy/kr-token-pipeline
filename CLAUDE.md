@@ -22,6 +22,25 @@ contrast requirement.
   changelog. Do not bypass the pipeline.
 - For the full token-change workflow (Figma → build → verify → fix at source), follow `PROCESS.md`.
 
+## Syncing from Figma (read before any sync)
+
+- **Use the Figma `use_figma` tool (Plugin API).** Run
+  `figma.variables.getLocalVariableCollectionsAsync()` and
+  `getLocalVariablesAsync()` — these read **all** local variables and collections
+  with **nothing selected**. Resolve aliases per mode and convert colors to hex.
+- **Do NOT use the selection-based reader** (`get_variable_defs` /
+  "get design context") for a full sync. It only sees the layer currently
+  selected in the Figma desktop app and fails with `"nothing selected"`. This
+  cost real time on the 2026-06-22 sync — reach for `use_figma` first.
+- The file is **IDEM Revised**, key `3e2J8b6paAwdAlTyOs9NrK`.
+- **Only `tokens/tokens.{light,dark}.json` are compiled into `dist/`.**
+  `color.json` / `typography.json` / `size.json` / `guidelines.json` feed
+  Storybook and the changelog snapshot, not the CSS/JS build.
+- **Build gotcha:** Style Dictionary drops any token nested under a parent that
+  has its own `$value` (e.g. `input.border` has a value *and* `focus`/`error`
+  children → only `input-border` is emitted). Surfacing those leaves is a build
+  change, not a value sync.
+
 ## Commands
 
 - `npm run build` — build tokens (Style Dictionary) + snapshot/changelog.
