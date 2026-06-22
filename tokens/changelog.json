@@ -1,5 +1,451 @@
 [
   {
+    "id": 15,
+    "timestamp": "2026-06-22T19:23:52.185Z",
+    "isFirstRun": false,
+    "tokenCount": 853,
+    "changeCount": 2,
+    "changes": [
+      {
+        "type": "added",
+        "token": "color/primitives/transparent",
+        "before": null,
+        "after": "#00000000"
+      },
+      {
+        "type": "added",
+        "token": "tokens/primitives/transparent",
+        "before": null,
+        "after": "#00000000"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "timestamp": "2026-06-22T19:20:33.222Z",
+    "isFirstRun": false,
+    "tokenCount": 851,
+    "changeCount": 68,
+    "changes": [
+      {
+        "type": "modified",
+        "token": "tokens.dark/button/primary/bg",
+        "before": "{colour.action.primary}",
+        "after": "{colour.action.primary.DEFAULT}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/primary/disabled/border",
+        "before": null,
+        "after": "{colour.border.subtle}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/primary/focus/DEFAULT",
+        "before": null,
+        "after": "{colour.state.focus}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/primary/focus/bg",
+        "before": null,
+        "after": "{button.primary.bg}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/primary/focus/text",
+        "before": null,
+        "after": "#1f343a"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/button/primary/hover",
+        "before": "{colour.action.primary.hover}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/primary/hover/bg",
+        "before": null,
+        "after": "{colour.action.primary.hover}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/button/primary/pressed",
+        "before": "{colour.action.primary.pressed}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/primary/pressed/bg",
+        "before": null,
+        "after": "{colour.action.primary.pressed}"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/button/secondary/bg",
+        "before": "{colour.action.secondary}",
+        "after": "{colour.action.secondary.DEFAULT}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/secondary/focus/DEFAULT",
+        "before": null,
+        "after": "{colour.state.focus}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/secondary/focus/bg",
+        "before": null,
+        "after": "{button.secondary.bg}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/secondary/focus/text",
+        "before": null,
+        "after": "#1f343a"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/button/secondary/hover",
+        "before": "{colour.action.secondary.hover}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/secondary/hover/bg",
+        "before": null,
+        "after": "{colour.action.secondary.hover}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/secondary/hover/border",
+        "before": null,
+        "after": "{button.secondary.border}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/button/secondary/pressed",
+        "before": "{colour.action.secondary.pressed}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/secondary/pressed/bg",
+        "before": null,
+        "after": "{colour.action.secondary.pressed}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/button/secondary/pressed/border",
+        "before": null,
+        "after": "{button.secondary.border}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/colour/action/primary",
+        "before": "{primitives.teal.500}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/action/primary/DEFAULT",
+        "before": null,
+        "after": "{primitives.teal.500}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/colour/action/secondary",
+        "before": "{primitives.neutral.200}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/action/secondary/DEFAULT",
+        "before": null,
+        "after": "{primitives.neutral.200}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/colour/text/link",
+        "before": "{primitives.teal.500}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/text/link/DEFAULT",
+        "before": null,
+        "after": "{primitives.teal.500}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/input/bg",
+        "before": "{colour.background.surface}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/input/bg/DEFAULT",
+        "before": null,
+        "after": "{colour.background.surface}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/input/border",
+        "before": "{colour.border.default}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/input/border/DEFAULT",
+        "before": null,
+        "after": "{colour.border.default}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/input/text",
+        "before": "{colour.text.primary}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/input/text/DEFAULT",
+        "before": null,
+        "after": "{colour.text.primary}"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/nav/indicator",
+        "before": "{colour.action.primary}",
+        "after": "{colour.action.primary.DEFAULT}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/nav/text",
+        "before": "{colour.text.secondary}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/nav/text/DEFAULT",
+        "before": null,
+        "after": "{colour.text.secondary}"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/button/primary/bg",
+        "before": "{colour.action.primary}",
+        "after": "{colour.action.primary.DEFAULT}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/primary/disabled/border",
+        "before": null,
+        "after": "{colour.border.subtle}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/primary/focus/DEFAULT",
+        "before": null,
+        "after": "{colour.state.focus}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/primary/focus/bg",
+        "before": null,
+        "after": "{button.primary.bg}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/primary/focus/text",
+        "before": null,
+        "after": "#ffffff"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/button/primary/hover",
+        "before": "{colour.action.primary.hover}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/primary/hover/bg",
+        "before": null,
+        "after": "{colour.action.primary.hover}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/button/primary/pressed",
+        "before": "{colour.action.primary.pressed}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/primary/pressed/bg",
+        "before": null,
+        "after": "{colour.action.primary.pressed}"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/button/secondary/bg",
+        "before": "{colour.action.secondary}",
+        "after": "{colour.action.secondary.DEFAULT}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/secondary/focus/DEFAULT",
+        "before": null,
+        "after": "{colour.state.focus}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/secondary/focus/bg",
+        "before": null,
+        "after": "{button.secondary.bg}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/secondary/focus/text",
+        "before": null,
+        "after": "#ffffff"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/button/secondary/hover",
+        "before": "{colour.action.secondary.hover}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/secondary/hover/bg",
+        "before": null,
+        "after": "{colour.action.secondary.hover}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/secondary/hover/border",
+        "before": null,
+        "after": "{button.secondary.border}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/button/secondary/pressed",
+        "before": "{colour.action.secondary.pressed}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/secondary/pressed/bg",
+        "before": null,
+        "after": "{colour.action.secondary.pressed}"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/button/secondary/pressed/border",
+        "before": null,
+        "after": "{button.secondary.border}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/colour/action/primary",
+        "before": "{primitives.teal.500}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/action/primary/DEFAULT",
+        "before": null,
+        "after": "{primitives.teal.500}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/colour/action/secondary",
+        "before": "{primitives.neutral.200}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/action/secondary/DEFAULT",
+        "before": null,
+        "after": "{primitives.neutral.200}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/colour/text/link",
+        "before": "{primitives.teal.500}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/text/link/DEFAULT",
+        "before": null,
+        "after": "{primitives.teal.500}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/input/bg",
+        "before": "{colour.background.surface}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/input/bg/DEFAULT",
+        "before": null,
+        "after": "{colour.background.surface}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/input/border",
+        "before": "{colour.border.default}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/input/border/DEFAULT",
+        "before": null,
+        "after": "{colour.border.default}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/input/text",
+        "before": "{colour.text.primary}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/input/text/DEFAULT",
+        "before": null,
+        "after": "{colour.text.primary}"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/nav/indicator",
+        "before": "{colour.action.primary}",
+        "after": "{colour.action.primary.DEFAULT}"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/nav/text",
+        "before": "{colour.text.secondary}",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/nav/text/DEFAULT",
+        "before": null,
+        "after": "{colour.text.secondary}"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "timestamp": "2026-06-22T19:12:22.239Z",
+    "isFirstRun": false,
+    "tokenCount": 833,
+    "changeCount": 0,
+    "changes": []
+  },
+  {
     "id": 12,
     "timestamp": "2026-06-22T18:46:25.940Z",
     "isFirstRun": false,

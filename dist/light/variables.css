@@ -270,6 +270,12 @@
    */
   --idem-colour-text-inverse: #ffffff;
   /**
+   * Purpose: The hover-state colour for inline links; communicates interactivity on cursor entry.
+   * Usage: Applied exclusively as the link text colour on :hover and :focus states.
+   * Guidelines: Maintain sufficient contrast from colour/text/link (resting) to communicate a visible state change. Also verify contrast against the background surface.
+   */
+  --idem-colour-text-link-hover: #0c5f6a;
+  /**
    * Purpose: The standard colour for inline hyperlinks and interactive text elements.
    * Usage: Applied to anchor text, inline navigational links, and any text that initiates navigation or opens contextual content.
    * Guidelines: Ensure links are distinguishable from surrounding body text through underline or other non-colour cues, per WCAG 1.4.1. Verify 4.5:1 contrast on all background contexts.
@@ -293,12 +299,16 @@
   --idem-colour-border-success: #0c8272;
   --idem-colour-border-error: #b42323;
   --idem-colour-border-warning: #b65f04;
+  --idem-colour-action-primary-hover: #0c5f6a;
+  --idem-colour-action-primary-pressed: #083f47;
   /**
    * Purpose: The brand-teal fill for primary interactive action controls in their resting state.
    * Usage: Applied to primary button backgrounds and any control representing the most prominent call to action.
    * Guidelines: Use for the single most important action in a given context. Do not apply to multiple sibling actions of equal weight — reserve primary emphasis for one action per area.
    */
   --idem-colour-action-primary: #007582;
+  --idem-colour-action-secondary-hover: #c3cccf;
+  --idem-colour-action-secondary-pressed: #aeb9bd;
   --idem-colour-action-secondary: #d5dbdd;
   /**
    * Purpose: The brand-teal colour used to render focus ring indicators on all interactive elements.
@@ -334,27 +344,104 @@
   --idem-colour-divider-strong: #c3cccf;
   --idem-colour-ink-on-brand: #ffffff;
   --idem-colour-ink-on-neutral: #1f343a;
+  --idem-input-bg-disabled: #e6e9ea;
   --idem-input-bg: #f4f5f5;
+  --idem-input-text-disabled: #aeb9bd;
+  --idem-input-text-error: #8f1a1a;
   --idem-input-text: #1f343a;
   --idem-input-placeholder: #66797f;
+  --idem-input-border-focus: #007582;
+  --idem-input-border-error: #b42323;
+  --idem-input-border-success: #0c8272;
+  --idem-input-border-disabled: #7f9096;
   --idem-input-border: #66797f;
   --idem-button-primary-bg: #007582;
   --idem-button-primary-text: #ffffff;
   --idem-button-primary-border: rgba(0, 0, 0, 0);
-  --idem-button-primary-hover: #0c5f6a;
-  --idem-button-primary-pressed: #083f47;
+  /**
+   * Purpose: The background fill of the primary button on cursor hover.
+   * Usage: Applied to the primary button background on :hover state.
+   * Guidelines: References colour/action/primary/hover. Ensure a perceptible but not jarring visual change from the resting state.
+   */
+  --idem-button-primary-hover-bg: #0c5f6a;
+  /**
+   * Purpose: The background fill of the primary button in an actively pressed state.
+   * Usage: Applied to the primary button background on :active / pointer-down.
+   * Guidelines: References colour/action/primary/pressed. Must be visually distinct from both the resting and hover states.
+   */
+  --idem-button-primary-pressed-bg: #083f47;
   --idem-button-primary-disabled-bg: #e6e9ea;
   --idem-button-primary-disabled-text: #aeb9bd;
+  --idem-button-primary-disabled-border: #7f9096; /** Primary button disabled border — matches colour/border/subtle. Apply the same logic as button/secondary/disabled/border. */
+  /**
+   * Purpose: The label colour for the primary button in its focus state.
+   * Usage: Applied to the primary button label text on :focus-visible.
+   * Guidelines: White (#ffffff) in light mode — 5.43:1 contrast against teal/500, passes WCAG AA. Switches to neutral/900 (#1f343a) in dark mode — 6.31:1 contrast against teal/300, passes WCAG AA.
+   */
+  --idem-button-primary-focus-text: #ffffff;
+  /**
+   * Purpose: The background fill of the primary button in its focus state.
+   * Usage: Applied to the primary button background on :focus-visible.
+   * Guidelines: Aliases button/primary/bg — the background does not change on focus; the focus ring (button/primary/focus) communicates the focus state. Declared explicitly so the component token set is complete and the intent is unambiguous.
+   */
+  --idem-button-primary-focus-bg: #007582;
+  /**
+   * Purpose: The focus ring colour for the primary button.
+   * Usage: Applied as an outline or box-shadow ring on :focus-visible to communicate keyboard focus on primary buttons.
+   * Guidelines: References colour/state/focus. Must be applied to all keyboard-navigable primary buttons to satisfy WCAG 2.4.7. The focus indicator must be clearly visible and must not be suppressed in any production context.
+   */
+  --idem-button-primary-focus: #007582;
   --idem-button-secondary-bg: #d5dbdd;
   --idem-button-secondary-text: #1f343a;
   --idem-button-secondary-border: #66797f;
-  --idem-button-secondary-hover: #c3cccf;
-  --idem-button-secondary-pressed: #aeb9bd;
+  /**
+   * Purpose: The background fill of the secondary button on cursor hover.
+   * Usage: Applied to the secondary button background on :hover.
+   * Guidelines: References colour/action/secondary/hover. Ensure the hover state is perceptibly different from the resting state.
+   */
+  --idem-button-secondary-hover-bg: #c3cccf;
+  /**
+   * Purpose: The border colour of the secondary button on cursor hover.
+   * Usage: Applied to the secondary button border on :hover.
+   * Guidelines: Currently aliases button/secondary/border. Declared explicitly because secondary has a visible border — this token allows the hover border to be adjusted independently without creating a new token later.
+   */
+  --idem-button-secondary-hover-border: #66797f;
+  /**
+   * Purpose: The background fill of the secondary button in a pressed state.
+   * Usage: Applied to the secondary button background on :active.
+   * Guidelines: References colour/action/secondary/pressed. Must be distinct from both the resting and hover states.
+   */
+  --idem-button-secondary-pressed-bg: #aeb9bd;
+  /**
+   * Purpose: The border colour of the secondary button in a pressed state.
+   * Usage: Applied to the secondary button border on :active.
+   * Guidelines: Currently aliases button/secondary/border. Declared explicitly because secondary has a visible border — this token allows the pressed border to be adjusted independently without creating a new token later.
+   */
+  --idem-button-secondary-pressed-border: #66797f;
   --idem-button-secondary-disabled-bg: #e6e9ea;
   --idem-button-secondary-disabled-text: #aeb9bd;
   --idem-button-secondary-disabled-border: #7f9096;
+  /**
+   * Purpose: The label colour for the secondary button in its focus state.
+   * Usage: Applied to the secondary button label text on :focus-visible.
+   * Guidelines: White (#ffffff) in light mode — 5.43:1 contrast against teal/500, passes WCAG AA. Switches to neutral/900 (#1f343a) in dark mode — 6.31:1 contrast against teal/300, passes WCAG AA.
+   */
+  --idem-button-secondary-focus-text: #ffffff;
+  /**
+   * Purpose: The background fill of the secondary button in its focus state.
+   * Usage: Applied to the secondary button background on :focus-visible.
+   * Guidelines: Aliases button/secondary/bg — the background does not change on focus; the focus ring (button/secondary/focus) communicates the focus state. Declared explicitly so the component token set is complete and the intent is unambiguous.
+   */
+  --idem-button-secondary-focus-bg: #d5dbdd;
+  /**
+   * Purpose: The focus ring colour for the secondary button.
+   * Usage: Applied as an outline or box-shadow ring on :focus-visible to communicate keyboard focus on secondary buttons.
+   * Guidelines: References colour/state/focus. Must be applied to all keyboard-navigable secondary buttons to satisfy WCAG 2.4.7. The focus indicator must be clearly visible and must not be suppressed in any production context.
+   */
+  --idem-button-secondary-focus: #007582;
   --idem-nav-bg: #ffffff;
   --idem-nav-border: #7f9096;
+  --idem-nav-text-active: #1f343a;
   --idem-nav-text: #4d6167;
   --idem-nav-indicator: #007582;
   --idem-nav-item-active-bg: #f5fafa;

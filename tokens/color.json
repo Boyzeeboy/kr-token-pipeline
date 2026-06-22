@@ -291,6 +291,11 @@
         "$value": "#5c2e01",
         "$type": "color"
       }
+    },
+    "transparent": {
+      "$value": "#00000000",
+      "$type": "color",
+      "$description": "Purpose: A fully transparent colour primitive; the zero-alpha anchor of the colour system.\nUsage: Referenced by any token that requires a genuinely invisible fill or border — e.g. button/primary/border where no visible border is desired.\nGuidelines: Do not substitute with a colour-matched value (e.g. same colour as bg) when true transparency is the intent. Changes to this value would propagate broadly — treat as immutable."
     }
   }
 }

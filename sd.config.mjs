@@ -45,17 +45,43 @@ StyleDictionary.registerFormat({
   },
 });
 
+// ─── Custom: kebab name transform that drops the `DEFAULT` sentinel ──────────
+// DTCG forbids a token node from having both a $value and nested child tokens.
+// Where a token needs a default value AND sub-states (e.g. `input.border` plus
+// `input.border.focus`), we model the default as a `DEFAULT` child. This name
+// transform strips that exact segment so `input.border.DEFAULT` still emits as
+// `idem-input-border` (unchanged), while `input.border.focus` emits alongside it.
+// Only the exact uppercase `DEFAULT` is stripped, so real `default` token names
+// (e.g. `colour.background.default`) are untouched.
+
+StyleDictionary.registerTransform({
+  name: 'name/kebab-default',
+  type: 'name',
+  transform: (token, config, options) => {
+    const prefix = (options && options.prefix) || (config && config.prefix) || '';
+    const segs = [prefix, ...token.path.filter((p) => p !== 'DEFAULT')];
+    return segs
+      .join(' ')
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2') // split camelCase (onBackground → on background)
+      .split(/[^a-zA-Z0-9]+/)
+      .filter(Boolean)
+      .join('-')
+      .toLowerCase();
+  },
+});
+
 // ─── Shared transform group ───────────────────────────────────────────────────
-// Uses SD's built-in 'css' transforms but keeps the name as kebab-case.
+// Uses SD's built-in 'css' transforms but keeps the name as kebab-case
+// (DEFAULT-aware, see above).
 
 StyleDictionary.registerTransformGroup({
   name: 'idem/css',
-  transforms: ['attribute/cti', 'name/kebab', 'color/css'],
+  transforms: ['attribute/cti', 'name/kebab-default', 'color/css'],
 });
 
 StyleDictionary.registerTransformGroup({
   name: 'idem/json',
-  transforms: ['attribute/cti', 'name/kebab', 'color/css'],
+  transforms: ['attribute/cti', 'name/kebab-default', 'color/css'],
 });
 
 // ─── Build helper ────────────────────────────────────────────────────────────

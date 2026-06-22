@@ -394,13 +394,15 @@
         "$description": "Purpose: A light text colour for use on dark or branded surfaces where standard dark text would fail contrast.\nUsage: Applied to text on colour/background/inverse, dark overlay surfaces, and any dark-filled container requiring light foreground text.\nGuidelines: Only use on surfaces dark enough to maintain 4.5:1 contrast. Do not apply to standard light backgrounds."
       },
       "link": {
-        "$value": "{primitives.teal.500}",
-        "$type": "color",
-        "$description": "Purpose: The standard colour for inline hyperlinks and interactive text elements.\nUsage: Applied to anchor text, inline navigational links, and any text that initiates navigation or opens contextual content.\nGuidelines: Ensure links are distinguishable from surrounding body text through underline or other non-colour cues, per WCAG 1.4.1. Verify 4.5:1 contrast on all background contexts.",
         "hover": {
           "$value": "{primitives.teal.600}",
           "$type": "color",
           "$description": "Purpose: The hover-state colour for inline links; communicates interactivity on cursor entry.\nUsage: Applied exclusively as the link text colour on :hover and :focus states.\nGuidelines: Maintain sufficient contrast from colour/text/link (resting) to communicate a visible state change. Also verify contrast against the background surface."
+        },
+        "DEFAULT": {
+          "$value": "{primitives.teal.500}",
+          "$type": "color",
+          "$description": "Purpose: The standard colour for inline hyperlinks and interactive text elements.\nUsage: Applied to anchor text, inline navigational links, and any text that initiates navigation or opens contextual content.\nGuidelines: Ensure links are distinguishable from surrounding body text through underline or other non-colour cues, per WCAG 1.4.1. Verify 4.5:1 contrast on all background contexts."
         }
       }
     },
@@ -482,9 +484,6 @@
     },
     "action": {
       "primary": {
-        "$value": "{primitives.teal.500}",
-        "$type": "color",
-        "$description": "Purpose: The brand-teal fill for primary interactive action controls in their resting state.\nUsage: Applied to primary button backgrounds and any control representing the most prominent call to action.\nGuidelines: Use for the single most important action in a given context. Do not apply to multiple sibling actions of equal weight — reserve primary emphasis for one action per area.",
         "hover": {
           "$value": "{primitives.teal.600}",
           "$type": "color"
@@ -492,17 +491,24 @@
         "pressed": {
           "$value": "{primitives.teal.700}",
           "$type": "color"
+        },
+        "DEFAULT": {
+          "$value": "{primitives.teal.500}",
+          "$type": "color",
+          "$description": "Purpose: The brand-teal fill for primary interactive action controls in their resting state.\nUsage: Applied to primary button backgrounds and any control representing the most prominent call to action.\nGuidelines: Use for the single most important action in a given context. Do not apply to multiple sibling actions of equal weight — reserve primary emphasis for one action per area."
         }
       },
       "secondary": {
-        "$value": "{primitives.neutral.200}",
-        "$type": "color",
         "hover": {
           "$value": "{primitives.neutral.300}",
           "$type": "color"
         },
         "pressed": {
           "$value": "{primitives.neutral.400}",
+          "$type": "color"
+        },
+        "DEFAULT": {
+          "$value": "{primitives.neutral.200}",
           "$type": "color"
         }
       }
@@ -645,22 +651,26 @@
   },
   "input": {
     "bg": {
-      "$value": "{colour.background.surface}",
-      "$type": "color",
       "disabled": {
         "$value": "{colour.state.disabled.bg}",
+        "$type": "color"
+      },
+      "DEFAULT": {
+        "$value": "{colour.background.surface}",
         "$type": "color"
       }
     },
     "text": {
-      "$value": "{colour.text.primary}",
-      "$type": "color",
       "disabled": {
         "$value": "{colour.state.disabled.text}",
         "$type": "color"
       },
       "error": {
         "$value": "{colour.onBackground.error}",
+        "$type": "color"
+      },
+      "DEFAULT": {
+        "$value": "{colour.text.primary}",
         "$type": "color"
       }
     },
@@ -669,8 +679,6 @@
       "$type": "color"
     },
     "border": {
-      "$value": "{colour.border.default}",
-      "$type": "color",
       "focus": {
         "$value": "{colour.border.interactive}",
         "$type": "color"
@@ -686,13 +694,17 @@
       "disabled": {
         "$value": "{colour.border.subtle}",
         "$type": "color"
+      },
+      "DEFAULT": {
+        "$value": "{colour.border.default}",
+        "$type": "color"
       }
     }
   },
   "button": {
     "primary": {
       "bg": {
-        "$value": "{colour.action.primary}",
+        "$value": "{colour.action.primary.DEFAULT}",
         "$type": "color"
       },
       "text": {
@@ -704,12 +716,18 @@
         "$type": "color"
       },
       "hover": {
-        "$value": "{colour.action.primary.hover}",
-        "$type": "color"
+        "bg": {
+          "$value": "{colour.action.primary.hover}",
+          "$type": "color",
+          "$description": "Purpose: The background fill of the primary button on cursor hover.\nUsage: Applied to the primary button background on :hover state.\nGuidelines: References colour/action/primary/hover. Ensure a perceptible but not jarring visual change from the resting state."
+        }
       },
       "pressed": {
-        "$value": "{colour.action.primary.pressed}",
-        "$type": "color"
+        "bg": {
+          "$value": "{colour.action.primary.pressed}",
+          "$type": "color",
+          "$description": "Purpose: The background fill of the primary button in an actively pressed state.\nUsage: Applied to the primary button background on :active / pointer-down.\nGuidelines: References colour/action/primary/pressed. Must be visually distinct from both the resting and hover states."
+        }
       },
       "disabled": {
         "bg": {
@@ -719,12 +737,34 @@
         "text": {
           "$value": "{colour.state.disabled.text}",
           "$type": "color"
+        },
+        "border": {
+          "$value": "{colour.border.subtle}",
+          "$type": "color",
+          "$description": "Primary button disabled border — matches colour/border/subtle. Apply the same logic as button/secondary/disabled/border."
+        }
+      },
+      "focus": {
+        "text": {
+          "$value": "#ffffff",
+          "$type": "color",
+          "$description": "Purpose: The label colour for the primary button in its focus state.\nUsage: Applied to the primary button label text on :focus-visible.\nGuidelines: White (#ffffff) in light mode — 5.43:1 contrast against teal/500, passes WCAG AA. Switches to neutral/900 (#1f343a) in dark mode — 6.31:1 contrast against teal/300, passes WCAG AA."
+        },
+        "bg": {
+          "$value": "{button.primary.bg}",
+          "$type": "color",
+          "$description": "Purpose: The background fill of the primary button in its focus state.\nUsage: Applied to the primary button background on :focus-visible.\nGuidelines: Aliases button/primary/bg — the background does not change on focus; the focus ring (button/primary/focus) communicates the focus state. Declared explicitly so the component token set is complete and the intent is unambiguous."
+        },
+        "DEFAULT": {
+          "$value": "{colour.state.focus}",
+          "$type": "color",
+          "$description": "Purpose: The focus ring colour for the primary button.\nUsage: Applied as an outline or box-shadow ring on :focus-visible to communicate keyboard focus on primary buttons.\nGuidelines: References colour/state/focus. Must be applied to all keyboard-navigable primary buttons to satisfy WCAG 2.4.7. The focus indicator must be clearly visible and must not be suppressed in any production context."
         }
       }
     },
     "secondary": {
       "bg": {
-        "$value": "{colour.action.secondary}",
+        "$value": "{colour.action.secondary.DEFAULT}",
         "$type": "color"
       },
       "text": {
@@ -736,12 +776,28 @@
         "$type": "color"
       },
       "hover": {
-        "$value": "{colour.action.secondary.hover}",
-        "$type": "color"
+        "bg": {
+          "$value": "{colour.action.secondary.hover}",
+          "$type": "color",
+          "$description": "Purpose: The background fill of the secondary button on cursor hover.\nUsage: Applied to the secondary button background on :hover.\nGuidelines: References colour/action/secondary/hover. Ensure the hover state is perceptibly different from the resting state."
+        },
+        "border": {
+          "$value": "{button.secondary.border}",
+          "$type": "color",
+          "$description": "Purpose: The border colour of the secondary button on cursor hover.\nUsage: Applied to the secondary button border on :hover.\nGuidelines: Currently aliases button/secondary/border. Declared explicitly because secondary has a visible border — this token allows the hover border to be adjusted independently without creating a new token later."
+        }
       },
       "pressed": {
-        "$value": "{colour.action.secondary.pressed}",
-        "$type": "color"
+        "bg": {
+          "$value": "{colour.action.secondary.pressed}",
+          "$type": "color",
+          "$description": "Purpose: The background fill of the secondary button in a pressed state.\nUsage: Applied to the secondary button background on :active.\nGuidelines: References colour/action/secondary/pressed. Must be distinct from both the resting and hover states."
+        },
+        "border": {
+          "$value": "{button.secondary.border}",
+          "$type": "color",
+          "$description": "Purpose: The border colour of the secondary button in a pressed state.\nUsage: Applied to the secondary button border on :active.\nGuidelines: Currently aliases button/secondary/border. Declared explicitly because secondary has a visible border — this token allows the pressed border to be adjusted independently without creating a new token later."
+        }
       },
       "disabled": {
         "bg": {
@@ -756,6 +812,23 @@
           "$value": "{colour.border.subtle}",
           "$type": "color"
         }
+      },
+      "focus": {
+        "text": {
+          "$value": "#ffffff",
+          "$type": "color",
+          "$description": "Purpose: The label colour for the secondary button in its focus state.\nUsage: Applied to the secondary button label text on :focus-visible.\nGuidelines: White (#ffffff) in light mode — 5.43:1 contrast against teal/500, passes WCAG AA. Switches to neutral/900 (#1f343a) in dark mode — 6.31:1 contrast against teal/300, passes WCAG AA."
+        },
+        "bg": {
+          "$value": "{button.secondary.bg}",
+          "$type": "color",
+          "$description": "Purpose: The background fill of the secondary button in its focus state.\nUsage: Applied to the secondary button background on :focus-visible.\nGuidelines: Aliases button/secondary/bg — the background does not change on focus; the focus ring (button/secondary/focus) communicates the focus state. Declared explicitly so the component token set is complete and the intent is unambiguous."
+        },
+        "DEFAULT": {
+          "$value": "{colour.state.focus}",
+          "$type": "color",
+          "$description": "Purpose: The focus ring colour for the secondary button.\nUsage: Applied as an outline or box-shadow ring on :focus-visible to communicate keyboard focus on secondary buttons.\nGuidelines: References colour/state/focus. Must be applied to all keyboard-navigable secondary buttons to satisfy WCAG 2.4.7. The focus indicator must be clearly visible and must not be suppressed in any production context."
+        }
       }
     }
   },
@@ -769,15 +842,17 @@
       "$type": "color"
     },
     "text": {
-      "$value": "{colour.text.secondary}",
-      "$type": "color",
       "active": {
         "$value": "{colour.text.primary}",
+        "$type": "color"
+      },
+      "DEFAULT": {
+        "$value": "{colour.text.secondary}",
         "$type": "color"
       }
     },
     "indicator": {
-      "$value": "{colour.action.primary}",
+      "$value": "{colour.action.primary.DEFAULT}",
       "$type": "color"
     },
     "item": {
