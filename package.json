@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "node sd.config.mjs && node scripts/snapshot-tokens.mjs",
+    "generate-docs": "node scripts/generate-docs.mjs",
+    "scaffold-client": "node scripts/scaffold-client.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "chromatic --project-token=chpt_29fa20d2f21a5c7",

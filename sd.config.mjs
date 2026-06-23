@@ -11,6 +11,11 @@
  */
 
 import StyleDictionary from 'style-dictionary';
+import config from './pipeline.config.mjs';
+
+// Per-client token name prefix. Sourced from pipeline.config.mjs, with an
+// optional TOKEN_PREFIX env override for one-off builds.
+const PREFIX = process.env.TOKEN_PREFIX ?? config.prefix;
 
 // ─── Custom: flat JSON format ────────────────────────────────────────────────
 // Outputs { "token-name": "#hex", ... } — one entry per token, kebab-cased key.
@@ -97,7 +102,7 @@ async function buildMode(mode) {
       // 1. CSS custom properties
       css: {
         transformGroup: 'idem/css',
-        prefix: 'idem',
+        prefix: PREFIX,
         buildPath: `dist/${mode}/`,
         files: [
           {
@@ -114,7 +119,7 @@ async function buildMode(mode) {
       // 2. JavaScript ES6 named exports
       js: {
         transformGroup: 'idem/json',
-        prefix: 'idem',
+        prefix: PREFIX,
         buildPath: `dist/${mode}/`,
         files: [
           {
@@ -127,7 +132,7 @@ async function buildMode(mode) {
       // 3. Flat JSON  { "idem-colour-background-default": "#ffffff", ... }
       json: {
         transformGroup: 'idem/json',
-        prefix: 'idem',
+        prefix: PREFIX,
         buildPath: `dist/${mode}/`,
         files: [
           {
