@@ -20,13 +20,13 @@
     "@storybook/blocks": "^8.6.14",
     "@storybook/react": "^8.6.18",
     "@storybook/react-vite": "^8.6.18",
-    "@vitejs/plugin-react": "^6.0.2",
+    "@vitejs/plugin-react": "^4.7.0",
     "chromatic": "^17.0.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "storybook": "^8.6.18",
     "style-dictionary": "^4.4.0",
-    "vite": "^8.0.13"
+    "vite": "^6.4.3"
   },
   "main": "sd.config.mjs",
   "dependencies": {
