@@ -62,7 +62,7 @@ What it does, in order:
 
 1. **Rewrites `pipeline.config.mjs`** with the client's `projectName`, `prefix`, `figmaFileName`, `figmaFileKey`.
 2. **Updates `package.json` identity** — `name` (`@acme/tokens` with `--scope`, else `acme-tokens`), resets `version` to `0.1.0`, sets `description`, and (if passed) `author` / `repository`. Also strips the hardcoded `--project-token=...` from the `chromatic` script so the CLI uses the `CHROMATIC_PROJECT_TOKEN` env/secret instead.
-3. **Resets generated artifacts** — clears `dist/` and deletes `tokens/snapshot.json` + `tokens/changelog.json` (the snapshot script recreates them cleanly on the next build).
+3. **Resets generated artifacts** — overwrites `tokens/snapshot.json` + `tokens/changelog.json` to a clean slate (`{}` / `[]`) and best-effort clears `dist/`. It resets by overwriting rather than deleting, so it still works on synced/sandboxed folders where file deletion is blocked; the next `npm run build` regenerates everything cleanly.
 4. **Regenerates `AGENTS.md` + `CLAUDE.md`** from the template with the new values.
 
 It deliberately **does not touch `tokens/*.json`**, so the repo still builds
