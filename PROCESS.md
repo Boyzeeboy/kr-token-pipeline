@@ -94,14 +94,15 @@ git diff dist/ tokens/changelog.json
 
 > ⚠️ **Build gotcha — nested-on-token tokens are dropped.** Style Dictionary
 > only emits a token's value when its node is a leaf. If a node has its own
-> `$value` *and* nested children (e.g. `input.border` carries a value and also
-> `focus` / `error` / `disabled` children), only the parent (`input-border`) is
-> emitted; the children never reach `dist/`. Several Figma variables
-> (`input/*` states, `colour/action/primary/hover`, `button/*/focus`, etc.)
-> already exist in the source but are invisible in `dist/` for this reason.
-> Surfacing them is a **build/structure change** (it also re-emits some existing
-> CSS variables under new names) — treat it as its own task with a Storybook
-> visual check, not part of a routine value sync.
+> `$value` *and* nested children, only the parent is emitted; the children
+> never reach `dist/`. **Resolved 2026-07-04:** all such conflicts (8 groups /
+> 16 child tokens: `input/*` states, `colour/action/*` hover/pressed,
+> `button/*/focus-*`, `nav/text-active`, `colour/text/link-hover`) were renamed
+> to hyphenated siblings in both Figma and the token JSON. The naming
+> convention is `parent-child` (e.g. `input/border-focus`). When syncing from
+> Figma, verify no variable name is also a group prefix of another variable in
+> the same collection; if one appears, rename it in Figma first — do not
+> recreate the nested structure in the JSON.
 
 ### Commit and push
 
