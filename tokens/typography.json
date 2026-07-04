@@ -2,14 +2,19 @@
   "fonts": {
     "family": {
       "base": {
-        "$value": "Inter Tight",
+        "$value": "Jost",
         "$type": "fontFamily",
-        "$description": "Primary typeface used across all UI text"
+        "$description": "Primary sans-serif for UI text: labels, buttons, navigation, form elements"
       },
-      "annotation": {
-        "$value": "Roboto Mono",
+      "serif-body": {
+        "$value": "Lora",
         "$type": "fontFamily",
-        "$description": "Monospace typeface for code, annotations, and technical labels"
+        "$description": "Serif for body prose: paragraphs and running text"
+      },
+      "display": {
+        "$value": "Cormorant Garamond",
+        "$type": "fontFamily",
+        "$description": "Display serif for display, headline and title roles"
       }
     },
     "weight": {
@@ -33,87 +38,15 @@
     "size": {
       "display": {
         "large": {
-          "$value": "56px",
+          "$value": "76px",
           "$type": "dimension"
         },
         "medium": {
-          "$value": "44px",
+          "$value": "60px",
           "$type": "dimension"
         },
         "small": {
-          "$value": "36px",
-          "$type": "dimension"
-        }
-      },
-      "headline": {
-        "large": {
-          "$value": "32px",
-          "$type": "dimension"
-        },
-        "medium": {
-          "$value": "24px",
-          "$type": "dimension"
-        },
-        "small": {
-          "$value": "18px",
-          "$type": "dimension"
-        }
-      },
-      "title": {
-        "large": {
-          "$value": "16px",
-          "$type": "dimension"
-        },
-        "medium": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "small": {
-          "$value": "12px",
-          "$type": "dimension"
-        }
-      },
-      "body": {
-        "large": {
-          "$value": "16px",
-          "$type": "dimension"
-        },
-        "medium": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "small": {
-          "$value": "12px",
-          "$type": "dimension"
-        }
-      },
-      "label": {
-        "large": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "medium": {
-          "$value": "12px",
-          "$type": "dimension"
-        },
-        "small": {
-          "$value": "11px",
-          "$type": "dimension"
-        }
-      }
-    },
-    "line-height": {
-      "display": {
-        "large": {
-          "$value": "64px",
-          "$type": "dimension"
-        },
-        "medium": {
-          "$value": "52px",
-          "$type": "dimension"
-        },
-        "small": {
-          "$value": "44px",
+          "$value": "48px",
           "$type": "dimension"
         }
       },
@@ -123,11 +56,11 @@
           "$type": "dimension"
         },
         "medium": {
-          "$value": "32px",
+          "$value": "34px",
           "$type": "dimension"
         },
         "small": {
-          "$value": "24px",
+          "$value": "28px",
           "$type": "dimension"
         }
       },
@@ -141,35 +74,107 @@
           "$type": "dimension"
         },
         "small": {
-          "$value": "16px",
+          "$value": "18px",
           "$type": "dimension"
         }
       },
       "body": {
         "large": {
-          "$value": "24px",
+          "$value": "17px",
           "$type": "dimension"
         },
         "medium": {
-          "$value": "20px",
+          "$value": "15px",
           "$type": "dimension"
         },
         "small": {
-          "$value": "16px",
+          "$value": "13px",
           "$type": "dimension"
         }
       },
       "label": {
         "large": {
-          "$value": "20px",
+          "$value": "12px",
           "$type": "dimension"
         },
         "medium": {
-          "$value": "16px",
+          "$value": "11px",
           "$type": "dimension"
         },
         "small": {
-          "$value": "16px",
+          "$value": "10px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "line-height": {
+      "display": {
+        "large": {
+          "$value": "80px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "65px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "53px",
+          "$type": "dimension"
+        }
+      },
+      "headline": {
+        "large": {
+          "$value": "45px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "39px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "34px",
+          "$type": "dimension"
+        }
+      },
+      "title": {
+        "large": {
+          "$value": "31px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "27px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "25px",
+          "$type": "dimension"
+        }
+      },
+      "body": {
+        "large": {
+          "$value": "31px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "27px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "23px",
+          "$type": "dimension"
+        }
+      },
+      "label": {
+        "large": {
+          "$value": "17px",
+          "$type": "dimension"
+        },
+        "medium": {
+          "$value": "15px",
+          "$type": "dimension"
+        },
+        "small": {
+          "$value": "14px",
           "$type": "dimension"
         }
       }
@@ -177,26 +182,26 @@
     "letter-spacing": {
       "display": {
         "large": {
-          "$value": -0.25,
+          "$value": -1.5,
           "$type": "number",
-          "$description": "-0.25px letter spacing"
+          "$description": "-1.5px letter spacing"
         },
         "medium": {
-          "$value": -0.1,
+          "$value": -0.9,
           "$type": "number",
-          "$description": "-0.1px letter spacing"
+          "$description": "-0.9px letter spacing"
         },
         "small": {
-          "$value": 0,
+          "$value": -0.5,
           "$type": "number",
-          "$description": "0px letter spacing"
+          "$description": "-0.5px letter spacing"
         }
       },
       "headline": {
         "large": {
-          "$value": 0,
+          "$value": -0.4,
           "$type": "number",
-          "$description": "0px letter spacing"
+          "$description": "-0.4px letter spacing"
         },
         "medium": {
           "$value": 0,
@@ -216,48 +221,48 @@
           "$description": "0px letter spacing"
         },
         "medium": {
-          "$value": 0.1,
+          "$value": 0,
           "$type": "number",
-          "$description": "0.1px letter spacing"
+          "$description": "0px letter spacing"
         },
         "small": {
-          "$value": 0.1,
+          "$value": 0,
           "$type": "number",
-          "$description": "0.1px letter spacing"
+          "$description": "0px letter spacing"
         }
       },
       "body": {
         "large": {
-          "$value": 0.5,
+          "$value": 0,
           "$type": "number",
-          "$description": "0.5px letter spacing"
+          "$description": "0px letter spacing"
         },
         "medium": {
-          "$value": 0.25,
+          "$value": 0,
           "$type": "number",
-          "$description": "0.25px letter spacing"
+          "$description": "0px letter spacing"
         },
         "small": {
-          "$value": 0.4,
+          "$value": 0,
           "$type": "number",
-          "$description": "0.4px letter spacing"
+          "$description": "0px letter spacing"
         }
       },
       "label": {
         "large": {
-          "$value": 0.1,
+          "$value": 1.7,
           "$type": "number",
-          "$description": "0.1px letter spacing"
+          "$description": "1.7px letter spacing"
         },
         "medium": {
-          "$value": 0.5,
+          "$value": 2,
           "$type": "number",
-          "$description": "0.5px letter spacing"
+          "$description": "2px letter spacing"
         },
         "small": {
-          "$value": 0.5,
+          "$value": 2,
           "$type": "number",
-          "$description": "0.5px letter spacing"
+          "$description": "2px letter spacing"
         }
       }
     }

@@ -215,7 +215,7 @@
   "kr-components-alert-info-border": "#6aaff0",
   "kr-components-alert-info-icon": "#6aaff0",
   "kr-fonts-family-base": "Jost",
-  "kr-fonts-family-annotation": "Lora",
+  "kr-fonts-family-serif-body": "Lora",
   "kr-fonts-family-display": "Cormorant Garamond",
   "kr-fonts-line-height-display-large": 80,
   "kr-fonts-line-height-display-medium": 65,

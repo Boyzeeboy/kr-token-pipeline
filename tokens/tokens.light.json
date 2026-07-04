@@ -987,7 +987,7 @@
         "$value": "Jost",
         "$type": "fontFamily"
       },
-      "annotation": {
+      "serif-body": {
         "$value": "Lora",
         "$type": "fontFamily"
       },

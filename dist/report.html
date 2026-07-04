@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KR Token Report — 2026-07-04</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; }
+  body { font: 15px/1.5 'Jost', sans-serif; color: #1a1714; background: #faf7f2; margin: 0; padding: 2rem clamp(1rem, 5vw, 4rem); }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 2.4rem; margin: 0 0 .25rem; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.7rem; margin: 2.5rem 0 .75rem; border-bottom: 1px solid #e2d9c8; padding-bottom: .3rem; }
+  .meta { color: #7a6c56; margin-bottom: 1.5rem; }
+  .summary { font-size: 1.1rem; margin: 1rem 0; }
+  .check { border: 1px solid #e2d9c8; border-radius: 6px; margin: .5rem 0; background: #fff; }
+  .check summary { padding: .6rem .9rem; cursor: pointer; font-weight: 500; }
+  .check ul { margin: 0 0 .8rem; }
+  .check li { margin: .15rem 0; font-family: ui-monospace, monospace; font-size: .82rem; }
+  .badge { display: inline-block; width: 1.4rem; text-align: center; border-radius: 4px; margin-right: .4rem; font-weight: 700; }
+  .pass > summary .badge { background: #ccf3ef; color: #1e5751; }
+  .fail > summary .badge { background: #ffe3e3; color: #a03030; }
+  table { border-collapse: collapse; width: 100%; background: #fff; border: 1px solid #e2d9c8; border-radius: 6px; }
+  th, td { text-align: left; padding: .4rem .7rem; border-bottom: 1px solid #f5f0e8; vertical-align: middle; }
+  th { font-weight: 500; color: #7a6c56; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+  code { font-size: .82rem; }
+  .sw { display: inline-block; width: 2.2rem; height: 1.4rem; border-radius: 4px; border: 1px solid rgba(0,0,0,.15); vertical-align: middle; }
+  tr.used { background: #f7f0e4; }
+  .pill { font-size: .7rem; background: #886534; color: #fff; border-radius: 999px; padding: .1rem .5rem; vertical-align: middle; }
+  .bar { height: .9rem; background: #c4a264; border-radius: 2px; min-width: 2px; }
+  .rad { width: 3.5rem; height: 2.2rem; background: #e8d9bc; border: 1px solid #a07840; }
+  .rolename small { color: #7a6c56; }
+  .darknote { font-size: .8rem; color: #7a6c56; }
+</style>
+</head>
+<body>
+<h1>KR Token Report</h1>
+<p class="meta">Generated 2026-07-04T20:38:21.606Z · 301 tokens (light) · 301 tokens (dark) · site: /sessions/inspiring-intelligent-darwin/mnt/Kirsten Rossiter</p>
+
+<h2>Health checks — 5/8 passing</h2>
+<details class="check pass" >
+    <summary><span class="badge">✓</span> Build (light): source tokens → dist</summary>
+    <ul><li>301 source tokens all present in dist.</li></ul>
+  </details>
+<details class="check pass" >
+    <summary><span class="badge">✓</span> Build (dark): source tokens → dist</summary>
+    <ul><li>301 source tokens all present in dist.</li></ul>
+  </details>
+<details class="check pass" >
+    <summary><span class="badge">✓</span> Site sync: dist/light/variables.css ↔ vendor/tokens.css</summary>
+    <ul><li>Files identical — site is running the latest build.</li></ul>
+  </details>
+<details class="check pass" >
+    <summary><span class="badge">✓</span> Consumer contract: 15 tokens referenced by the site</summary>
+    <ul><li>Every var(--kr-…) the site references is defined in vendor/tokens.css.</li></ul>
+  </details>
+<details class="check pass" >
+    <summary><span class="badge">✓</span> Fonts: site Google Fonts link ↔ font-family tokens</summary>
+    <ul><li>Loaded families (Cormorant Garamond, Jost, Lora) match tokens exactly.</li></ul>
+  </details>
+<details class="check fail" open>
+    <summary><span class="badge">✗</span> Lint: doubled group names (e.g. --kr-colour-colour-…)</summary>
+    <ul><li>71 tokens have a repeated path segment (fix in name transform or restructure source): e.g. --kr-colour-colour-background-default, --kr-colour-colour-background-subtle, --kr-colour-colour-background-muted, --kr-colour-colour-background-surface, --kr-colour-colour-background-raised, …</li></ul>
+  </details>
+<details class="check fail" open>
+    <summary><span class="badge">✗</span> Lint: numeric font tokens without units</summary>
+    <ul><li>45 font tokens are bare numbers (e.g. line-height: 80 means 80× in CSS, not 80px). Add px transforms before the site consumes them. Examples: kr-fonts-line-height-display-large=80, kr-fonts-line-height-display-medium=65, kr-fonts-line-height-display-small=53, kr-fonts-line-height-headline-large=45, …</li></ul>
+  </details>
+<details class="check fail" open>
+    <summary><span class="badge">✗</span> Hardcoded hex: 13 distinct values in site CSS/HTML</summary>
+    <ul><li>#1a2235 — matches NO token (contact.html, functions/stripe-webhook.js, thank-you.html)</li><li>#1c1814 — matches NO token (functions/api/contact.js, functions/stripe-webhook.js, thank-you.html)</li><li>#e6ddcd — matches NO token (functions/api/contact.js, functions/stripe-webhook.js)</li><li>#9a938a — matches NO token (functions/api/contact.js, functions/stripe-webhook.js)</li><li>#fbf8f2 — matches NO token (contact.html)</li><li>#9a3b2e — matches NO token (contact.html)</li><li>#6b645c — matches NO token (functions/stripe-webhook.js)</li><li>#1a1310 — matches NO token (styles.css)</li><li>#2a2218 — matches NO token (styles.css)</li><li>#e8a0a0 — matches NO token (styles.css)</li></ul>
+  </details>
+
+<h2>Tokens the site actually uses (15)</h2>
+<table><tr><th>Variable</th><th>Value (light)</th><th>Used in</th></tr><tr><td><code>--kr-colour-colour-background-default</code></td><td><code>#faf7f2</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-colour-colour-text-secondary</code></td><td><code>#5c5040</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-colour-colour-text-tertiary</code></td><td><code>#7a6c56</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-fonts-family-base</code></td><td><code>Jost</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-family-display</code></td><td><code>Cormorant Garamond</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-family-serif-body</code></td><td><code>Lora</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-200</code></td><td><code>#e8d9bc</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-400</code></td><td><code>#c4a264</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-500</code></td><td><code>#a07840</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-100</code></td><td><code>#f5f0e8</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-200</code></td><td><code>#ede6d8</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-300</code></td><td><code>#e2d9c8</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-50</code></td><td><code>#faf7f2</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-900</code></td><td><code>#3d3830</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-950</code></td><td><code>#1a1714</code></td><td>styles.css</td></tr></table>
+
+<h2>Colours — semantic</h2>
+<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr><tr class="used">
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><code>--kr-colour-colour-background-default</code> <span class="pill">used by site</span></td>
+        <td><code>#faf7f2</code></td><td><code>#1a1714</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><span class="sw" style="background:#221c14"></span></td>
+        <td><code>--kr-colour-colour-background-subtle</code></td>
+        <td><code>#f5f0e8</code></td><td><code>#221c14</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#2e2820"></span></td>
+        <td><code>--kr-colour-colour-background-muted</code></td>
+        <td><code>#ede6d8</code></td><td><code>#2e2820</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffffff"></span></td>
+        <td><span class="sw" style="background:#221c14"></span></td>
+        <td><code>--kr-colour-colour-background-surface</code></td>
+        <td><code>#ffffff</code></td><td><code>#221c14</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffffff"></span></td>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><code>--kr-colour-colour-background-raised</code></td>
+        <td><code>#ffffff</code></td><td><code>#1a1714</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#f7f0e4"></span></td>
+        <td><code>--kr-colour-colour-background-inverse</code></td>
+        <td><code>#1a1714</code></td><td><code>#f7f0e4</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-colour-colour-background-brand</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f2ead8"></span></td>
+        <td><span class="sw" style="background:#e8d9bc"></span></td>
+        <td><code>--kr-colour-colour-background-promo</code></td>
+        <td><code>#f2ead8</code></td><td><code>#e8d9bc</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#dcf0fd"></span></td>
+        <td><span class="sw" style="background:#0a1628"></span></td>
+        <td><code>--kr-colour-colour-background-info</code></td>
+        <td><code>#dcf0fd</code></td><td><code>#0a1628</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ccf3ef"></span></td>
+        <td><span class="sw" style="background:#0f2e2a"></span></td>
+        <td><code>--kr-colour-colour-background-success</code></td>
+        <td><code>#ccf3ef</code></td><td><code>#0f2e2a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffe3e3"></span></td>
+        <td><span class="sw" style="background:#2a1212"></span></td>
+        <td><code>--kr-colour-colour-background-error</code></td>
+        <td><code>#ffe3e3</code></td><td><code>#2a1212</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#fff6e5"></span></td>
+        <td><span class="sw" style="background:#2a1f0f"></span></td>
+        <td><code>--kr-colour-colour-background-warning</code></td>
+        <td><code>#fff6e5</code></td><td><code>#2a1f0f</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3d3830"></span></td>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><code>--kr-colour-colour-on-background-default</code></td>
+        <td><code>#3d3830</code></td><td><code>#ede6d8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><code>--kr-colour-colour-on-background-subtle</code></td>
+        <td><code>#5c5040</code></td><td><code>#d4c9b4</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-colour-colour-on-background-muted</code></td>
+        <td><code>#7a6c56</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><code>--kr-colour-colour-on-background-inverse</code></td>
+        <td><code>#1a1714</code></td><td><code>#f5f0e8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><code>--kr-colour-colour-on-background-brand</code></td>
+        <td><code>#faf7f2</code></td><td><code>#f5f0e8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><code>--kr-colour-colour-on-background-promo</code></td>
+        <td><code>#1a1714</code></td><td><code>#f5f0e8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#153060"></span></td>
+        <td><span class="sw" style="background:#90c4f5"></span></td>
+        <td><code>--kr-colour-colour-on-background-info</code></td>
+        <td><code>#153060</code></td><td><code>#90c4f5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1e5751"></span></td>
+        <td><span class="sw" style="background:#84d5ca"></span></td>
+        <td><code>--kr-colour-colour-on-background-success</code></td>
+        <td><code>#1e5751</code></td><td><code>#84d5ca</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a2323"></span></td>
+        <td><span class="sw" style="background:#ffaaaa"></span></td>
+        <td><code>--kr-colour-colour-on-background-error</code></td>
+        <td><code>#4a2323</code></td><td><code>#ffaaaa</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3a2b14"></span></td>
+        <td><span class="sw" style="background:#ffe8bf"></span></td>
+        <td><code>--kr-colour-colour-on-background-warning</code></td>
+        <td><code>#3a2b14</code></td><td><code>#ffe8bf</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><code>--kr-colour-colour-text-primary</code></td>
+        <td><code>#1a1714</code></td><td><code>#ede6d8</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><code>--kr-colour-colour-text-secondary</code> <span class="pill">used by site</span></td>
+        <td><code>#5c5040</code></td><td><code>#d4c9b4</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-colour-colour-text-tertiary</code> <span class="pill">used by site</span></td>
+        <td><code>#7a6c56</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><code>--kr-colour-colour-text-inverse</code></td>
+        <td><code>#f5f0e8</code></td><td><code>#f5f0e8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-colour-colour-text-link</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#886534"></span></td>
+        <td><span class="sw" style="background:#d4bf94"></span></td>
+        <td><code>--kr-colour-colour-text-link-hover</code></td>
+        <td><code>#886534</code></td><td><code>#d4bf94</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><code>--kr-colour-colour-border-subtle</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#9a8b72</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-colour-colour-border-default</code></td>
+        <td><code>#b8a990</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><code>--kr-colour-colour-border-strong</code></td>
+        <td><code>#9a8b72</code></td><td><code>#d4c9b4</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-colour-colour-border-interactive</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a90d9"></span></td>
+        <td><span class="sw" style="background:#6aaff0"></span></td>
+        <td><code>--kr-colour-colour-border-info</code></td>
+        <td><code>#4a90d9</code></td><td><code>#6aaff0</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3aae9e"></span></td>
+        <td><span class="sw" style="background:#5fc3b5"></span></td>
+        <td><code>--kr-colour-colour-border-success</code></td>
+        <td><code>#3aae9e</code></td><td><code>#5fc3b5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ff6b6b"></span></td>
+        <td><span class="sw" style="background:#ff8a8a"></span></td>
+        <td><code>--kr-colour-colour-border-error</code></td>
+        <td><code>#ff6b6b</code></td><td><code>#ff8a8a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffb84d"></span></td>
+        <td><span class="sw" style="background:#ffd999"></span></td>
+        <td><code>--kr-colour-colour-border-warning</code></td>
+        <td><code>#ffb84d</code></td><td><code>#ffd999</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-colour-colour-action-primary</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#886534"></span></td>
+        <td><span class="sw" style="background:#d4bf94"></span></td>
+        <td><code>--kr-colour-colour-action-primary-hover</code></td>
+        <td><code>#886534</code></td><td><code>#d4bf94</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#6e5229"></span></td>
+        <td><span class="sw" style="background:#e8d9bc"></span></td>
+        <td><code>--kr-colour-colour-action-primary-pressed</code></td>
+        <td><code>#6e5229</code></td><td><code>#e8d9bc</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#3d3830"></span></td>
+        <td><code>--kr-colour-colour-action-secondary</code></td>
+        <td><code>#ede6d8</code></td><td><code>#3d3830</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#e2d9c8"></span></td>
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><code>--kr-colour-colour-action-secondary-hover</code></td>
+        <td><code>#e2d9c8</code></td><td><code>#5c5040</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><code>--kr-colour-colour-action-secondary-pressed</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#7a6c56</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-colour-colour-state-focus</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f7f0e4"></span></td>
+        <td><span class="sw" style="background:#3a2b15"></span></td>
+        <td><code>--kr-colour-colour-state-hover</code></td>
+        <td><code>#f7f0e4</code></td><td><code>#3a2b15</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><span class="sw" style="background:#20170b"></span></td>
+        <td><code>--kr-colour-colour-state-selected</code></td>
+        <td><code>#faf7f2</code></td><td><code>#20170b</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f7f0e4"></span></td>
+        <td><span class="sw" style="background:#3a2b15"></span></td>
+        <td><code>--kr-colour-colour-state-active</code></td>
+        <td><code>#f7f0e4</code></td><td><code>#3a2b15</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#2e2820"></span></td>
+        <td><code>--kr-colour-colour-state-disabled-bg</code></td>
+        <td><code>#ede6d8</code></td><td><code>#2e2820</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><code>--kr-colour-colour-state-disabled-text</code></td>
+        <td><code>#b8a990</code></td><td><code>#7a6c56</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><code>--kr-colour-colour-icon-default</code></td>
+        <td><code>#5c5040</code></td><td><code>#d4c9b4</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><code>--kr-colour-colour-icon-subtle</code></td>
+        <td><code>#9a8b72</code></td><td><code>#9a8b72</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-colour-colour-icon-brand</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><code>--kr-colour-colour-icon-inverse</code></td>
+        <td><code>#f5f0e8</code></td><td><code>#f5f0e8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a90d9"></span></td>
+        <td><span class="sw" style="background:#6aaff0"></span></td>
+        <td><code>--kr-colour-colour-icon-info</code></td>
+        <td><code>#4a90d9</code></td><td><code>#6aaff0</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3aae9e"></span></td>
+        <td><span class="sw" style="background:#5fc3b5"></span></td>
+        <td><code>--kr-colour-colour-icon-success</code></td>
+        <td><code>#3aae9e</code></td><td><code>#5fc3b5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ff6b6b"></span></td>
+        <td><span class="sw" style="background:#ff8a8a"></span></td>
+        <td><code>--kr-colour-colour-icon-error</code></td>
+        <td><code>#ff6b6b</code></td><td><code>#ff8a8a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffb84d"></span></td>
+        <td><span class="sw" style="background:#ffd999"></span></td>
+        <td><code>--kr-colour-colour-icon-warning</code></td>
+        <td><code>#ffb84d</code></td><td><code>#ffd999</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f2ead8"></span></td>
+        <td><span class="sw" style="background:#543e1f"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-teal-weakest</code></td>
+        <td><code>#f2ead8</code></td><td><code>#543e1f</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#e8d9bc"></span></td>
+        <td><span class="sw" style="background:#6e5229"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-teal-weak</code></td>
+        <td><code>#e8d9bc</code></td><td><code>#6e5229</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4bf94"></span></td>
+        <td><span class="sw" style="background:#886534"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-teal-mid</code></td>
+        <td><code>#d4bf94</code></td><td><code>#886534</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-teal-strong</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#6e5229"></span></td>
+        <td><span class="sw" style="background:#e8d9bc"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-teal-strongest</code></td>
+        <td><code>#6e5229</code></td><td><code>#e8d9bc</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><span class="sw" style="background:#221c14"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-neutral-weakest</code></td>
+        <td><code>#f5f0e8</code></td><td><code>#221c14</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#e2d9c8"></span></td>
+        <td><span class="sw" style="background:#3d3830"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-neutral-weak</code></td>
+        <td><code>#e2d9c8</code></td><td><code>#3d3830</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-neutral-mid</code></td>
+        <td><code>#b8a990</code></td><td><code>#7a6c56</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-neutral-strong</code></td>
+        <td><code>#7a6c56</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3d3830"></span></td>
+        <td><span class="sw" style="background:#e2d9c8"></span></td>
+        <td><code>--kr-colour-colour-dataviz-sequential-neutral-strongest</code></td>
+        <td><code>#3d3830</code></td><td><code>#e2d9c8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#2e2820"></span></td>
+        <td><code>--kr-colour-colour-divider-subtle</code></td>
+        <td><code>#ede6d8</code></td><td><code>#2e2820</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#e2d9c8"></span></td>
+        <td><span class="sw" style="background:#3d3830"></span></td>
+        <td><code>--kr-colour-colour-divider-default</code></td>
+        <td><code>#e2d9c8</code></td><td><code>#3d3830</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><code>--kr-colour-colour-divider-strong</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#5c5040</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><code>--kr-colour-colour-ink-on-brand</code></td>
+        <td><code>#faf7f2</code></td><td><code>#f5f0e8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><code>--kr-colour-colour-ink-on-neutral</code></td>
+        <td><code>#1a1714</code></td><td><code>#ede6d8</code></td>
+      </tr></table>
+
+<h2>Colours — components</h2>
+<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr><tr>
+        <td><span class="sw" style="background:#ffffff"></span></td>
+        <td><span class="sw" style="background:#221c14"></span></td>
+        <td><code>--kr-components-input-bg</code></td>
+        <td><code>#ffffff</code></td><td><code>#221c14</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#2e2820"></span></td>
+        <td><code>--kr-components-input-bg-disabled</code></td>
+        <td><code>#ede6d8</code></td><td><code>#2e2820</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><code>--kr-components-input-text</code></td>
+        <td><code>#1a1714</code></td><td><code>#ede6d8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a2323"></span></td>
+        <td><span class="sw" style="background:#ffaaaa"></span></td>
+        <td><code>--kr-components-input-text-error</code></td>
+        <td><code>#4a2323</code></td><td><code>#ffaaaa</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><code>--kr-components-input-text-disabled</code></td>
+        <td><code>#b8a990</code></td><td><code>#7a6c56</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-components-input-placeholder</code></td>
+        <td><code>#7a6c56</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-components-input-border</code></td>
+        <td><code>#b8a990</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-components-input-border-focus</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><code>--kr-components-input-border-disabled</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#9a8b72</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ff6b6b"></span></td>
+        <td><span class="sw" style="background:#ff8a8a"></span></td>
+        <td><code>--kr-components-input-border-error</code></td>
+        <td><code>#ff6b6b</code></td><td><code>#ff8a8a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3aae9e"></span></td>
+        <td><span class="sw" style="background:#5fc3b5"></span></td>
+        <td><code>--kr-components-input-border-success</code></td>
+        <td><code>#3aae9e</code></td><td><code>#5fc3b5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-components-button-primary-bg</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><code>--kr-components-button-primary-text</code></td>
+        <td><code>#faf7f2</code></td><td><code>#f5f0e8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#000000"></span></td>
+        <td><span class="sw" style="background:#000000"></span></td>
+        <td><code>--kr-components-button-primary-border</code></td>
+        <td><code>#000000</code></td><td><code>#000000</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#886534"></span></td>
+        <td><span class="sw" style="background:#d4bf94"></span></td>
+        <td><code>--kr-components-button-primary-hover-bg</code></td>
+        <td><code>#886534</code></td><td><code>#d4bf94</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#6e5229"></span></td>
+        <td><span class="sw" style="background:#e8d9bc"></span></td>
+        <td><code>--kr-components-button-primary-pressed-bg</code></td>
+        <td><code>#6e5229</code></td><td><code>#e8d9bc</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#2e2820"></span></td>
+        <td><code>--kr-components-button-primary-disabled-bg</code></td>
+        <td><code>#ede6d8</code></td><td><code>#2e2820</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><code>--kr-components-button-primary-disabled-text</code></td>
+        <td><code>#b8a990</code></td><td><code>#7a6c56</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><code>--kr-components-button-primary-disabled-border</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#9a8b72</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-components-button-primary-focus</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1f343a"></span></td>
+        <td><span class="sw" style="background:#1f343a"></span></td>
+        <td><code>--kr-components-button-primary-focus-text</code></td>
+        <td><code>#1f343a</code></td><td><code>#1f343a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-components-button-primary-focus-bg</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#3d3830"></span></td>
+        <td><code>--kr-components-button-secondary-bg</code></td>
+        <td><code>#ede6d8</code></td><td><code>#3d3830</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><code>--kr-components-button-secondary-text</code></td>
+        <td><code>#1a1714</code></td><td><code>#ede6d8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-components-button-secondary-border</code></td>
+        <td><code>#b8a990</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#e2d9c8"></span></td>
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><code>--kr-components-button-secondary-hover-bg</code></td>
+        <td><code>#e2d9c8</code></td><td><code>#5c5040</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-components-button-secondary-hover-border</code></td>
+        <td><code>#b8a990</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><code>--kr-components-button-secondary-pressed-bg</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#7a6c56</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-components-button-secondary-pressed-border</code></td>
+        <td><code>#b8a990</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#2e2820"></span></td>
+        <td><code>--kr-components-button-secondary-disabled-bg</code></td>
+        <td><code>#ede6d8</code></td><td><code>#2e2820</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><code>--kr-components-button-secondary-disabled-text</code></td>
+        <td><code>#b8a990</code></td><td><code>#7a6c56</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><code>--kr-components-button-secondary-disabled-border</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#9a8b72</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-components-button-secondary-focus</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1f343a"></span></td>
+        <td><span class="sw" style="background:#1f343a"></span></td>
+        <td><code>--kr-components-button-secondary-focus-text</code></td>
+        <td><code>#1f343a</code></td><td><code>#1f343a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#3d3830"></span></td>
+        <td><code>--kr-components-button-secondary-focus-bg</code></td>
+        <td><code>#ede6d8</code></td><td><code>#3d3830</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><code>--kr-components-nav-bg</code></td>
+        <td><code>#faf7f2</code></td><td><code>#1a1714</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><code>--kr-components-nav-border</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#9a8b72</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><code>--kr-components-nav-text</code></td>
+        <td><code>#5c5040</code></td><td><code>#d4c9b4</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><code>--kr-components-nav-text-active</code></td>
+        <td><code>#1a1714</code></td><td><code>#ede6d8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-components-nav-indicator</code></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f7f0e4"></span></td>
+        <td><span class="sw" style="background:#3a2b15"></span></td>
+        <td><code>--kr-components-nav-item-hover-bg</code></td>
+        <td><code>#f7f0e4</code></td><td><code>#3a2b15</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><span class="sw" style="background:#20170b"></span></td>
+        <td><code>--kr-components-nav-item-active-bg</code></td>
+        <td><code>#faf7f2</code></td><td><code>#20170b</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffffff"></span></td>
+        <td><span class="sw" style="background:#221c14"></span></td>
+        <td><code>--kr-components-nav-mega-bg</code></td>
+        <td><code>#ffffff</code></td><td><code>#221c14</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><code>--kr-components-nav-mega-border</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#9a8b72</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-components-nav-mega-section-title</code></td>
+        <td><code>#7a6c56</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffffff"></span></td>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><code>--kr-components-card-bg</code></td>
+        <td><code>#ffffff</code></td><td><code>#1a1714</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><code>--kr-components-card-border</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#9a8b72</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><code>--kr-components-card-title</code></td>
+        <td><code>#1a1714</code></td><td><code>#ede6d8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><code>--kr-components-card-meta</code></td>
+        <td><code>#5c5040</code></td><td><code>#d4c9b4</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ccf3ef"></span></td>
+        <td><span class="sw" style="background:#0f2e2a"></span></td>
+        <td><code>--kr-components-badge-success-bg</code></td>
+        <td><code>#ccf3ef</code></td><td><code>#0f2e2a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1e5751"></span></td>
+        <td><span class="sw" style="background:#84d5ca"></span></td>
+        <td><code>--kr-components-badge-success-text</code></td>
+        <td><code>#1e5751</code></td><td><code>#84d5ca</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3aae9e"></span></td>
+        <td><span class="sw" style="background:#5fc3b5"></span></td>
+        <td><code>--kr-components-badge-success-icon</code></td>
+        <td><code>#3aae9e</code></td><td><code>#5fc3b5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f2ead8"></span></td>
+        <td><span class="sw" style="background:#e8d9bc"></span></td>
+        <td><code>--kr-components-badge-promo-bg</code></td>
+        <td><code>#f2ead8</code></td><td><code>#e8d9bc</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><code>--kr-components-badge-promo-text</code></td>
+        <td><code>#1a1714</code></td><td><code>#f5f0e8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#fff6e5"></span></td>
+        <td><span class="sw" style="background:#2a1f0f"></span></td>
+        <td><code>--kr-components-badge-warning-bg</code></td>
+        <td><code>#fff6e5</code></td><td><code>#2a1f0f</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3a2b14"></span></td>
+        <td><span class="sw" style="background:#ffe8bf"></span></td>
+        <td><code>--kr-components-badge-warning-text</code></td>
+        <td><code>#3a2b14</code></td><td><code>#ffe8bf</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffb84d"></span></td>
+        <td><span class="sw" style="background:#ffd999"></span></td>
+        <td><code>--kr-components-badge-warning-icon</code></td>
+        <td><code>#ffb84d</code></td><td><code>#ffd999</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffe3e3"></span></td>
+        <td><span class="sw" style="background:#2a1212"></span></td>
+        <td><code>--kr-components-badge-error-bg</code></td>
+        <td><code>#ffe3e3</code></td><td><code>#2a1212</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a2323"></span></td>
+        <td><span class="sw" style="background:#ffaaaa"></span></td>
+        <td><code>--kr-components-badge-error-text</code></td>
+        <td><code>#4a2323</code></td><td><code>#ffaaaa</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ff6b6b"></span></td>
+        <td><span class="sw" style="background:#ff8a8a"></span></td>
+        <td><code>--kr-components-badge-error-icon</code></td>
+        <td><code>#ff6b6b</code></td><td><code>#ff8a8a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#dcf0fd"></span></td>
+        <td><span class="sw" style="background:#0a1628"></span></td>
+        <td><code>--kr-components-badge-info-bg</code></td>
+        <td><code>#dcf0fd</code></td><td><code>#0a1628</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#153060"></span></td>
+        <td><span class="sw" style="background:#90c4f5"></span></td>
+        <td><code>--kr-components-badge-info-text</code></td>
+        <td><code>#153060</code></td><td><code>#90c4f5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a90d9"></span></td>
+        <td><span class="sw" style="background:#6aaff0"></span></td>
+        <td><code>--kr-components-badge-info-icon</code></td>
+        <td><code>#4a90d9</code></td><td><code>#6aaff0</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#fff6e5"></span></td>
+        <td><span class="sw" style="background:#2a1f0f"></span></td>
+        <td><code>--kr-components-alert-warning-bg</code></td>
+        <td><code>#fff6e5</code></td><td><code>#2a1f0f</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3a2b14"></span></td>
+        <td><span class="sw" style="background:#ffe8bf"></span></td>
+        <td><code>--kr-components-alert-warning-text</code></td>
+        <td><code>#3a2b14</code></td><td><code>#ffe8bf</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffb84d"></span></td>
+        <td><span class="sw" style="background:#ffd999"></span></td>
+        <td><code>--kr-components-alert-warning-border</code></td>
+        <td><code>#ffb84d</code></td><td><code>#ffd999</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffb84d"></span></td>
+        <td><span class="sw" style="background:#ffd999"></span></td>
+        <td><code>--kr-components-alert-warning-icon</code></td>
+        <td><code>#ffb84d</code></td><td><code>#ffd999</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ccf3ef"></span></td>
+        <td><span class="sw" style="background:#0f2e2a"></span></td>
+        <td><code>--kr-components-alert-success-bg</code></td>
+        <td><code>#ccf3ef</code></td><td><code>#0f2e2a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1e5751"></span></td>
+        <td><span class="sw" style="background:#84d5ca"></span></td>
+        <td><code>--kr-components-alert-success-text</code></td>
+        <td><code>#1e5751</code></td><td><code>#84d5ca</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3aae9e"></span></td>
+        <td><span class="sw" style="background:#5fc3b5"></span></td>
+        <td><code>--kr-components-alert-success-border</code></td>
+        <td><code>#3aae9e</code></td><td><code>#5fc3b5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3aae9e"></span></td>
+        <td><span class="sw" style="background:#5fc3b5"></span></td>
+        <td><code>--kr-components-alert-success-icon</code></td>
+        <td><code>#3aae9e</code></td><td><code>#5fc3b5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffe3e3"></span></td>
+        <td><span class="sw" style="background:#2a1212"></span></td>
+        <td><code>--kr-components-alert-error-bg</code></td>
+        <td><code>#ffe3e3</code></td><td><code>#2a1212</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a2323"></span></td>
+        <td><span class="sw" style="background:#ffaaaa"></span></td>
+        <td><code>--kr-components-alert-error-text</code></td>
+        <td><code>#4a2323</code></td><td><code>#ffaaaa</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ff6b6b"></span></td>
+        <td><span class="sw" style="background:#ff8a8a"></span></td>
+        <td><code>--kr-components-alert-error-border</code></td>
+        <td><code>#ff6b6b</code></td><td><code>#ff8a8a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ff6b6b"></span></td>
+        <td><span class="sw" style="background:#ff8a8a"></span></td>
+        <td><code>--kr-components-alert-error-icon</code></td>
+        <td><code>#ff6b6b</code></td><td><code>#ff8a8a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#dcf0fd"></span></td>
+        <td><span class="sw" style="background:#0a1628"></span></td>
+        <td><code>--kr-components-alert-info-bg</code></td>
+        <td><code>#dcf0fd</code></td><td><code>#0a1628</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#153060"></span></td>
+        <td><span class="sw" style="background:#90c4f5"></span></td>
+        <td><code>--kr-components-alert-info-text</code></td>
+        <td><code>#153060</code></td><td><code>#90c4f5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a90d9"></span></td>
+        <td><span class="sw" style="background:#6aaff0"></span></td>
+        <td><code>--kr-components-alert-info-border</code></td>
+        <td><code>#4a90d9</code></td><td><code>#6aaff0</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a90d9"></span></td>
+        <td><span class="sw" style="background:#6aaff0"></span></td>
+        <td><code>--kr-components-alert-info-icon</code></td>
+        <td><code>#4a90d9</code></td><td><code>#6aaff0</code></td>
+      </tr></table>
+
+<h2>Colours — primitives <span class="darknote">(not for direct use per guidelines)</span></h2>
+<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr><tr>
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><span class="sw" style="background:#20170b"></span></td>
+        <td><code>--kr-primitives-gold-25</code></td>
+        <td><code>#faf7f2</code></td><td><code>#20170b</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f7f0e4"></span></td>
+        <td><span class="sw" style="background:#3a2b15"></span></td>
+        <td><code>--kr-primitives-gold-50</code></td>
+        <td><code>#f7f0e4</code></td><td><code>#3a2b15</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#f2ead8"></span></td>
+        <td><span class="sw" style="background:#543e1f"></span></td>
+        <td><code>--kr-primitives-gold-100</code></td>
+        <td><code>#f2ead8</code></td><td><code>#543e1f</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#e8d9bc"></span></td>
+        <td><span class="sw" style="background:#6e5229"></span></td>
+        <td><code>--kr-primitives-gold-200</code> <span class="pill">used by site</span></td>
+        <td><code>#e8d9bc</code></td><td><code>#6e5229</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4bf94"></span></td>
+        <td><span class="sw" style="background:#886534"></span></td>
+        <td><code>--kr-primitives-gold-300</code></td>
+        <td><code>#d4bf94</code></td><td><code>#886534</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><code>--kr-primitives-gold-400</code> <span class="pill">used by site</span></td>
+        <td><code>#c4a264</code></td><td><code>#a07840</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#a07840"></span></td>
+        <td><span class="sw" style="background:#c4a264"></span></td>
+        <td><code>--kr-primitives-gold-500</code> <span class="pill">used by site</span></td>
+        <td><code>#a07840</code></td><td><code>#c4a264</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#886534"></span></td>
+        <td><span class="sw" style="background:#d4bf94"></span></td>
+        <td><code>--kr-primitives-gold-600</code></td>
+        <td><code>#886534</code></td><td><code>#d4bf94</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#6e5229"></span></td>
+        <td><span class="sw" style="background:#e8d9bc"></span></td>
+        <td><code>--kr-primitives-gold-700</code></td>
+        <td><code>#6e5229</code></td><td><code>#e8d9bc</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#543e1f"></span></td>
+        <td><span class="sw" style="background:#f2ead8"></span></td>
+        <td><code>--kr-primitives-gold-800</code></td>
+        <td><code>#543e1f</code></td><td><code>#f2ead8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3a2b15"></span></td>
+        <td><span class="sw" style="background:#f7f0e4"></span></td>
+        <td><code>--kr-primitives-gold-900</code></td>
+        <td><code>#3a2b15</code></td><td><code>#f7f0e4</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#20170b"></span></td>
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><code>--kr-primitives-gold-950</code></td>
+        <td><code>#20170b</code></td><td><code>#faf7f2</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffffff"></span></td>
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><code>--kr-primitives-neutral-0</code></td>
+        <td><code>#ffffff</code></td><td><code>#1a1714</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#faf7f2"></span></td>
+        <td><span class="sw" style="background:#221c14"></span></td>
+        <td><code>--kr-primitives-neutral-50</code> <span class="pill">used by site</span></td>
+        <td><code>#faf7f2</code></td><td><code>#221c14</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><span class="sw" style="background:#2e2820"></span></td>
+        <td><code>--kr-primitives-neutral-100</code> <span class="pill">used by site</span></td>
+        <td><code>#f5f0e8</code></td><td><code>#2e2820</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><span class="sw" style="background:#3d3830"></span></td>
+        <td><code>--kr-primitives-neutral-200</code> <span class="pill">used by site</span></td>
+        <td><code>#ede6d8</code></td><td><code>#3d3830</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#e2d9c8"></span></td>
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><code>--kr-primitives-neutral-300</code> <span class="pill">used by site</span></td>
+        <td><code>#e2d9c8</code></td><td><code>#5c5040</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><code>--kr-primitives-neutral-400</code></td>
+        <td><code>#d4c9b4</code></td><td><code>#7a6c56</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><code>--kr-primitives-neutral-500</code></td>
+        <td><code>#b8a990</code></td><td><code>#9a8b72</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#9a8b72"></span></td>
+        <td><span class="sw" style="background:#b8a990"></span></td>
+        <td><code>--kr-primitives-neutral-600</code></td>
+        <td><code>#9a8b72</code></td><td><code>#b8a990</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#7a6c56"></span></td>
+        <td><span class="sw" style="background:#d4c9b4"></span></td>
+        <td><code>--kr-primitives-neutral-700</code></td>
+        <td><code>#7a6c56</code></td><td><code>#d4c9b4</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#5c5040"></span></td>
+        <td><span class="sw" style="background:#e2d9c8"></span></td>
+        <td><code>--kr-primitives-neutral-800</code></td>
+        <td><code>#5c5040</code></td><td><code>#e2d9c8</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#3d3830"></span></td>
+        <td><span class="sw" style="background:#ede6d8"></span></td>
+        <td><code>--kr-primitives-neutral-900</code> <span class="pill">used by site</span></td>
+        <td><code>#3d3830</code></td><td><code>#ede6d8</code></td>
+      </tr><tr class="used">
+        <td><span class="sw" style="background:#1a1714"></span></td>
+        <td><span class="sw" style="background:#f5f0e8"></span></td>
+        <td><code>--kr-primitives-neutral-950</code> <span class="pill">used by site</span></td>
+        <td><code>#1a1714</code></td><td><code>#f5f0e8</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#dcf0fd"></span></td>
+        <td><span class="sw" style="background:#0a1628"></span></td>
+        <td><code>--kr-primitives-blue-50</code></td>
+        <td><code>#dcf0fd</code></td><td><code>#0a1628</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#b8d9f9"></span></td>
+        <td><span class="sw" style="background:#0f2040"></span></td>
+        <td><code>--kr-primitives-blue-100</code></td>
+        <td><code>#b8d9f9</code></td><td><code>#0f2040</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#90c4f5"></span></td>
+        <td><span class="sw" style="background:#153060"></span></td>
+        <td><code>--kr-primitives-blue-200</code></td>
+        <td><code>#90c4f5</code></td><td><code>#153060</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#6aaff0"></span></td>
+        <td><span class="sw" style="background:#1e4480"></span></td>
+        <td><code>--kr-primitives-blue-300</code></td>
+        <td><code>#6aaff0</code></td><td><code>#1e4480</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a90d9"></span></td>
+        <td><span class="sw" style="background:#2a5fa0"></span></td>
+        <td><code>--kr-primitives-blue-400</code></td>
+        <td><code>#4a90d9</code></td><td><code>#2a5fa0</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#2a5fa0"></span></td>
+        <td><span class="sw" style="background:#4a90d9"></span></td>
+        <td><code>--kr-primitives-blue-500</code></td>
+        <td><code>#2a5fa0</code></td><td><code>#4a90d9</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1e4480"></span></td>
+        <td><span class="sw" style="background:#6aaff0"></span></td>
+        <td><code>--kr-primitives-blue-600</code></td>
+        <td><code>#1e4480</code></td><td><code>#6aaff0</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#153060"></span></td>
+        <td><span class="sw" style="background:#90c4f5"></span></td>
+        <td><code>--kr-primitives-blue-700</code></td>
+        <td><code>#153060</code></td><td><code>#90c4f5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#0f2040"></span></td>
+        <td><span class="sw" style="background:#b8d9f9"></span></td>
+        <td><code>--kr-primitives-blue-800</code></td>
+        <td><code>#0f2040</code></td><td><code>#b8d9f9</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#0a1628"></span></td>
+        <td><span class="sw" style="background:#dcf0fd"></span></td>
+        <td><code>--kr-primitives-blue-900</code></td>
+        <td><code>#0a1628</code></td><td><code>#dcf0fd</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ccf3ef"></span></td>
+        <td><span class="sw" style="background:#0f2e2a"></span></td>
+        <td><code>--kr-primitives-green-50</code></td>
+        <td><code>#ccf3ef</code></td><td><code>#0f2e2a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#a8e6df"></span></td>
+        <td><span class="sw" style="background:#16423d"></span></td>
+        <td><code>--kr-primitives-green-100</code></td>
+        <td><code>#a8e6df</code></td><td><code>#16423d</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#84d5ca"></span></td>
+        <td><span class="sw" style="background:#1e5751"></span></td>
+        <td><code>--kr-primitives-green-200</code></td>
+        <td><code>#84d5ca</code></td><td><code>#1e5751</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#5fc3b5"></span></td>
+        <td><span class="sw" style="background:#267067"></span></td>
+        <td><code>--kr-primitives-green-300</code></td>
+        <td><code>#5fc3b5</code></td><td><code>#267067</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3aae9e"></span></td>
+        <td><span class="sw" style="background:#2f8a7e"></span></td>
+        <td><code>--kr-primitives-green-400</code></td>
+        <td><code>#3aae9e</code></td><td><code>#2f8a7e</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#2f8a7e"></span></td>
+        <td><span class="sw" style="background:#3aae9e"></span></td>
+        <td><code>--kr-primitives-green-500</code></td>
+        <td><code>#2f8a7e</code></td><td><code>#3aae9e</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#267067"></span></td>
+        <td><span class="sw" style="background:#5fc3b5"></span></td>
+        <td><code>--kr-primitives-green-600</code></td>
+        <td><code>#267067</code></td><td><code>#5fc3b5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#1e5751"></span></td>
+        <td><span class="sw" style="background:#84d5ca"></span></td>
+        <td><code>--kr-primitives-green-700</code></td>
+        <td><code>#1e5751</code></td><td><code>#84d5ca</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#16423d"></span></td>
+        <td><span class="sw" style="background:#a8e6df"></span></td>
+        <td><code>--kr-primitives-green-800</code></td>
+        <td><code>#16423d</code></td><td><code>#a8e6df</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#0f2e2a"></span></td>
+        <td><span class="sw" style="background:#ccf3ef"></span></td>
+        <td><code>--kr-primitives-green-900</code></td>
+        <td><code>#0f2e2a</code></td><td><code>#ccf3ef</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffe3e3"></span></td>
+        <td><span class="sw" style="background:#2a1212"></span></td>
+        <td><code>--kr-primitives-red-50</code></td>
+        <td><code>#ffe3e3</code></td><td><code>#2a1212</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffc7c7"></span></td>
+        <td><span class="sw" style="background:#3a1a1a"></span></td>
+        <td><code>--kr-primitives-red-100</code></td>
+        <td><code>#ffc7c7</code></td><td><code>#3a1a1a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffaaaa"></span></td>
+        <td><span class="sw" style="background:#4a2323"></span></td>
+        <td><code>--kr-primitives-red-200</code></td>
+        <td><code>#ffaaaa</code></td><td><code>#4a2323</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ff8a8a"></span></td>
+        <td><span class="sw" style="background:#5c2d2d"></span></td>
+        <td><code>--kr-primitives-red-300</code></td>
+        <td><code>#ff8a8a</code></td><td><code>#5c2d2d</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ff6b6b"></span></td>
+        <td><span class="sw" style="background:#7a3a3a"></span></td>
+        <td><code>--kr-primitives-red-400</code></td>
+        <td><code>#ff6b6b</code></td><td><code>#7a3a3a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#7a3a3a"></span></td>
+        <td><span class="sw" style="background:#ff6b6b"></span></td>
+        <td><code>--kr-primitives-red-500</code></td>
+        <td><code>#7a3a3a</code></td><td><code>#ff6b6b</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#5c2d2d"></span></td>
+        <td><span class="sw" style="background:#ff8a8a"></span></td>
+        <td><code>--kr-primitives-red-600</code></td>
+        <td><code>#5c2d2d</code></td><td><code>#ff8a8a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a2323"></span></td>
+        <td><span class="sw" style="background:#ffaaaa"></span></td>
+        <td><code>--kr-primitives-red-700</code></td>
+        <td><code>#4a2323</code></td><td><code>#ffaaaa</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3a1a1a"></span></td>
+        <td><span class="sw" style="background:#ffc7c7"></span></td>
+        <td><code>--kr-primitives-red-800</code></td>
+        <td><code>#3a1a1a</code></td><td><code>#ffc7c7</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#2a1212"></span></td>
+        <td><span class="sw" style="background:#ffe3e3"></span></td>
+        <td><code>--kr-primitives-red-900</code></td>
+        <td><code>#2a1212</code></td><td><code>#ffe3e3</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#fff6e5"></span></td>
+        <td><span class="sw" style="background:#2a1f0f"></span></td>
+        <td><code>--kr-primitives-amber-50</code></td>
+        <td><code>#fff6e5</code></td><td><code>#2a1f0f</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffe8bf"></span></td>
+        <td><span class="sw" style="background:#3a2b14"></span></td>
+        <td><code>--kr-primitives-amber-100</code></td>
+        <td><code>#ffe8bf</code></td><td><code>#3a2b14</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffd999"></span></td>
+        <td><span class="sw" style="background:#4a381a"></span></td>
+        <td><code>--kr-primitives-amber-200</code></td>
+        <td><code>#ffd999</code></td><td><code>#4a381a</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffc973"></span></td>
+        <td><span class="sw" style="background:#5c4721"></span></td>
+        <td><code>--kr-primitives-amber-300</code></td>
+        <td><code>#ffc973</code></td><td><code>#5c4721</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#ffb84d"></span></td>
+        <td><span class="sw" style="background:#7a5d2c"></span></td>
+        <td><code>--kr-primitives-amber-400</code></td>
+        <td><code>#ffb84d</code></td><td><code>#7a5d2c</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#7a5d2c"></span></td>
+        <td><span class="sw" style="background:#ffb84d"></span></td>
+        <td><code>--kr-primitives-amber-500</code></td>
+        <td><code>#7a5d2c</code></td><td><code>#ffb84d</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#5c4721"></span></td>
+        <td><span class="sw" style="background:#ffc973"></span></td>
+        <td><code>--kr-primitives-amber-600</code></td>
+        <td><code>#5c4721</code></td><td><code>#ffc973</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#4a381a"></span></td>
+        <td><span class="sw" style="background:#ffd999"></span></td>
+        <td><code>--kr-primitives-amber-700</code></td>
+        <td><code>#4a381a</code></td><td><code>#ffd999</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#3a2b14"></span></td>
+        <td><span class="sw" style="background:#ffe8bf"></span></td>
+        <td><code>--kr-primitives-amber-800</code></td>
+        <td><code>#3a2b14</code></td><td><code>#ffe8bf</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#2a1f0f"></span></td>
+        <td><span class="sw" style="background:#fff6e5"></span></td>
+        <td><code>--kr-primitives-amber-900</code></td>
+        <td><code>#2a1f0f</code></td><td><code>#fff6e5</code></td>
+      </tr><tr>
+        <td><span class="sw" style="background:#000000"></span></td>
+        <td><span class="sw" style="background:#000000"></span></td>
+        <td><code>--kr-primitives-transparent</code></td>
+        <td><code>#000000</code></td><td><code>#000000</code></td>
+      </tr></table>
+
+<h2>Type scale <span class="darknote">(rendered assuming px — see unitless lint check. Families follow site convention: display/headline/title → Cormorant Garamond, body → Lora, label → Jost. The tokens don't bind a family per role — consider adding that in Figma.)</span></h2>
+<table><tr><td class="rolename"><code>display-large</code><br><small>Cormorant Garamond <code>(family-display)</code> · 76px / 80px / -1.5</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:76px;line-height:80px;letter-spacing:-1.5px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>display-medium</code><br><small>Cormorant Garamond <code>(family-display)</code> · 60px / 65px / -0.9</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:60px;line-height:65px;letter-spacing:-0.9px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>display-small</code><br><small>Cormorant Garamond <code>(family-display)</code> · 48px / 53px / -0.5</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:48px;line-height:53px;letter-spacing:-0.5px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>headline-large</code><br><small>Cormorant Garamond <code>(family-display)</code> · 40px / 45px / -0.4</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:40px;line-height:45px;letter-spacing:-0.4px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>headline-medium</code><br><small>Cormorant Garamond <code>(family-display)</code> · 34px / 39px / 0</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:34px;line-height:39px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>headline-small</code><br><small>Cormorant Garamond <code>(family-display)</code> · 28px / 34px / 0</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:28px;line-height:34px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>title-large</code><br><small>Cormorant Garamond <code>(family-display)</code> · 24px / 31px / 0</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:24px;line-height:31px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>title-medium</code><br><small>Cormorant Garamond <code>(family-display)</code> · 20px / 27px / 0</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:20px;line-height:27px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>title-small</code><br><small>Cormorant Garamond <code>(family-display)</code> · 18px / 25px / 0</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:18px;line-height:25px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>body-large</code><br><small>Lora <code>(family-serif-body)</code> · 17px / 31px / 0</small></td>
+      <td><span style="font-family:'Lora';font-size:17px;line-height:31px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>body-medium</code><br><small>Lora <code>(family-serif-body)</code> · 15px / 27px / 0</small></td>
+      <td><span style="font-family:'Lora';font-size:15px;line-height:27px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>body-small</code><br><small>Lora <code>(family-serif-body)</code> · 13px / 23px / 0</small></td>
+      <td><span style="font-family:'Lora';font-size:13px;line-height:23px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>label-large</code><br><small>Jost <code>(family-base)</code> · 12px / 17px / 1.7</small></td>
+      <td><span style="font-family:'Jost';font-size:12px;line-height:17px;letter-spacing:1.7px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>label-medium</code><br><small>Jost <code>(family-base)</code> · 11px / 15px / 2</small></td>
+      <td><span style="font-family:'Jost';font-size:11px;line-height:15px;letter-spacing:2px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>label-small</code><br><small>Jost <code>(family-base)</code> · 10px / 14px / 2</small></td>
+      <td><span style="font-family:'Jost';font-size:10px;line-height:14px;letter-spacing:2px;">Building the Nations</span></td></tr></table>
+
+<h2>Spacing</h2>
+<table><tr><th>Token</th><th>Value</th><th></th></tr><tr><td><code>--kr-spacing-scale-4</code></td><td>4</td><td><div class="bar" style="width:4px"></div></td></tr><tr><td><code>--kr-spacing-xs</code></td><td>4</td><td><div class="bar" style="width:4px"></div></td></tr><tr><td><code>--kr-spacing-scale-8</code></td><td>8</td><td><div class="bar" style="width:8px"></div></td></tr><tr><td><code>--kr-spacing-s</code></td><td>8</td><td><div class="bar" style="width:8px"></div></td></tr><tr><td><code>--kr-spacing-scale-12</code></td><td>12</td><td><div class="bar" style="width:12px"></div></td></tr><tr><td><code>--kr-spacing-scale-16</code></td><td>16</td><td><div class="bar" style="width:16px"></div></td></tr><tr><td><code>--kr-spacing-m</code></td><td>16</td><td><div class="bar" style="width:16px"></div></td></tr><tr><td><code>--kr-spacing-scale-20</code></td><td>20</td><td><div class="bar" style="width:20px"></div></td></tr><tr><td><code>--kr-spacing-scale-24</code></td><td>24</td><td><div class="bar" style="width:24px"></div></td></tr><tr><td><code>--kr-spacing-l</code></td><td>24</td><td><div class="bar" style="width:24px"></div></td></tr><tr><td><code>--kr-spacing-scale-32</code></td><td>32</td><td><div class="bar" style="width:32px"></div></td></tr><tr><td><code>--kr-spacing-scale-40</code></td><td>40</td><td><div class="bar" style="width:40px"></div></td></tr><tr><td><code>--kr-spacing-xl</code></td><td>40</td><td><div class="bar" style="width:40px"></div></td></tr><tr><td><code>--kr-spacing-scale-48</code></td><td>48</td><td><div class="bar" style="width:48px"></div></td></tr><tr><td><code>--kr-spacing-scale-56</code></td><td>56</td><td><div class="bar" style="width:56px"></div></td></tr><tr><td><code>--kr-spacing-2xl</code></td><td>56</td><td><div class="bar" style="width:56px"></div></td></tr><tr><td><code>--kr-spacing-scale-64</code></td><td>64</td><td><div class="bar" style="width:64px"></div></td></tr><tr><td><code>--kr-spacing-scale-80</code></td><td>80</td><td><div class="bar" style="width:80px"></div></td></tr><tr><td><code>--kr-spacing-scale-104</code></td><td>104</td><td><div class="bar" style="width:104px"></div></td></tr><tr><td><code>--kr-spacing-page</code></td><td>104</td><td><div class="bar" style="width:104px"></div></td></tr></table>
+
+<h2>Radius</h2>
+<table><tr><th>Token</th><th>Value</th><th></th></tr><tr><td><code>--kr-radius-scale-0</code></td><td>0</td><td><div class="rad" style="border-radius:0px"></div></td></tr><tr><td><code>--kr-radius-none</code></td><td>0</td><td><div class="rad" style="border-radius:0px"></div></td></tr><tr><td><code>--kr-radius-scale-4</code></td><td>4</td><td><div class="rad" style="border-radius:4px"></div></td></tr><tr><td><code>--kr-radius-xs</code></td><td>4</td><td><div class="rad" style="border-radius:4px"></div></td></tr><tr><td><code>--kr-radius-scale-8</code></td><td>8</td><td><div class="rad" style="border-radius:8px"></div></td></tr><tr><td><code>--kr-radius-s</code></td><td>8</td><td><div class="rad" style="border-radius:8px"></div></td></tr><tr><td><code>--kr-radius-scale-12</code></td><td>12</td><td><div class="rad" style="border-radius:12px"></div></td></tr><tr><td><code>--kr-radius-m</code></td><td>12</td><td><div class="rad" style="border-radius:12px"></div></td></tr><tr><td><code>--kr-radius-scale-16</code></td><td>16</td><td><div class="rad" style="border-radius:16px"></div></td></tr><tr><td><code>--kr-radius-l</code></td><td>16</td><td><div class="rad" style="border-radius:16px"></div></td></tr><tr><td><code>--kr-radius-scale-24</code></td><td>24</td><td><div class="rad" style="border-radius:24px"></div></td></tr><tr><td><code>--kr-radius-xl</code></td><td>24</td><td><div class="rad" style="border-radius:24px"></div></td></tr><tr><td><code>--kr-radius-scale-full</code></td><td>9999</td><td><div class="rad" style="border-radius:9999px"></div></td></tr><tr><td><code>--kr-radius-full</code></td><td>9999</td><td><div class="rad" style="border-radius:9999px"></div></td></tr></table>
+</body>
+</html>

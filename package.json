@@ -23,8 +23,9 @@
     "access": "restricted"
   },
   "scripts": {
-    "build": "node sd.config.mjs && node scripts/snapshot-tokens.mjs",
+    "build": "node sd.config.mjs && node scripts/snapshot-tokens.mjs && node scripts/generate-report.mjs",
     "generate-docs": "node scripts/generate-docs.mjs",
+    "report": "node scripts/generate-report.mjs",
     "scaffold-client": "node scripts/scaffold-client.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",

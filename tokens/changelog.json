@@ -1,5 +1,781 @@
 [
   {
+    "id": 7,
+    "timestamp": "2026-07-04T20:38:21.570Z",
+    "isFirstRun": false,
+    "tokenCount": 753,
+    "changeCount": 121,
+    "changes": [
+      {
+        "type": "modified",
+        "token": "color/primitives/amber/100",
+        "before": "#ffe7bf",
+        "after": "#ffe8bf"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/amber/200",
+        "before": "#ffd699",
+        "after": "#ffd999"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/amber/300",
+        "before": "#ffc266",
+        "after": "#ffc973"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/amber/400",
+        "before": "#ffad33",
+        "after": "#ffb84d"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/amber/500",
+        "before": "#f79009",
+        "after": "#7a5d2c"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/amber/600",
+        "before": "#d97706",
+        "after": "#5c4721"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/amber/700",
+        "before": "#b65f04",
+        "after": "#4a381a"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/amber/800",
+        "before": "#8c4603",
+        "after": "#3a2b14"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/amber/900",
+        "before": "#5c2e01",
+        "after": "#2a1f0f"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/100",
+        "before": "#dbeafe",
+        "after": "#b8d9f9"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/200",
+        "before": "#bfdbfe",
+        "after": "#90c4f5"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/300",
+        "before": "#93c5fd",
+        "after": "#6aaff0"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/400",
+        "before": "#60a5fa",
+        "after": "#4a90d9"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/50",
+        "before": "#eff6ff",
+        "after": "#dcf0fd"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/500",
+        "before": "#3b82f6",
+        "after": "#2a5fa0"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/600",
+        "before": "#2563eb",
+        "after": "#1e4480"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/700",
+        "before": "#1d4ed8",
+        "after": "#153060"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/800",
+        "before": "#1e40af",
+        "after": "#0f2040"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/blue/900",
+        "before": "#1e3a8a",
+        "after": "#0a1628"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/100",
+        "before": null,
+        "after": "#f2ead8"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/200",
+        "before": null,
+        "after": "#e8d9bc"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/25",
+        "before": null,
+        "after": "#faf7f2"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/300",
+        "before": null,
+        "after": "#d4bf94"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/400",
+        "before": null,
+        "after": "#c4a264"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/50",
+        "before": null,
+        "after": "#f7f0e4"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/500",
+        "before": null,
+        "after": "#a07840"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/600",
+        "before": null,
+        "after": "#886534"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/700",
+        "before": null,
+        "after": "#6e5229"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/800",
+        "before": null,
+        "after": "#543e1f"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/900",
+        "before": null,
+        "after": "#3a2b15"
+      },
+      {
+        "type": "added",
+        "token": "color/primitives/gold/950",
+        "before": null,
+        "after": "#20170b"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/100",
+        "before": "#ccf3ef",
+        "after": "#a8e6df"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/200",
+        "before": "#99ddd3",
+        "after": "#84d5ca"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/300",
+        "before": "#66cbbe",
+        "after": "#5fc3b5"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/400",
+        "before": "#33b8a8",
+        "after": "#3aae9e"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/50",
+        "before": "#e6f6f3",
+        "after": "#ccf3ef"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/500",
+        "before": "#0fa38f",
+        "after": "#2f8a7e"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/600",
+        "before": "#0c8272",
+        "after": "#267067"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/700",
+        "before": "#096458",
+        "after": "#1e5751"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/800",
+        "before": "#06463e",
+        "after": "#16423d"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/green/900",
+        "before": "#032824",
+        "after": "#0f2e2a"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/100",
+        "before": "#e6e9ea",
+        "after": "#f5f0e8"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/200",
+        "before": "#d5dbdd",
+        "after": "#ede6d8"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/300",
+        "before": "#c3cccf",
+        "after": "#e2d9c8"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/400",
+        "before": "#aeb9bd",
+        "after": "#d4c9b4"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/50",
+        "before": "#f4f5f5",
+        "after": "#faf7f2"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/500",
+        "before": "#7f9096",
+        "after": "#b8a990"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/600",
+        "before": "#66797f",
+        "after": "#9a8b72"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/700",
+        "before": "#4d6167",
+        "after": "#7a6c56"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/800",
+        "before": "#354a50",
+        "after": "#5c5040"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/900",
+        "before": "#1f343a",
+        "after": "#3d3830"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/neutral/950",
+        "before": "#0f2328",
+        "after": "#1a1714"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/100",
+        "before": "#f9cfcf",
+        "after": "#ffc7c7"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/200",
+        "before": "#f4afaf",
+        "after": "#ffaaaa"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/300",
+        "before": "#ed8a8a",
+        "after": "#ff8a8a"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/400",
+        "before": "#e35c5c",
+        "after": "#ff6b6b"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/50",
+        "before": "#fdecec",
+        "after": "#ffe3e3"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/500",
+        "before": "#d92d2d",
+        "after": "#7a3a3a"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/600",
+        "before": "#b42323",
+        "after": "#5c2d2d"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/700",
+        "before": "#8f1a1a",
+        "after": "#4a2323"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/800",
+        "before": "#6a1212",
+        "after": "#3a1a1a"
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/red/900",
+        "before": "#450909",
+        "after": "#2a1212"
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/100",
+        "before": "#cfe6e8",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/200",
+        "before": "#a8d3d7",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/25",
+        "before": "#f5fafa",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/300",
+        "before": "#7fbfc6",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/400",
+        "before": "#4faab3",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/50",
+        "before": "#e6f2f3",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/500",
+        "before": "#007582",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/600",
+        "before": "#0c5f6a",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/700",
+        "before": "#083f47",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/800",
+        "before": "#062f35",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/900",
+        "before": "#041f24",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/teal/950",
+        "before": "#021316",
+        "after": null
+      },
+      {
+        "type": "modified",
+        "token": "color/primitives/transparent",
+        "before": "#00000000",
+        "after": "#000000"
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/family/annotation",
+        "before": "Roboto Mono",
+        "after": null
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/family/base",
+        "before": "Inter Tight",
+        "after": "Jost"
+      },
+      {
+        "type": "added",
+        "token": "typography/fonts/family/display",
+        "before": null,
+        "after": "Cormorant Garamond"
+      },
+      {
+        "type": "added",
+        "token": "typography/fonts/family/serif-body",
+        "before": null,
+        "after": "Lora"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/body/large",
+        "before": "0.5",
+        "after": "0"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/body/medium",
+        "before": "0.25",
+        "after": "0"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/body/small",
+        "before": "0.4",
+        "after": "0"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/display/large",
+        "before": "-0.25",
+        "after": "-1.5"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/display/medium",
+        "before": "-0.1",
+        "after": "-0.9"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/display/small",
+        "before": "0",
+        "after": "-0.5"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/headline/large",
+        "before": "0",
+        "after": "-0.4"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/label/large",
+        "before": "0.1",
+        "after": "1.7"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/label/medium",
+        "before": "0.5",
+        "after": "2"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/label/small",
+        "before": "0.5",
+        "after": "2"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/title/medium",
+        "before": "0.1",
+        "after": "0"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/letter-spacing/title/small",
+        "before": "0.1",
+        "after": "0"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/body/large",
+        "before": "24px",
+        "after": "31px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/body/medium",
+        "before": "20px",
+        "after": "27px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/body/small",
+        "before": "16px",
+        "after": "23px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/display/large",
+        "before": "64px",
+        "after": "80px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/display/medium",
+        "before": "52px",
+        "after": "65px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/display/small",
+        "before": "44px",
+        "after": "53px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/headline/large",
+        "before": "40px",
+        "after": "45px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/headline/medium",
+        "before": "32px",
+        "after": "39px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/headline/small",
+        "before": "24px",
+        "after": "34px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/label/large",
+        "before": "20px",
+        "after": "17px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/label/medium",
+        "before": "16px",
+        "after": "15px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/label/small",
+        "before": "16px",
+        "after": "14px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/title/large",
+        "before": "24px",
+        "after": "31px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/title/medium",
+        "before": "20px",
+        "after": "27px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/line-height/title/small",
+        "before": "16px",
+        "after": "25px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/body/large",
+        "before": "16px",
+        "after": "17px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/body/medium",
+        "before": "14px",
+        "after": "15px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/body/small",
+        "before": "12px",
+        "after": "13px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/display/large",
+        "before": "56px",
+        "after": "76px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/display/medium",
+        "before": "44px",
+        "after": "60px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/display/small",
+        "before": "36px",
+        "after": "48px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/headline/large",
+        "before": "32px",
+        "after": "40px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/headline/medium",
+        "before": "24px",
+        "after": "34px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/headline/small",
+        "before": "18px",
+        "after": "28px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/label/large",
+        "before": "14px",
+        "after": "12px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/label/medium",
+        "before": "12px",
+        "after": "11px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/label/small",
+        "before": "11px",
+        "after": "10px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/title/large",
+        "before": "16px",
+        "after": "24px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/title/medium",
+        "before": "14px",
+        "after": "20px"
+      },
+      {
+        "type": "modified",
+        "token": "typography/fonts/size/title/small",
+        "before": "12px",
+        "after": "18px"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "timestamp": "2026-07-04T20:30:54.484Z",
+    "isFirstRun": false,
+    "tokenCount": 752,
+    "changeCount": 4,
+    "changes": [
+      {
+        "type": "removed",
+        "token": "tokens.dark/fonts/family/annotation",
+        "before": "Lora",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/family/serif-body",
+        "before": null,
+        "after": "Lora"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/fonts/family/annotation",
+        "before": "Lora",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/family/serif-body",
+        "before": null,
+        "after": "Lora"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "timestamp": "2026-07-04T20:07:37.934Z",
+    "isFirstRun": false,
+    "tokenCount": 752,
+    "changeCount": 0,
+    "changes": []
+  },
+  {
     "id": 4,
     "timestamp": "2026-07-04T16:33:49.341Z",
     "isFirstRun": false,

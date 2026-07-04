@@ -2,47 +2,47 @@
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "$version": "1.0",
   "$metadata": {
-    "source": "Figma — IDEM Revised (3e2J8b6paAwdAlTyOs9NrK)",
+    "source": "Figma — Kirsten Rossiter Token Pipeline (M4EeBpB5Ez5cgTkwJnk4LK)",
     "description": "Design token usage guidelines, extracted from Figma variable descriptions.",
-    "updatedAt": "2026-06-03T21:34:06.632Z"
+    "updatedAt": "2026-07-04T20:36:35.237609+00:00"
   },
   "primitives": {
-    "teal": {
+    "gold": {
       "25": {
-        "description": "Purpose: The lightest step in the teal primitive scale; a near-white tinted surface value.\nUsage: Referenced by semantic tokens requiring a very subtle teal-tinted wash, such as colour/state/selected in light mode.\nGuidelines: Do not apply directly to component design. All usage must flow through a semantic alias. Reserve for contexts where the tint is barely perceptible against a white background."
+        "description": "Purpose: The lightest step in the gold primitive scale; a near-white tinted surface value.\nUsage: Referenced by semantic tokens requiring a very subtle gold-tinted wash, such as colour/state/selected in light mode.\nGuidelines: Do not apply directly to component design. All usage must flow through a semantic alias. Reserve for contexts where the tint is barely perceptible against a white background."
       },
       "50": {
-        "description": "Purpose: A soft, low-saturation teal primitive establishing the second lightest step in the scale.\nUsage: Consumed by semantic tokens that require a light teal background, such as state and hover overlays.\nGuidelines: Not for direct use in layouts or components. Should always be aliased through a semantic token."
+        "description": "Purpose: A soft, low-saturation gold primitive establishing the second lightest step in the scale.\nUsage: Consumed by semantic tokens that require a light gold background, such as state and hover overlays.\nGuidelines: Not for direct use in layouts or components. Should always be aliased through a semantic token."
       },
       "100": {
-        "description": "Purpose: A light teal primitive representing the third step of the scale.\nUsage: Available for aliasing into semantic tokens where a light but visible teal fill is required.\nGuidelines: Use only as a primitive source value. Do not hard-code into component styles."
+        "description": "Purpose: A light gold primitive representing the third step of the scale.\nUsage: Available for aliasing into semantic tokens where a light but visible gold fill is required.\nGuidelines: Use only as a primitive source value. Do not hard-code into component styles."
       },
       "200": {
-        "description": "Purpose: A medium-light teal primitive at the fourth step of the scale.\nUsage: Provides a mid-range light value for teal; usable as a source for subtle border or tinted fill tokens.\nGuidelines: Primitive-layer only. Must be consumed via a semantic token alias."
+        "description": "Purpose: A medium-light gold primitive at the fourth step of the scale.\nUsage: Provides a mid-range light value for gold; usable as a source for subtle border or tinted fill tokens.\nGuidelines: Primitive-layer only. Must be consumed via a semantic token alias."
       },
       "300": {
-        "description": "Purpose: A mid-range teal primitive establishing a clearly visible, unsaturated teal.\nUsage: Aliased into semantic tokens for interactive borders, icon fills, and link text in dark mode contexts.\nGuidelines: Not for direct application. Check contrast ratio when aliasing to text or icon tokens — minimum 4.5:1 required for WCAG AA compliance."
+        "description": "Purpose: A mid-range gold primitive establishing a clearly visible, unsaturated gold.\nUsage: Aliased into semantic tokens for interactive borders, icon fills, and link text in dark mode contexts.\nGuidelines: Not for direct application. Check contrast ratio when aliasing to text or icon tokens — minimum 4.5:1 required for WCAG AA compliance."
       },
       "400": {
-        "description": "Purpose: A medium teal primitive at the fifth-brightest step of the scale.\nUsage: Source value for semantic action, icon, and interactive element tokens in dark mode.\nGuidelines: Validate contrast when used as foreground on dark surfaces. Not for direct use in component design."
+        "description": "Purpose: A medium gold primitive at the fifth-brightest step of the scale.\nUsage: Source value for semantic action, icon, and interactive element tokens in dark mode.\nGuidelines: Validate contrast when used as foreground on dark surfaces. Not for direct use in component design."
       },
       "500": {
-        "description": "Purpose: The core brand teal; the primary mid-point of the scale and the anchor for the brand identity.\nUsage: Aliased into colour/action/primary (light mode) and colour/background/brand. The single brand-colour source value provided by the brand designer.\nGuidelines: Treat as the canonical brand colour. When aliasing to text or icon contexts, verify WCAG AA compliance. Do not substitute other primitives where teal/500 is expected."
+        "description": "Purpose: The core brand gold; the primary mid-point of the scale and the anchor for the brand identity.\nUsage: Aliased into colour/action/primary (light mode) and colour/background/brand. The single brand-colour source value provided by the brand designer.\nGuidelines: Treat as the canonical brand colour. When aliasing to text or icon contexts, verify WCAG AA compliance. Do not substitute other primitives where gold/500 is expected."
       },
       "600": {
-        "description": "Purpose: A darkened brand teal primitive one step below the mid-point.\nUsage: Aliased into hover state tokens for primary actions in light mode (colour/action/primary/hover).\nGuidelines: Use to communicate interaction depth on primary actions. Maintain at least one step of contrast against the resting-state primitive."
+        "description": "Purpose: A darkened brand gold primitive one step below the mid-point.\nUsage: Aliased into hover state tokens for primary actions in light mode (colour/action/primary/hover).\nGuidelines: Use to communicate interaction depth on primary actions. Maintain at least one step of contrast against the resting-state primitive."
       },
       "700": {
-        "description": "Purpose: A dark teal primitive providing strong contrast against light surfaces.\nUsage: Aliased into pressed/active state tokens for primary actions in light mode, and into colour/background/promo.\nGuidelines: Reserved for pressed states and promotional backgrounds. Do not use where a softer brand presence is required."
+        "description": "Purpose: A dark gold primitive providing strong contrast against light surfaces.\nUsage: Aliased into pressed/active state tokens for primary actions in light mode, and into colour/background/promo.\nGuidelines: Reserved for pressed states and promotional backgrounds. Do not use where a softer brand presence is required."
       },
       "800": {
-        "description": "Purpose: A very dark teal primitive approaching near-black saturation.\nUsage: Available for aliasing into dark, high-contrast teal surfaces such as deep brand backgrounds.\nGuidelines: Primitive-layer only. Ensure any foreground aliased against this value meets 4.5:1 contrast for text."
+        "description": "Purpose: A very dark gold primitive approaching near-black saturation.\nUsage: Available for aliasing into dark, high-contrast gold surfaces such as deep brand backgrounds.\nGuidelines: Primitive-layer only. Ensure any foreground aliased against this value meets 4.5:1 contrast for text."
       },
       "900": {
-        "description": "Purpose: The darkest teal near the bottom of the scale, suitable for deep inverse backgrounds.\nUsage: Aliased into colour/background/inverse to provide the dark branded surface in light mode.\nGuidelines: Only use in contexts where maximum teal depth is required. Foreground on this surface must be a near-white neutral."
+        "description": "Purpose: The darkest gold near the bottom of the scale, suitable for deep inverse backgrounds.\nUsage: Aliased into colour/background/inverse to provide the dark branded surface in light mode.\nGuidelines: Only use in contexts where maximum gold depth is required. Foreground on this surface must be a near-white neutral."
       },
       "950": {
-        "description": "Purpose: The absolute darkest step of the teal scale; near-black with a teal undertone.\nUsage: Available as a source value for the very deepest teal surfaces if required by future component needs.\nGuidelines: Primitive-layer only. Use sparingly — prefer teal/900 unless maximum depth is explicitly required."
+        "description": "Purpose: The absolute darkest step of the gold scale; near-black with a gold undertone.\nUsage: Available as a source value for the very deepest gold surfaces if required by future component needs.\nGuidelines: Primitive-layer only. Use sparingly — prefer gold/900 unless maximum depth is explicitly required."
       }
     },
     "neutral": {
@@ -121,13 +121,13 @@
           "description": "Purpose: A tertiary foreground colour for reduced-emphasis content on any background.\nUsage: Applied to placeholder text, metadata, disabled foreground labels, and any content intentionally subordinated in the visual hierarchy.\nGuidelines: Do not use for interactive or actionable content."
         },
         "inverse": {
-          "description": "Purpose: The foreground colour for content rendered on inverse (dark branded) surfaces.\nUsage: Applied to all text and icons on colour/background/inverse to ensure legibility on dark teal surfaces.\nGuidelines: Always pair with colour/background/inverse."
+          "description": "Purpose: The foreground colour for content rendered on inverse (dark branded) surfaces.\nUsage: Applied to all text and icons on colour/background/inverse to ensure legibility on dark gold surfaces.\nGuidelines: Always pair with colour/background/inverse."
         },
         "brand": {
           "description": "Purpose: The foreground colour for content on brand-coloured surfaces.\nUsage: Applied to text and icons within brand-filled components, such as primary button labels and brand tile content.\nGuidelines: Always pair with colour/background/brand. Verify contrast at both light and dark mode values."
         },
         "promo": {
-          "description": "Purpose: The foreground colour for content on promotional surfaces.\nUsage: Applied to text and icons within deep teal promotional UI regions.\nGuidelines: Always pair with colour/background/promo. Validate WCAG AA contrast."
+          "description": "Purpose: The foreground colour for content on promotional surfaces.\nUsage: Applied to text and icons within deep gold promotional UI regions.\nGuidelines: Always pair with colour/background/promo. Validate WCAG AA contrast."
         },
         "info": {
           "description": "Purpose: The foreground colour for text and icons rendered on info status surfaces.\nUsage: Applied to the body text, headings, and inline icons within info alert containers and badges.\nGuidelines: Only use on colour/background/info surfaces. Verify WCAG AA contrast in both modes."
@@ -153,7 +153,7 @@
           "description": "Purpose: A higher-contrast border for surfaces requiring emphatic separation or structural distinction.\nUsage: Applied to strongly delineated sections, featured callout borders, and dividers requiring higher visual prominence.\nGuidelines: Reserve for contexts where colour/border/default provides insufficient visual separation."
         },
         "interactive": {
-          "description": "Purpose: The brand-teal border colour signalling interactive focus and active selection states on form controls.\nUsage: Applied to input field borders on :focus, selected control outlines, and any border communicating keyboard focus or active interaction.\nGuidelines: Must always be applied to the focused state of all interactive inputs to satisfy WCAG 2.4.7."
+          "description": "Purpose: The brand-gold border colour signalling interactive focus and active selection states on form controls.\nUsage: Applied to input field borders on :focus, selected control outlines, and any border communicating keyboard focus or active interaction.\nGuidelines: Must always be applied to the focused state of all interactive inputs to satisfy WCAG 2.4.7."
         },
         "info": {
           "description": "Purpose: The border colour for info status containers.\nUsage: Applied to the border of info alert components and info-state input fields.\nGuidelines: Maintain 3:1 contrast against both the info background and the adjacent page surface."
@@ -170,12 +170,12 @@
       },
       "action": {
         "primary": {
-          "description": "Purpose: The brand-teal fill for primary interactive action controls in their resting state.\nUsage: Applied to primary button backgrounds and any control representing the most prominent call to action.\nGuidelines: Use for the single most important action in a given context.",
+          "description": "Purpose: The brand-gold fill for primary interactive action controls in their resting state.\nUsage: Applied to primary button backgrounds and any control representing the most prominent call to action.\nGuidelines: Use for the single most important action in a given context.",
           "hover": {
-            "description": "Purpose: The darkened brand-teal fill for primary action controls on cursor hover.\nUsage: Applied exclusively to primary button and primary interactive control backgrounds on :hover.\nGuidelines: The perceptible shift from the resting state confirms interactivity."
+            "description": "Purpose: The darkened brand-gold fill for primary action controls on cursor hover.\nUsage: Applied exclusively to primary button and primary interactive control backgrounds on :hover.\nGuidelines: The perceptible shift from the resting state confirms interactivity."
           },
           "pressed": {
-            "description": "Purpose: The deepest brand-teal fill for primary action controls in a pressed or active state.\nUsage: Applied to primary button backgrounds on :active / pointer down.\nGuidelines: Must be visually distinct from both the resting and hover states."
+            "description": "Purpose: The deepest brand-gold fill for primary action controls in a pressed or active state.\nUsage: Applied to primary button backgrounds on :active / pointer down.\nGuidelines: Must be visually distinct from both the resting and hover states."
           }
         },
         "secondary": {
@@ -190,16 +190,16 @@
       },
       "state": {
         "focus": {
-          "description": "Purpose: The brand-teal colour used to render focus ring indicators on all interactive elements.\nUsage: Applied to focus ring outlines on buttons, inputs, links, and any focusable control.\nGuidelines: Must be applied to all keyboard-navigable interactive elements to satisfy WCAG 2.4.7."
+          "description": "Purpose: The brand-gold colour used to render focus ring indicators on all interactive elements.\nUsage: Applied to focus ring outlines on buttons, inputs, links, and any focusable control.\nGuidelines: Must be applied to all keyboard-navigable interactive elements to satisfy WCAG 2.4.7."
         },
         "hover": {
           "description": "Purpose: A subtle neutral overlay background applied on cursor hover to indicate that an element is interactive.\nUsage: Applied to navigation items, list items, table rows, and any hover-sensitive container.\nGuidelines: Use as a lightweight hover signal where a full action colour is too heavy."
         },
         "selected": {
-          "description": "Purpose: A soft teal-tinted background indicating a selected or chosen state.\nUsage: Applied to selected navigation items, selected list rows, and active tab or filter chip backgrounds.\nGuidelines: Pair with colour/text/primary for foreground content — the selected state colour alone should not convey selection without additional visual cues."
+          "description": "Purpose: A soft gold-tinted background indicating a selected or chosen state.\nUsage: Applied to selected navigation items, selected list rows, and active tab or filter chip backgrounds.\nGuidelines: Pair with colour/text/primary for foreground content — the selected state colour alone should not convey selection without additional visual cues."
         },
         "active": {
-          "description": "Purpose: A slightly stronger teal tint than selected, used for actively engaged or pressed interactive list items.\nUsage: Applied to the active (momentarily pressed) state of list items, nav entries, or any surface showing a transient active interaction.\nGuidelines: Distinct from selected in visual weight — active is transient; selected is persistent."
+          "description": "Purpose: A slightly stronger gold tint than selected, used for actively engaged or pressed interactive list items.\nUsage: Applied to the active (momentarily pressed) state of list items, nav entries, or any surface showing a transient active interaction.\nGuidelines: Distinct from selected in visual weight — active is transient; selected is persistent."
         },
         "disabled": {
           "text": {
@@ -218,7 +218,7 @@
           "description": "Purpose: A reduced-emphasis colour for secondary or supporting icons.\nUsage: Applied to auxiliary icons, trailing decorative glyphs, and icons used in low-priority informational contexts.\nGuidelines: Reserve for visual support roles."
         },
         "brand": {
-          "description": "Purpose: The brand teal colour for icons requiring brand expression.\nUsage: Applied to featured brand icons, primary action icons, and interactive icons in brand-forward contexts.\nGuidelines: Verify 3:1 contrast against the surface it appears on."
+          "description": "Purpose: The brand gold colour for icons requiring brand expression.\nUsage: Applied to featured brand icons, primary action icons, and interactive icons in brand-forward contexts.\nGuidelines: Verify 3:1 contrast against the surface it appears on."
         },
         "inverse": {
           "description": "Purpose: A light icon colour for use on dark or branded backgrounds.\nUsage: Applied to icons on colour/background/inverse, dark panels, and any dark-filled surface requiring light foreground icons.\nGuidelines: Pair only with surfaces dark enough to maintain 3:1 contrast."
@@ -307,10 +307,13 @@
   "typography": {
     "family": {
       "base": {
-        "description": "Primary typeface for all UI text. Inter Tight provides a modern, condensed aesthetic optimised for digital interfaces."
+        "description": "Primary sans-serif (Jost) for UI text: labels, buttons, navigation, form elements. Site alias: --sans."
       },
-      "annotation": {
-        "description": "Monospace typeface for code snippets, technical labels, and annotation content."
+      "serif-body": {
+        "description": "Serif (Lora) for body prose: paragraphs and running text. Site alias: --serif-body."
+      },
+      "display": {
+        "description": "Display serif (Cormorant Garamond) for display, headline and title roles. Site alias: --serif."
       }
     },
     "scale": {
