@@ -95,6 +95,7 @@
   --kr-colour-colour-text-tertiary: #7a6c56;
   --kr-colour-colour-text-inverse: #f5f0e8;
   --kr-colour-colour-text-link: #a07840;
+  --kr-colour-colour-text-link-hover: #886534;
   --kr-colour-colour-border-subtle: #d4c9b4;
   --kr-colour-colour-border-default: #b8a990;
   --kr-colour-colour-border-strong: #9a8b72;
@@ -104,7 +105,11 @@
   --kr-colour-colour-border-error: #ff6b6b;
   --kr-colour-colour-border-warning: #ffb84d;
   --kr-colour-colour-action-primary: #a07840;
+  --kr-colour-colour-action-primary-hover: #886534;
+  --kr-colour-colour-action-primary-pressed: #6e5229;
   --kr-colour-colour-action-secondary: #ede6d8;
+  --kr-colour-colour-action-secondary-hover: #e2d9c8;
+  --kr-colour-colour-action-secondary-pressed: #d4c9b4;
   --kr-colour-colour-state-focus: #a07840;
   --kr-colour-colour-state-hover: #f7f0e4;
   --kr-colour-colour-state-selected: #faf7f2;
@@ -135,9 +140,16 @@
   --kr-colour-colour-ink-on-brand: #faf7f2;
   --kr-colour-colour-ink-on-neutral: #1a1714;
   --kr-components-input-bg: #ffffff;
+  --kr-components-input-bg-disabled: #ede6d8;
   --kr-components-input-text: #1a1714;
+  --kr-components-input-text-error: #4a2323;
+  --kr-components-input-text-disabled: #b8a990;
   --kr-components-input-placeholder: #7a6c56;
   --kr-components-input-border: #b8a990;
+  --kr-components-input-border-focus: #a07840;
+  --kr-components-input-border-disabled: #d4c9b4;
+  --kr-components-input-border-error: #ff6b6b;
+  --kr-components-input-border-success: #3aae9e;
   --kr-components-button-primary-bg: #a07840;
   --kr-components-button-primary-text: #faf7f2;
   --kr-components-button-primary-border: #000000;
@@ -147,6 +159,8 @@
   --kr-components-button-primary-disabled-text: #b8a990;
   --kr-components-button-primary-disabled-border: #d4c9b4;
   --kr-components-button-primary-focus: #a07840;
+  --kr-components-button-primary-focus-text: #1f343a;
+  --kr-components-button-primary-focus-bg: #a07840;
   --kr-components-button-secondary-bg: #ede6d8;
   --kr-components-button-secondary-text: #1a1714;
   --kr-components-button-secondary-border: #b8a990;
@@ -158,9 +172,12 @@
   --kr-components-button-secondary-disabled-text: #b8a990;
   --kr-components-button-secondary-disabled-border: #d4c9b4;
   --kr-components-button-secondary-focus: #a07840;
+  --kr-components-button-secondary-focus-text: #1f343a;
+  --kr-components-button-secondary-focus-bg: #ede6d8;
   --kr-components-nav-bg: #faf7f2;
   --kr-components-nav-border: #d4c9b4;
   --kr-components-nav-text: #5c5040;
+  --kr-components-nav-text-active: #1a1714;
   --kr-components-nav-indicator: #a07840;
   --kr-components-nav-item-hover-bg: #f7f0e4;
   --kr-components-nav-item-active-bg: #faf7f2;

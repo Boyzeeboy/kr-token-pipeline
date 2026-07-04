@@ -404,11 +404,11 @@
         },
         "link": {
           "$value": "#a07840",
-          "$type": "color",
-          "hover": {
-            "$value": "#886534",
-            "$type": "color"
-          }
+          "$type": "color"
+        },
+        "link-hover": {
+          "$value": "#886534",
+          "$type": "color"
         }
       },
       "border": {
@@ -448,27 +448,27 @@
       "action": {
         "primary": {
           "$value": "#a07840",
-          "$type": "color",
-          "hover": {
-            "$value": "#886534",
-            "$type": "color"
-          },
-          "pressed": {
-            "$value": "#6e5229",
-            "$type": "color"
-          }
+          "$type": "color"
+        },
+        "primary-hover": {
+          "$value": "#886534",
+          "$type": "color"
+        },
+        "primary-pressed": {
+          "$value": "#6e5229",
+          "$type": "color"
         },
         "secondary": {
           "$value": "#ede6d8",
-          "$type": "color",
-          "hover": {
-            "$value": "#e2d9c8",
-            "$type": "color"
-          },
-          "pressed": {
-            "$value": "#d4c9b4",
-            "$type": "color"
-          }
+          "$type": "color"
+        },
+        "secondary-hover": {
+          "$value": "#e2d9c8",
+          "$type": "color"
+        },
+        "secondary-pressed": {
+          "$value": "#d4c9b4",
+          "$type": "color"
         }
       },
       "state": {
@@ -611,23 +611,23 @@
     "input": {
       "bg": {
         "$value": "#ffffff",
-        "$type": "color",
-        "disabled": {
-          "$value": "#ede6d8",
-          "$type": "color"
-        }
+        "$type": "color"
+      },
+      "bg-disabled": {
+        "$value": "#ede6d8",
+        "$type": "color"
       },
       "text": {
         "$value": "#1a1714",
-        "$type": "color",
-        "error": {
-          "$value": "#4a2323",
-          "$type": "color"
-        },
-        "disabled": {
-          "$value": "#b8a990",
-          "$type": "color"
-        }
+        "$type": "color"
+      },
+      "text-error": {
+        "$value": "#4a2323",
+        "$type": "color"
+      },
+      "text-disabled": {
+        "$value": "#b8a990",
+        "$type": "color"
       },
       "placeholder": {
         "$value": "#7a6c56",
@@ -635,23 +635,23 @@
       },
       "border": {
         "$value": "#b8a990",
-        "$type": "color",
-        "focus": {
-          "$value": "#a07840",
-          "$type": "color"
-        },
-        "disabled": {
-          "$value": "#d4c9b4",
-          "$type": "color"
-        },
-        "error": {
-          "$value": "#ff6b6b",
-          "$type": "color"
-        },
-        "success": {
-          "$value": "#3aae9e",
-          "$type": "color"
-        }
+        "$type": "color"
+      },
+      "border-focus": {
+        "$value": "#a07840",
+        "$type": "color"
+      },
+      "border-disabled": {
+        "$value": "#d4c9b4",
+        "$type": "color"
+      },
+      "border-error": {
+        "$value": "#ff6b6b",
+        "$type": "color"
+      },
+      "border-success": {
+        "$value": "#3aae9e",
+        "$type": "color"
       }
     },
     "button": {
@@ -696,15 +696,15 @@
         },
         "focus": {
           "$value": "#a07840",
-          "$type": "color",
-          "text": {
-            "$value": "#1f343a",
-            "$type": "color"
-          },
-          "bg": {
-            "$value": "#a07840",
-            "$type": "color"
-          }
+          "$type": "color"
+        },
+        "focus-text": {
+          "$value": "#1f343a",
+          "$type": "color"
+        },
+        "focus-bg": {
+          "$value": "#a07840",
+          "$type": "color"
         }
       },
       "secondary": {
@@ -756,15 +756,15 @@
         },
         "focus": {
           "$value": "#a07840",
-          "$type": "color",
-          "text": {
-            "$value": "#1f343a",
-            "$type": "color"
-          },
-          "bg": {
-            "$value": "#ede6d8",
-            "$type": "color"
-          }
+          "$type": "color"
+        },
+        "focus-text": {
+          "$value": "#1f343a",
+          "$type": "color"
+        },
+        "focus-bg": {
+          "$value": "#ede6d8",
+          "$type": "color"
         }
       }
     },
@@ -779,11 +779,11 @@
       },
       "text": {
         "$value": "#5c5040",
-        "$type": "color",
-        "active": {
-          "$value": "#1a1714",
-          "$type": "color"
-        }
+        "$type": "color"
+      },
+      "text-active": {
+        "$value": "#1a1714",
+        "$type": "color"
       },
       "indicator": {
         "$value": "#a07840",

@@ -1,5 +1,439 @@
 [
   {
+    "id": 4,
+    "timestamp": "2026-07-04T16:33:49.341Z",
+    "isFirstRun": false,
+    "tokenCount": 752,
+    "changeCount": 64,
+    "changes": [
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/colour/action/primary-hover",
+        "before": null,
+        "after": "#d4bf94"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/colour/action/primary-pressed",
+        "before": null,
+        "after": "#e8d9bc"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/colour/colour/action/primary/hover",
+        "before": "#d4bf94",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/colour/colour/action/primary/pressed",
+        "before": "#e8d9bc",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/colour/action/secondary-hover",
+        "before": null,
+        "after": "#5c5040"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/colour/action/secondary-pressed",
+        "before": null,
+        "after": "#7a6c56"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/colour/colour/action/secondary/hover",
+        "before": "#5c5040",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/colour/colour/action/secondary/pressed",
+        "before": "#7a6c56",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/button/primary/focus-bg",
+        "before": null,
+        "after": "#c4a264"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/button/primary/focus-text",
+        "before": null,
+        "after": "#1f343a"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/button/primary/focus/bg",
+        "before": "#c4a264",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/button/primary/focus/text",
+        "before": "#1f343a",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/button/secondary/focus-bg",
+        "before": null,
+        "after": "#3d3830"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/button/secondary/focus-text",
+        "before": null,
+        "after": "#1f343a"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/button/secondary/focus/bg",
+        "before": "#3d3830",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/button/secondary/focus/text",
+        "before": "#1f343a",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/input/bg-disabled",
+        "before": null,
+        "after": "#2e2820"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/input/bg/disabled",
+        "before": "#2e2820",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/input/border-disabled",
+        "before": null,
+        "after": "#9a8b72"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/input/border-error",
+        "before": null,
+        "after": "#ff8a8a"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/input/border-focus",
+        "before": null,
+        "after": "#c4a264"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/input/border-success",
+        "before": null,
+        "after": "#5fc3b5"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/input/border/disabled",
+        "before": "#9a8b72",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/input/border/error",
+        "before": "#ff8a8a",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/input/border/focus",
+        "before": "#c4a264",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/input/border/success",
+        "before": "#5fc3b5",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/input/text-disabled",
+        "before": null,
+        "after": "#7a6c56"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/input/text-error",
+        "before": null,
+        "after": "#ffaaaa"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/input/text/disabled",
+        "before": "#7a6c56",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/input/text/error",
+        "before": "#ffaaaa",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/components/nav/text-active",
+        "before": null,
+        "after": "#ede6d8"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/components/nav/text/active",
+        "before": "#ede6d8",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/colour/action/primary-hover",
+        "before": null,
+        "after": "#886534"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/colour/action/primary-pressed",
+        "before": null,
+        "after": "#6e5229"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/colour/colour/action/primary/hover",
+        "before": "#886534",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/colour/colour/action/primary/pressed",
+        "before": "#6e5229",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/colour/action/secondary-hover",
+        "before": null,
+        "after": "#e2d9c8"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/colour/action/secondary-pressed",
+        "before": null,
+        "after": "#d4c9b4"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/colour/colour/action/secondary/hover",
+        "before": "#e2d9c8",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/colour/colour/action/secondary/pressed",
+        "before": "#d4c9b4",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/button/primary/focus-bg",
+        "before": null,
+        "after": "#a07840"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/button/primary/focus-text",
+        "before": null,
+        "after": "#1f343a"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/button/primary/focus/bg",
+        "before": "#a07840",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/button/primary/focus/text",
+        "before": "#1f343a",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/button/secondary/focus-bg",
+        "before": null,
+        "after": "#ede6d8"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/button/secondary/focus-text",
+        "before": null,
+        "after": "#1f343a"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/button/secondary/focus/bg",
+        "before": "#ede6d8",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/button/secondary/focus/text",
+        "before": "#1f343a",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/input/bg-disabled",
+        "before": null,
+        "after": "#ede6d8"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/input/bg/disabled",
+        "before": "#ede6d8",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/input/border-disabled",
+        "before": null,
+        "after": "#d4c9b4"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/input/border-error",
+        "before": null,
+        "after": "#ff6b6b"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/input/border-focus",
+        "before": null,
+        "after": "#a07840"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/input/border-success",
+        "before": null,
+        "after": "#3aae9e"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/input/border/disabled",
+        "before": "#d4c9b4",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/input/border/error",
+        "before": "#ff6b6b",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/input/border/focus",
+        "before": "#a07840",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/input/border/success",
+        "before": "#3aae9e",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/input/text-disabled",
+        "before": null,
+        "after": "#b8a990"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/input/text-error",
+        "before": null,
+        "after": "#4a2323"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/input/text/disabled",
+        "before": "#b8a990",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/input/text/error",
+        "before": "#4a2323",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/components/nav/text-active",
+        "before": null,
+        "after": "#1a1714"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/components/nav/text/active",
+        "before": "#1a1714",
+        "after": null
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "timestamp": "2026-07-04T16:17:25.997Z",
+    "isFirstRun": false,
+    "tokenCount": 752,
+    "changeCount": 4,
+    "changes": [
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/colour/text/link-hover",
+        "before": null,
+        "after": "#d4bf94"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.dark/colour/colour/text/link/hover",
+        "before": "#d4bf94",
+        "after": null
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/colour/text/link-hover",
+        "before": null,
+        "after": "#886534"
+      },
+      {
+        "type": "removed",
+        "token": "tokens.light/colour/colour/text/link/hover",
+        "before": "#886534",
+        "after": null
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "timestamp": "2026-07-04T16:16:52.927Z",
+    "isFirstRun": false,
+    "tokenCount": 752,
+    "changeCount": 0,
+    "changes": []
+  },
+  {
     "id": 1,
     "timestamp": "2026-06-29T16:51:47.728Z",
     "isFirstRun": true,
