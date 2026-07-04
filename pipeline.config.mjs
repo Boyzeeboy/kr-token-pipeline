@@ -12,15 +12,15 @@
 
 export default {
   // Display name used in the generated agent docs (AGENTS.md / CLAUDE.md).
-  projectName: 'IDEM',
+  projectName: "Kirsten Rossiter",
 
-  // Token name prefix. Produces e.g. `--idem-color-...`, `idemColor...`,
-  // and `"idem-color-..."` keys in the flat JSON. Keep it short and unique
+  // Token name prefix. Produces e.g. `--kr-color-...`, `krColor...`,
+  // and `"kr-color-..."` keys in the flat JSON. Keep it short and unique
   // per client to avoid CSS variable collisions when multiple token packages
   // load on the same page. Override at build time with TOKEN_PREFIX=... if needed.
-  prefix: 'idem',
+  prefix: "kr",
 
   // The Figma file this pipeline syncs from (see "Syncing from Figma" in the docs).
-  figmaFileName: 'IDEM Revised',
-  figmaFileKey: '3e2J8b6paAwdAlTyOs9NrK',
+  figmaFileName: "Kirsten Rossiter Token Pipeline",
+  figmaFileKey: "M4EeBpB5Ez5cgTkwJnk4LK",
 };

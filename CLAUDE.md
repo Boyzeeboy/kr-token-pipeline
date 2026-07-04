@@ -1,6 +1,6 @@
-# IDEM Token Pipeline
+# Kirsten Rossiter Token Pipeline
 
-Design token pipeline for IDEM: Figma → DTCG token files (`tokens/*.json`) →
+Design token pipeline for Kirsten Rossiter: Figma → DTCG token files (`tokens/*.json`) →
 Style Dictionary (`sd.config.mjs`) → outputs in `dist/{light,dark}/`. Storybook
 documents the tokens; `scripts/snapshot-tokens.mjs` diffs each build into
 `tokens/changelog.json`.
@@ -32,7 +32,7 @@ contrast requirement.
   "get design context") for a full sync. It only sees the layer currently
   selected in the Figma desktop app and fails with `"nothing selected"`. This
   cost real time on the 2026-06-22 sync — reach for `use_figma` first.
-- The file is **IDEM Revised**, key `3e2J8b6paAwdAlTyOs9NrK`.
+- The file is **Kirsten Rossiter Token Pipeline**, key `M4EeBpB5Ez5cgTkwJnk4LK`.
 - **Only `tokens/tokens.{light,dark}.json` are compiled into `dist/`.**
   `color.json` / `typography.json` / `size.json` / `guidelines.json` feed
   Storybook and the changelog snapshot, not the CSS/JS build.

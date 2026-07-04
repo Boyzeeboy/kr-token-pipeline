@@ -185,6 +185,8 @@ prevent.
 | Action | Command |
 | --- | --- |
 | Rebuild tokens + changelog | `npm run build` |
+| Verify build outputs exist | `npm run verify` |
+| Build + verify (full test) | `npm test` |
 | Run Storybook locally | `npm run storybook` |
 | Build static Storybook | `npm run build-storybook` |
 | Review source token changes | `git diff tokens/` |

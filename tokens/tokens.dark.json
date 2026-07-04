@@ -2,141 +2,120 @@
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "$version": "1.0",
   "$metadata": {
-    "source": "Figma — IDEM Revised (3e2J8b6paAwdAlTyOs9NrK)",
-    "collections": [
-      "Primitives",
-      "Semantic",
-      "Components"
-    ],
-    "modes": [
-      "light",
-      "dark"
-    ],
+    "source": "Figma — Kirsten Rossiter Token Pipeline (M4EeBpB5Ez5cgTkwJnk4LK)",
+    "collections": {
+      "0": "Primitives",
+      "1": "Semantic",
+      "2": "Components",
+      "3": "Fonts",
+      "4": "Spacing",
+      "5": "Radius"
+    },
+    "modes": {
+      "0": "light",
+      "1": "dark"
+    },
     "mode": "dark"
   },
   "primitives": {
-    "teal": {
+    "gold": {
       "25": {
-        "$value": "#071a1e",
-        "$type": "color",
-        "$description": "Purpose: The lightest step in the teal primitive scale; a near-white tinted surface value.\nUsage: Referenced by semantic tokens requiring a very subtle teal-tinted wash, such as colour/state/selected in light mode.\nGuidelines: Do not apply directly to component design. All usage must flow through a semantic alias. Reserve for contexts where the tint is barely perceptible against a white background."
+        "$value": "#20170b",
+        "$type": "color"
       },
       "50": {
-        "$value": "#091e22",
-        "$type": "color",
-        "$description": "Purpose: A soft, low-saturation teal primitive establishing the second lightest step in the scale.\nUsage: Consumed by semantic tokens that require a light teal background, such as state and hover overlays.\nGuidelines: Not for direct use in layouts or components. Should always be aliased through a semantic token."
+        "$value": "#3a2b15",
+        "$type": "color"
       },
       "100": {
-        "$value": "#0f2d33",
-        "$type": "color",
-        "$description": "Purpose: A light teal primitive representing the third step of the scale.\nUsage: Available for aliasing into semantic tokens where a light but visible teal fill is required.\nGuidelines: Use only as a primitive source value. Do not hard-code into component styles."
+        "$value": "#543e1f",
+        "$type": "color"
       },
       "200": {
-        "$value": "#163d45",
-        "$type": "color",
-        "$description": "Purpose: A medium-light teal primitive at the fourth step of the scale.\nUsage: Provides a mid-range light value for teal; usable as a source for subtle border or tinted fill tokens.\nGuidelines: Primitive-layer only. Must be consumed via a semantic token alias."
+        "$value": "#6e5229",
+        "$type": "color"
       },
       "300": {
-        "$value": "#1f5460",
-        "$type": "color",
-        "$description": "Purpose: A mid-range teal primitive establishing a clearly visible, unsaturated teal.\nUsage: Aliased into semantic tokens for interactive borders, icon fills, and link text in dark mode contexts.\nGuidelines: Not for direct application. Check contrast ratio when aliasing to text or icon tokens — minimum 4.5:1 required for WCAG AA compliance."
+        "$value": "#886534",
+        "$type": "color"
       },
       "400": {
-        "$value": "#2a6e7a",
-        "$type": "color",
-        "$description": "Purpose: A medium teal primitive at the fifth-brightest step of the scale.\nUsage: Source value for semantic action, icon, and interactive element tokens in dark mode.\nGuidelines: Validate contrast when used as foreground on dark surfaces. Not for direct use in component design."
+        "$value": "#a07840",
+        "$type": "color"
       },
       "500": {
-        "$value": "#3aabb8",
-        "$type": "color",
-        "$description": "Purpose: The core brand teal; the primary mid-point of the scale and the anchor for the brand identity.\nUsage: Aliased into colour/action/primary (light mode) and colour/background/brand. The single brand-colour source value provided by the brand designer.\nGuidelines: Treat as the canonical brand colour. When aliasing to text or icon contexts, verify WCAG AA compliance. Do not substitute other primitives where teal/500 is expected."
+        "$value": "#c4a264",
+        "$type": "color"
       },
       "600": {
-        "$value": "#5fc4cf",
-        "$type": "color",
-        "$description": "Purpose: A darkened brand teal primitive one step below the mid-point.\nUsage: Aliased into hover state tokens for primary actions in light mode (colour/action/primary/hover).\nGuidelines: Use to communicate interaction depth on primary actions. Maintain at least one step of contrast against the resting-state primitive."
+        "$value": "#d4bf94",
+        "$type": "color"
       },
       "700": {
-        "$value": "#88d6de",
-        "$type": "color",
-        "$description": "Purpose: A dark teal primitive providing strong contrast against light surfaces.\nUsage: Aliased into pressed/active state tokens for primary actions in light mode, and into colour/background/promo.\nGuidelines: Reserved for pressed states and promotional backgrounds. Do not use where a softer brand presence is required."
+        "$value": "#e8d9bc",
+        "$type": "color"
       },
       "800": {
-        "$value": "#b3e6ec",
-        "$type": "color",
-        "$description": "Purpose: A very dark teal primitive approaching near-black saturation.\nUsage: Available for aliasing into dark, high-contrast teal surfaces such as deep brand backgrounds.\nGuidelines: Primitive-layer only. Ensure any foreground aliased against this value meets 4.5:1 contrast for text."
+        "$value": "#f2ead8",
+        "$type": "color"
       },
       "900": {
-        "$value": "#daf3f5",
-        "$type": "color",
-        "$description": "Purpose: The darkest teal near the bottom of the scale, suitable for deep inverse backgrounds.\nUsage: Aliased into colour/background/inverse to provide the dark branded surface in light mode.\nGuidelines: Only use in contexts where maximum teal depth is required. Foreground on this surface must be a near-white neutral."
+        "$value": "#f7f0e4",
+        "$type": "color"
       },
       "950": {
-        "$value": "#ecf8f9",
-        "$type": "color",
-        "$description": "Purpose: The absolute darkest step of the teal scale; near-black with a teal undertone.\nUsage: Available as a source value for the very deepest teal surfaces if required by future component needs.\nGuidelines: Primitive-layer only. Use sparingly — prefer teal/900 unless maximum depth is explicitly required."
+        "$value": "#faf7f2",
+        "$type": "color"
       }
     },
     "neutral": {
       "0": {
-        "$value": "#0f2328",
-        "$type": "color",
-        "$description": "Purpose: The zero-point anchor of the neutral scale; pure white in light mode and the deepest dark-mode base in dark mode.\nUsage: Aliased into colour/background/default and colour/background/raised in light mode; inverted to the darkest surface in dark mode.\nGuidelines: A special-case primitive. Never substitute another step where neutral/0 is expected, as it carries structural meaning as both the lightest and darkest extremes depending on mode."
+        "$value": "#1a1714",
+        "$type": "color"
       },
       "50": {
-        "$value": "#1f343a",
-        "$type": "color",
-        "$description": "Purpose: The lightest non-white step of the neutral scale; a very subtle off-white.\nUsage: Aliased into colour/background/subtle and colour/background/surface to distinguish page-level tinted regions and component backgrounds from the default canvas.\nGuidelines: Primitive-layer only. Note that subtle and surface share this primitive intentionally — semantic differentiation is achieved through borders and elevation, not colour alone."
+        "$value": "#221c14",
+        "$type": "color"
       },
       "100": {
-        "$value": "#354a50",
-        "$type": "color",
-        "$description": "Purpose: A light neutral primitive providing a soft, visible background distinction.\nUsage: Aliased into colour/background/muted, colour/border/subtle, and colour/state/disabled/bg.\nGuidelines: Not for direct use. When aliased to border tokens, ensure visual separation from adjacent surfaces is sufficient without relying on this colour alone."
+        "$value": "#2e2820",
+        "$type": "color"
       },
       "200": {
-        "$value": "#4d6167",
-        "$type": "color",
-        "$description": "Purpose: A slightly darker light neutral, providing a clearly visible but low-contrast value.\nUsage: Aliased into colour/border/default and colour/action/secondary for default borders and secondary action fills.\nGuidelines: Primitive-layer only. Border tokens aliasing this value must maintain a minimum 3:1 contrast ratio against adjacent surfaces per WCAG AA."
+        "$value": "#3d3830",
+        "$type": "color"
       },
       "300": {
-        "$value": "#66797f",
-        "$type": "color",
-        "$description": "Purpose: A mid-light neutral sitting at a clearly visible step between light and mid tones.\nUsage: Aliased into colour/border/strong and colour/action/secondary/hover.\nGuidelines: Not for direct use. When aliased to interactive controls, verify that hover states provide sufficient visual change from the resting state."
+        "$value": "#5c5040",
+        "$type": "color"
       },
       "400": {
-        "$value": "#7f9096",
-        "$type": "color",
-        "$description": "Purpose: A mid neutral at the boundary between light and medium tones.\nUsage: Aliased into colour/text/tertiary (light mode), colour/state/disabled/text, and colour/action/secondary/pressed.\nGuidelines: Primitive-layer only. When aliased to text tokens, ensure the resulting combination meets WCAG AA contrast against its background context."
+        "$value": "#7a6c56",
+        "$type": "color"
       },
       "500": {
-        "$value": "#aeb9bd",
-        "$type": "color",
-        "$description": "Purpose: The true mid-point of the neutral scale; a balanced grey with equal contrast in both directions.\nUsage: Aliased into colour/text/secondary (light mode) and colour/onBackground/muted in light mode.\nGuidelines: Not for direct use. The mirror relationship between neutral/500 and neutral/400 across modes is intentional — validate both mode outputs when modifying this token."
+        "$value": "#9a8b72",
+        "$type": "color"
       },
       "600": {
-        "$value": "#c3cccf",
-        "$type": "color",
-        "$description": "Purpose: A mid-dark neutral providing stronger contrast than the mid-point.\nUsage: Aliased into colour/text/secondary (light mode) and colour/onBackground/subtle in light mode.\nGuidelines: Primitive-layer only. Confirm WCAG AA compliance (4.5:1 for body text) against all background contexts where this value is applied via semantic aliases."
+        "$value": "#b8a990",
+        "$type": "color"
       },
       "700": {
-        "$value": "#d5dbdd",
-        "$type": "color",
-        "$description": "Purpose: A dark neutral close to the deep anchor, suitable for icon and secondary heading values.\nUsage: Aliased into colour/icon/default to ensure icons read clearly against light surfaces.\nGuidelines: Not for direct use. As an icon colour source, the semantic token should maintain 3:1 contrast against the surface it appears on."
+        "$value": "#d4c9b4",
+        "$type": "color"
       },
       "800": {
-        "$value": "#e6e9ea",
-        "$type": "color",
-        "$description": "Purpose: A very dark neutral near the bottom of the light-mode scale.\nUsage: Aliased into component-layer tokens and dark-mode background tokens requiring high-contrast dark fills.\nGuidelines: Primitive-layer only. Use to support elevation distinctions in dark mode through subtle tonal differences."
+        "$value": "#e2d9c8",
+        "$type": "color"
       },
       "900": {
-        "$value": "#f4f5f5",
-        "$type": "color",
-        "$description": "Purpose: The near-darkest neutral in the scale; a deep, ink-like tone for primary text and strong foreground elements.\nUsage: Aliased into colour/text/primary and colour/onBackground/default in light mode.\nGuidelines: Not for direct use. Always verify 7:1 contrast against the default background for AAA compliance, and minimum 4.5:1 for AA."
+        "$value": "#ede6d8",
+        "$type": "color"
       },
       "950": {
-        "$value": "#ffffff",
-        "$type": "color",
-        "$description": "Purpose: The darkest step in the neutral scale; the primary dark-mode base surface colour.\nUsage: Aliased into colour/background/default in dark mode and colour/text/inverse in light mode.\nGuidelines: A structural anchor primitive. Changes to this value propagate broadly — always audit all downstream semantic aliases before modifying."
+        "$value": "#f5f0e8",
+        "$type": "color"
       }
     },
     "blue": {
@@ -308,742 +287,1092 @@
       }
     },
     "transparent": {
-      "$value": "#00000000",
-      "$type": "color",
-      "$description": "Purpose: A fully transparent colour primitive; the zero-alpha anchor of the colour system.\nUsage: Referenced by any token that requires a genuinely invisible fill or border — e.g. button/primary/border where no visible border is desired.\nGuidelines: Do not substitute with a colour-matched value (e.g. same colour as bg) when true transparency is the intent. Changes to this value would propagate broadly — treat as immutable."
+      "$value": "#000000",
+      "$type": "color"
     }
   },
   "colour": {
-    "background": {
-      "default": {
-        "$value": "{primitives.neutral.0}",
-        "$type": "color",
-        "$description": "Purpose: The primary canvas background; the base surface of every page and layout.\nUsage: Applied to the root body background, full-page layouts, and any area that represents the default visual plane of the UI.\nGuidelines: Do not use for elevated or contained surfaces — use colour/background/surface or colour/background/raised instead. This token must always produce the highest (or lowest in dark mode) surface in the visual hierarchy."
+    "colour": {
+      "background": {
+        "default": {
+          "$value": "#1a1714",
+          "$type": "color"
+        },
+        "subtle": {
+          "$value": "#221c14",
+          "$type": "color"
+        },
+        "muted": {
+          "$value": "#2e2820",
+          "$type": "color"
+        },
+        "surface": {
+          "$value": "#221c14",
+          "$type": "color"
+        },
+        "raised": {
+          "$value": "#1a1714",
+          "$type": "color"
+        },
+        "inverse": {
+          "$value": "#f7f0e4",
+          "$type": "color"
+        },
+        "brand": {
+          "$value": "#c4a264",
+          "$type": "color"
+        },
+        "promo": {
+          "$value": "#e8d9bc",
+          "$type": "color"
+        },
+        "info": {
+          "$value": "#0a1628",
+          "$type": "color"
+        },
+        "success": {
+          "$value": "#0f2e2a",
+          "$type": "color"
+        },
+        "error": {
+          "$value": "#2a1212",
+          "$type": "color"
+        },
+        "warning": {
+          "$value": "#2a1f0f",
+          "$type": "color"
+        }
       },
-      "subtle": {
-        "$value": "{primitives.neutral.50}",
-        "$type": "color",
-        "$description": "Purpose: A gently tinted background for page-level regions that need subtle visual separation from the default canvas.\nUsage: Applied to secondary page areas, sidebar backgrounds, table row stripes, or any region-level tint that should not draw focus.\nGuidelines: Shares the same primitive as colour/background/surface — differentiation in practice is achieved through borders and elevation. Do not rely on colour contrast alone to distinguish subtle regions."
+      "onBackground": {
+        "default": {
+          "$value": "#ede6d8",
+          "$type": "color"
+        },
+        "subtle": {
+          "$value": "#d4c9b4",
+          "$type": "color"
+        },
+        "muted": {
+          "$value": "#b8a990",
+          "$type": "color"
+        },
+        "inverse": {
+          "$value": "#f5f0e8",
+          "$type": "color"
+        },
+        "brand": {
+          "$value": "#f5f0e8",
+          "$type": "color"
+        },
+        "promo": {
+          "$value": "#f5f0e8",
+          "$type": "color"
+        },
+        "info": {
+          "$value": "#90c4f5",
+          "$type": "color"
+        },
+        "success": {
+          "$value": "#84d5ca",
+          "$type": "color"
+        },
+        "error": {
+          "$value": "#ffaaaa",
+          "$type": "color"
+        },
+        "warning": {
+          "$value": "#ffe8bf",
+          "$type": "color"
+        }
       },
-      "muted": {
-        "$value": "{primitives.neutral.100}",
-        "$type": "color",
-        "$description": "Purpose: A clearly tinted background for suppressed or de-emphasised surface areas.\nUsage: Used for disabled container backgrounds, inactive panel fills, or any surface that communicates reduced visual prominence.\nGuidelines: Not for active, interactive surfaces. Ensure foreground content on muted backgrounds meets WCAG AA contrast requirements using the appropriate text token."
-      },
-      "surface": {
-        "$value": "{primitives.neutral.50}",
-        "$type": "color",
-        "$description": "Purpose: The standard component background; the expected fill for contained UI surfaces such as cards, modals, and panels.\nUsage: Applied to card backgrounds, dialog surfaces, dropdown panels, and any component-level container that sits above the default canvas.\nGuidelines: Shares the same primitive as colour/background/subtle — border and elevation are the primary differentiators in practice. Use consistently across all card and panel components to maintain visual coherence."
-      },
-      "raised": {
-        "$value": "{primitives.neutral.0}",
-        "$type": "color",
-        "$description": "Purpose: A background for elevated components that sit above the standard surface layer.\nUsage: Applied to tooltips, floating menus, overlays, and components with a perceptible drop shadow that indicates elevation above sibling surfaces.\nGuidelines: Reserve for components with visual elevation cues (shadow, border). Do not use in place of surface for flat components."
-      },
-      "inverse": {
-        "$value": "{primitives.teal.900}",
-        "$type": "color",
-        "$description": "Purpose: A dark, branded background for inverted UI regions where the surface adopts the brand's deep teal tone.\nUsage: Applied to page headers, hero sections, promotional banners, or callout components that require a strong brand presence.\nGuidelines: Always pair with colour/onBackground/inverse or colour/text/inverse for foreground content on this surface to ensure contrast. Do not use for large body content areas."
-      },
-      "brand": {
-        "$value": "{primitives.teal.500}",
-        "$type": "color",
-        "$description": "Purpose: The primary brand-coloured surface; a teal fill for brand-forward components.\nUsage: Applied to primary action surfaces, brand tiles, and any component where the full brand teal should fill the background.\nGuidelines: Always use colour/onBackground/brand for foreground content on this surface. Validate contrast for all text and icon content placed on this background."
-      },
-      "promo": {
-        "$value": "{primitives.teal.700}",
-        "$type": "color",
-        "$description": "Purpose: A deep teal promotional surface for high-impact, campaign-style UI regions.\nUsage: Applied to promotional cards, marketing banners, and feature highlight sections requiring deeper brand emphasis than brand.\nGuidelines: Use sparingly to preserve its visual impact. Always pair with colour/onBackground/promo for legible foreground content."
-      },
-      "info": {
-        "$value": "{primitives.blue.50}",
-        "$type": "color"
-      },
-      "success": {
-        "$value": "{primitives.green.50}",
-        "$type": "color"
-      },
-      "error": {
-        "$value": "{primitives.red.50}",
-        "$type": "color"
-      },
-      "warning": {
-        "$value": "{primitives.amber.50}",
-        "$type": "color"
-      }
-    },
-    "text": {
-      "primary": {
-        "$value": "{primitives.neutral.900}",
-        "$type": "color",
-        "$description": "Purpose: The default colour for all primary body text and high-emphasis typographic content.\nUsage: Applied to headings, paragraph body copy, input field text, and any text requiring maximum legibility.\nGuidelines: Use as the default text colour throughout. Ensure it maintains 4.5:1 contrast against all background contexts it appears on. Do not use for decorative or subordinate text."
-      },
-      "secondary": {
-        "$value": "{primitives.neutral.700}",
-        "$type": "color",
-        "$description": "Purpose: A reduced-emphasis text colour for supporting content and secondary labels.\nUsage: Applied to subheadings, metadata, helper text, table secondary data, and any text that supports but does not replace primary content.\nGuidelines: Verify WCAG AA contrast against the surface it appears on. Not suitable for critical user-facing content where maximum legibility is required."
-      },
-      "tertiary": {
-        "$value": "{primitives.neutral.600}",
-        "$type": "color",
-        "$description": "Purpose: The lowest-emphasis text colour for minimally significant labels and placeholder content.\nUsage: Applied to input placeholder text, timestamp metadata, supplementary annotations, and visually subordinate labels.\nGuidelines: Do not use for interactive text or content that conveys essential meaning. Placeholder usage should rely on other design cues to remain intelligible."
-      },
-      "inverse": {
-        "$value": "{primitives.neutral.950}",
-        "$type": "color",
-        "$description": "Purpose: A light text colour for use on dark or branded surfaces where standard dark text would fail contrast.\nUsage: Applied to text on colour/background/inverse, dark overlay surfaces, and any dark-filled container requiring light foreground text.\nGuidelines: Only use on surfaces dark enough to maintain 4.5:1 contrast. Do not apply to standard light backgrounds."
-      },
-      "link": {
-        "hover": {
-          "$value": "{primitives.teal.600}",
+      "text": {
+        "primary": {
+          "$value": "#ede6d8",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "#d4c9b4",
+          "$type": "color"
+        },
+        "tertiary": {
+          "$value": "#b8a990",
+          "$type": "color"
+        },
+        "inverse": {
+          "$value": "#f5f0e8",
+          "$type": "color"
+        },
+        "link": {
+          "$value": "#c4a264",
           "$type": "color",
-          "$description": "Purpose: The hover-state colour for inline links; communicates interactivity on cursor entry.\nUsage: Applied exclusively as the link text colour on :hover and :focus states.\nGuidelines: Maintain sufficient contrast from colour/text/link (resting) to communicate a visible state change. Also verify contrast against the background surface."
-        },
-        "DEFAULT": {
-          "$value": "{primitives.teal.500}",
-          "$type": "color",
-          "$description": "Purpose: The standard colour for inline hyperlinks and interactive text elements.\nUsage: Applied to anchor text, inline navigational links, and any text that initiates navigation or opens contextual content.\nGuidelines: Ensure links are distinguishable from surrounding body text through underline or other non-colour cues, per WCAG 1.4.1. Verify 4.5:1 contrast on all background contexts."
-        }
-      }
-    },
-    "onBackground": {
-      "default": {
-        "$value": "{primitives.neutral.900}",
-        "$type": "color"
-      },
-      "subtle": {
-        "$value": "{primitives.neutral.700}",
-        "$type": "color"
-      },
-      "muted": {
-        "$value": "{primitives.neutral.600}",
-        "$type": "color"
-      },
-      "inverse": {
-        "$value": "{primitives.neutral.950}",
-        "$type": "color"
-      },
-      "brand": {
-        "$value": "{primitives.neutral.950}",
-        "$type": "color"
-      },
-      "promo": {
-        "$value": "{primitives.neutral.950}",
-        "$type": "color"
-      },
-      "info": {
-        "$value": "{primitives.blue.700}",
-        "$type": "color"
-      },
-      "success": {
-        "$value": "{primitives.green.700}",
-        "$type": "color"
-      },
-      "error": {
-        "$value": "{primitives.red.700}",
-        "$type": "color"
-      },
-      "warning": {
-        "$value": "{primitives.amber.800}",
-        "$type": "color"
-      }
-    },
-    "border": {
-      "subtle": {
-        "$value": "{primitives.neutral.500}",
-        "$type": "color"
-      },
-      "default": {
-        "$value": "{primitives.neutral.600}",
-        "$type": "color"
-      },
-      "strong": {
-        "$value": "{primitives.neutral.700}",
-        "$type": "color"
-      },
-      "interactive": {
-        "$value": "{primitives.teal.500}",
-        "$type": "color"
-      },
-      "info": {
-        "$value": "{primitives.blue.600}",
-        "$type": "color"
-      },
-      "success": {
-        "$value": "{primitives.green.600}",
-        "$type": "color"
-      },
-      "error": {
-        "$value": "{primitives.red.600}",
-        "$type": "color"
-      },
-      "warning": {
-        "$value": "{primitives.amber.700}",
-        "$type": "color"
-      }
-    },
-    "action": {
-      "primary": {
-        "hover": {
-          "$value": "{primitives.teal.600}",
-          "$type": "color"
-        },
-        "pressed": {
-          "$value": "{primitives.teal.700}",
-          "$type": "color"
-        },
-        "DEFAULT": {
-          "$value": "{primitives.teal.500}",
-          "$type": "color",
-          "$description": "Purpose: The brand-teal fill for primary interactive action controls in their resting state.\nUsage: Applied to primary button backgrounds and any control representing the most prominent call to action.\nGuidelines: Use for the single most important action in a given context. Do not apply to multiple sibling actions of equal weight — reserve primary emphasis for one action per area."
-        }
-      },
-      "secondary": {
-        "hover": {
-          "$value": "{primitives.neutral.300}",
-          "$type": "color"
-        },
-        "pressed": {
-          "$value": "{primitives.neutral.400}",
-          "$type": "color"
-        },
-        "DEFAULT": {
-          "$value": "{primitives.neutral.200}",
-          "$type": "color"
-        }
-      }
-    },
-    "state": {
-      "focus": {
-        "$value": "{primitives.teal.500}",
-        "$type": "color",
-        "$description": "Purpose: The brand-teal colour used to render focus ring indicators on all interactive elements.\nUsage: Applied to focus ring outlines (typically via outline or box-shadow) on buttons, inputs, links, and any focusable control.\nGuidelines: Must be applied to all keyboard-navigable interactive elements to satisfy WCAG 2.4.7. The focus indicator must be clearly visible and must not be suppressed in any production context."
-      },
-      "hover": {
-        "$value": "{primitives.teal.50}",
-        "$type": "color"
-      },
-      "selected": {
-        "$value": "{primitives.teal.25}",
-        "$type": "color"
-      },
-      "active": {
-        "$value": "{primitives.teal.50}",
-        "$type": "color"
-      },
-      "disabled": {
-        "text": {
-          "$value": "{primitives.neutral.400}",
-          "$type": "color"
-        },
-        "bg": {
-          "$value": "{primitives.neutral.100}",
-          "$type": "color"
-        }
-      }
-    },
-    "icon": {
-      "default": {
-        "$value": "{primitives.neutral.700}",
-        "$type": "color"
-      },
-      "subtle": {
-        "$value": "{primitives.neutral.500}",
-        "$type": "color"
-      },
-      "brand": {
-        "$value": "{primitives.teal.500}",
-        "$type": "color"
-      },
-      "inverse": {
-        "$value": "{primitives.neutral.950}",
-        "$type": "color"
-      },
-      "info": {
-        "$value": "{primitives.blue.600}",
-        "$type": "color"
-      },
-      "success": {
-        "$value": "{primitives.green.600}",
-        "$type": "color"
-      },
-      "error": {
-        "$value": "{primitives.red.600}",
-        "$type": "color"
-      },
-      "warning": {
-        "$value": "{primitives.amber.700}",
-        "$type": "color"
-      }
-    },
-    "dataviz": {
-      "sequential": {
-        "teal": {
-          "weakest": {
-            "$value": "{primitives.teal.100}",
-            "$type": "color"
-          },
-          "weak": {
-            "$value": "{primitives.teal.200}",
-            "$type": "color"
-          },
-          "mid": {
-            "$value": "{primitives.teal.300}",
-            "$type": "color"
-          },
-          "strong": {
-            "$value": "{primitives.teal.500}",
-            "$type": "color"
-          },
-          "strongest": {
-            "$value": "{primitives.teal.700}",
-            "$type": "color"
-          }
-        },
-        "neutral": {
-          "weakest": {
-            "$value": "{primitives.neutral.50}",
-            "$type": "color"
-          },
-          "weak": {
-            "$value": "{primitives.neutral.200}",
-            "$type": "color"
-          },
-          "mid": {
-            "$value": "{primitives.neutral.400}",
-            "$type": "color"
-          },
-          "strong": {
-            "$value": "{primitives.neutral.600}",
-            "$type": "color"
-          },
-          "strongest": {
-            "$value": "{primitives.neutral.800}",
+          "hover": {
+            "$value": "#d4bf94",
             "$type": "color"
           }
         }
-      }
-    },
-    "divider": {
-      "subtle": {
-        "$value": "{primitives.neutral.100}",
-        "$type": "color"
       },
-      "default": {
-        "$value": "{primitives.neutral.200}",
-        "$type": "color"
+      "border": {
+        "subtle": {
+          "$value": "#9a8b72",
+          "$type": "color"
+        },
+        "default": {
+          "$value": "#b8a990",
+          "$type": "color"
+        },
+        "strong": {
+          "$value": "#d4c9b4",
+          "$type": "color"
+        },
+        "interactive": {
+          "$value": "#c4a264",
+          "$type": "color"
+        },
+        "info": {
+          "$value": "#6aaff0",
+          "$type": "color"
+        },
+        "success": {
+          "$value": "#5fc3b5",
+          "$type": "color"
+        },
+        "error": {
+          "$value": "#ff8a8a",
+          "$type": "color"
+        },
+        "warning": {
+          "$value": "#ffd999",
+          "$type": "color"
+        }
       },
-      "strong": {
-        "$value": "{primitives.neutral.300}",
-        "$type": "color"
-      }
-    },
-    "ink": {
-      "onBrand": {
-        "$value": "{primitives.neutral.950}",
-        "$type": "color"
+      "action": {
+        "primary": {
+          "$value": "#c4a264",
+          "$type": "color",
+          "hover": {
+            "$value": "#d4bf94",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "#e8d9bc",
+            "$type": "color"
+          }
+        },
+        "secondary": {
+          "$value": "#3d3830",
+          "$type": "color",
+          "hover": {
+            "$value": "#5c5040",
+            "$type": "color"
+          },
+          "pressed": {
+            "$value": "#7a6c56",
+            "$type": "color"
+          }
+        }
       },
-      "onNeutral": {
-        "$value": "{primitives.neutral.900}",
-        "$type": "color"
+      "state": {
+        "focus": {
+          "$value": "#c4a264",
+          "$type": "color"
+        },
+        "hover": {
+          "$value": "#3a2b15",
+          "$type": "color"
+        },
+        "selected": {
+          "$value": "#20170b",
+          "$type": "color"
+        },
+        "active": {
+          "$value": "#3a2b15",
+          "$type": "color"
+        },
+        "disabled": {
+          "bg": {
+            "$value": "#2e2820",
+            "$type": "color"
+          },
+          "text": {
+            "$value": "#7a6c56",
+            "$type": "color"
+          }
+        }
+      },
+      "icon": {
+        "default": {
+          "$value": "#d4c9b4",
+          "$type": "color"
+        },
+        "subtle": {
+          "$value": "#9a8b72",
+          "$type": "color"
+        },
+        "brand": {
+          "$value": "#c4a264",
+          "$type": "color"
+        },
+        "inverse": {
+          "$value": "#f5f0e8",
+          "$type": "color"
+        },
+        "info": {
+          "$value": "#6aaff0",
+          "$type": "color"
+        },
+        "success": {
+          "$value": "#5fc3b5",
+          "$type": "color"
+        },
+        "error": {
+          "$value": "#ff8a8a",
+          "$type": "color"
+        },
+        "warning": {
+          "$value": "#ffd999",
+          "$type": "color"
+        }
+      },
+      "dataviz": {
+        "sequential": {
+          "teal": {
+            "weakest": {
+              "$value": "#543e1f",
+              "$type": "color"
+            },
+            "weak": {
+              "$value": "#6e5229",
+              "$type": "color"
+            },
+            "mid": {
+              "$value": "#886534",
+              "$type": "color"
+            },
+            "strong": {
+              "$value": "#c4a264",
+              "$type": "color"
+            },
+            "strongest": {
+              "$value": "#e8d9bc",
+              "$type": "color"
+            }
+          },
+          "neutral": {
+            "weakest": {
+              "$value": "#221c14",
+              "$type": "color"
+            },
+            "weak": {
+              "$value": "#3d3830",
+              "$type": "color"
+            },
+            "mid": {
+              "$value": "#7a6c56",
+              "$type": "color"
+            },
+            "strong": {
+              "$value": "#b8a990",
+              "$type": "color"
+            },
+            "strongest": {
+              "$value": "#e2d9c8",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "divider": {
+        "subtle": {
+          "$value": "#2e2820",
+          "$type": "color"
+        },
+        "default": {
+          "$value": "#3d3830",
+          "$type": "color"
+        },
+        "strong": {
+          "$value": "#5c5040",
+          "$type": "color"
+        }
+      },
+      "ink": {
+        "onBrand": {
+          "$value": "#f5f0e8",
+          "$type": "color"
+        },
+        "onNeutral": {
+          "$value": "#ede6d8",
+          "$type": "color"
+        }
       }
     }
   },
-  "input": {
-    "bg": {
-      "disabled": {
-        "$value": "{colour.state.disabled.bg}",
+  "components": {
+    "input": {
+      "bg": {
+        "$value": "#221c14",
+        "$type": "color",
+        "disabled": {
+          "$value": "#2e2820",
+          "$type": "color"
+        }
+      },
+      "text": {
+        "$value": "#ede6d8",
+        "$type": "color",
+        "error": {
+          "$value": "#ffaaaa",
+          "$type": "color"
+        },
+        "disabled": {
+          "$value": "#7a6c56",
+          "$type": "color"
+        }
+      },
+      "placeholder": {
+        "$value": "#b8a990",
         "$type": "color"
       },
-      "DEFAULT": {
-        "$value": "{colour.background.surface}",
+      "border": {
+        "$value": "#b8a990",
+        "$type": "color",
+        "focus": {
+          "$value": "#c4a264",
+          "$type": "color"
+        },
+        "disabled": {
+          "$value": "#9a8b72",
+          "$type": "color"
+        },
+        "error": {
+          "$value": "#ff8a8a",
+          "$type": "color"
+        },
+        "success": {
+          "$value": "#5fc3b5",
+          "$type": "color"
+        }
+      }
+    },
+    "button": {
+      "primary": {
+        "bg": {
+          "$value": "#c4a264",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "#f5f0e8",
+          "$type": "color"
+        },
+        "border": {
+          "$value": "#000000",
+          "$type": "color"
+        },
+        "hover": {
+          "bg": {
+            "$value": "#d4bf94",
+            "$type": "color"
+          }
+        },
+        "pressed": {
+          "bg": {
+            "$value": "#e8d9bc",
+            "$type": "color"
+          }
+        },
+        "disabled": {
+          "bg": {
+            "$value": "#2e2820",
+            "$type": "color"
+          },
+          "text": {
+            "$value": "#7a6c56",
+            "$type": "color"
+          },
+          "border": {
+            "$value": "#9a8b72",
+            "$type": "color"
+          }
+        },
+        "focus": {
+          "$value": "#c4a264",
+          "$type": "color",
+          "text": {
+            "$value": "#1f343a",
+            "$type": "color"
+          },
+          "bg": {
+            "$value": "#c4a264",
+            "$type": "color"
+          }
+        }
+      },
+      "secondary": {
+        "bg": {
+          "$value": "#3d3830",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "#ede6d8",
+          "$type": "color"
+        },
+        "border": {
+          "$value": "#b8a990",
+          "$type": "color"
+        },
+        "hover": {
+          "bg": {
+            "$value": "#5c5040",
+            "$type": "color"
+          },
+          "border": {
+            "$value": "#b8a990",
+            "$type": "color"
+          }
+        },
+        "pressed": {
+          "bg": {
+            "$value": "#7a6c56",
+            "$type": "color"
+          },
+          "border": {
+            "$value": "#b8a990",
+            "$type": "color"
+          }
+        },
+        "disabled": {
+          "bg": {
+            "$value": "#2e2820",
+            "$type": "color"
+          },
+          "text": {
+            "$value": "#7a6c56",
+            "$type": "color"
+          },
+          "border": {
+            "$value": "#9a8b72",
+            "$type": "color"
+          }
+        },
+        "focus": {
+          "$value": "#c4a264",
+          "$type": "color",
+          "text": {
+            "$value": "#1f343a",
+            "$type": "color"
+          },
+          "bg": {
+            "$value": "#3d3830",
+            "$type": "color"
+          }
+        }
+      }
+    },
+    "nav": {
+      "bg": {
+        "$value": "#1a1714",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "#9a8b72",
+        "$type": "color"
+      },
+      "text": {
+        "$value": "#d4c9b4",
+        "$type": "color",
+        "active": {
+          "$value": "#ede6d8",
+          "$type": "color"
+        }
+      },
+      "indicator": {
+        "$value": "#c4a264",
+        "$type": "color"
+      },
+      "item": {
+        "hover": {
+          "bg": {
+            "$value": "#3a2b15",
+            "$type": "color"
+          }
+        },
+        "active": {
+          "bg": {
+            "$value": "#20170b",
+            "$type": "color"
+          }
+        }
+      },
+      "mega": {
+        "bg": {
+          "$value": "#221c14",
+          "$type": "color"
+        },
+        "border": {
+          "$value": "#9a8b72",
+          "$type": "color"
+        },
+        "section": {
+          "title": {
+            "$value": "#b8a990",
+            "$type": "color"
+          }
+        }
+      }
+    },
+    "card": {
+      "bg": {
+        "$value": "#1a1714",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "#9a8b72",
+        "$type": "color"
+      },
+      "title": {
+        "$value": "#ede6d8",
+        "$type": "color"
+      },
+      "meta": {
+        "$value": "#d4c9b4",
         "$type": "color"
       }
     },
-    "text": {
-      "disabled": {
-        "$value": "{colour.state.disabled.text}",
-        "$type": "color"
+    "badge": {
+      "success": {
+        "bg": {
+          "$value": "#0f2e2a",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "#84d5ca",
+          "$type": "color"
+        },
+        "icon": {
+          "$value": "#5fc3b5",
+          "$type": "color"
+        }
+      },
+      "promo": {
+        "bg": {
+          "$value": "#e8d9bc",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "#f5f0e8",
+          "$type": "color"
+        }
+      },
+      "warning": {
+        "bg": {
+          "$value": "#2a1f0f",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "#ffe8bf",
+          "$type": "color"
+        },
+        "icon": {
+          "$value": "#ffd999",
+          "$type": "color"
+        }
       },
       "error": {
-        "$value": "{colour.onBackground.error}",
-        "$type": "color"
+        "bg": {
+          "$value": "#2a1212",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "#ffaaaa",
+          "$type": "color"
+        },
+        "icon": {
+          "$value": "#ff8a8a",
+          "$type": "color"
+        }
       },
-      "DEFAULT": {
-        "$value": "{colour.text.primary}",
-        "$type": "color"
+      "info": {
+        "bg": {
+          "$value": "#0a1628",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "#90c4f5",
+          "$type": "color"
+        },
+        "icon": {
+          "$value": "#6aaff0",
+          "$type": "color"
+        }
       }
     },
-    "placeholder": {
-      "$value": "{colour.text.tertiary}",
-      "$type": "color"
-    },
-    "border": {
-      "focus": {
-        "$value": "{colour.border.interactive}",
-        "$type": "color"
-      },
-      "error": {
-        "$value": "{colour.border.error}",
-        "$type": "color"
+    "alert": {
+      "warning": {
+        "bg": {
+          "$value": "#2a1f0f",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "#ffe8bf",
+          "$type": "color"
+        },
+        "border": {
+          "$value": "#ffd999",
+          "$type": "color"
+        },
+        "icon": {
+          "$value": "#ffd999",
+          "$type": "color"
+        }
       },
       "success": {
-        "$value": "{colour.border.success}",
-        "$type": "color"
-      },
-      "disabled": {
-        "$value": "{colour.border.subtle}",
-        "$type": "color"
-      },
-      "DEFAULT": {
-        "$value": "{colour.border.default}",
-        "$type": "color"
-      }
-    }
-  },
-  "button": {
-    "primary": {
-      "bg": {
-        "$value": "{colour.action.primary.DEFAULT}",
-        "$type": "color"
-      },
-      "text": {
-        "$value": "{colour.ink.onBrand}",
-        "$type": "color"
-      },
-      "border": {
-        "$value": "{primitives.transparent}",
-        "$type": "color"
-      },
-      "hover": {
         "bg": {
-          "$value": "{colour.action.primary.hover}",
-          "$type": "color",
-          "$description": "Purpose: The background fill of the primary button on cursor hover.\nUsage: Applied to the primary button background on :hover state.\nGuidelines: References colour/action/primary/hover. Ensure a perceptible but not jarring visual change from the resting state."
-        }
-      },
-      "pressed": {
-        "bg": {
-          "$value": "{colour.action.primary.pressed}",
-          "$type": "color",
-          "$description": "Purpose: The background fill of the primary button in an actively pressed state.\nUsage: Applied to the primary button background on :active / pointer-down.\nGuidelines: References colour/action/primary/pressed. Must be visually distinct from both the resting and hover states."
-        }
-      },
-      "disabled": {
-        "bg": {
-          "$value": "{colour.state.disabled.bg}",
+          "$value": "#0f2e2a",
           "$type": "color"
         },
         "text": {
-          "$value": "{colour.state.disabled.text}",
+          "$value": "#84d5ca",
           "$type": "color"
         },
         "border": {
-          "$value": "{colour.border.subtle}",
-          "$type": "color",
-          "$description": "Primary button disabled border — matches colour/border/subtle. Apply the same logic as button/secondary/disabled/border."
+          "$value": "#5fc3b5",
+          "$type": "color"
+        },
+        "icon": {
+          "$value": "#5fc3b5",
+          "$type": "color"
         }
       },
-      "focus": {
-        "text": {
-          "$value": "#1f343a",
-          "$type": "color",
-          "$description": "Purpose: The label colour for the primary button in its focus state.\nUsage: Applied to the primary button label text on :focus-visible.\nGuidelines: White (#ffffff) in light mode — 5.43:1 contrast against teal/500, passes WCAG AA. Switches to neutral/900 (#1f343a) in dark mode — 6.31:1 contrast against teal/300, passes WCAG AA."
-        },
+      "error": {
         "bg": {
-          "$value": "{button.primary.bg}",
-          "$type": "color",
-          "$description": "Purpose: The background fill of the primary button in its focus state.\nUsage: Applied to the primary button background on :focus-visible.\nGuidelines: Aliases button/primary/bg — the background does not change on focus; the focus ring (button/primary/focus) communicates the focus state. Declared explicitly so the component token set is complete and the intent is unambiguous."
-        },
-        "DEFAULT": {
-          "$value": "{colour.state.focus}",
-          "$type": "color",
-          "$description": "Purpose: The focus ring colour for the primary button.\nUsage: Applied as an outline or box-shadow ring on :focus-visible to communicate keyboard focus on primary buttons.\nGuidelines: References colour/state/focus. Must be applied to all keyboard-navigable primary buttons to satisfy WCAG 2.4.7. The focus indicator must be clearly visible and must not be suppressed in any production context."
-        }
-      }
-    },
-    "secondary": {
-      "bg": {
-        "$value": "{colour.action.secondary.DEFAULT}",
-        "$type": "color"
-      },
-      "text": {
-        "$value": "{colour.ink.onNeutral}",
-        "$type": "color"
-      },
-      "border": {
-        "$value": "{colour.border.default}",
-        "$type": "color"
-      },
-      "hover": {
-        "bg": {
-          "$value": "{colour.action.secondary.hover}",
-          "$type": "color",
-          "$description": "Purpose: The background fill of the secondary button on cursor hover.\nUsage: Applied to the secondary button background on :hover.\nGuidelines: References colour/action/secondary/hover. Ensure the hover state is perceptibly different from the resting state."
-        },
-        "border": {
-          "$value": "{button.secondary.border}",
-          "$type": "color",
-          "$description": "Purpose: The border colour of the secondary button on cursor hover.\nUsage: Applied to the secondary button border on :hover.\nGuidelines: Currently aliases button/secondary/border. Declared explicitly because secondary has a visible border — this token allows the hover border to be adjusted independently without creating a new token later."
-        }
-      },
-      "pressed": {
-        "bg": {
-          "$value": "{colour.action.secondary.pressed}",
-          "$type": "color",
-          "$description": "Purpose: The background fill of the secondary button in a pressed state.\nUsage: Applied to the secondary button background on :active.\nGuidelines: References colour/action/secondary/pressed. Must be distinct from both the resting and hover states."
-        },
-        "border": {
-          "$value": "{button.secondary.border}",
-          "$type": "color",
-          "$description": "Purpose: The border colour of the secondary button in a pressed state.\nUsage: Applied to the secondary button border on :active.\nGuidelines: Currently aliases button/secondary/border. Declared explicitly because secondary has a visible border — this token allows the pressed border to be adjusted independently without creating a new token later."
-        }
-      },
-      "disabled": {
-        "bg": {
-          "$value": "{colour.state.disabled.bg}",
+          "$value": "#2a1212",
           "$type": "color"
         },
         "text": {
-          "$value": "{colour.state.disabled.text}",
+          "$value": "#ffaaaa",
           "$type": "color"
         },
         "border": {
-          "$value": "{colour.border.subtle}",
+          "$value": "#ff8a8a",
+          "$type": "color"
+        },
+        "icon": {
+          "$value": "#ff8a8a",
           "$type": "color"
         }
       },
-      "focus": {
+      "info": {
+        "bg": {
+          "$value": "#0a1628",
+          "$type": "color"
+        },
         "text": {
-          "$value": "#1f343a",
-          "$type": "color",
-          "$description": "Purpose: The label colour for the secondary button in its focus state.\nUsage: Applied to the secondary button label text on :focus-visible.\nGuidelines: White (#ffffff) in light mode — 5.43:1 contrast against teal/500, passes WCAG AA. Switches to neutral/900 (#1f343a) in dark mode — 6.31:1 contrast against teal/300, passes WCAG AA."
+          "$value": "#90c4f5",
+          "$type": "color"
         },
-        "bg": {
-          "$value": "{button.secondary.bg}",
-          "$type": "color",
-          "$description": "Purpose: The background fill of the secondary button in its focus state.\nUsage: Applied to the secondary button background on :focus-visible.\nGuidelines: Aliases button/secondary/bg — the background does not change on focus; the focus ring (button/secondary/focus) communicates the focus state. Declared explicitly so the component token set is complete and the intent is unambiguous."
+        "border": {
+          "$value": "#6aaff0",
+          "$type": "color"
         },
-        "DEFAULT": {
-          "$value": "{colour.state.focus}",
-          "$type": "color",
-          "$description": "Purpose: The focus ring colour for the secondary button.\nUsage: Applied as an outline or box-shadow ring on :focus-visible to communicate keyboard focus on secondary buttons.\nGuidelines: References colour/state/focus. Must be applied to all keyboard-navigable secondary buttons to satisfy WCAG 2.4.7. The focus indicator must be clearly visible and must not be suppressed in any production context."
-        }
-      }
-    }
-  },
-  "nav": {
-    "bg": {
-      "$value": "{colour.background.default}",
-      "$type": "color"
-    },
-    "border": {
-      "$value": "{colour.border.subtle}",
-      "$type": "color"
-    },
-    "text": {
-      "active": {
-        "$value": "{colour.text.primary}",
-        "$type": "color"
-      },
-      "DEFAULT": {
-        "$value": "{colour.text.secondary}",
-        "$type": "color"
-      }
-    },
-    "indicator": {
-      "$value": "{colour.action.primary.DEFAULT}",
-      "$type": "color"
-    },
-    "item": {
-      "active": {
-        "bg": {
-          "$value": "{colour.state.selected}",
-          "$type": "color"
-        }
-      },
-      "hover": {
-        "bg": {
-          "$value": "{colour.state.hover}",
-          "$type": "color"
-        }
-      }
-    },
-    "mega": {
-      "bg": {
-        "$value": "{colour.background.surface}",
-        "$type": "color"
-      },
-      "border": {
-        "$value": "{colour.border.subtle}",
-        "$type": "color"
-      },
-      "section": {
-        "title": {
-          "$value": "{colour.text.tertiary}",
+        "icon": {
+          "$value": "#6aaff0",
           "$type": "color"
         }
       }
     }
   },
-  "card": {
-    "bg": {
-      "$value": "{colour.background.default}",
-      "$type": "color"
+  "fonts": {
+    "family": {
+      "base": {
+        "$value": "Jost",
+        "$type": "fontFamily"
+      },
+      "annotation": {
+        "$value": "Lora",
+        "$type": "fontFamily"
+      },
+      "display": {
+        "$value": "Cormorant Garamond",
+        "$type": "fontFamily"
+      }
     },
-    "border": {
-      "$value": "{colour.border.subtle}",
-      "$type": "color"
+    "line-height": {
+      "display": {
+        "large": {
+          "$value": 80,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 65,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 53,
+          "$type": "number"
+        }
+      },
+      "headline": {
+        "large": {
+          "$value": 45,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 39,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 34,
+          "$type": "number"
+        }
+      },
+      "title": {
+        "large": {
+          "$value": 31,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 27,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 25,
+          "$type": "number"
+        }
+      },
+      "body": {
+        "large": {
+          "$value": 31,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 27,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 23,
+          "$type": "number"
+        }
+      },
+      "label": {
+        "large": {
+          "$value": 17,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 15,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 14,
+          "$type": "number"
+        }
+      }
     },
-    "title": {
-      "$value": "{colour.text.primary}",
-      "$type": "color"
+    "letter-spacing": {
+      "display": {
+        "large": {
+          "$value": -1.5,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": -0.9,
+          "$type": "number"
+        },
+        "small": {
+          "$value": -0.5,
+          "$type": "number"
+        }
+      },
+      "headline": {
+        "large": {
+          "$value": -0.4,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 0,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 0,
+          "$type": "number"
+        }
+      },
+      "title": {
+        "large": {
+          "$value": 0,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 0,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 0,
+          "$type": "number"
+        }
+      },
+      "body": {
+        "large": {
+          "$value": 0,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 0,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 0,
+          "$type": "number"
+        }
+      },
+      "label": {
+        "large": {
+          "$value": 1.7,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 2,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 2,
+          "$type": "number"
+        }
+      }
     },
-    "meta": {
-      "$value": "{colour.text.secondary}",
-      "$type": "color"
+    "size": {
+      "display": {
+        "large": {
+          "$value": 76,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 60,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 48,
+          "$type": "number"
+        }
+      },
+      "headline": {
+        "large": {
+          "$value": 40,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 34,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 28,
+          "$type": "number"
+        }
+      },
+      "title": {
+        "large": {
+          "$value": 24,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 20,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 18,
+          "$type": "number"
+        }
+      },
+      "body": {
+        "large": {
+          "$value": 17,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 15,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 13,
+          "$type": "number"
+        }
+      },
+      "label": {
+        "large": {
+          "$value": 12,
+          "$type": "number"
+        },
+        "medium": {
+          "$value": 11,
+          "$type": "number"
+        },
+        "small": {
+          "$value": 10,
+          "$type": "number"
+        }
+      }
+    },
+    "weight": {
+      "regular": {
+        "$value": 400,
+        "$type": "number"
+      },
+      "medium": {
+        "$value": 500,
+        "$type": "number"
+      },
+      "semi-bold": {
+        "$value": 600,
+        "$type": "number"
+      },
+      "bold": {
+        "$value": 700,
+        "$type": "number"
+      }
     }
   },
-  "badge": {
-    "success": {
-      "bg": {
-        "$value": "{colour.background.success}",
-        "$type": "color"
+  "spacing": {
+    "scale": {
+      "4": {
+        "$value": 4,
+        "$type": "number"
       },
-      "text": {
-        "$value": "{colour.onBackground.success}",
-        "$type": "color"
+      "8": {
+        "$value": 8,
+        "$type": "number"
       },
-      "icon": {
-        "$value": "{colour.icon.success}",
-        "$type": "color"
+      "12": {
+        "$value": 12,
+        "$type": "number"
+      },
+      "16": {
+        "$value": 16,
+        "$type": "number"
+      },
+      "20": {
+        "$value": 20,
+        "$type": "number"
+      },
+      "24": {
+        "$value": 24,
+        "$type": "number"
+      },
+      "32": {
+        "$value": 32,
+        "$type": "number"
+      },
+      "40": {
+        "$value": 40,
+        "$type": "number"
+      },
+      "48": {
+        "$value": 48,
+        "$type": "number"
+      },
+      "56": {
+        "$value": 56,
+        "$type": "number"
+      },
+      "64": {
+        "$value": 64,
+        "$type": "number"
+      },
+      "80": {
+        "$value": 80,
+        "$type": "number"
+      },
+      "104": {
+        "$value": 104,
+        "$type": "number"
       }
     },
-    "error": {
-      "bg": {
-        "$value": "{colour.background.error}",
-        "$type": "color"
-      },
-      "text": {
-        "$value": "{colour.onBackground.error}",
-        "$type": "color"
-      },
-      "icon": {
-        "$value": "{colour.icon.error}",
-        "$type": "color"
-      }
+    "xs": {
+      "$value": 4,
+      "$type": "number"
     },
-    "warning": {
-      "bg": {
-        "$value": "{colour.background.warning}",
-        "$type": "color"
-      },
-      "text": {
-        "$value": "{colour.onBackground.warning}",
-        "$type": "color"
-      },
-      "icon": {
-        "$value": "{colour.icon.warning}",
-        "$type": "color"
-      }
+    "s": {
+      "$value": 8,
+      "$type": "number"
     },
-    "info": {
-      "bg": {
-        "$value": "{colour.background.info}",
-        "$type": "color"
-      },
-      "text": {
-        "$value": "{colour.onBackground.info}",
-        "$type": "color"
-      },
-      "icon": {
-        "$value": "{colour.icon.info}",
-        "$type": "color"
-      }
+    "m": {
+      "$value": 16,
+      "$type": "number"
     },
-    "promo": {
-      "bg": {
-        "$value": "{colour.background.promo}",
-        "$type": "color"
-      },
-      "text": {
-        "$value": "{colour.onBackground.promo}",
-        "$type": "color"
-      }
+    "l": {
+      "$value": 24,
+      "$type": "number"
+    },
+    "xl": {
+      "$value": 40,
+      "$type": "number"
+    },
+    "2xl": {
+      "$value": 56,
+      "$type": "number"
+    },
+    "page": {
+      "$value": 104,
+      "$type": "number"
     }
   },
-  "alert": {
-    "error": {
-      "bg": {
-        "$value": "{colour.background.error}",
-        "$type": "color"
+  "radius": {
+    "scale": {
+      "0": {
+        "$value": 0,
+        "$type": "number"
       },
-      "text": {
-        "$value": "{colour.onBackground.error}",
-        "$type": "color"
+      "4": {
+        "$value": 4,
+        "$type": "number"
       },
-      "border": {
-        "$value": "{colour.border.error}",
-        "$type": "color"
+      "8": {
+        "$value": 8,
+        "$type": "number"
       },
-      "icon": {
-        "$value": "{colour.icon.error}",
-        "$type": "color"
+      "12": {
+        "$value": 12,
+        "$type": "number"
+      },
+      "16": {
+        "$value": 16,
+        "$type": "number"
+      },
+      "24": {
+        "$value": 24,
+        "$type": "number"
+      },
+      "full": {
+        "$value": 9999,
+        "$type": "number"
       }
     },
-    "success": {
-      "bg": {
-        "$value": "{colour.background.success}",
-        "$type": "color"
-      },
-      "text": {
-        "$value": "{colour.onBackground.success}",
-        "$type": "color"
-      },
-      "border": {
-        "$value": "{colour.border.success}",
-        "$type": "color"
-      },
-      "icon": {
-        "$value": "{colour.icon.success}",
-        "$type": "color"
-      }
+    "none": {
+      "$value": 0,
+      "$type": "number"
     },
-    "warning": {
-      "bg": {
-        "$value": "{colour.background.warning}",
-        "$type": "color"
-      },
-      "text": {
-        "$value": "{colour.onBackground.warning}",
-        "$type": "color"
-      },
-      "border": {
-        "$value": "{colour.border.warning}",
-        "$type": "color"
-      },
-      "icon": {
-        "$value": "{colour.icon.warning}",
-        "$type": "color"
-      }
+    "xs": {
+      "$value": 4,
+      "$type": "number"
     },
-    "info": {
-      "bg": {
-        "$value": "{colour.background.info}",
-        "$type": "color"
-      },
-      "text": {
-        "$value": "{colour.onBackground.info}",
-        "$type": "color"
-      },
-      "border": {
-        "$value": "{colour.border.info}",
-        "$type": "color"
-      },
-      "icon": {
-        "$value": "{colour.icon.info}",
-        "$type": "color"
-      }
+    "s": {
+      "$value": 8,
+      "$type": "number"
+    },
+    "m": {
+      "$value": 12,
+      "$type": "number"
+    },
+    "l": {
+      "$value": 16,
+      "$type": "number"
+    },
+    "xl": {
+      "$value": 24,
+      "$type": "number"
+    },
+    "full": {
+      "$value": 9999,
+      "$type": "number"
     }
   }
 }

@@ -23,7 +23,6 @@ const TRACKED_FILES = [
   'tokens/color.json',
   'tokens/size.json',
   'tokens/typography.json',
-  'tokens/tokens.json',
   'tokens/tokens.light.json',
   'tokens/tokens.dark.json',
 ];

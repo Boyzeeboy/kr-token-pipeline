@@ -51,7 +51,6 @@ function tokenFile(token) {
     color:         'color.json',
     size:          'size.json',
     typography:    'typography.json',
-    tokens:        'tokens.json',
     'tokens.light':'tokens.light.json',
     'tokens.dark': 'tokens.dark.json',
   };
