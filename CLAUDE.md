@@ -34,16 +34,13 @@ contrast requirement.
   cost real time on the 2026-06-22 sync — reach for `use_figma` first.
 - The file is **Kirsten Rossiter Token Pipeline**, key `M4EeBpB5Ez5cgTkwJnk4LK`.
 - **Only `tokens/tokens.{light,dark}.json` are compiled into `dist/`.**
-  `color.json` / `typography.json` / `size.json` / `guidelines.json` feed
-  Storybook and the changelog snapshot, not the CSS/JS build.
-- **Build gotcha (resolved 2026-07-04, don't reintroduce):** Style Dictionary
-  drops any token nested under a parent that has its own `$value`. Figma allows
-  a variable to double as a group (`input/border` + `input/border/focus`); DTCG
-  does not. All such conflicts were renamed to hyphenated siblings — the
-  convention is `parent-child` (e.g. `input/border-focus`,
-  `colour/action/primary-hover`, `colour/text/link-hover`) — in both Figma and
-  the token JSON. When adding state variables in Figma, name them this way from
-  the start; never nest a variable "under" another variable's name.
+  `color.json` / `typography.json` / `size.json` feed Storybook and the changelog
+  snapshot, not the CSS/JS build. `guidelines.json` is a reference file (read by
+  people and agents) — nothing consumes it programmatically.
+- **Build gotcha:** Style Dictionary drops any token nested under a parent that
+  has its own `$value` (e.g. `input.border` has a value *and* `focus`/`error`
+  children → only `input-border` is emitted). Surfacing those leaves is a build
+  change, not a value sync.
 
 ## Commands
 

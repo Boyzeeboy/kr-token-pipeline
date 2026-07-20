@@ -1,5 +1,5 @@
 /**
- * Style Dictionary v4 configuration — IDEM Design System
+ * Style Dictionary v4 configuration — token pipeline (client-agnostic)
  *
  * Builds two modes (light / dark) × three formats:
  *   1. CSS custom properties  →  dist/{mode}/variables.css
@@ -55,7 +55,7 @@ StyleDictionary.registerFormat({
 // Where a token needs a default value AND sub-states (e.g. `input.border` plus
 // `input.border.focus`), we model the default as a `DEFAULT` child. This name
 // transform strips that exact segment so `input.border.DEFAULT` still emits as
-// `idem-input-border` (unchanged), while `input.border.focus` emits alongside it.
+// `<prefix>-input-border` (unchanged), while `input.border.focus` emits alongside it.
 // Only the exact uppercase `DEFAULT` is stripped, so real `default` token names
 // (e.g. `colour.background.default`) are untouched.
 
@@ -80,12 +80,12 @@ StyleDictionary.registerTransform({
 // (DEFAULT-aware, see above).
 
 StyleDictionary.registerTransformGroup({
-  name: 'idem/css',
+  name: 'tokens/css',
   transforms: ['attribute/cti', 'name/kebab-default', 'color/css'],
 });
 
 StyleDictionary.registerTransformGroup({
-  name: 'idem/json',
+  name: 'tokens/json',
   transforms: ['attribute/cti', 'name/kebab-default', 'color/css'],
 });
 
@@ -101,7 +101,7 @@ async function buildMode(mode) {
 
       // 1. CSS custom properties
       css: {
-        transformGroup: 'idem/css',
+        transformGroup: 'tokens/css',
         prefix: PREFIX,
         buildPath: `dist/${mode}/`,
         files: [
@@ -118,7 +118,7 @@ async function buildMode(mode) {
 
       // 2. JavaScript ES6 named exports
       js: {
-        transformGroup: 'idem/json',
+        transformGroup: 'tokens/json',
         prefix: PREFIX,
         buildPath: `dist/${mode}/`,
         files: [
@@ -129,9 +129,9 @@ async function buildMode(mode) {
         ],
       },
 
-      // 3. Flat JSON  { "idem-colour-background-default": "#ffffff", ... }
+      // 3. Flat JSON  { "<prefix>-colour-background-default": "#ffffff", ... }
       json: {
-        transformGroup: 'idem/json',
+        transformGroup: 'tokens/json',
         prefix: PREFIX,
         buildPath: `dist/${mode}/`,
         files: [

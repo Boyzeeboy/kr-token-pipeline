@@ -1,6 +1,6 @@
-# IDEM Design Token — Work Process
+# Token Pipeline — Work Process
 
-This is the working loop for the IDEM token pipeline: how a change moves from
+This is the working loop for the token pipeline: how a change moves from
 Figma through the build to the outputs that UIs and AI agents consume. The system
 is governed and one-directional — **Figma → `tokens/*.json` → `dist/`** — so the
 golden rule is to make every change and every fix at its correct source layer, so
@@ -19,7 +19,8 @@ For the design rule itself, see `design.md` (the lightweight router) and
 
 ## Step 1 — Edit tokens in Figma
 
-All token changes start in Figma (IDEM Revised, file `3e2J8b6paAwdAlTyOs9NrK`),
+All token changes start in Figma (the file configured in `pipeline.config.mjs` —
+see `figmaFileName` / `figmaFileKey`, also surfaced in `CLAUDE.md` / `AGENTS.md`),
 never in code. Change a color, add a type size, adjust spacing, or rewrite a
 token's usage description there. Two things matter:
 
@@ -55,9 +56,12 @@ The Figma values land in the DTCG source files. Note which file does what:
 - **`tokens/tokens.{light,dark}.json` are the only files Style Dictionary
   compiles into `dist/`.** These are what the build, the CSS/JS outputs, and
   consuming UIs actually use. Edit these for any value that must reach `dist/`.
-- `tokens/color.json`, `tokens/typography.json`, `tokens/size.json`, and
-  `tokens/guidelines.json` feed **Storybook** and the **changelog snapshot** —
-  they are not compiled into the CSS/JS build.
+- `tokens/color.json`, `tokens/typography.json`, and `tokens/size.json` feed
+  **Storybook** (the stories import them) and the **changelog snapshot**
+  (`snapshot-tokens.mjs` tracks them) — they are not compiled into the CSS/JS build.
+- `tokens/guidelines.json` is a **reference file** read by people and agents (see
+  `design.md`). Nothing consumes it programmatically — not the build, not
+  Storybook, not the snapshot — so keep it in step with the tokens by hand.
 
 Before building, review the diff so you can see exactly what changed:
 
@@ -73,8 +77,11 @@ One command does two things in sequence (see `package.json`):
 
 1. `node sd.config.mjs` — Style Dictionary compiles the DTCG tokens into
    `dist/light/` and `dist/dark/`:
-   - `variables.css` — the `--idem-…` custom properties, with guideline prose
-     baked in as comments.
+   - `variables.css` — the `--<prefix>-…` custom properties (prefix from
+     `pipeline.config.mjs`). Note: token guideline prose is *not* emitted into
+     the CSS — the compiled `tokens.{light,dark}.json` carry no `$description`,
+     and `guidelines.json` is not wired into the build. Guidance lives in
+     `guidelines.json` / Storybook, consulted separately.
    - `tokens.js` — ES6 named exports.
    - `tokens.flat.json` — flat `name: value` map.
 2. `node scripts/snapshot-tokens.mjs` — diffs the new build against the previous

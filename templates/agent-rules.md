@@ -34,8 +34,9 @@ contrast requirement.
   cost real time on the 2026-06-22 sync — reach for `use_figma` first.
 - The file is **{{figmaFileName}}**, key `{{figmaFileKey}}`.
 - **Only `tokens/tokens.{light,dark}.json` are compiled into `dist/`.**
-  `color.json` / `typography.json` / `size.json` / `guidelines.json` feed
-  Storybook and the changelog snapshot, not the CSS/JS build.
+  `color.json` / `typography.json` / `size.json` feed Storybook and the changelog
+  snapshot, not the CSS/JS build. `guidelines.json` is a reference file (read by
+  people and agents) — nothing consumes it programmatically.
 - **Build gotcha:** Style Dictionary drops any token nested under a parent that
   has its own `$value` (e.g. `input.border` has a value *and* `focus`/`error`
   children → only `input-border` is emitted). Surfacing those leaves is a build
