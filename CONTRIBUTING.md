@@ -94,6 +94,11 @@ change produced them.
 
 ## Releasing tokens (how consumers get them)
 
+> This section starts *after* the token change exists. For the step before it —
+> changing a value in Figma and syncing it down into `tokens/*.json` — see
+> `PROCESS.md`. Together they are the full loop: `PROCESS.md` gets a change into
+> the build; this file gets it onto `main` and out to consumers.
+
 Consuming sites do **not** read this repo off the filesystem. They install it as a
 pinned dependency straight from a git tag, e.g. in the site's `package.json`:
 
@@ -125,7 +130,10 @@ consuming site stop resolving?* If yes, it's major.
 
 1. Land the token change through the normal PR flow above (so `build + verify`
    passes on it).
-2. In a follow-up PR, bump `version` in `package.json` per the policy.
+2. Bump `version` in `package.json` per the policy — **same pull request or a
+   follow-up, your choice**. Same PR is fewer steps; a separate one keeps the
+   token diff clean and easy to read. Either is fine, as long as the version on
+   `main` matches the tag you're about to cut.
 3. Once merged, tag the merge commit on `main` and push the tag:
 
 ```bash
@@ -137,6 +145,26 @@ git push origin v0.2.0
 4. In the consuming site, bump the pinned tag in `package.json`, then
    `npm install && npm run sync-tokens`, and commit the updated
    `vendor/tokens.css`.
+
+### Rolling back
+
+The main payoff of pinning: every previous release is a named thing you can
+return to. If a release looks wrong in production, you do **not** revert tokens,
+rebuild, or re-tag. Roll the *consumer* back instead — in the site repo:
+
+```bash
+# 1. edit package.json: change the pinned tag back, e.g. #v0.2.1 -> #v0.2.0
+npm install
+npm run sync-tokens        # prints the version it synced — check it says the old one
+git add package.json package-lock.json vendor/tokens.css
+git commit -m "revert(tokens): pin back to v0.2.0"
+git push
+```
+
+`vendor/tokens.css` returns to exactly the bytes that shipped under the old tag,
+and the deploy follows. The pipeline repo is untouched — the bad release still
+exists as a tag, which is what lets you diff the two and work out what went
+wrong before rolling forward again with a fix.
 
 ### Do not add a `prepare` script
 
