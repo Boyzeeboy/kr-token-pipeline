@@ -92,6 +92,59 @@ git restore dist/report.html tokens/changelog.json tokens/snapshot.json
 Only commit `tokens/changelog.json` / `snapshot.json` when a genuine token
 change produced them.
 
+## Releasing tokens (how consumers get them)
+
+Consuming sites do **not** read this repo off the filesystem. They install it as a
+pinned dependency straight from a git tag, e.g. in the site's `package.json`:
+
+```json
+"devDependencies": {
+  "kirsten-rossiter-tokens": "github:Boyzeeboy/kr-token-pipeline#v0.2.0"
+}
+```
+
+That pin is the contract: a site is on an exact, named version of the tokens and
+only moves when you bump it. No sibling-folder paths, no "whatever happened to be
+on disk".
+
+### Versioning policy
+
+`dist/` is committed, so a consumer installing from a tag gets built outputs with
+no build step on their side. Version the *tokens*, not the machinery:
+
+- **MAJOR** — a token is removed or renamed, or its meaning changes. Consumers
+  referencing it will break.
+- **MINOR** — new tokens added, or a new mode. Existing references keep working.
+- **PATCH** — a token's *value* changes (a colour is retuned), or a build/doc fix.
+  Visually different, but no reference breaks.
+
+When in doubt between minor and major, ask: *would an existing `var(--kr-…)` in a
+consuming site stop resolving?* If yes, it's major.
+
+### Cutting a release
+
+1. Land the token change through the normal PR flow above (so `build + verify`
+   passes on it).
+2. In a follow-up PR, bump `version` in `package.json` per the policy.
+3. Once merged, tag the merge commit on `main` and push the tag:
+
+```bash
+git checkout main && git pull
+git tag v0.2.0          # match the version in package.json
+git push origin v0.2.0
+```
+
+4. In the consuming site, bump the pinned tag in `package.json`, then
+   `npm install && npm run sync-tokens`, and commit the updated
+   `vendor/tokens.css`.
+
+### Do not add a `prepare` script
+
+npm runs `prepare` when installing from a git URL. Because `dist/` is committed,
+consumers need no build — and adding `prepare` would force this repo's
+devDependencies (Storybook, Chromatic, Vite…) to install on every consumer. Keep
+`prepublishOnly` for registry publishes only.
+
 ## Quick reference
 
 | Action | Command |
