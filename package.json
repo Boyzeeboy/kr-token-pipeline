@@ -1,6 +1,6 @@
 {
   "name": "kirsten-rossiter-tokens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Design token pipeline for Kirsten Rossiter using Style Dictionary",
   "type": "module",
   "files": [
