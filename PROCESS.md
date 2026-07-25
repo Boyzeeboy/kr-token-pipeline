@@ -36,6 +36,23 @@ actually consume.
 
 ## Step 2 — Sync into `tokens/*.json`
 
+**Preferred: the scripted sync (deterministic, tested).** Rather than mapping by
+hand, use the two-part sync:
+
+1. **Fetch** — with the Figma file open, run `scripts/figma-fetch.snippet.js` via
+   the `use_figma` tool (fileKey in `pipeline.config.mjs`). Save the returned JSON
+   to `tokens/.figma-dump.json` (gitignored, transient).
+2. **Transform** — `npm run sync:figma -- --dry-run` to review the diff, then
+   `npm run sync:figma` to write `tokens.{light,dark}.json`.
+
+The mapping (collection→branch, alias resolution, colour→hex, unit policy, the
+`colour/` de-dup, Fonts selection) lives in `scripts/lib/figma-to-dtcg.mjs` and is
+unit-tested (`npm run test:unit`). The data model it implements is documented in
+`SYNC-DATA-MODEL.md`. The fetch stays manual because the Plugin API only runs
+inside Figma (REST is Enterprise-only) — but everything downstream is code.
+
+The prose below explains what the fetch snippet does under the hood.
+
 **How the sync actually reads Figma.** Use the Figma **`use_figma`** tool, which
 runs the Figma Plugin API. Call
 `figma.variables.getLocalVariableCollectionsAsync()` and
