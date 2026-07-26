@@ -48,16 +48,19 @@ function parseArgs(argv) {
 const args = parseArgs(process.argv.slice(2));
 const DRY = Boolean(args['dry-run']);
 
+// --help before the required-flag guard, or `--help` on its own would exit 1
+// complaining about the very flags the help text is meant to explain.
+if (args.help) {
+  console.log(readFileSync(fileURLToPath(import.meta.url), 'utf8').split('\n').slice(1, 24).join('\n'));
+  process.exit(0);
+}
+
 const REQUIRED = ['name', 'prefix', 'figma-name', 'figma-key'];
 const missing = REQUIRED.filter((k) => !args[k] || args[k] === true);
 if (missing.length) {
   console.error(`scaffold-client: missing required flag(s): ${missing.map((m) => '--' + m).join(', ')}`);
   console.error('Run with --help to see usage.');
   process.exit(1);
-}
-if (args.help) {
-  console.log(readFileSync(fileURLToPath(import.meta.url), 'utf8').split('\n').slice(1, 24).join('\n'));
-  process.exit(0);
 }
 
 const slug = (s) => String(s).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
