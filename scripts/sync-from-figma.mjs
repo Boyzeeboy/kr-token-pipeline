@@ -46,6 +46,9 @@ if (Array.isArray(dump.v) && Array.isArray(dump.c)) {
   const collections = dump.c.map(([id, name, modes]) => ({
     id, name, modes: modes.map(([modeId, mName]) => ({ modeId, name: mName })),
   }));
+  // Non-fatal oddities the fetch flagged (e.g. an alias whose target has no mode
+  // of the name we were resolving). Surfaced, not swallowed.
+  for (const w of dump.w ?? []) console.warn(`  warn  fetch: ${w}`);
   dump = {
     fetchedFrom: dump.f,
     resolved: true,
