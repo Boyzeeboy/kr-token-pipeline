@@ -214,6 +214,22 @@ experimental (repo is the intended live state). Nothing has been written to
 back as `-0.8999999761581421`. The transform now rounds to 4dp (test added).
 Without it, every sync would have produced spurious precision diffs.
 
+## RESOLVED (2026-07-26)
+
+Warren confirmed Figma's re-tuned palette is correct (contrast pass; brand gold
+`#a07840` and all fonts unchanged). Shipped as `v1.0.0` in
+[`14d1146`](../../commit/14d1146) via PR #4 (`step-4-figma-sync`):
+`npm run sync:figma` written, `npm test` green (6/6 dist outputs, 15/15 consumer
+contract, 16/16 unit tests), `colour/colour/…` doubling fixed at source, units
+added to spacing/radius/font-size. The KR site was upgraded in the same session
+(`c98ccc6`, pin bumped to `github:Boyzeeboy/kr-token-pipeline#v1.0.0`,
+`vendor/tokens.css` re-synced, verified byte-identical to `dist/light/variables.css`).
+
+No open items from this scope remain. `npm run build`'s report still flags two
+pre-existing advisory issues (unitless font tokens, 13 hardcoded hex values in
+site CSS/HTML) — those are informational, not gates, and are separate from this
+scope.
+
 ## Suggested sequence
 
 1. Capture a raw Figma dump → commit as a test fixture.
