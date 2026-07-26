@@ -31,7 +31,38 @@ if (!existsSync(DUMP_PATH)) {
   console.error('  save the result there, then re-run. See PROCESS.md.');
   process.exit(1);
 }
-const dump = JSON.parse(readFileSync(DUMP_PATH, 'utf8'));
+let dump = JSON.parse(readFileSync(DUMP_PATH, 'utf8'));
+
+/**
+ * Expand the compact tuple encoding the fetch returns.
+ *
+ * The fetch emits {f, c:[[id,name,[[modeId,modeName],…]],…], v:[[name,colIdx,typeIdx,…values]]}
+ * because the verbose form (~90KB) exceeds the Figma tool's response cap; the
+ * tuple form is ~14KB and fits in one shot. Expand it back to the shape the
+ * transform expects. A verbose dump passes through untouched.
+ */
+if (Array.isArray(dump.v) && Array.isArray(dump.c)) {
+  const TYPES = ['COLOR', 'FLOAT', 'STRING'];
+  const collections = dump.c.map(([id, name, modes]) => ({
+    id, name, modes: modes.map(([modeId, mName]) => ({ modeId, name: mName })),
+  }));
+  dump = {
+    fetchedFrom: dump.f,
+    resolved: true,
+    collections,
+    variables: dump.v.map(([name, colIdx, typeIdx, ...vals]) => {
+      const col = collections[colIdx];
+      const valuesByMode = {};
+      col.modes.forEach((m, i) => { valuesByMode[m.modeId] = vals[i]; });
+      return {
+        name,
+        resolvedType: TYPES[typeIdx],
+        variableCollectionId: col.id,
+        valuesByMode,
+      };
+    }),
+  };
+}
 
 // ─── Transform ───────────────────────────────────────────────────────────────
 let trees;

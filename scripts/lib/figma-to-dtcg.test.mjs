@@ -137,6 +137,46 @@ test('deterministic ordering: keys are sorted', () => {
   assert.deepEqual(Object.keys(light), [...Object.keys(light)].sort());
 });
 
+test('accepts a PRE-RESOLVED dump (hex strings) as well as raw floats/aliases', () => {
+  // What the compact fetch returns: aliases already followed, colours already hex.
+  const resolvedDump = { collections: [], resolved: true, variables: [
+    { name: 'gold/500', resolvedType: 'COLOR',
+      variableCollectionId: 'VariableCollectionId:68:2831',
+      valuesByMode: { '68:0': '#a07840', '106:1': '#c4a264' } },
+    { name: 'colour/background/default', resolvedType: 'COLOR',
+      variableCollectionId: 'VariableCollectionId:68:2832',
+      valuesByMode: { '68:1': '#a07840', '89:0': '#c4a264' } },
+    { name: 'Fonts/family/base', resolvedType: 'STRING',
+      variableCollectionId: 'VariableCollectionId:1:6836', valuesByMode: { '1:0': 'Jost' } },
+    { name: 'scale/4', resolvedType: 'FLOAT',
+      variableCollectionId: 'VariableCollectionId:1394:371', valuesByMode: { '1394:0': 4 } },
+  ]};
+  const { light, dark } = transform(resolvedDump);
+  assert.deepEqual(light.primitives.gold['500'], { $value: '#a07840', $type: 'color' });
+  assert.deepEqual(dark.primitives.gold['500'],  { $value: '#c4a264', $type: 'color' });
+  // de-dup still applies, and a hex string is typed as colour (not fontFamily)
+  assert.deepEqual(light.colour.background.default, { $value: '#a07840', $type: 'color' });
+  assert.ok(!light.colour.colour);
+  // STRING stays fontFamily; FLOAT still gets px
+  assert.deepEqual(light.fonts.family.base, { $value: 'Jost', $type: 'fontFamily' });
+  assert.deepEqual(light.spacing.scale['4'], { $value: '4px', $type: 'dimension' });
+});
+
+test('Figma float32 imprecision is rounded to the authored value', () => {
+  // Figma returns 0.9 as -0.8999999761581421 etc. — must not leak into tokens.
+  const d = { collections: [], variables: [
+    { name: 'Fonts/letter-spacing/display/medium', resolvedType: 'FLOAT',
+      variableCollectionId: 'VariableCollectionId:1:6836',
+      valuesByMode: { '1:0': -0.8999999761581421 } },
+    { name: 'Fonts/letter-spacing/label/large', resolvedType: 'FLOAT',
+      variableCollectionId: 'VariableCollectionId:1:6836',
+      valuesByMode: { '1:0': 1.7000000476837158 } },
+  ]};
+  const { light } = transform(d);
+  assert.equal(light.fonts['letter-spacing'].display.medium.$value, -0.9);
+  assert.equal(light.fonts['letter-spacing'].label.large.$value, 1.7);
+});
+
 test('name-that-is-also-a-group collision fails loudly', () => {
   const collide = { collections: [], variables: [
     { id: 'a', name: 'input/border', resolvedType: 'COLOR',

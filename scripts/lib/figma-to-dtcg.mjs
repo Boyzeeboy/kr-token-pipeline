@@ -122,13 +122,26 @@ function pickModeId(variable, sourceModeId, varsById) {
   return Object.keys(variable.valuesByMode)[0];
 }
 
-function toToken(concrete, path, cfg) {
-  if (concrete && typeof concrete === 'object' && 'r' in concrete) {
-    return { $value: colourToHex(concrete), $type: 'color' };
+/**
+ * Build a DTCG token node.
+ *
+ * Accepts values in EITHER shape, so the same transform works with a raw dump
+ * (colour objects + alias refs) or a pre-resolved dump (hex strings), which is
+ * what the compact fetch returns. `resolvedType` (COLOR/FLOAT/STRING) is the
+ * discriminator — needed because a hex colour and a fontFamily are both strings.
+ */
+function toToken(concrete, path, cfg, resolvedType) {
+  // COLOR — either {r,g,b,a} floats (raw) or an already-converted hex string.
+  if (resolvedType === 'COLOR' || (concrete && typeof concrete === 'object' && 'r' in concrete)) {
+    const hex = typeof concrete === 'string' ? concrete : colourToHex(concrete);
+    return { $value: hex, $type: 'color' };
   }
   if (typeof concrete === 'number') {
-    if (isUnitless(path, cfg)) return { $value: concrete, $type: 'number' };
-    return { $value: `${concrete}px`, $type: 'dimension' };
+    // Figma stores floats as 32-bit, so 0.9 comes back as 0.8999999761581421.
+    // Round to 4dp to restore the authored value (and keep diffs meaningful).
+    const n = Math.round(concrete * 1e4) / 1e4;
+    if (isUnitless(path, cfg)) return { $value: n, $type: 'number' };
+    return { $value: `${n}px`, $type: 'dimension' };
   }
   if (typeof concrete === 'string') {
     return { $value: concrete, $type: 'fontFamily' };
@@ -167,7 +180,7 @@ export function transform(dump, cfg = CONFIG) {
 
     for (const [modeId, logical] of Object.entries(col.modes)) {
       const concrete = resolveValue(v.valuesByMode[modeId], modeId, varsById);
-      const token = toToken(concrete, dtcgPath, cfg);
+      const token = toToken(concrete, dtcgPath, cfg, v.resolvedType);
       const targets = logical === 'both' ? ['light', 'dark'] : [logical];
       for (const t of targets) setDeep(trees[t], segs, token);
     }

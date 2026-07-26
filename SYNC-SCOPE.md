@@ -167,6 +167,53 @@ transform = structural decisions) and removes the size blocker. Est: small.
 Stray file: `tokens/.dump-01-primitives.json` (a partial chunk) is now gitignored;
 delete it whenever convenient (`rm tokens/.dump-01-primitives.json`).
 
+## Live reconciliation — DONE, and it found drift (2026-07-23)
+
+The fetch redesign worked: a **tuple-encoded, pre-resolved dump is 14.6KB** (vs
+90KB raw / 52KB resolved-verbose) and returns in one shot, under the tool cap.
+`tokens/.figma-dump.json` holds that dump (gitignored). The CLI expands the tuple
+form; `npm run sync:figma -- --dry-run` runs clean, 302 tokens per mode, key
+parity holds, 16/16 unit tests pass.
+
+**The dry-run diff splits three ways:**
+
+| Category | Count | Status |
+|---|---|---|
+| Renames `colour/colour/…` → `colour/…` | 71 | Expected (our decision) |
+| New token `button/radius` | 1 | Expected (302 vs 301) |
+| Unit changes `4` → `4px` | 49 | Expected (our decision) |
+| **Real colour value changes** | **124** | **UNEXPECTED — needs a decision** |
+
+**The drift.** Figma's palette has diverged from the tokens committed on
+2026-07-04. Not subtle: the neutral ramp shifted warmer/darker (`neutral/0`
+`#ffffff` → `#f5f0e8`), gold re-stepped by roughly one stop (`gold/50` `#f7f0e4`
+→ `#f2ead8`, …), and blue replaced wholesale (custom navy → a Tailwind-like
+ramp). `gold/500` (`#a07840`) is unchanged.
+
+**Blast radius.** The KR site references 15 tokens; **~8 change value**,
+including `neutral/50` (`#faf7f2` → `#ede6d8`), `neutral/100`, `neutral/200`,
+`neutral/300`, `neutral/900`, `gold/200`, `gold/400` — i.e. page backgrounds and
+gold accents. Applying the sync **visibly changes the live site**, not just
+variable names.
+
+**Status: PAUSED pending Warren checking the Figma file** to confirm whether the
+current palette is intended/final (Figma legitimately re-tuned since 4 July) or
+experimental (repo is the intended live state). Nothing has been written to
+`tokens/*.json` — dry-run only.
+
+**Resume from here:**
+1. Warren confirms which source is correct.
+2. If Figma is correct → `npm run sync:figma` (writes), `npm test`, review
+   `dist/` diff, then **v1.0.0** (MAJOR: breaking renames) + update the site CSS
+   (`--kr-colour-colour-*` → `--kr-colour-*`) and bump its pin in the same
+   release. Do a visual check of the site before/after.
+3. If the repo is correct → don't apply colour values; we'd need a transform
+   option to keep existing values while applying rename + units.
+
+**Also fixed during the live run:** Figma returns 32-bit floats, so `-0.9` came
+back as `-0.8999999761581421`. The transform now rounds to 4dp (test added).
+Without it, every sync would have produced spurious precision diffs.
+
 ## Suggested sequence
 
 1. Capture a raw Figma dump → commit as a test fixture.
