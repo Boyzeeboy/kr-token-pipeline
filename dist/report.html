@@ -46,9 +46,9 @@
     <summary><span class="badge">✓</span> Build (dark): source tokens → dist</summary>
     <ul><li>302 source tokens all present in dist.</li></ul>
   </details>
-<details class="check pass" >
-    <summary><span class="badge">✓</span> Site sync: dist/light/variables.css ↔ vendor/tokens.css</summary>
-    <ul><li>Files identical — site is running the latest build.</li></ul>
+<details class="check fail" open>
+    <summary><span class="badge">✗</span> Site sync: dist/light/variables.css ↔ vendor/tokens.css</summary>
+    <ul><li>Files differ — run scripts/sync-tokens.sh in the site repo.</li></ul>
   </details>
 <details class="check pass" >
     <summary><span class="badge">✓</span> Consumer contract: 15 tokens referenced by the site</summary>
@@ -62,9 +62,9 @@
     <summary><span class="badge">✓</span> Lint: doubled group names (e.g. --kr-colour-colour-…)</summary>
     <ul><li>No repeated path segments.</li></ul>
   </details>
-<details class="check fail" open>
-    <summary><span class="badge">✗</span> Lint: numeric font tokens without units</summary>
-    <ul><li>15 tokens are bare numbers where CSS requires a unit — these are INVALID as-is: kr-fonts-letter-spacing-body-large=0, kr-fonts-letter-spacing-body-medium=0, kr-fonts-letter-spacing-body-small=0, kr-fonts-letter-spacing-display-large=-1.5, …</li><li>15 line-height tokens are bare numbers above 4, so CSS reads them as multipliers (line-height: 80 = 80× the font size). They look like px values missing their unit: kr-fonts-line-height-body-large=31, kr-fonts-line-height-body-medium=27, kr-fonts-line-height-body-small=23, kr-fonts-line-height-display-large=80, …</li><li>Fix at source: add the path to `unitlessNumber` exceptions in scripts/lib/figma-to-dtcg.mjs, or remove it so the value gets px. Changes shipped values — MAJOR bump.</li></ul>
+<details class="check pass" >
+    <summary><span class="badge">✓</span> Lint: numeric font tokens without units</summary>
+    <ul><li>All font tokens carry units or are credible ratios.</li></ul>
   </details>
 <details class="check fail" open>
     <summary><span class="badge">✗</span> Hardcoded hex: 13 distinct values in site CSS/HTML</summary>

@@ -94,11 +94,27 @@ test('fontFamily string → $type fontFamily', () => {
   assert.deepEqual(light.fonts.family.base, { $value: 'Jost', $type: 'fontFamily' });
 });
 
-test('font size → dimension px; line-height & weight → unit-less number', () => {
+test('font size & line-height → dimension px; weight stays a unit-less number', () => {
   const { light } = transform(dump);
   assert.deepEqual(light.fonts.size.body.medium, { $value: '16px', $type: 'dimension' });
-  assert.deepEqual(light.fonts['line-height'].body.medium, { $value: 24, $type: 'number' });
+  // line-height is absolute px in Figma, not a ratio — bare, CSS would read 24
+  // as 24× the font size. See the unitlessNumber comment in figma-to-dtcg.mjs.
+  assert.deepEqual(light.fonts['line-height'].body.medium, { $value: '24px', $type: 'dimension' });
   assert.deepEqual(light.fonts.weight.regular, { $value: 400, $type: 'number' });
+});
+
+test('letter-spacing → dimension px (bare numbers are invalid CSS)', () => {
+  const d = { collections: [], variables: [
+    { name: 'Fonts/letter-spacing/label/medium', resolvedType: 'FLOAT',
+      variableCollectionId: 'VariableCollectionId:1:6836', valuesByMode: { '1:0': 2 } },
+    { name: 'Fonts/letter-spacing/display/medium', resolvedType: 'FLOAT',
+      variableCollectionId: 'VariableCollectionId:1:6836',
+      valuesByMode: { '1:0': -0.8999999761581421 } },
+  ]};
+  const { light } = transform(d);
+  assert.deepEqual(light.fonts['letter-spacing'].label.medium, { $value: '2px', $type: 'dimension' });
+  // float32 rounding still applies before the unit is appended
+  assert.deepEqual(light.fonts['letter-spacing'].display.medium, { $value: '-0.9px', $type: 'dimension' });
 });
 
 test('spacing & radius → dimension px', () => {
@@ -173,8 +189,8 @@ test('Figma float32 imprecision is rounded to the authored value', () => {
       valuesByMode: { '1:0': 1.7000000476837158 } },
   ]};
   const { light } = transform(d);
-  assert.equal(light.fonts['letter-spacing'].display.medium.$value, -0.9);
-  assert.equal(light.fonts['letter-spacing'].label.large.$value, 1.7);
+  assert.equal(light.fonts['letter-spacing'].display.medium.$value, '-0.9px');
+  assert.equal(light.fonts['letter-spacing'].label.large.$value, '1.7px');
 });
 
 test('name-that-is-also-a-group collision fails loudly', () => {
