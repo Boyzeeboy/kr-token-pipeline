@@ -1,5 +1,374 @@
 [
   {
+    "id": 9,
+    "timestamp": "2026-07-26T17:46:13.191Z",
+    "isFirstRun": false,
+    "tokenCount": 755,
+    "changeCount": 60,
+    "changes": [
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/body/large",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/body/medium",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/body/small",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/display/large",
+        "before": "-1.5",
+        "after": "-1.5px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/display/medium",
+        "before": "-0.9",
+        "after": "-0.9px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/display/small",
+        "before": "-0.5",
+        "after": "-0.5px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/headline/large",
+        "before": "-0.4",
+        "after": "-0.4px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/headline/medium",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/headline/small",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/label/large",
+        "before": "1.7",
+        "after": "1.7px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/label/medium",
+        "before": "2",
+        "after": "2px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/label/small",
+        "before": "2",
+        "after": "2px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/title/large",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/title/medium",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/letter-spacing/title/small",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/body/large",
+        "before": "31",
+        "after": "31px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/body/medium",
+        "before": "27",
+        "after": "27px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/body/small",
+        "before": "23",
+        "after": "23px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/display/large",
+        "before": "80",
+        "after": "80px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/display/medium",
+        "before": "65",
+        "after": "65px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/display/small",
+        "before": "53",
+        "after": "53px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/headline/large",
+        "before": "45",
+        "after": "45px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/headline/medium",
+        "before": "39",
+        "after": "39px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/headline/small",
+        "before": "34",
+        "after": "34px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/label/large",
+        "before": "17",
+        "after": "17px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/label/medium",
+        "before": "15",
+        "after": "15px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/label/small",
+        "before": "14",
+        "after": "14px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/title/large",
+        "before": "31",
+        "after": "31px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/title/medium",
+        "before": "27",
+        "after": "27px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/fonts/line-height/title/small",
+        "before": "25",
+        "after": "25px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/body/large",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/body/medium",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/body/small",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/display/large",
+        "before": "-1.5",
+        "after": "-1.5px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/display/medium",
+        "before": "-0.9",
+        "after": "-0.9px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/display/small",
+        "before": "-0.5",
+        "after": "-0.5px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/headline/large",
+        "before": "-0.4",
+        "after": "-0.4px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/headline/medium",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/headline/small",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/label/large",
+        "before": "1.7",
+        "after": "1.7px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/label/medium",
+        "before": "2",
+        "after": "2px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/label/small",
+        "before": "2",
+        "after": "2px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/title/large",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/title/medium",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/letter-spacing/title/small",
+        "before": "0",
+        "after": "0px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/body/large",
+        "before": "31",
+        "after": "31px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/body/medium",
+        "before": "27",
+        "after": "27px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/body/small",
+        "before": "23",
+        "after": "23px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/display/large",
+        "before": "80",
+        "after": "80px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/display/medium",
+        "before": "65",
+        "after": "65px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/display/small",
+        "before": "53",
+        "after": "53px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/headline/large",
+        "before": "45",
+        "after": "45px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/headline/medium",
+        "before": "39",
+        "after": "39px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/headline/small",
+        "before": "34",
+        "after": "34px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/label/large",
+        "before": "17",
+        "after": "17px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/label/medium",
+        "before": "15",
+        "after": "15px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/label/small",
+        "before": "14",
+        "after": "14px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/title/large",
+        "before": "31",
+        "after": "31px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/title/medium",
+        "before": "27",
+        "after": "27px"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/fonts/line-height/title/small",
+        "before": "25",
+        "after": "25px"
+      }
+    ]
+  },
+  {
     "id": 8,
     "timestamp": "2026-07-26T08:28:30.386Z",
     "isFirstRun": false,
