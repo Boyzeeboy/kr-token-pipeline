@@ -166,6 +166,25 @@ git push origin v0.2.0
    `npm install && npm run sync-tokens`, and commit the updated
    `vendor/tokens.css`.
 
+### Gotcha: `npm install` does NOT pick up a moved git pin
+
+Bumping the tag in the site's `package.json` and running `npm install` is **not
+enough**. npm sees the lockfile's pinned commit as satisfying the range and skips
+the re-fetch — it reports "up to date", updates `package-lock.json`, and leaves
+the OLD package in `node_modules`. You then sync stale tokens believing you have
+upgraded. (Hit on the v1.0.0 release, 2026-07-23.)
+
+Always force the re-resolve:
+
+```bash
+npm install github:Boyzeeboy/kr-token-pipeline#v1.0.0 --save-dev
+npm run sync-tokens     # confirm it prints the version you expect
+```
+
+The version line `sync-tokens.sh` prints is the safety net — **read it every
+time**. If it shows the old version, the upgrade did not happen. Harder reset:
+`rm -rf node_modules/kirsten-rossiter-tokens && npm cache clean --force && npm install`.
+
 ### Rolling back
 
 The main payoff of pinning: every previous release is a named thing you can
