@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KR Token Report — 2026-07-26</title>
+<title>Kirsten Rossiter Token Report</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root { color-scheme: light; }
@@ -33,10 +33,11 @@
 </style>
 </head>
 <body>
-<h1>KR Token Report</h1>
-<p class="meta">Generated 2026-07-26T08:28:30.569Z · 302 tokens (light) · 302 tokens (dark) · site: /sessions/optimistic-hopeful-goodall/mnt/Projects/Kirsten Rossiter</p>
+<h1>Kirsten Rossiter Token Report</h1>
+<p class="meta">302 tokens (light) · 302 tokens (dark) · site: /Users/warrenrossiter/Documents/Claude/Projects/Kirsten Rossiter</p>
+<p class="meta">No generation timestamp: this file is committed, and a clock reading would make every rebuild a diff. Use <code>git log dist/report.html</code> for when it last changed.</p>
 
-<h2>Health checks — 4/8 passing</h2>
+<h2>Health checks — 6/8 passing</h2>
 <details class="check pass" >
     <summary><span class="badge">✓</span> Build (light): source tokens → dist</summary>
     <ul><li>302 source tokens all present in dist.</li></ul>
@@ -45,13 +46,13 @@
     <summary><span class="badge">✓</span> Build (dark): source tokens → dist</summary>
     <ul><li>302 source tokens all present in dist.</li></ul>
   </details>
-<details class="check fail" open>
-    <summary><span class="badge">✗</span> Site sync: dist/light/variables.css ↔ vendor/tokens.css</summary>
-    <ul><li>Files differ — run scripts/sync-tokens.sh in the site repo.</li></ul>
+<details class="check pass" >
+    <summary><span class="badge">✓</span> Site sync: dist/light/variables.css ↔ vendor/tokens.css</summary>
+    <ul><li>Files identical — site is running the latest build.</li></ul>
   </details>
-<details class="check fail" open>
-    <summary><span class="badge">✗</span> Consumer contract: 15 tokens referenced by the site</summary>
-    <ul><li>UNDEFINED: --kr-colour-text-secondary (used in building-the-nations.html)</li><li>UNDEFINED: --kr-colour-text-tertiary (used in building-the-nations.html)</li><li>UNDEFINED: --kr-colour-background-default (used in building-the-nations.html)</li></ul>
+<details class="check pass" >
+    <summary><span class="badge">✓</span> Consumer contract: 15 tokens referenced by the site</summary>
+    <ul><li>Every var(--kr-…) the site references is defined in vendor/tokens.css.</li></ul>
   </details>
 <details class="check pass" >
     <summary><span class="badge">✓</span> Fonts: site Google Fonts link ↔ font-family tokens</summary>
@@ -63,7 +64,7 @@
   </details>
 <details class="check fail" open>
     <summary><span class="badge">✗</span> Lint: numeric font tokens without units</summary>
-    <ul><li>30 font tokens are bare numbers (e.g. line-height: 80 means 80× in CSS, not 80px). Add px transforms before the site consumes them. Examples: kr-fonts-letter-spacing-body-large=0, kr-fonts-letter-spacing-body-medium=0, kr-fonts-letter-spacing-body-small=0, kr-fonts-letter-spacing-display-large=-1.5, …</li></ul>
+    <ul><li>15 tokens are bare numbers where CSS requires a unit — these are INVALID as-is: kr-fonts-letter-spacing-body-large=0, kr-fonts-letter-spacing-body-medium=0, kr-fonts-letter-spacing-body-small=0, kr-fonts-letter-spacing-display-large=-1.5, …</li><li>15 line-height tokens are bare numbers above 4, so CSS reads them as multipliers (line-height: 80 = 80× the font size). They look like px values missing their unit: kr-fonts-line-height-body-large=31, kr-fonts-line-height-body-medium=27, kr-fonts-line-height-body-small=23, kr-fonts-line-height-display-large=80, …</li><li>Fix at source: add the path to `unitlessNumber` exceptions in scripts/lib/figma-to-dtcg.mjs, or remove it so the value gets px. Changes shipped values — MAJOR bump.</li></ul>
   </details>
 <details class="check fail" open>
     <summary><span class="badge">✗</span> Hardcoded hex: 13 distinct values in site CSS/HTML</summary>
@@ -1148,27 +1149,27 @@
       </tr></table>
 
 <h2>Type scale <span class="darknote">(rendered assuming px — see unitless lint check. Families follow site convention: display/headline/title → Cormorant Garamond, body → Lora, label → Jost. The tokens don't bind a family per role — consider adding that in Figma.)</span></h2>
-<table><tr><td class="rolename"><code>display-large</code><br><small>Cormorant Garamond <code>(family-display)</code> · 76pxpx / 80px / -1.5</small></td>
-      <td><span style="font-family:'Cormorant Garamond';font-size:76pxpx;line-height:80px;letter-spacing:-1.5px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>display-medium</code><br><small>Cormorant Garamond <code>(family-display)</code> · 60pxpx / 65px / -0.9</small></td>
-      <td><span style="font-family:'Cormorant Garamond';font-size:60pxpx;line-height:65px;letter-spacing:-0.9px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>display-small</code><br><small>Cormorant Garamond <code>(family-display)</code> · 48pxpx / 53px / -0.5</small></td>
-      <td><span style="font-family:'Cormorant Garamond';font-size:48pxpx;line-height:53px;letter-spacing:-0.5px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>headline-large</code><br><small>Cormorant Garamond <code>(family-display)</code> · 40pxpx / 45px / -0.4</small></td>
-      <td><span style="font-family:'Cormorant Garamond';font-size:40pxpx;line-height:45px;letter-spacing:-0.4px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>headline-medium</code><br><small>Cormorant Garamond <code>(family-display)</code> · 34pxpx / 39px / 0</small></td>
-      <td><span style="font-family:'Cormorant Garamond';font-size:34pxpx;line-height:39px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>headline-small</code><br><small>Cormorant Garamond <code>(family-display)</code> · 28pxpx / 34px / 0</small></td>
-      <td><span style="font-family:'Cormorant Garamond';font-size:28pxpx;line-height:34px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>title-large</code><br><small>Cormorant Garamond <code>(family-display)</code> · 24pxpx / 31px / 0</small></td>
-      <td><span style="font-family:'Cormorant Garamond';font-size:24pxpx;line-height:31px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>title-medium</code><br><small>Cormorant Garamond <code>(family-display)</code> · 20pxpx / 27px / 0</small></td>
-      <td><span style="font-family:'Cormorant Garamond';font-size:20pxpx;line-height:27px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>title-small</code><br><small>Cormorant Garamond <code>(family-display)</code> · 18pxpx / 25px / 0</small></td>
-      <td><span style="font-family:'Cormorant Garamond';font-size:18pxpx;line-height:25px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>body-large</code><br><small>Lora <code>(family-serif-body)</code> · 17pxpx / 31px / 0</small></td>
-      <td><span style="font-family:'Lora';font-size:17pxpx;line-height:31px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>body-medium</code><br><small>Lora <code>(family-serif-body)</code> · 15pxpx / 27px / 0</small></td>
-      <td><span style="font-family:'Lora';font-size:15pxpx;line-height:27px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>body-small</code><br><small>Lora <code>(family-serif-body)</code> · 13pxpx / 23px / 0</small></td>
-      <td><span style="font-family:'Lora';font-size:13pxpx;line-height:23px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>label-large</code><br><small>Jost <code>(family-base)</code> · 12pxpx / 17px / 1.7</small></td>
-      <td><span style="font-family:'Jost';font-size:12pxpx;line-height:17px;letter-spacing:1.7px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>label-medium</code><br><small>Jost <code>(family-base)</code> · 11pxpx / 15px / 2</small></td>
-      <td><span style="font-family:'Jost';font-size:11pxpx;line-height:15px;letter-spacing:2px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>label-small</code><br><small>Jost <code>(family-base)</code> · 10pxpx / 14px / 2</small></td>
-      <td><span style="font-family:'Jost';font-size:10pxpx;line-height:14px;letter-spacing:2px;">Building the Nations</span></td></tr></table>
+<table><tr><td class="rolename"><code>display-large</code><br><small>Cormorant Garamond <code>(family-display)</code> · 76px / 80px / -1.5px</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:76px;line-height:80px;letter-spacing:-1.5px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>display-medium</code><br><small>Cormorant Garamond <code>(family-display)</code> · 60px / 65px / -0.9px</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:60px;line-height:65px;letter-spacing:-0.9px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>display-small</code><br><small>Cormorant Garamond <code>(family-display)</code> · 48px / 53px / -0.5px</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:48px;line-height:53px;letter-spacing:-0.5px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>headline-large</code><br><small>Cormorant Garamond <code>(family-display)</code> · 40px / 45px / -0.4px</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:40px;line-height:45px;letter-spacing:-0.4px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>headline-medium</code><br><small>Cormorant Garamond <code>(family-display)</code> · 34px / 39px / 0px</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:34px;line-height:39px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>headline-small</code><br><small>Cormorant Garamond <code>(family-display)</code> · 28px / 34px / 0px</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:28px;line-height:34px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>title-large</code><br><small>Cormorant Garamond <code>(family-display)</code> · 24px / 31px / 0px</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:24px;line-height:31px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>title-medium</code><br><small>Cormorant Garamond <code>(family-display)</code> · 20px / 27px / 0px</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:20px;line-height:27px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>title-small</code><br><small>Cormorant Garamond <code>(family-display)</code> · 18px / 25px / 0px</small></td>
+      <td><span style="font-family:'Cormorant Garamond';font-size:18px;line-height:25px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>body-large</code><br><small>Lora <code>(family-serif-body)</code> · 17px / 31px / 0px</small></td>
+      <td><span style="font-family:'Lora';font-size:17px;line-height:31px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>body-medium</code><br><small>Lora <code>(family-serif-body)</code> · 15px / 27px / 0px</small></td>
+      <td><span style="font-family:'Lora';font-size:15px;line-height:27px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>body-small</code><br><small>Lora <code>(family-serif-body)</code> · 13px / 23px / 0px</small></td>
+      <td><span style="font-family:'Lora';font-size:13px;line-height:23px;letter-spacing:0px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>label-large</code><br><small>Jost <code>(family-base)</code> · 12px / 17px / 1.7px</small></td>
+      <td><span style="font-family:'Jost';font-size:12px;line-height:17px;letter-spacing:1.7px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>label-medium</code><br><small>Jost <code>(family-base)</code> · 11px / 15px / 2px</small></td>
+      <td><span style="font-family:'Jost';font-size:11px;line-height:15px;letter-spacing:2px;">Building the Nations</span></td></tr><tr><td class="rolename"><code>label-small</code><br><small>Jost <code>(family-base)</code> · 10px / 14px / 2px</small></td>
+      <td><span style="font-family:'Jost';font-size:10px;line-height:14px;letter-spacing:2px;">Building the Nations</span></td></tr></table>
 
 <h2>Spacing</h2>
-<table><tr><th>Token</th><th>Value</th><th></th></tr></table>
+<table><tr><th>Token</th><th>Value</th><th></th></tr><tr><td><code>--kr-spacing-scale-4</code></td><td>4px</td><td><div class="bar" style="width:4px"></div></td></tr><tr><td><code>--kr-spacing-xs</code></td><td>4px</td><td><div class="bar" style="width:4px"></div></td></tr><tr><td><code>--kr-spacing-s</code></td><td>8px</td><td><div class="bar" style="width:8px"></div></td></tr><tr><td><code>--kr-spacing-scale-8</code></td><td>8px</td><td><div class="bar" style="width:8px"></div></td></tr><tr><td><code>--kr-spacing-scale-12</code></td><td>12px</td><td><div class="bar" style="width:12px"></div></td></tr><tr><td><code>--kr-spacing-m</code></td><td>16px</td><td><div class="bar" style="width:16px"></div></td></tr><tr><td><code>--kr-spacing-scale-16</code></td><td>16px</td><td><div class="bar" style="width:16px"></div></td></tr><tr><td><code>--kr-spacing-scale-20</code></td><td>20px</td><td><div class="bar" style="width:20px"></div></td></tr><tr><td><code>--kr-spacing-l</code></td><td>24px</td><td><div class="bar" style="width:24px"></div></td></tr><tr><td><code>--kr-spacing-scale-24</code></td><td>24px</td><td><div class="bar" style="width:24px"></div></td></tr><tr><td><code>--kr-spacing-scale-32</code></td><td>32px</td><td><div class="bar" style="width:32px"></div></td></tr><tr><td><code>--kr-spacing-scale-40</code></td><td>40px</td><td><div class="bar" style="width:40px"></div></td></tr><tr><td><code>--kr-spacing-xl</code></td><td>40px</td><td><div class="bar" style="width:40px"></div></td></tr><tr><td><code>--kr-spacing-scale-48</code></td><td>48px</td><td><div class="bar" style="width:48px"></div></td></tr><tr><td><code>--kr-spacing-2xl</code></td><td>56px</td><td><div class="bar" style="width:56px"></div></td></tr><tr><td><code>--kr-spacing-scale-56</code></td><td>56px</td><td><div class="bar" style="width:56px"></div></td></tr><tr><td><code>--kr-spacing-scale-64</code></td><td>64px</td><td><div class="bar" style="width:64px"></div></td></tr><tr><td><code>--kr-spacing-scale-80</code></td><td>80px</td><td><div class="bar" style="width:80px"></div></td></tr><tr><td><code>--kr-spacing-page</code></td><td>104px</td><td><div class="bar" style="width:104px"></div></td></tr><tr><td><code>--kr-spacing-scale-104</code></td><td>104px</td><td><div class="bar" style="width:104px"></div></td></tr></table>
 
 <h2>Radius</h2>
-<table><tr><th>Token</th><th>Value</th><th></th></tr></table>
+<table><tr><th>Token</th><th>Value</th><th></th></tr><tr><td><code>--kr-radius-none</code></td><td>0px</td><td><div class="rad" style="border-radius:0px"></div></td></tr><tr><td><code>--kr-radius-scale-0</code></td><td>0px</td><td><div class="rad" style="border-radius:0px"></div></td></tr><tr><td><code>--kr-radius-scale-4</code></td><td>4px</td><td><div class="rad" style="border-radius:4px"></div></td></tr><tr><td><code>--kr-radius-xs</code></td><td>4px</td><td><div class="rad" style="border-radius:4px"></div></td></tr><tr><td><code>--kr-radius-s</code></td><td>8px</td><td><div class="rad" style="border-radius:8px"></div></td></tr><tr><td><code>--kr-radius-scale-8</code></td><td>8px</td><td><div class="rad" style="border-radius:8px"></div></td></tr><tr><td><code>--kr-radius-m</code></td><td>12px</td><td><div class="rad" style="border-radius:12px"></div></td></tr><tr><td><code>--kr-radius-scale-12</code></td><td>12px</td><td><div class="rad" style="border-radius:12px"></div></td></tr><tr><td><code>--kr-radius-l</code></td><td>16px</td><td><div class="rad" style="border-radius:16px"></div></td></tr><tr><td><code>--kr-radius-scale-16</code></td><td>16px</td><td><div class="rad" style="border-radius:16px"></div></td></tr><tr><td><code>--kr-radius-scale-24</code></td><td>24px</td><td><div class="rad" style="border-radius:24px"></div></td></tr><tr><td><code>--kr-radius-xl</code></td><td>24px</td><td><div class="rad" style="border-radius:24px"></div></td></tr><tr><td><code>--kr-radius-full</code></td><td>9999px</td><td><div class="rad" style="border-radius:200px"></div></td></tr><tr><td><code>--kr-radius-scale-full</code></td><td>9999px</td><td><div class="rad" style="border-radius:200px"></div></td></tr></table>
 </body>
 </html>

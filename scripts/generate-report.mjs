@@ -16,14 +16,34 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import config from '../pipeline.config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = process.env.KR_SITE_DIR || join(ROOT, '..', 'Kirsten Rossiter');
 const OUT = join(ROOT, 'dist', 'report.html');
 
+// Token name prefix, matching sd.config.mjs. Everything that greps for
+// `--<prefix>-…` builds its pattern from this rather than hardcoding it.
+const PREFIX = process.env.TOKEN_PREFIX ?? config.prefix;
+const P = PREFIX.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // regex-safe
+const varDefRe = () => new RegExp(`--(${P}-[a-z0-9-]+)\\s*:`, 'g');
+const varUseRe = () => new RegExp(`var\\(\\s*--(${P}-[a-z0-9-]+)`, 'g');
+
 // ---------- helpers ----------
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/**
+ * Token values carry their unit as a string ("16px") since the px migration.
+ * `num` extracts the magnitude for sorting/scaling; `len` renders a CSS length,
+ * appending px only to a bare number. Returns null for non-numeric values.
+ */
+const num = (v) => {
+  if (typeof v === 'number') return v;
+  const m = /^(-?\d*\.?\d+)/.exec(String(v));
+  return m ? parseFloat(m[1]) : null;
+};
+const len = (v) => (typeof v === 'number' ? `${v}px` : String(v));
 
 function loadJSON(p) {
   return JSON.parse(readFileSync(p, 'utf8'));
@@ -43,10 +63,10 @@ function walkSource(obj, path = []) {
   return out;
 }
 
-/** Derive the flat CSS-ish name Style Dictionary produces: kr-<path kebab-joined> */
+/** Derive the flat CSS-ish name Style Dictionary produces: <prefix>-<path kebab-joined> */
 function flatName(path) {
   return (
-    'kr-' +
+    `${PREFIX}-` +
     path
       .map((s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase().replace(/[^a-z0-9-]+/g, '-'))
       .join('-')
@@ -124,17 +144,17 @@ buildCheck(srcDark, distDark, 'dark');
   });
 }
 
-// 3. Consumer contract: every var(--kr-*) used by the site must be defined
+// 3. Consumer contract: every var(--<prefix>-*) used by the site must be defined
 const usedVars = new Map(); // name -> [files]
 for (const [p, text] of fileText) {
-  for (const m of text.matchAll(/var\(\s*--(kr-[a-z0-9-]+)/g)) {
+  for (const m of text.matchAll(varUseRe())) {
     const name = m[1];
     if (!usedVars.has(name)) usedVars.set(name, new Set());
     usedVars.get(name).add(relative(SITE, p));
   }
 }
 {
-  const defined = new Set([...(vendorCSS || '').matchAll(/--(kr-[a-z0-9-]+)\s*:/g)].map((m) => m[1]));
+  const defined = new Set([...(vendorCSS || '').matchAll(varDefRe())].map((m) => m[1]));
   const undef = [...usedVars.keys()].filter((n) => !defined.has(n));
   checks.push({
     id: 'contract',
@@ -142,7 +162,7 @@ for (const [p, text] of fileText) {
     pass: undef.length === 0,
     detail: undef.length
       ? undef.map((n) => `UNDEFINED: --${n} (used in ${[...usedVars.get(n)].join(', ')})`)
-      : ['Every var(--kr-…) the site references is defined in vendor/tokens.css.'],
+      : [`Every var(--${PREFIX}-…) the site references is defined in vendor/tokens.css.`],
   });
 }
 
@@ -157,7 +177,7 @@ for (const [p, text] of fileText) {
     for (const m of link.matchAll(/family=([^:&]+)/g)) loadedFamilies.add(decodeURIComponent(m[1]).replace(/\+/g, ' '));
   }
   const tokenFamilies = Object.entries(distLight)
-    .filter(([k]) => k.startsWith('kr-fonts-family'))
+    .filter(([k]) => k.startsWith(`${PREFIX}-fonts-family`))
     .map(([k, v]) => ({ k, v: String(v).replace(/['"]/g, '') }));
   const notLoaded = tokenFamilies.filter(({ v }) => !loadedFamilies.has(v));
   const notTokenised = [...loadedFamilies].filter((f) => !tokenFamilies.some(({ v }) => v === f));
@@ -180,23 +200,44 @@ for (const [p, text] of fileText) {
   const doubled = srcLight.filter((t) => t.path.some((seg, i) => i > 0 && seg === t.path[i - 1]));
   checks.push({
     id: 'lint-doubled',
-    label: 'Lint: doubled group names (e.g. --kr-colour-colour-…)',
+    label: `Lint: doubled group names (e.g. --${PREFIX}-colour-colour-…)`,
     pass: doubled.length === 0,
     detail: doubled.length
       ? [`${doubled.length} tokens have a repeated path segment (fix in name transform or restructure source): e.g. ${doubled.slice(0, 5).map((t) => '--' + flatName(t.path)).join(', ')}${doubled.length > 5 ? ', …' : ''}`]
       : ['No repeated path segments.'],
   });
 
-  const unitless = Object.entries(distLight).filter(
-    ([k, v]) => /^kr-fonts-(size|line-height|letter-spacing)/.test(k) && typeof v === 'number'
+  // Bare numbers in font tokens fail in two different ways, so they're reported
+  // separately rather than lumped together:
+  //   - font-size / letter-spacing are INVALID CSS without a unit.
+  //   - line-height is valid but means a ratio. A bare 80 alongside a 76px font
+  //     is plainly an unlabelled px value, not an 80× multiplier — so flag any
+  //     bare line-height too large to be a credible ratio.
+  const RATIO_MAX = 4;
+  const bare = (k) => typeof distLight[k] === 'number';
+  const needsUnit = Object.keys(distLight).filter(
+    (k) => new RegExp(`^${P}-fonts-(size|letter-spacing)`).test(k) && bare(k)
   );
+  const ratioish = Object.keys(distLight).filter(
+    (k) => new RegExp(`^${P}-fonts-line-height`).test(k) && bare(k) && Math.abs(distLight[k]) > RATIO_MAX
+  );
+  const sample = (ks) => ks.slice(0, 4).map((k) => `${k}=${distLight[k]}`).join(', ') + (ks.length > 4 ? ', …' : '');
   checks.push({
     id: 'lint-unitless',
     label: 'Lint: numeric font tokens without units',
-    pass: unitless.length === 0,
-    detail: unitless.length
-      ? [`${unitless.length} font tokens are bare numbers (e.g. line-height: 80 means 80× in CSS, not 80px). Add px transforms before the site consumes them. Examples: ${unitless.slice(0, 4).map(([k, v]) => `${k}=${v}`).join(', ')}, …`]
-      : ['All font tokens carry units.'],
+    pass: needsUnit.length === 0 && ratioish.length === 0,
+    detail: [
+      needsUnit.length
+        ? `${needsUnit.length} tokens are bare numbers where CSS requires a unit — these are INVALID as-is: ${sample(needsUnit)}`
+        : '',
+      ratioish.length
+        ? `${ratioish.length} line-height tokens are bare numbers above ${RATIO_MAX}, so CSS reads them as multipliers (line-height: 80 = 80× the font size). They look like px values missing their unit: ${sample(ratioish)}`
+        : '',
+      !needsUnit.length && !ratioish.length ? 'All font tokens carry units or are credible ratios.' : '',
+      needsUnit.length || ratioish.length
+        ? 'Fix at source: add the path to `unitlessNumber` exceptions in scripts/lib/figma-to-dtcg.mjs, or remove it so the value gets px. Changes shipped values — MAJOR bump.'
+        : '',
+    ].filter(Boolean),
   });
 }
 
@@ -261,9 +302,9 @@ function colourRows(prefix) {
 }
 
 const typeRoles = ['display-large', 'display-medium', 'display-small', 'headline-large', 'headline-medium', 'headline-small', 'title-large', 'title-medium', 'title-small', 'body-large', 'body-medium', 'body-small', 'label-large', 'label-medium', 'label-small'];
-const famBase = String(distLight['kr-fonts-family-base'] ?? 'sans-serif');
-const famDisplay = String(distLight['kr-fonts-family-display'] ?? 'serif');
-const famSerifBody = String(distLight['kr-fonts-family-serif-body'] ?? 'serif');
+const famBase = String(distLight[`${PREFIX}-fonts-family-base`] ?? 'sans-serif');
+const famDisplay = String(distLight[`${PREFIX}-fonts-family-display`] ?? 'serif');
+const famSerifBody = String(distLight[`${PREFIX}-fonts-family-serif-body`] ?? 'serif');
 // Site convention (styles.css aliases): display/headline/title → --serif (display),
 // body → --serif-body (Lora), label → --sans (base = Jost).
 // NB: the tokens do NOT bind a family per role; this mapping mirrors actual site usage.
@@ -272,29 +313,33 @@ function roleFamily(role) {
   if (role.startsWith('label')) return { fam: famBase, token: 'family-base' };
   return { fam: famDisplay, token: 'family-display' };
 }
+// Values already carry their unit where they have one ("76px"); len() only adds
+// px to the bare numbers (line-height, letter-spacing — see the unitless lint).
 const typeRows = typeRoles
   .map((role) => {
-    const size = distLight[`kr-fonts-size-${role}`];
-    const lh = distLight[`kr-fonts-line-height-${role}`];
-    const ls = distLight[`kr-fonts-letter-spacing-${role}`];
+    const size = distLight[`${PREFIX}-fonts-size-${role}`];
+    const lh = distLight[`${PREFIX}-fonts-line-height-${role}`];
+    const ls = distLight[`${PREFIX}-fonts-letter-spacing-${role}`];
     if (size == null) return '';
     const { fam, token } = roleFamily(role);
-    return `<tr><td class="rolename"><code>${role}</code><br><small>${esc(fam)} <code>(${token})</code> · ${size}px / ${lh}px / ${ls}</small></td>
-      <td><span style="font-family:'${fam}';font-size:${size}px;line-height:${lh}px;letter-spacing:${ls}px;">Building the Nations</span></td></tr>`;
+    const spec = [len(size), lh == null ? '—' : len(lh), ls == null ? '—' : len(ls)].join(' / ');
+    return `<tr><td class="rolename"><code>${role}</code><br><small>${esc(fam)} <code>(${token})</code> · ${spec}</small></td>
+      <td><span style="font-family:'${fam}';font-size:${len(size)};${lh == null ? '' : `line-height:${len(lh)};`}${ls == null ? '' : `letter-spacing:${len(ls)};`}">Building the Nations</span></td></tr>`;
   })
   .join('');
 
-const spacingRows = Object.entries(distLight)
-  .filter(([k, v]) => k.startsWith('kr-spacing') && typeof v === 'number')
-  .sort((a, b) => a[1] - b[1])
-  .map(([k, v]) => `<tr><td><code>--${k}</code></td><td>${v}</td><td><div class="bar" style="width:${Math.min(v, 400)}px"></div></td></tr>`)
-  .join('');
+/** Rows for a scale branch: sorted by magnitude, with the raw value shown as-is. */
+function scaleRows(prefix, render) {
+  return Object.entries(distLight)
+    .filter(([k, v]) => k.startsWith(prefix) && num(v) !== null)
+    .map(([k, v]) => [k, v, num(v)])
+    .sort((a, b) => a[2] - b[2])
+    .map(([k, v, n]) => `<tr><td><code>--${k}</code></td><td>${esc(v)}</td><td>${render(n)}</td></tr>`)
+    .join('');
+}
 
-const radiusRows = Object.entries(distLight)
-  .filter(([k, v]) => k.startsWith('kr-radius') && typeof v === 'number')
-  .sort((a, b) => a[1] - b[1])
-  .map(([k, v]) => `<tr><td><code>--${k}</code></td><td>${v}</td><td><div class="rad" style="border-radius:${v}px"></div></td></tr>`)
-  .join('');
+const spacingRows = scaleRows(`${PREFIX}-spacing`, (n) => `<div class="bar" style="width:${Math.min(n, 400)}px"></div>`);
+const radiusRows = scaleRows(`${PREFIX}-radius`, (n) => `<div class="rad" style="border-radius:${Math.min(n, 200)}px"></div>`);
 
 const usedList = [...usedVars.entries()]
   .sort()
@@ -306,7 +351,7 @@ const html = `<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KR Token Report — ${new Date().toISOString().slice(0, 10)}</title>
+<title>${esc(config.projectName)} Token Report</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root { color-scheme: light; }
@@ -336,8 +381,9 @@ const html = `<!DOCTYPE html>
 </style>
 </head>
 <body>
-<h1>KR Token Report</h1>
-<p class="meta">Generated ${new Date().toISOString()} · ${Object.keys(distLight).length} tokens (light) · ${Object.keys(distDark).length} tokens (dark) · site: ${esc(SITE)}</p>
+<h1>${esc(config.projectName)} Token Report</h1>
+<p class="meta">${Object.keys(distLight).length} tokens (light) · ${Object.keys(distDark).length} tokens (dark) · site: ${esc(SITE)}</p>
+<p class="meta">No generation timestamp: this file is committed, and a clock reading would make every rebuild a diff. Use <code>git log dist/report.html</code> for when it last changed.</p>
 
 <h2>Health checks — ${passCount}/${checks.length} passing</h2>
 ${checks.map(checkHTML).join('\n')}
@@ -346,13 +392,13 @@ ${checks.map(checkHTML).join('\n')}
 <table><tr><th>Variable</th><th>Value (light)</th><th>Used in</th></tr>${usedList}</table>
 
 <h2>Colours — semantic</h2>
-<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>${colourRows('kr-colour')}</table>
+<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>${colourRows(`${PREFIX}-colour`)}</table>
 
 <h2>Colours — components</h2>
-<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>${colourRows('kr-components')}</table>
+<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>${colourRows(`${PREFIX}-components`)}</table>
 
 <h2>Colours — primitives <span class="darknote">(not for direct use per guidelines)</span></h2>
-<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>${colourRows('kr-primitives')}</table>
+<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>${colourRows(`${PREFIX}-primitives`)}</table>
 
 <h2>Type scale <span class="darknote">(rendered assuming px — see unitless lint check. Families follow site convention: display/headline/title → Cormorant Garamond, body → Lora, label → Jost. The tokens don't bind a family per role — consider adding that in Figma.)</span></h2>
 <table>${typeRows}</table>

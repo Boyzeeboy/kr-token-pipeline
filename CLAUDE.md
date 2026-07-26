@@ -34,16 +34,27 @@ contrast requirement.
   cost real time on the 2026-06-22 sync — reach for `use_figma` first.
 - The file is **Kirsten Rossiter Token Pipeline**, key `M4EeBpB5Ez5cgTkwJnk4LK`.
 - **Only `tokens/tokens.{light,dark}.json` are compiled into `dist/`.**
-  `color.json` / `typography.json` / `size.json` feed Storybook and the changelog
-  snapshot, not the CSS/JS build. `guidelines.json` is a reference file (read by
-  people and agents) — nothing consumes it programmatically.
-- **Build gotcha:** Style Dictionary drops any token nested under a parent that
-  has its own `$value` (e.g. `input.border` has a value *and* `focus`/`error`
-  children → only `input-border` is emitted). Surfacing those leaves is a build
-  change, not a value sync.
+  `guidelines.json` is a reference file (read by people and agents) — nothing
+  consumes it programmatically.
+- **⚠ `color.json` / `typography.json` / `size.json` are STALE.** They feed the
+  Storybook stories and the changelog snapshot, but the Figma sync never writes
+  them, so they have drifted from what actually ships (71 of 150 shared values
+  disagree with `tokens.light.json` as of 2026-07-26). Treat `dist/` — not these
+  files — as the truth for any token value, and don't trust the Storybook colour
+  swatches until this is resolved.
+- **Name-vs-group collisions are rejected, not silently dropped.** Style
+  Dictionary emits only one token when a name is also a group prefix (e.g.
+  `input.border` has a `$value` *and* `focus`/`error` children → only
+  `input-border` survives). The sync now fails loudly on that shape rather than
+  letting it through — see `setDeep()` in `scripts/lib/figma-to-dtcg.mjs`. Fix it
+  by renaming in Figma to parent-child (`input.border.default`, not
+  `input.border`).
 
 ## Commands
 
-- `npm run build` — build tokens (Style Dictionary) + snapshot/changelog.
+- `npm run build` — build tokens (Style Dictionary) + snapshot/changelog + report.
+- `npm test` — build, verify outputs, run the transform unit tests. The CI gate.
+- `npm run test:unit` — transform unit tests only (fast).
+- `npm run sync:figma -- --dry-run` — diff a saved Figma dump against `tokens/`.
 - `npm run storybook` — run Storybook locally (port 6006).
 - `npm run build-storybook` — build the static Storybook.

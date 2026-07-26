@@ -50,43 +50,19 @@ StyleDictionary.registerFormat({
   },
 });
 
-// ─── Custom: kebab name transform that drops the `DEFAULT` sentinel ──────────
-// DTCG forbids a token node from having both a $value and nested child tokens.
-// Where a token needs a default value AND sub-states (e.g. `input.border` plus
-// `input.border.focus`), we model the default as a `DEFAULT` child. This name
-// transform strips that exact segment so `input.border.DEFAULT` still emits as
-// `<prefix>-input-border` (unchanged), while `input.border.focus` emits alongside it.
-// Only the exact uppercase `DEFAULT` is stripped, so real `default` token names
-// (e.g. `colour.background.default`) are untouched.
-
-StyleDictionary.registerTransform({
-  name: 'name/kebab-default',
-  type: 'name',
-  transform: (token, config, options) => {
-    const prefix = (options && options.prefix) || (config && config.prefix) || '';
-    const segs = [prefix, ...token.path.filter((p) => p !== 'DEFAULT')];
-    return segs
-      .join(' ')
-      .replace(/([a-z0-9])([A-Z])/g, '$1 $2') // split camelCase (onBackground → on background)
-      .split(/[^a-zA-Z0-9]+/)
-      .filter(Boolean)
-      .join('-')
-      .toLowerCase();
-  },
-});
-
 // ─── Shared transform group ───────────────────────────────────────────────────
-// Uses SD's built-in 'css' transforms but keeps the name as kebab-case
-// (DEFAULT-aware, see above).
+// One group for all three platforms: kebab-cased names (prefix-aware, camelCase
+// split — `colour.onBackground.brand` → `<prefix>-colour-on-background-brand`)
+// and CSS-formatted colours (8-digit hex → rgba()).
+//
+// Token names that are ALSO group prefixes (e.g. `input.border` alongside
+// `input.border.focus`) are not modelled here: the Figma sync rejects that shape
+// outright — see setDeep() in scripts/lib/figma-to-dtcg.mjs — because Style
+// Dictionary would silently drop one of the two. Fix it by renaming in Figma.
 
 StyleDictionary.registerTransformGroup({
-  name: 'tokens/css',
-  transforms: ['attribute/cti', 'name/kebab-default', 'color/css'],
-});
-
-StyleDictionary.registerTransformGroup({
-  name: 'tokens/json',
-  transforms: ['attribute/cti', 'name/kebab-default', 'color/css'],
+  name: 'tokens/kebab',
+  transforms: ['attribute/cti', 'name/kebab', 'color/css'],
 });
 
 // ─── Build helper ────────────────────────────────────────────────────────────
@@ -101,7 +77,7 @@ async function buildMode(mode) {
 
       // 1. CSS custom properties
       css: {
-        transformGroup: 'tokens/css',
+        transformGroup: 'tokens/kebab',
         prefix: PREFIX,
         buildPath: `dist/${mode}/`,
         files: [
@@ -118,7 +94,7 @@ async function buildMode(mode) {
 
       // 2. JavaScript ES6 named exports
       js: {
-        transformGroup: 'tokens/json',
+        transformGroup: 'tokens/kebab',
         prefix: PREFIX,
         buildPath: `dist/${mode}/`,
         files: [
@@ -131,7 +107,7 @@ async function buildMode(mode) {
 
       // 3. Flat JSON  { "<prefix>-colour-background-default": "#ffffff", ... }
       json: {
-        transformGroup: 'tokens/json',
+        transformGroup: 'tokens/kebab',
         prefix: PREFIX,
         buildPath: `dist/${mode}/`,
         files: [

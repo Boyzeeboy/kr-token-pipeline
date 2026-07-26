@@ -35,8 +35,9 @@ const CHANGELOG_PATH = join(ROOT, 'tokens/changelog.json');
 /**
  * Recursively walk a token tree and collect every leaf that has a $value.
  * Keys starting with $ are metadata and are skipped during recursion.
- * Dark-mode variants in $extensions.modes.dark are recorded as separate
- * entries with a "[dark]" suffix so they can be diffed independently.
+ *
+ * Light and dark are separate files, each flattened under its own namespace
+ * (see TRACKED_FILES), so there is no per-token mode variant to unpack here.
  *
  * @param {object} obj   - The current node in the token tree.
  * @param {string} prefix - Dot-path built up during recursion.
@@ -51,17 +52,7 @@ function flattenTokens(obj, prefix = '', result = {}) {
 
     const path = prefix ? `${prefix}/${key}` : key;
 
-    if ('$value' in val) {
-      result[path] = String(val.$value);
-
-      // Capture dark-mode variants stored in $extensions.modes
-      const modes = val.$extensions?.modes ?? {};
-      for (const [mode, modeVal] of Object.entries(modes)) {
-        if (modeVal !== undefined && modeVal !== null) {
-          result[`${path}[${mode}]`] = String(modeVal);
-        }
-      }
-    }
+    if ('$value' in val) result[path] = String(val.$value);
 
     // Always recurse — a node can have both a $value AND nested children
     flattenTokens(val, path, result);
@@ -145,43 +136,52 @@ if (existsSync(SNAPSHOT_PATH)) {
 // diff and store an empty changes array so the changelog entry is clean.
 const changes = isFirstRun ? [] : diffTokens(previousTokens, currentTokens);
 
-// ── Write updated snapshot ────────────────────────────────────────────────────
-writeFileSync(
-  SNAPSHOT_PATH,
-  JSON.stringify(
-    {
-      generatedAt: timestamp,
-      tokenCount:  Object.keys(currentTokens).length,
-      tokens:      currentTokens,
-    },
-    null,
-    2,
-  ),
-);
+// A rebuild with no token change must leave the tree byte-identical, so that
+// `git diff --exit-code dist/` is a meaningful CI gate and repeated local builds
+// don't churn the repo. Nothing below runs on a no-op build.
+const isNoop = !isFirstRun && changes.length === 0;
 
-// ── Append to changelog (newest entry first) ──────────────────────────────────
-let changelog = [];
-if (existsSync(CHANGELOG_PATH)) {
-  try {
-    changelog = JSON.parse(readFileSync(CHANGELOG_PATH, 'utf8'));
-    if (!Array.isArray(changelog)) changelog = [];
-  } catch {
-    changelog = [];
+if (!isNoop) {
+  // ── Write updated snapshot ──────────────────────────────────────────────────
+  writeFileSync(
+    SNAPSHOT_PATH,
+    JSON.stringify(
+      {
+        generatedAt: timestamp,
+        tokenCount:  Object.keys(currentTokens).length,
+        tokens:      currentTokens,
+      },
+      null,
+      2,
+    ),
+  );
+
+  // ── Append to changelog (newest entry first) ────────────────────────────────
+  let changelog = [];
+  if (existsSync(CHANGELOG_PATH)) {
+    try {
+      changelog = JSON.parse(readFileSync(CHANGELOG_PATH, 'utf8'));
+      if (!Array.isArray(changelog)) changelog = [];
+    } catch {
+      changelog = [];
+    }
   }
+
+  const entry = {
+    // Max existing id + 1. Not `length + 1`: entries are unshifted, and the log
+    // can be trimmed or reset (scaffold-client), which would recycle ids.
+    id:          Math.max(0, ...changelog.map((e) => Number(e?.id) || 0)) + 1,
+    timestamp,
+    isFirstRun,
+    tokenCount:  Object.keys(currentTokens).length,
+    changeCount: changes.length,
+    changes,
+  };
+
+  changelog.unshift(entry);
+
+  writeFileSync(CHANGELOG_PATH, JSON.stringify(changelog, null, 2));
 }
-
-const entry = {
-  id:          changelog.length + 1,
-  timestamp,
-  isFirstRun,
-  tokenCount:  Object.keys(currentTokens).length,
-  changeCount: changes.length,
-  changes,
-};
-
-changelog.unshift(entry);
-
-writeFileSync(CHANGELOG_PATH, JSON.stringify(changelog, null, 2));
 
 // ── Console summary ───────────────────────────────────────────────────────────
 if (isFirstRun) {
@@ -189,7 +189,7 @@ if (isFirstRun) {
     `[snapshot] ✓ Initialized — ${Object.keys(currentTokens).length} tokens now tracked.`,
   );
 } else if (changes.length === 0) {
-  console.log('[snapshot] ✓ No token changes detected.');
+  console.log('[snapshot] ✓ No token changes detected — snapshot/changelog left untouched.');
 } else {
   const added    = changes.filter(c => c.type === 'added').length;
   const removed  = changes.filter(c => c.type === 'removed').length;
