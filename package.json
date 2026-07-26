@@ -1,6 +1,6 @@
 {
   "name": "kirsten-rossiter-tokens",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Design token pipeline for Kirsten Rossiter using Style Dictionary",
   "type": "module",
   "files": [
@@ -27,6 +27,8 @@
     "generate-docs": "node scripts/generate-docs.mjs",
     "report": "node scripts/generate-report.mjs",
     "scaffold-client": "node scripts/scaffold-client.mjs",
+    "sync:figma": "node scripts/sync-from-figma.mjs",
+    "test:unit": "node --test scripts/lib/*.test.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "chromatic",
