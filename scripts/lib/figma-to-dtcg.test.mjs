@@ -193,6 +193,41 @@ test('Figma float32 imprecision is rounded to the authored value', () => {
   assert.equal(light.fonts['letter-spacing'].label.large.$value, '1.7px');
 });
 
+test('$description attaches from the descriptions map, in both modes', () => {
+  const descriptions = {
+    'VariableCollectionId:68:2831': { 'gold/500': 'The brand gold.' },
+    'VariableCollectionId:1:6836': { 'Fonts/family/base': 'UI sans-serif.' },
+  };
+  const { light, dark } = transform(dump, undefined, descriptions);
+  assert.equal(light.primitives.gold['500'].$description, 'The brand gold.');
+  assert.equal(dark.primitives.gold['500'].$description, 'The brand gold.');
+  // single-mode tokens land in both trees and keep the description
+  assert.equal(dark.fonts.family.base.$description, 'UI sans-serif.');
+  // tokens with no entry get no key at all, rather than an empty string
+  assert.ok(!('$description' in light.primitives.transparent));
+});
+
+test('descriptions are keyed by COLLECTION — Spacing and Radius both define scale/4', () => {
+  // Figma variable names are not unique across collections. A flat name-keyed
+  // map merged these and silently lost 5 of the real file's 223 descriptions.
+  const descriptions = {
+    'VariableCollectionId:1394:371': { 'scale/4': '4px — icon gaps, tight internal spacing' },
+    'VariableCollectionId:1399:371': { 'scale/8': '8px — badges, tags, tooltips' },
+  };
+  const { light } = transform(dump, undefined, descriptions);
+  assert.equal(light.spacing.scale['4'].$description, '4px — icon gaps, tight internal spacing');
+  assert.equal(light.radius.scale['8'].$description, '8px — badges, tags, tooltips');
+  // the spacing entry must NOT bleed into radius, or vice versa
+  assert.ok(!('$description' in light.radius.scale['8'] && light.radius.scale['8'].$description.includes('icon gaps')));
+  assert.ok(!('$description' in (light.spacing.scale['8'] ?? {})));
+});
+
+test('transform works with no descriptions argument at all', () => {
+  const { light } = transform(dump);
+  assert.equal(light.primitives.gold['500'].$value, '#a07840');
+  assert.ok(!('$description' in light.primitives.gold['500']));
+});
+
 test('name-that-is-also-a-group collision fails loudly', () => {
   const collide = { collections: [], variables: [
     { id: 'a', name: 'input/border', resolvedType: 'COLOR',

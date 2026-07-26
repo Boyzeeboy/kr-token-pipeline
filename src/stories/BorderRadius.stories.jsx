@@ -1,16 +1,16 @@
 import React from 'react';
-import sizeData from '../../tokens/size.json';
+import tokens from '../../tokens/tokens.light.json';
 import { collectTokens, parsePx } from './token-utils';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const scaleTokens = collectTokens(sizeData.radius.scale).map((t) => ({
+const scaleTokens = collectTokens(tokens.radius.scale).map((t) => ({
   ...t,
   px: parsePx(t.value),
   displayName: `radius/scale/${t.path}`,
 }));
 
-const aliasTokens = collectTokens(sizeData.radius)
+const aliasTokens = collectTokens(tokens.radius)
   .filter((t) => !t.path.startsWith('scale/'))
   .map((t) => ({
     ...t,
@@ -130,7 +130,7 @@ function BorderRadiusPage() {
       <h1 style={styles.pageTitle}>Border Radius Tokens</h1>
       <p style={styles.pageSubtitle}>
         All border-radius values imported from{' '}
-        <code style={{ background: '#e6e9ea', padding: '1px 5px', borderRadius: '3px' }}>tokens/size.json</code>.
+        <code style={{ background: '#e6e9ea', padding: '1px 5px', borderRadius: '3px' }}>tokens/tokens.light.json</code>.
         Each box is rendered at its actual radius.
       </p>
 
@@ -157,7 +157,7 @@ export default {
   title: 'Design Tokens/Border Radius',
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Border-radius tokens rendered at their actual values, dynamically read from tokens/size.json.' } },
+    docs: { description: { component: 'Border-radius tokens rendered at their actual values, dynamically read from tokens/tokens.light.json.' } },
   },
 };
 

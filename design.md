@@ -39,7 +39,7 @@ open the right one for the task:
 - **Source token definitions (edit only via Figma sync, see below):**
   `tokens/tokens.{light,dark}.json` are the **only** files Style Dictionary
   compiles into `dist/` — they drive every CSS/JS value consumers use.
-  `tokens/color.json`, `tokens/typography.json`, and `tokens/size.json` feed
+  `tokens/tokens.light.json`, `tokens/tokens.light.json`, and `tokens/tokens.light.json` feed
   Storybook and the changelog snapshot, not the built outputs.
 - **Health & drift report:** `dist/report.html` (regenerated on every
   `npm run build`) — build/sync/consumer-contract checks, colour swatches for
@@ -70,14 +70,14 @@ open the right one for the task:
   `--serif-body`) for body prose; `Jost` (`family/base`, site alias `--sans`)
   for UI text: labels, buttons, navigation, and form elements. Weights:
   400 / 500 / 600 / 700. Full type scale (display → body → label) defined in
-  `tokens/typography.json` and shown in the Typography story.
+  `tokens/tokens.light.json` and shown in the Typography story.
   **Body copy is Lora, not Jost** — pages must set `--serif-body` on prose;
   paragraphs otherwise inherit the global `--sans` body rule (this bug shipped
   once on building-the-nations.html; the token report's type scale documents
   the role→family convention).
 - **Spacing:** Strict 4px base scale (`4, 8, 12, 16, 20, 24, …`) in
-  `tokens/size.json`. Do not introduce off-scale spacing values.
-- **Radius:** See the BorderRadius story and `tokens/size.json`.
+  `tokens/tokens.light.json`. Do not introduce off-scale spacing values.
+- **Radius:** See the BorderRadius story and `tokens/tokens.light.json`.
 - **Modes:** Light is the default (`:root`); dark is applied via
   `:root[data-theme="dark"]` or `.dark`.
 

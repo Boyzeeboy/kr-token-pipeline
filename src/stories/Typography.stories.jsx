@@ -1,10 +1,10 @@
 import React from 'react';
-import typographyData from '../../tokens/typography.json';
+import tokens from '../../tokens/tokens.light.json';
 import { collectTokens } from './token-utils';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const fonts = typographyData.fonts;
+const fonts = tokens.fonts;
 
 const families = collectTokens(fonts.family);
 const weights = collectTokens(fonts.weight);
@@ -217,7 +217,7 @@ function TypographyPage() {
       <h1 style={s.pageTitle}>Typography Tokens</h1>
       <p style={s.pageSubtitle}>
         Font families, sizes, weights, line heights, and letter spacing imported from{' '}
-        <code style={{ background: '#e6e9ea', padding: '1px 5px', borderRadius: '3px' }}>tokens/typography.json</code>.
+        <code style={{ background: '#e6e9ea', padding: '1px 5px', borderRadius: '3px' }}>tokens/tokens.light.json</code>.
       </p>
 
       <FamilySection />
@@ -235,7 +235,7 @@ export default {
   title: 'Design Tokens/Typography',
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'All typography tokens, dynamically read from tokens/typography.json.' } },
+    docs: { description: { component: 'All typography tokens, dynamically read from tokens/tokens.light.json.' } },
   },
 };
 

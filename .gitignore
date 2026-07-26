@@ -1,5 +1,6 @@
 node_modules/
 tokens/.figma-dump.json
+tokens/.figma-descriptions.json
 tokens/.dump-*.json
 .DS_Store
 storybook-static/

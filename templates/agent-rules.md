@@ -33,15 +33,17 @@ contrast requirement.
   selected in the Figma desktop app and fails with `"nothing selected"`. This
   cost real time on the 2026-06-22 sync — reach for `use_figma` first.
 - The file is **{{figmaFileName}}**, key `{{figmaFileKey}}`.
-- **Only `tokens/tokens.{light,dark}.json` are compiled into `dist/`.**
-  `guidelines.json` is a reference file (read by people and agents) — nothing
-  consumes it programmatically.
-- **⚠ `color.json` / `typography.json` / `size.json` are STALE.** They feed the
-  Storybook stories and the changelog snapshot, but the Figma sync never writes
-  them, so they have drifted from what actually ships (71 of 150 shared values
-  disagree with `tokens.light.json` as of 2026-07-26). Treat `dist/` — not these
-  files — as the truth for any token value, and don't trust the Storybook colour
-  swatches until this is resolved.
+- **`tokens/tokens.{light,dark}.json` are the only token files.** They are
+  compiled into `dist/`, read by the Storybook stories, and tracked by the
+  changelog snapshot. `color.json` / `typography.json` / `size.json` were a
+  second, unsynced copy that had drifted badly (71 of 150 shared values wrong)
+  and were deleted on 2026-07-26 — do not reintroduce that shape.
+- **Descriptions live in Figma** and sync into `$description` on each token
+  (223 of 302 tokens carry one). They are fetched separately from the values —
+  see `scripts/figma-fetch-descriptions.snippet.js` and `scripts/figma-sink.mjs`
+  — because the text is ~70KB and exceeds the plugin bridge's response cap.
+  `guidelines.json` is an older, partial reference file kept for humans; nothing
+  consumes it programmatically and it still uses pre-rename paths.
 - **Name-vs-group collisions are rejected, not silently dropped.** Style
   Dictionary emits only one token when a name is also a group prefix (e.g.
   `input.border` has a `$value` *and* `focus`/`error` children → only

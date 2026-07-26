@@ -167,9 +167,13 @@ function sortDeep(o) {
 /**
  * @param {{collections:Array, variables:Array}} dump  raw Figma dump
  * @param {object} [cfg]  defaults to CONFIG
+ * @param {object} [descriptions]  collectionId → variableName → description text.
+ *   Keyed by COLLECTION as well as name because Figma variable names are not
+ *   unique across collections — Spacing and Radius both define `scale/4`, `xs`,
+ *   `s`, `m`, `l`, `xl`, and a flat name-keyed map silently loses 5 of them.
  * @returns {{light:object, dark:object}} DTCG trees (unsorted metadata aside)
  */
-export function transform(dump, cfg = CONFIG) {
+export function transform(dump, cfg = CONFIG, descriptions = {}) {
   const varsById = {};
   for (const v of dump.variables) varsById[v.id] = v;
 
@@ -183,9 +187,13 @@ export function transform(dump, cfg = CONFIG) {
     const segs = pathFor(v.name, col);
     const dtcgPath = segs.join('/');
 
+    const desc = descriptions[v.variableCollectionId]?.[v.name];
+
     for (const [modeId, logical] of Object.entries(col.modes)) {
       const concrete = resolveValue(v.valuesByMode[modeId], modeId, varsById);
       const token = toToken(concrete, dtcgPath, cfg, v.resolvedType);
+      // A Figma variable carries one description across all its modes.
+      if (desc) token.$description = desc;
       const targets = logical === 'both' ? ['light', 'dark'] : [logical];
       for (const t of targets) setDeep(trees[t], segs, token);
     }

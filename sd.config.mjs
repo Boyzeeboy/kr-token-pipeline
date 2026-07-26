@@ -87,6 +87,14 @@ async function buildMode(mode) {
             options: {
               selector: mode === 'light' ? ':root' : ':root[data-theme="dark"], .dark',
               outputReferences: false,
+              // Tokens carry a $description synced from Figma. Style Dictionary
+              // would emit each one as a CSS comment, which took variables.css
+              // from 12.5KB to 82KB (2.2KB → 16.7KB gzipped) — documentation
+              // shipped to every visitor of the consuming site. The descriptions
+              // stay in tokens/*.json, where Storybook and the docs read them.
+              // NB: commentStyle lives under `formatting`, not at the top level
+              // of options — see createPropertyFormatter in style-dictionary.
+              formatting: { commentStyle: 'none' },
             },
           },
         ],

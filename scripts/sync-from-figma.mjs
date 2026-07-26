@@ -13,7 +13,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { transform } from './lib/figma-to-dtcg.mjs';
 import config from '../pipeline.config.mjs';
@@ -67,10 +67,25 @@ if (Array.isArray(dump.v) && Array.isArray(dump.c)) {
   };
 }
 
+// ─── Descriptions (optional) ─────────────────────────────────────────────────
+// Written by scripts/figma-fetch-descriptions.snippet.js via scripts/figma-sink.mjs.
+// Kept in its own file because the description text is ~70KB — five times the
+// size of the value dump — and would push the main fetch past the plugin's
+// response cap. Absent file = tokens build without $description, not an error.
+const DESC_PATH = join(ROOT, 'tokens', '.figma-descriptions.json');
+let descriptions = {};
+if (existsSync(DESC_PATH)) {
+  descriptions = JSON.parse(readFileSync(DESC_PATH, 'utf8'));
+  const n = Object.values(descriptions).reduce((a, c) => a + Object.keys(c).length, 0);
+  console.log(`  ok  ${n} variable descriptions loaded`);
+} else {
+  console.warn(`  warn  no ${relative(ROOT, DESC_PATH)} — tokens will have no $description.`);
+}
+
 // ─── Transform ───────────────────────────────────────────────────────────────
 let trees;
 try {
-  trees = transform(dump); // { light, dark } — throws loudly on collisions
+  trees = transform(dump, undefined, descriptions); // throws loudly on collisions
 } catch (e) {
   console.error(`✗ Transform failed: ${e.message}`);
   process.exit(1);
@@ -122,9 +137,22 @@ function flat(o, p = '', out = {}) {
   }
   return out;
 }
+
+/** Same walk, but collecting $description — tracked separately so prose edits
+ *  in Figma show up in the diff instead of landing silently. */
+function flatDesc(o, p = '', out = {}) {
+  for (const [k, v] of Object.entries(o)) {
+    if (k.startsWith('$')) continue;
+    if (v && typeof v === 'object' && '$value' in v) {
+      if (v.$description) out[`${p}${k}`] = String(v.$description);
+    } else if (v && typeof v === 'object') flatDesc(v, `${p}${k}/`, out);
+  }
+  return out;
+}
 function diff(mode) {
   const path = join(ROOT, 'tokens', `tokens.${mode}.json`);
-  const cur = existsSync(path) ? flat(JSON.parse(readFileSync(path, 'utf8'))) : {};
+  const prev = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : {};
+  const cur = flat(prev);
   const nxt = flat(outputs[mode]);
   const keys = new Set([...Object.keys(cur), ...Object.keys(nxt)]);
   const added = [], removed = [], changed = [];
@@ -133,14 +161,29 @@ function diff(mode) {
     else if (!(k in nxt)) removed.push(k);
     else if (cur[k] !== nxt[k]) changed.push(`${k}: ${cur[k]} → ${nxt[k]}`);
   }
-  return { added, removed, changed };
+
+  // Descriptions are counted, not listed — they are multi-line prose and would
+  // bury the value diff. `git diff tokens/` is the place to read the wording.
+  const dCur = flatDesc(prev), dNxt = flatDesc(outputs[mode]);
+  const dKeys = new Set([...Object.keys(dCur), ...Object.keys(dNxt)]);
+  let dAdded = 0, dRemoved = 0, dChanged = 0;
+  for (const k of dKeys) {
+    if (!(k in dCur)) dAdded++;
+    else if (!(k in dNxt)) dRemoved++;
+    else if (dCur[k] !== dNxt[k]) dChanged++;
+  }
+  return { added, removed, changed, desc: { added: dAdded, removed: dRemoved, changed: dChanged } };
 }
 
 let totalChange = 0;
 for (const mode of ['light', 'dark']) {
   const d = diff(mode);
-  totalChange += d.added.length + d.removed.length + d.changed.length;
+  const dTotal = d.desc.added + d.desc.removed + d.desc.changed;
+  totalChange += d.added.length + d.removed.length + d.changed.length + dTotal;
   console.log(`\n[${mode}] +${d.added.length} added  -${d.removed.length} removed  ~${d.changed.length} changed`);
+  if (dTotal) {
+    console.log(`  \$description: +${d.desc.added} added  -${d.desc.removed} removed  ~${d.desc.changed} changed`);
+  }
   for (const x of d.added.slice(0, 8))   console.log(`  + ${x}`);
   for (const x of d.removed.slice(0, 8)) console.log(`  - ${x}`);
   for (const x of d.changed.slice(0, 8)) console.log(`  ~ ${x}`);
