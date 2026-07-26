@@ -9,111 +9,111 @@
     "action": {
       "primary": {
         "$type": "color",
-        "$value": "#a07840"
+        "$value": "#c4a264"
       },
       "primary-hover": {
         "$type": "color",
-        "$value": "#886534"
+        "$value": "#d4bf94"
       },
       "primary-pressed": {
         "$type": "color",
-        "$value": "#6e5229"
+        "$value": "#e8d9bc"
       },
       "secondary": {
         "$type": "color",
-        "$value": "#d4c9b4"
+        "$value": "#3d3830"
       },
       "secondary-hover": {
         "$type": "color",
-        "$value": "#b8a990"
+        "$value": "#5c5040"
       },
       "secondary-pressed": {
         "$type": "color",
-        "$value": "#9a8b72"
+        "$value": "#7a6c56"
       }
     },
     "background": {
       "brand": {
         "$type": "color",
-        "$value": "#a07840"
+        "$value": "#c4a264"
       },
       "default": {
         "$type": "color",
-        "$value": "#f5f0e8"
+        "$value": "#1a1714"
       },
       "error": {
         "$type": "color",
-        "$value": "#fdecec"
+        "$value": "#2a1212"
       },
       "info": {
         "$type": "color",
-        "$value": "#eff6ff"
+        "$value": "#0a1628"
       },
       "inverse": {
         "$type": "color",
-        "$value": "#3a2b15"
+        "$value": "#f7f0e4"
       },
       "muted": {
         "$type": "color",
-        "$value": "#e2d9c8"
+        "$value": "#2e2820"
       },
       "promo": {
         "$type": "color",
-        "$value": "#6e5229"
+        "$value": "#e8d9bc"
       },
       "raised": {
         "$type": "color",
-        "$value": "#f5f0e8"
+        "$value": "#1a1714"
       },
       "subtle": {
         "$type": "color",
-        "$value": "#ede6d8"
+        "$value": "#221c14"
       },
       "success": {
         "$type": "color",
-        "$value": "#e6f6f3"
+        "$value": "#0f2e2a"
       },
       "surface": {
         "$type": "color",
-        "$value": "#ede6d8"
+        "$value": "#221c14"
       },
       "warning": {
         "$type": "color",
-        "$value": "#fff6e5"
+        "$value": "#2a1f0f"
       }
     },
     "border": {
       "default": {
         "$type": "color",
-        "$value": "#5c5040"
+        "$value": "#b8a990"
       },
       "error": {
         "$type": "color",
-        "$value": "#b42323"
+        "$value": "#ff8a8a"
       },
       "info": {
         "$type": "color",
-        "$value": "#2563eb"
+        "$value": "#6aaff0"
       },
       "interactive": {
         "$type": "color",
-        "$value": "#a07840"
+        "$value": "#c4a264"
       },
       "strong": {
         "$type": "color",
-        "$value": "#3d3830"
+        "$value": "#d4c9b4"
       },
       "subtle": {
         "$type": "color",
-        "$value": "#7a6c56"
+        "$value": "#9a8b72"
       },
       "success": {
         "$type": "color",
-        "$value": "#0c8272"
+        "$value": "#5fc3b5"
       },
       "warning": {
         "$type": "color",
-        "$value": "#b65f04"
+        "$value": "#ffd999"
       }
     },
     "dataviz": {
@@ -121,45 +121,45 @@
         "neutral": {
           "mid": {
             "$type": "color",
-            "$value": "#9a8b72"
+            "$value": "#7a6c56"
           },
           "strong": {
             "$type": "color",
-            "$value": "#5c5040"
+            "$value": "#b8a990"
           },
           "strongest": {
             "$type": "color",
-            "$value": "#2e2820"
+            "$value": "#e2d9c8"
           },
           "weak": {
             "$type": "color",
-            "$value": "#d4c9b4"
+            "$value": "#3d3830"
           },
           "weakest": {
             "$type": "color",
-            "$value": "#ede6d8"
+            "$value": "#221c14"
           }
         },
         "teal": {
           "mid": {
             "$type": "color",
-            "$value": "#c4a264"
+            "$value": "#886534"
           },
           "strong": {
             "$type": "color",
-            "$value": "#a07840"
+            "$value": "#c4a264"
           },
           "strongest": {
             "$type": "color",
-            "$value": "#6e5229"
+            "$value": "#e8d9bc"
           },
           "weak": {
             "$type": "color",
-            "$value": "#d4bf94"
+            "$value": "#6e5229"
           },
           "weakest": {
             "$type": "color",
-            "$value": "#e8d9bc"
+            "$value": "#543e1f"
           }
         }
       }
@@ -167,155 +167,155 @@
     "divider": {
       "default": {
         "$type": "color",
-        "$value": "#d4c9b4"
+        "$value": "#3d3830"
       },
       "strong": {
         "$type": "color",
-        "$value": "#b8a990"
+        "$value": "#5c5040"
       },
       "subtle": {
         "$type": "color",
-        "$value": "#e2d9c8"
+        "$value": "#2e2820"
       }
     },
     "icon": {
       "brand": {
         "$type": "color",
-        "$value": "#a07840"
+        "$value": "#c4a264"
       },
       "default": {
         "$type": "color",
-        "$value": "#3d3830"
+        "$value": "#d4c9b4"
       },
       "error": {
         "$type": "color",
-        "$value": "#b42323"
+        "$value": "#ff8a8a"
       },
       "info": {
         "$type": "color",
-        "$value": "#2563eb"
+        "$value": "#6aaff0"
       },
       "inverse": {
         "$type": "color",
-        "$value": "#1a1714"
+        "$value": "#f5f0e8"
       },
       "subtle": {
         "$type": "color",
-        "$value": "#7a6c56"
+        "$value": "#9a8b72"
       },
       "success": {
         "$type": "color",
-        "$value": "#0c8272"
+        "$value": "#5fc3b5"
       },
       "warning": {
         "$type": "color",
-        "$value": "#b65f04"
+        "$value": "#ffd999"
       }
     },
     "ink": {
       "onBrand": {
         "$type": "color",
-        "$value": "#1a1714"
+        "$value": "#f5f0e8"
       },
       "onNeutral": {
         "$type": "color",
-        "$value": "#221c14"
+        "$value": "#ede6d8"
       }
     },
     "onBackground": {
       "brand": {
         "$type": "color",
-        "$value": "#1a1714"
+        "$value": "#f5f0e8"
       },
       "default": {
         "$type": "color",
-        "$value": "#221c14"
+        "$value": "#ede6d8"
       },
       "error": {
         "$type": "color",
-        "$value": "#8f1a1a"
+        "$value": "#ffaaaa"
       },
       "info": {
         "$type": "color",
-        "$value": "#1d4ed8"
+        "$value": "#90c4f5"
       },
       "inverse": {
         "$type": "color",
-        "$value": "#1a1714"
+        "$value": "#f5f0e8"
       },
       "muted": {
         "$type": "color",
-        "$value": "#5c5040"
+        "$value": "#b8a990"
       },
       "promo": {
         "$type": "color",
-        "$value": "#1a1714"
+        "$value": "#f5f0e8"
       },
       "subtle": {
         "$type": "color",
-        "$value": "#3d3830"
+        "$value": "#d4c9b4"
       },
       "success": {
         "$type": "color",
-        "$value": "#096458"
+        "$value": "#84d5ca"
       },
       "warning": {
         "$type": "color",
-        "$value": "#8c4603"
+        "$value": "#ffe8bf"
       }
     },
     "state": {
       "active": {
         "$type": "color",
-        "$value": "#f2ead8"
+        "$value": "#3a2b15"
       },
       "disabled": {
         "bg": {
           "$type": "color",
-          "$value": "#e2d9c8"
+          "$value": "#2e2820"
         },
         "text": {
           "$type": "color",
-          "$value": "#9a8b72"
+          "$value": "#7a6c56"
         }
       },
       "focus": {
         "$type": "color",
-        "$value": "#a07840"
+        "$value": "#c4a264"
       },
       "hover": {
         "$type": "color",
-        "$value": "#f2ead8"
+        "$value": "#3a2b15"
       },
       "selected": {
         "$type": "color",
-        "$value": "#faf7f2"
+        "$value": "#20170b"
       }
     },
     "text": {
       "inverse": {
         "$type": "color",
-        "$value": "#1a1714"
+        "$value": "#f5f0e8"
       },
       "link": {
         "$type": "color",
-        "$value": "#a07840"
+        "$value": "#c4a264"
       },
       "link-hover": {
         "$type": "color",
-        "$value": "#886534"
+        "$value": "#d4bf94"
       },
       "primary": {
         "$type": "color",
-        "$value": "#221c14"
+        "$value": "#ede6d8"
       },
       "secondary": {
         "$type": "color",
-        "$value": "#3d3830"
+        "$value": "#d4c9b4"
       },
       "tertiary": {
         "$type": "color",
-        "$value": "#5c5040"
+        "$value": "#b8a990"
       }
     }
   },
@@ -324,73 +324,73 @@
       "error": {
         "bg": {
           "$type": "color",
-          "$value": "#fdecec"
+          "$value": "#2a1212"
         },
         "border": {
           "$type": "color",
-          "$value": "#b42323"
+          "$value": "#ff8a8a"
         },
         "icon": {
           "$type": "color",
-          "$value": "#b42323"
+          "$value": "#ff8a8a"
         },
         "text": {
           "$type": "color",
-          "$value": "#8f1a1a"
+          "$value": "#ffaaaa"
         }
       },
       "info": {
         "bg": {
           "$type": "color",
-          "$value": "#eff6ff"
+          "$value": "#0a1628"
         },
         "border": {
           "$type": "color",
-          "$value": "#2563eb"
+          "$value": "#6aaff0"
         },
         "icon": {
           "$type": "color",
-          "$value": "#2563eb"
+          "$value": "#6aaff0"
         },
         "text": {
           "$type": "color",
-          "$value": "#1d4ed8"
+          "$value": "#90c4f5"
         }
       },
       "success": {
         "bg": {
           "$type": "color",
-          "$value": "#e6f6f3"
+          "$value": "#0f2e2a"
         },
         "border": {
           "$type": "color",
-          "$value": "#0c8272"
+          "$value": "#5fc3b5"
         },
         "icon": {
           "$type": "color",
-          "$value": "#0c8272"
+          "$value": "#5fc3b5"
         },
         "text": {
           "$type": "color",
-          "$value": "#096458"
+          "$value": "#84d5ca"
         }
       },
       "warning": {
         "bg": {
           "$type": "color",
-          "$value": "#fff6e5"
+          "$value": "#2a1f0f"
         },
         "border": {
           "$type": "color",
-          "$value": "#b65f04"
+          "$value": "#ffd999"
         },
         "icon": {
           "$type": "color",
-          "$value": "#b65f04"
+          "$value": "#ffd999"
         },
         "text": {
           "$type": "color",
-          "$value": "#8c4603"
+          "$value": "#ffe8bf"
         }
       }
     },
@@ -398,35 +398,35 @@
       "error": {
         "bg": {
           "$type": "color",
-          "$value": "#fdecec"
+          "$value": "#2a1212"
         },
         "icon": {
           "$type": "color",
-          "$value": "#b42323"
+          "$value": "#ff8a8a"
         },
         "text": {
           "$type": "color",
-          "$value": "#8f1a1a"
+          "$value": "#ffaaaa"
         }
       },
       "info": {
         "bg": {
           "$type": "color",
-          "$value": "#eff6ff"
+          "$value": "#0a1628"
         },
         "icon": {
           "$type": "color",
-          "$value": "#2563eb"
+          "$value": "#6aaff0"
         },
         "text": {
           "$type": "color",
-          "$value": "#1d4ed8"
+          "$value": "#90c4f5"
         }
       },
       "promo": {
         "bg": {
           "$type": "color",
-          "$value": "#6e5229"
+          "$value": "#e8d9bc"
         },
         "text": {
           "$type": "color",
@@ -436,29 +436,29 @@
       "success": {
         "bg": {
           "$type": "color",
-          "$value": "#e6f6f3"
+          "$value": "#0f2e2a"
         },
         "icon": {
           "$type": "color",
-          "$value": "#0c8272"
+          "$value": "#5fc3b5"
         },
         "text": {
           "$type": "color",
-          "$value": "#096458"
+          "$value": "#84d5ca"
         }
       },
       "warning": {
         "bg": {
           "$type": "color",
-          "$value": "#fff6e5"
+          "$value": "#2a1f0f"
         },
         "icon": {
           "$type": "color",
-          "$value": "#b65f04"
+          "$value": "#ffd999"
         },
         "text": {
           "$type": "color",
-          "$value": "#8c4603"
+          "$value": "#ffe8bf"
         }
       }
     },
@@ -466,7 +466,7 @@
       "primary": {
         "bg": {
           "$type": "color",
-          "$value": "#a07840"
+          "$value": "#c4a264"
         },
         "border": {
           "$type": "color",
@@ -475,24 +475,24 @@
         "disabled": {
           "bg": {
             "$type": "color",
-            "$value": "#e2d9c8"
+            "$value": "#2e2820"
           },
           "border": {
             "$type": "color",
-            "$value": "#7a6c56"
+            "$value": "#9a8b72"
           },
           "text": {
             "$type": "color",
-            "$value": "#9a8b72"
+            "$value": "#7a6c56"
           }
         },
         "focus": {
           "$type": "color",
-          "$value": "#a07840"
+          "$value": "#c4a264"
         },
         "focus-bg": {
           "$type": "color",
-          "$value": "#a07840"
+          "$value": "#c4a264"
         },
         "focus-text": {
           "$type": "color",
@@ -501,13 +501,13 @@
         "hover": {
           "bg": {
             "$type": "color",
-            "$value": "#886534"
+            "$value": "#d4bf94"
           }
         },
         "pressed": {
           "bg": {
             "$type": "color",
-            "$value": "#6e5229"
+            "$value": "#e8d9bc"
           }
         },
         "text": {
@@ -522,33 +522,33 @@
       "secondary": {
         "bg": {
           "$type": "color",
-          "$value": "#d4c9b4"
+          "$value": "#3d3830"
         },
         "border": {
           "$type": "color",
-          "$value": "#5c5040"
+          "$value": "#b8a990"
         },
         "disabled": {
           "bg": {
             "$type": "color",
-            "$value": "#e2d9c8"
+            "$value": "#2e2820"
           },
           "border": {
             "$type": "color",
-            "$value": "#7a6c56"
+            "$value": "#9a8b72"
           },
           "text": {
             "$type": "color",
-            "$value": "#9a8b72"
+            "$value": "#7a6c56"
           }
         },
         "focus": {
           "$type": "color",
-          "$value": "#a07840"
+          "$value": "#c4a264"
         },
         "focus-bg": {
           "$type": "color",
-          "$value": "#d4c9b4"
+          "$value": "#3d3830"
         },
         "focus-text": {
           "$type": "color",
@@ -557,143 +557,143 @@
         "hover": {
           "bg": {
             "$type": "color",
-            "$value": "#b8a990"
+            "$value": "#5c5040"
           },
           "border": {
             "$type": "color",
-            "$value": "#5c5040"
+            "$value": "#b8a990"
           }
         },
         "pressed": {
           "bg": {
             "$type": "color",
-            "$value": "#9a8b72"
+            "$value": "#7a6c56"
           },
           "border": {
             "$type": "color",
-            "$value": "#5c5040"
+            "$value": "#b8a990"
           }
         },
         "text": {
           "$type": "color",
-          "$value": "#221c14"
+          "$value": "#ede6d8"
         }
       }
     },
     "card": {
       "bg": {
         "$type": "color",
-        "$value": "#f5f0e8"
+        "$value": "#1a1714"
       },
       "border": {
         "$type": "color",
-        "$value": "#7a6c56"
+        "$value": "#9a8b72"
       },
       "meta": {
         "$type": "color",
-        "$value": "#3d3830"
+        "$value": "#d4c9b4"
       },
       "title": {
         "$type": "color",
-        "$value": "#221c14"
+        "$value": "#ede6d8"
       }
     },
     "input": {
       "bg": {
         "$type": "color",
-        "$value": "#ede6d8"
+        "$value": "#221c14"
       },
       "bg-disabled": {
         "$type": "color",
-        "$value": "#e2d9c8"
+        "$value": "#2e2820"
       },
       "border": {
         "$type": "color",
-        "$value": "#5c5040"
+        "$value": "#b8a990"
       },
       "border-disabled": {
         "$type": "color",
-        "$value": "#7a6c56"
+        "$value": "#9a8b72"
       },
       "border-error": {
         "$type": "color",
-        "$value": "#b42323"
+        "$value": "#ff8a8a"
       },
       "border-focus": {
         "$type": "color",
-        "$value": "#a07840"
+        "$value": "#c4a264"
       },
       "border-success": {
         "$type": "color",
-        "$value": "#0c8272"
+        "$value": "#5fc3b5"
       },
       "placeholder": {
         "$type": "color",
-        "$value": "#5c5040"
+        "$value": "#b8a990"
       },
       "text": {
         "$type": "color",
-        "$value": "#221c14"
+        "$value": "#ede6d8"
       },
       "text-disabled": {
         "$type": "color",
-        "$value": "#9a8b72"
+        "$value": "#7a6c56"
       },
       "text-error": {
         "$type": "color",
-        "$value": "#8f1a1a"
+        "$value": "#ffaaaa"
       }
     },
     "nav": {
       "bg": {
         "$type": "color",
-        "$value": "#f5f0e8"
+        "$value": "#1a1714"
       },
       "border": {
         "$type": "color",
-        "$value": "#7a6c56"
+        "$value": "#9a8b72"
       },
       "indicator": {
         "$type": "color",
-        "$value": "#a07840"
+        "$value": "#c4a264"
       },
       "item": {
         "active": {
           "bg": {
             "$type": "color",
-            "$value": "#faf7f2"
+            "$value": "#20170b"
           }
         },
         "hover": {
           "bg": {
             "$type": "color",
-            "$value": "#f2ead8"
+            "$value": "#3a2b15"
           }
         }
       },
       "mega": {
         "bg": {
           "$type": "color",
-          "$value": "#ede6d8"
+          "$value": "#221c14"
         },
         "border": {
           "$type": "color",
-          "$value": "#7a6c56"
+          "$value": "#9a8b72"
         },
         "section": {
           "title": {
             "$type": "color",
-            "$value": "#5c5040"
+            "$value": "#b8a990"
           }
         }
       },
       "text": {
         "$type": "color",
-        "$value": "#3d3830"
+        "$value": "#d4c9b4"
       },
       "text-active": {
         "$type": "color",
-        "$value": "#221c14"
+        "$value": "#ede6d8"
       }
     }
   },
