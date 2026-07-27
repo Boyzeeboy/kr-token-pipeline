@@ -34,7 +34,7 @@
 </head>
 <body>
 <h1>Kirsten Rossiter Token Report</h1>
-<p class="meta">302 tokens (light) · 302 tokens (dark) · site: /Users/warrenrossiter/Documents/Claude/Projects/Kirsten Rossiter</p>
+<p class="meta">302 tokens (light) · 302 tokens (dark) · site: /nonexistent</p>
 <p class="meta">No generation timestamp: this file is committed, and a clock reading would make every rebuild a diff. Use <code>git log dist/report.html</code> for when it last changed.</p>
 
 <h2>Health checks — 6/8 passing</h2>
@@ -48,15 +48,15 @@
   </details>
 <details class="check fail" open>
     <summary><span class="badge">✗</span> Site sync: dist/light/variables.css ↔ vendor/tokens.css</summary>
-    <ul><li>Files differ — run scripts/sync-tokens.sh in the site repo.</li></ul>
+    <ul><li>vendor/tokens.css not found at /nonexistent/vendor/tokens.css</li></ul>
   </details>
 <details class="check pass" >
-    <summary><span class="badge">✓</span> Consumer contract: 15 tokens referenced by the site</summary>
+    <summary><span class="badge">✓</span> Consumer contract: 0 tokens referenced by the site</summary>
     <ul><li>Every var(--kr-…) the site references is defined in vendor/tokens.css.</li></ul>
   </details>
-<details class="check pass" >
-    <summary><span class="badge">✓</span> Fonts: site Google Fonts link ↔ font-family tokens</summary>
-    <ul><li>Loaded families (Cormorant Garamond, Jost, Lora) match tokens exactly.</li></ul>
+<details class="check fail" open>
+    <summary><span class="badge">✗</span> Fonts: site Google Fonts link ↔ font-family tokens</summary>
+    <ul><li>Token kr-fonts-family-base = "Jost" but that family is NOT loaded by the site.</li><li>Token kr-fonts-family-display = "Cormorant Garamond" but that family is NOT loaded by the site.</li><li>Token kr-fonts-family-serif-body = "Lora" but that family is NOT loaded by the site.</li></ul>
   </details>
 <details class="check pass" >
     <summary><span class="badge">✓</span> Lint: doubled group names (e.g. --kr-colour-colour-…)</summary>
@@ -66,13 +66,13 @@
     <summary><span class="badge">✓</span> Lint: numeric font tokens without units</summary>
     <ul><li>All font tokens carry units or are credible ratios.</li></ul>
   </details>
-<details class="check fail" open>
-    <summary><span class="badge">✗</span> Hardcoded hex: 13 distinct values in site CSS/HTML</summary>
-    <ul><li>#1a2235 — matches NO token (contact.html, functions/stripe-webhook.js, thank-you.html)</li><li>#1c1814 — matches NO token (functions/api/contact.js, functions/stripe-webhook.js, thank-you.html)</li><li>#e6ddcd — matches NO token (functions/api/contact.js, functions/stripe-webhook.js)</li><li>#9a938a — matches NO token (functions/api/contact.js, functions/stripe-webhook.js)</li><li>#fbf8f2 — matches NO token (contact.html)</li><li>#9a3b2e — matches NO token (contact.html)</li><li>#6b645c — matches NO token (functions/stripe-webhook.js)</li><li>#1a1310 — matches NO token (styles.css)</li><li>#2a2218 — matches NO token (styles.css)</li><li>#e8a0a0 — matches NO token (styles.css)</li></ul>
+<details class="check pass" >
+    <summary><span class="badge">✓</span> Hardcoded hex: 0 distinct values in site CSS/HTML</summary>
+    <ul><li>Every hardcoded hex matches a token value (still better as var() references).</li></ul>
   </details>
 
-<h2>Tokens the site actually uses (15)</h2>
-<table><tr><th>Variable</th><th>Value (light)</th><th>Used in</th></tr><tr><td><code>--kr-colour-background-default</code></td><td><code>#f5f0e8</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-colour-text-secondary</code></td><td><code>#3d3830</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-colour-text-tertiary</code></td><td><code>#5c5040</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-fonts-family-base</code></td><td><code>Jost</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-family-display</code></td><td><code>Cormorant Garamond</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-family-serif-body</code></td><td><code>Lora</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-200</code></td><td><code>#d4bf94</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-400</code></td><td><code>#b28a50</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-500</code></td><td><code>#a07840</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-100</code></td><td><code>#e2d9c8</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-200</code></td><td><code>#d4c9b4</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-300</code></td><td><code>#b8a990</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-50</code></td><td><code>#ede6d8</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-900</code></td><td><code>#221c14</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-950</code></td><td><code>#1a1714</code></td><td>styles.css</td></tr></table>
+<h2>Tokens the site actually uses (0)</h2>
+<table><tr><th>Variable</th><th>Value (light)</th><th>Used in</th></tr></table>
 
 <h2>Colours — semantic</h2>
 <table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr><tr>
@@ -110,10 +110,10 @@
         <td><span class="sw" style="background:#c4a264"></span></td>
         <td><code>--kr-colour-background-brand</code></td>
         <td><code>#a07840</code></td><td><code>#c4a264</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#f5f0e8"></span></td>
         <td><span class="sw" style="background:#1a1714"></span></td>
-        <td><code>--kr-colour-background-default</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-colour-background-default</code></td>
         <td><code>#f5f0e8</code></td><td><code>#1a1714</code></td>
       </tr><tr>
         <td><span class="sw" style="background:#fdecec"></span></td>
@@ -420,15 +420,15 @@
         <td><span class="sw" style="background:#ede6d8"></span></td>
         <td><code>--kr-colour-text-primary</code></td>
         <td><code>#221c14</code></td><td><code>#ede6d8</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#3d3830"></span></td>
         <td><span class="sw" style="background:#d4c9b4"></span></td>
-        <td><code>--kr-colour-text-secondary</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-colour-text-secondary</code></td>
         <td><code>#3d3830</code></td><td><code>#d4c9b4</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#5c5040"></span></td>
         <td><span class="sw" style="background:#b8a990"></span></td>
-        <td><code>--kr-colour-text-tertiary</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-colour-text-tertiary</code></td>
         <td><code>#5c5040</code></td><td><code>#b8a990</code></td>
       </tr></table>
 
@@ -941,25 +941,25 @@
         <td><span class="sw" style="background:#543e1f"></span></td>
         <td><code>--kr-primitives-gold-100</code></td>
         <td><code>#e8d9bc</code></td><td><code>#543e1f</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#d4bf94"></span></td>
         <td><span class="sw" style="background:#6e5229"></span></td>
-        <td><code>--kr-primitives-gold-200</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-primitives-gold-200</code></td>
         <td><code>#d4bf94</code></td><td><code>#6e5229</code></td>
       </tr><tr>
         <td><span class="sw" style="background:#c4a264"></span></td>
         <td><span class="sw" style="background:#886534"></span></td>
         <td><code>--kr-primitives-gold-300</code></td>
         <td><code>#c4a264</code></td><td><code>#886534</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#b28a50"></span></td>
         <td><span class="sw" style="background:#a07840"></span></td>
-        <td><code>--kr-primitives-gold-400</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-primitives-gold-400</code></td>
         <td><code>#b28a50</code></td><td><code>#a07840</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#a07840"></span></td>
         <td><span class="sw" style="background:#c4a264"></span></td>
-        <td><code>--kr-primitives-gold-500</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-primitives-gold-500</code></td>
         <td><code>#a07840</code></td><td><code>#c4a264</code></td>
       </tr><tr>
         <td><span class="sw" style="background:#886534"></span></td>
@@ -1041,25 +1041,25 @@
         <td><span class="sw" style="background:#1a1714"></span></td>
         <td><code>--kr-primitives-neutral-0</code></td>
         <td><code>#f5f0e8</code></td><td><code>#1a1714</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#ede6d8"></span></td>
         <td><span class="sw" style="background:#221c14"></span></td>
-        <td><code>--kr-primitives-neutral-50</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-primitives-neutral-50</code></td>
         <td><code>#ede6d8</code></td><td><code>#221c14</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#e2d9c8"></span></td>
         <td><span class="sw" style="background:#2e2820"></span></td>
-        <td><code>--kr-primitives-neutral-100</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-primitives-neutral-100</code></td>
         <td><code>#e2d9c8</code></td><td><code>#2e2820</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#d4c9b4"></span></td>
         <td><span class="sw" style="background:#3d3830"></span></td>
-        <td><code>--kr-primitives-neutral-200</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-primitives-neutral-200</code></td>
         <td><code>#d4c9b4</code></td><td><code>#3d3830</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#b8a990"></span></td>
         <td><span class="sw" style="background:#5c5040"></span></td>
-        <td><code>--kr-primitives-neutral-300</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-primitives-neutral-300</code></td>
         <td><code>#b8a990</code></td><td><code>#5c5040</code></td>
       </tr><tr>
         <td><span class="sw" style="background:#9a8b72"></span></td>
@@ -1086,15 +1086,15 @@
         <td><span class="sw" style="background:#e2d9c8"></span></td>
         <td><code>--kr-primitives-neutral-800</code></td>
         <td><code>#2e2820</code></td><td><code>#e2d9c8</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#221c14"></span></td>
         <td><span class="sw" style="background:#ede6d8"></span></td>
-        <td><code>--kr-primitives-neutral-900</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-primitives-neutral-900</code></td>
         <td><code>#221c14</code></td><td><code>#ede6d8</code></td>
-      </tr><tr class="used">
+      </tr><tr>
         <td><span class="sw" style="background:#1a1714"></span></td>
         <td><span class="sw" style="background:#f5f0e8"></span></td>
-        <td><code>--kr-primitives-neutral-950</code> <span class="pill">used by site</span></td>
+        <td><code>--kr-primitives-neutral-950</code></td>
         <td><code>#1a1714</code></td><td><code>#f5f0e8</code></td>
       </tr><tr>
         <td><span class="sw" style="background:#fdecec"></span></td>
