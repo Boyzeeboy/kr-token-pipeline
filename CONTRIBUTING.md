@@ -97,17 +97,22 @@ Branch protection is set with **Required approvals: 0**, so you can merge your
 own PRs without a second reviewer. You still go through a PR (that's what runs
 the gate), but you don't need anyone else to click approve.
 
-## Gotcha: no-op build churn
+## Builds no longer churn (fixed 2026-07-26)
 
-Running `npm run build` / `npm test` locally re-stamps a timestamp in
-`tokens/snapshot.json` and `dist/report.html`, and appends a `changeCount: 0`
-entry to `tokens/changelog.json` — even when no token actually changed. If you
-see only those three files modified after a build and no real token change,
-discard them rather than committing noise:
+This used to be a gotcha: a build re-stamped timestamps in
+`tokens/snapshot.json` and `dist/report.html` and appended a `changeCount: 0`
+changelog entry even when nothing changed, so you had to remember to
+`git restore` the noise before committing.
 
-```bash
-git restore dist/report.html tokens/changelog.json tokens/snapshot.json
-```
+That is fixed. `snapshot-tokens.mjs` now skips both writes entirely when a
+rebuild finds no token change, and `dist/report.html` is no longer tracked at
+all (its content depends on whether the consuming site repo is checked out
+alongside, so it could never be reproduced in CI). **A build on an unchanged
+tree now leaves `git status` clean** — and CI enforces it: a step fails the PR
+if the build changes committed `dist/`, `snapshot.json` or `changelog.json`.
+
+If you *do* see those files modified after a build, a token genuinely changed;
+commit it.
 
 Only commit `tokens/changelog.json` / `snapshot.json` when a genuine token
 change produced them.
@@ -222,5 +227,5 @@ devDependencies (Storybook, Chromatic, Vite…) to install on every consumer. Ke
 | Push the branch | `git push -u origin my-change` |
 | Merge | on GitHub: open PR → wait for green → **Merge** |
 | Sync local main after merge | `git checkout main && git pull` |
-| Drop no-op build churn | `git restore dist/report.html tokens/changelog.json tokens/snapshot.json` |
+| Re-fetch tokens from Figma | `node scripts/figma-sink.mjs tokens/.figma-dump.json`, run the fetch snippet, then `npm run sync:figma -- --dry-run` |
 | Clear a stale git lock | `find .git -name '*.lock' -delete` |

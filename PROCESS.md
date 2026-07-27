@@ -73,9 +73,18 @@ The Figma values land in the DTCG source files. Note which file does what:
 - **`tokens/tokens.{light,dark}.json` are the only files Style Dictionary
   compiles into `dist/`.** These are what the build, the CSS/JS outputs, and
   consuming UIs actually use. Edit these for any value that must reach `dist/`.
-- `tokens/tokens.light.json`, `tokens/tokens.light.json`, and `tokens/tokens.light.json` feed
-  **Storybook** (the stories import them) and the **changelog snapshot**
-  (`snapshot-tokens.mjs` tracks them) — they are not compiled into the CSS/JS build.
+- The same two files also feed **Storybook** (the stories import
+  `tokens.light.json` directly) and the **changelog snapshot**
+  (`snapshot-tokens.mjs` tracks both). There is no separate copy: `color.json`,
+  `typography.json` and `size.json` were deleted on 2026-07-26 after drifting
+  from what actually shipped (71 of 150 shared values disagreed).
+- **Descriptions are fetched separately from values.** The prose is ~70KB, five
+  times the value dump, and exceeds the plugin bridge's response cap. Run
+  `node scripts/figma-sink.mjs tokens/.figma-descriptions.json`, then execute
+  `scripts/figma-fetch-descriptions.snippet.js` in the Figma plugin — it POSTs
+  straight to that local sink. `sync-from-figma.mjs` picks the file up
+  automatically and writes `$description` onto each token; without it the sync
+  still works, it just warns and produces no descriptions.
 - `tokens/guidelines.json` is a **reference file** read by people and agents (see
   `design.md`). Nothing consumes it programmatically — not the build, not
   Storybook, not the snapshot — so keep it in step with the tokens by hand.

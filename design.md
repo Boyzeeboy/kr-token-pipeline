@@ -7,7 +7,7 @@ modes: [light, dark]
 prefix: kr
 # NOTE: This file is a lightweight ROUTER. It does not redefine token values.
 # Always read the generated outputs in dist/ for canonical values, and
-# tokens/guidelines.json for per-token usage rules. Never hardcode hex.
+# each token's $description for per-token usage rules. Never hardcode hex.
 ---
 
 # Kirsten Rossiter Design System
@@ -33,18 +33,23 @@ open the right one for the task:
   `dist/light/variables.css` and `dist/dark/variables.css` — CSS custom
   properties, all prefixed `--kr-`. Also available as `dist/{mode}/tokens.js`
   (ES6 named exports) and `dist/{mode}/tokens.flat.json` (flat `name: value` map).
-- **Usage rules, intent, and constraints per token:**
-  `tokens/guidelines.json` — every token carries Purpose / Usage / Guidelines
-  prose, including WCAG contrast requirements and "primitive-layer only" notes.
+- **Usage rules, intent, and constraints per token:** read the `$description` on
+  the token itself in `tokens/tokens.{light,dark}.json`. 253 of 332 carry one —
+  223 synced from Figma with Purpose / Usage / Guidelines prose (including WCAG
+  contrast requirements and "primitive-layer only" notes), plus the 30 derived
+  fluid-type tokens, which the pipeline describes. `tokens/guidelines.json` is an
+  older partial copy kept for humans: it covers ~31% of tokens and still uses
+  pre-rename paths, so prefer the `$description`.
 - **Source token definitions (edit only via Figma sync, see below):**
-  `tokens/tokens.{light,dark}.json` are the **only** files Style Dictionary
-  compiles into `dist/` — they drive every CSS/JS value consumers use.
-  `tokens/tokens.light.json`, `tokens/tokens.light.json`, and `tokens/tokens.light.json` feed
-  Storybook and the changelog snapshot, not the built outputs.
+  `tokens/tokens.{light,dark}.json` are the **only** token files. They are
+  compiled into `dist/`, read by the Storybook stories, and tracked by the
+  changelog snapshot. (`color.json` / `typography.json` / `size.json` were a
+  second, unsynced copy that had drifted badly; deleted 2026-07-26.)
 - **Health & drift report:** `dist/report.html` (regenerated on every
-  `npm run build`) — build/sync/consumer-contract checks, colour swatches for
-  both modes, type scale, spacing, and radius, plus which tokens the site
-  actually uses.
+  `npm run build`) — build/sync/consumer-contract checks, the colour audit,
+  swatches for both modes, type scale, spacing, and radius, plus which tokens
+  the site actually uses. Not committed: its content depends on whether the
+  consuming site repo is checked out alongside, so it is generated locally only.
 - **Visual reference and live examples:** Storybook
   (`npm run storybook`) — stories for Colors, Typography, Spacing, BorderRadius,
   and the token Changelog.
@@ -59,7 +64,7 @@ open the right one for the task:
   state, icon, dataviz) and component tokens. Light and dark each resolve to the
   same names; the built `dist/` is the authoritative list of emitted color
   variables. Resolve every color through a semantic token; check
-  `guidelines.json` for the contrast rule before using a color as text or icon
+  the token's `$description` for the contrast rule before using it as text or icon
   foreground (4.5:1 AA for text, 3:1 for borders/large text).
   *Note:* not every token defined in source reaches `dist/` — a token whose node
   has both a `$value` and nested children only emits the parent (see
@@ -75,6 +80,19 @@ open the right one for the task:
   paragraphs otherwise inherit the global `--sans` body rule (this bug shipped
   once on building-the-nations.html; the token report's type scale documents
   the role→family convention).
+- **Line-height and letter-spacing — pick the right pair.** Each role ships two
+  forms, and the choice depends on how the font-size is set:
+
+  | font-size is… | use | example |
+  | --- | --- | --- |
+  | fixed | `--kr-fonts-line-height-*` / `--kr-fonts-letter-spacing-*` (px) | `80px`, `-1.5px` |
+  | fluid — `clamp()`, `vw`, anything responsive | `--kr-fonts-line-height-ratio-*` / `--kr-fonts-letter-spacing-em-*` | `1.0526`, `-0.0197em` |
+
+  Figma stores px, which pins leading: on a heading whose computed size is 40px,
+  `line-height: 80px` is 2× leading rather than 1.05×. The ratio/em forms are
+  derived upstream by dividing each px value by its matching size token (tokens
+  ≥ v2.1.0). The KR site sizes type fluidly, so it uses the ratio/em pair
+  throughout.
 - **Spacing:** Strict 4px base scale (`4, 8, 12, 16, 20, 24, …`) in
   `tokens/tokens.light.json`. Do not introduce off-scale spacing values.
 - **Radius:** See the BorderRadius story and `tokens/tokens.light.json`.
@@ -90,7 +108,7 @@ open the right one for the task:
 - **Do** keep spacing on the 4px scale. **Don't** invent intermediate values.
 - **Do** support both modes by using semantic tokens (they resolve per mode).
   **Don't** branch on hardcoded light/dark colors.
-- **Do** check `tokens/guidelines.json` for a token's intended use and contrast
+- **Do** check the token's `$description` for its intended use and contrast
   rule before applying it. **Don't** guess intent from the token name alone.
 - **Don't** edit files in `dist/` — they are auto-generated and overwritten on
   every build.
