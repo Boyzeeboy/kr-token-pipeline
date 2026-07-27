@@ -11,8 +11,9 @@ name: CI
 #     from the site repo's CI against the pinned tokens.
 #
 # Then checks that the committed dist/ matches what the build just produced,
-# so a stale published artifact can't sail through. dist/report.html is excluded:
-# its content depends on the site repo, which isn't checked out here.
+# so a stale published artifact can't sail through. dist/report.html is not
+# tracked at all — it is a local diagnostic whose content depends on whether the
+# consuming site repo is checked out alongside, so it can't be reproduced here.
 
 on:
   pull_request:
