@@ -44,15 +44,18 @@ function shortTokenPath(token) {
   return parts.slice(1).join('/') || token;
 }
 
-/** The first path segment is the source file namespace. */
+/** The first path segment is the source file namespace.
+ *  `color`/`size`/`typography` are historical: those files were deleted once the
+ *  stories moved onto the synced tokens, but they still appear in older
+ *  changelog entries, so the labels stay for the archive to render correctly. */
 function tokenFile(token) {
   const ns = token.split('/')[0];
   const map = {
-    color:         'color.json',
-    size:          'size.json',
-    typography:    'typography.json',
-    'tokens.light':'tokens.light.json',
-    'tokens.dark': 'tokens.dark.json',
+    'tokens.light': 'tokens.light.json',
+    'tokens.dark':  'tokens.dark.json',
+    color:          'color.json (removed)',
+    size:           'size.json (removed)',
+    typography:     'typography.json (removed)',
   };
   return map[ns] ?? `${ns}.json`;
 }

@@ -1,5 +1,920 @@
 [
   {
+    "id": 11,
+    "timestamp": "2026-07-26T21:36:50.184Z",
+    "isFirstRun": false,
+    "tokenCount": 604,
+    "changeCount": 151,
+    "changes": [
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/100",
+        "before": "#ffe8bf",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/200",
+        "before": "#ffd999",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/300",
+        "before": "#ffc973",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/400",
+        "before": "#ffb84d",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/50",
+        "before": "#fff6e5",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/500",
+        "before": "#7a5d2c",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/600",
+        "before": "#5c4721",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/700",
+        "before": "#4a381a",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/800",
+        "before": "#3a2b14",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/amber/900",
+        "before": "#2a1f0f",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/100",
+        "before": "#b8d9f9",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/200",
+        "before": "#90c4f5",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/300",
+        "before": "#6aaff0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/400",
+        "before": "#4a90d9",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/50",
+        "before": "#dcf0fd",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/500",
+        "before": "#2a5fa0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/600",
+        "before": "#1e4480",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/700",
+        "before": "#153060",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/800",
+        "before": "#0f2040",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/blue/900",
+        "before": "#0a1628",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/100",
+        "before": "#f2ead8",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/200",
+        "before": "#e8d9bc",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/25",
+        "before": "#faf7f2",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/300",
+        "before": "#d4bf94",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/400",
+        "before": "#c4a264",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/50",
+        "before": "#f7f0e4",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/500",
+        "before": "#a07840",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/600",
+        "before": "#886534",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/700",
+        "before": "#6e5229",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/800",
+        "before": "#543e1f",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/900",
+        "before": "#3a2b15",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/gold/950",
+        "before": "#20170b",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/100",
+        "before": "#a8e6df",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/200",
+        "before": "#84d5ca",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/300",
+        "before": "#5fc3b5",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/400",
+        "before": "#3aae9e",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/50",
+        "before": "#ccf3ef",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/500",
+        "before": "#2f8a7e",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/600",
+        "before": "#267067",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/700",
+        "before": "#1e5751",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/800",
+        "before": "#16423d",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/green/900",
+        "before": "#0f2e2a",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/0",
+        "before": "#ffffff",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/100",
+        "before": "#f5f0e8",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/200",
+        "before": "#ede6d8",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/300",
+        "before": "#e2d9c8",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/400",
+        "before": "#d4c9b4",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/50",
+        "before": "#faf7f2",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/500",
+        "before": "#b8a990",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/600",
+        "before": "#9a8b72",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/700",
+        "before": "#7a6c56",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/800",
+        "before": "#5c5040",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/900",
+        "before": "#3d3830",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/neutral/950",
+        "before": "#1a1714",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/100",
+        "before": "#ffc7c7",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/200",
+        "before": "#ffaaaa",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/300",
+        "before": "#ff8a8a",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/400",
+        "before": "#ff6b6b",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/50",
+        "before": "#ffe3e3",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/500",
+        "before": "#7a3a3a",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/600",
+        "before": "#5c2d2d",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/700",
+        "before": "#4a2323",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/800",
+        "before": "#3a1a1a",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/red/900",
+        "before": "#2a1212",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "color/primitives/transparent",
+        "before": "#000000",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/full",
+        "before": "9999px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/l",
+        "before": "16px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/m",
+        "before": "12px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/none",
+        "before": "0px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/s",
+        "before": "8px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/scale/0",
+        "before": "0px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/scale/12",
+        "before": "12px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/scale/16",
+        "before": "16px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/scale/24",
+        "before": "24px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/scale/4",
+        "before": "4px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/scale/8",
+        "before": "8px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/scale/9999",
+        "before": "9999px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/xl",
+        "before": "24px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/radius/xs",
+        "before": "4px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/2xl",
+        "before": "56px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/l",
+        "before": "24px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/m",
+        "before": "16px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/page",
+        "before": "104px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/s",
+        "before": "8px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/104",
+        "before": "104px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/12",
+        "before": "12px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/16",
+        "before": "16px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/20",
+        "before": "20px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/24",
+        "before": "24px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/32",
+        "before": "32px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/4",
+        "before": "4px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/40",
+        "before": "40px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/48",
+        "before": "48px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/56",
+        "before": "56px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/64",
+        "before": "64px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/8",
+        "before": "8px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/scale/80",
+        "before": "80px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/xl",
+        "before": "40px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "size/spacing/xs",
+        "before": "4px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/family/base",
+        "before": "Jost",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/family/display",
+        "before": "Cormorant Garamond",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/family/serif-body",
+        "before": "Lora",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/body/large",
+        "before": "0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/body/medium",
+        "before": "0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/body/small",
+        "before": "0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/display/large",
+        "before": "-1.5",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/display/medium",
+        "before": "-0.9",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/display/small",
+        "before": "-0.5",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/headline/large",
+        "before": "-0.4",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/headline/medium",
+        "before": "0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/headline/small",
+        "before": "0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/label/large",
+        "before": "1.7",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/label/medium",
+        "before": "2",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/label/small",
+        "before": "2",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/title/large",
+        "before": "0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/title/medium",
+        "before": "0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/letter-spacing/title/small",
+        "before": "0",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/body/large",
+        "before": "31px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/body/medium",
+        "before": "27px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/body/small",
+        "before": "23px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/display/large",
+        "before": "80px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/display/medium",
+        "before": "65px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/display/small",
+        "before": "53px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/headline/large",
+        "before": "45px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/headline/medium",
+        "before": "39px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/headline/small",
+        "before": "34px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/label/large",
+        "before": "17px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/label/medium",
+        "before": "15px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/label/small",
+        "before": "14px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/title/large",
+        "before": "31px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/title/medium",
+        "before": "27px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/line-height/title/small",
+        "before": "25px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/body/large",
+        "before": "17px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/body/medium",
+        "before": "15px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/body/small",
+        "before": "13px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/display/large",
+        "before": "76px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/display/medium",
+        "before": "60px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/display/small",
+        "before": "48px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/headline/large",
+        "before": "40px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/headline/medium",
+        "before": "34px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/headline/small",
+        "before": "28px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/label/large",
+        "before": "12px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/label/medium",
+        "before": "11px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/label/small",
+        "before": "10px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/title/large",
+        "before": "24px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/title/medium",
+        "before": "20px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/size/title/small",
+        "before": "18px",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/weight/bold",
+        "before": "700",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/weight/medium",
+        "before": "500",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/weight/regular",
+        "before": "400",
+        "after": null
+      },
+      {
+        "type": "removed",
+        "token": "typography/fonts/weight/semi-bold",
+        "before": "600",
+        "after": null
+      }
+    ]
+  },
+  {
     "id": 10,
     "timestamp": "2026-07-26T20:11:42.210Z",
     "isFirstRun": false,

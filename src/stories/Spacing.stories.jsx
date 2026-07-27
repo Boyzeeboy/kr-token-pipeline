@@ -1,16 +1,16 @@
 import React from 'react';
-import sizeData from '../../tokens/size.json';
+import tokens from '../../tokens/tokens.light.json';
 import { collectTokens, parsePx } from './token-utils';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const scaleTokens = collectTokens(sizeData.spacing.scale).map((t) => ({
+const scaleTokens = collectTokens(tokens.spacing.scale).map((t) => ({
   ...t,
   px: parsePx(t.value),
   displayName: `spacing/scale/${t.path}`,
 }));
 
-const aliasTokens = collectTokens(sizeData.spacing)
+const aliasTokens = collectTokens(tokens.spacing)
   .filter((t) => !t.path.startsWith('scale/'))
   .map((t) => ({
     ...t,
@@ -107,7 +107,7 @@ function SpacingPage() {
       <h1 style={styles.pageTitle}>Spacing Tokens</h1>
       <p style={styles.pageSubtitle}>
         All spacing values imported from{' '}
-        <code style={{ background: '#e6e9ea', padding: '1px 5px', borderRadius: '3px' }}>tokens/size.json</code>.
+        <code style={{ background: '#e6e9ea', padding: '1px 5px', borderRadius: '3px' }}>tokens/tokens.light.json</code>.
         Bar width is proportional to pixel value.
       </p>
 
@@ -138,7 +138,7 @@ export default {
   title: 'Design Tokens/Spacing',
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Spacing scale and named aliases, dynamically read from tokens/size.json.' } },
+    docs: { description: { component: 'Spacing scale and named aliases, dynamically read from tokens/tokens.light.json.' } },
   },
 };
 

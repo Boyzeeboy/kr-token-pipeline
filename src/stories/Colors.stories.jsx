@@ -1,10 +1,10 @@
 import React from 'react';
-import colorData from '../../tokens/color.json';
+import tokens from '../../tokens/tokens.light.json';
 import { collectTokens, parseDescription, isLight } from './token-utils';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const palettes = Object.entries(colorData.primitives)
+const palettes = Object.entries(tokens.primitives)
   .filter(([, val]) => typeof val === 'object' && !('$value' in val))
   .map(([name, group]) => ({
     name,
@@ -14,7 +14,7 @@ const palettes = Object.entries(colorData.primitives)
     })),
   }));
 
-const standaloneTokens = collectTokens(colorData.primitives)
+const standaloneTokens = collectTokens(tokens.primitives)
   .filter((t) => !t.path.includes('/'))
   .map((t) => ({ ...t, ...parseDescription(t.description) }));
 
@@ -147,7 +147,7 @@ function ColorsPage() {
       <h1 style={styles.pageTitle}>Color Tokens</h1>
       <p style={styles.pageSubtitle}>
         Primitive color scales imported from{' '}
-        <code style={{ background: '#e6e9ea', padding: '1px 5px', borderRadius: '3px' }}>tokens/color.json</code>.
+        <code style={{ background: '#e6e9ea', padding: '1px 5px', borderRadius: '3px' }}>tokens/tokens.light.json</code>.
         Guidelines parsed from each token's <code style={{ background: '#e6e9ea', padding: '1px 5px', borderRadius: '3px' }}>$description</code> field.
       </p>
 
@@ -200,7 +200,7 @@ export default {
   title: 'Design Tokens/Colors',
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'All primitive color scales, dynamically read from tokens/color.json.' } },
+    docs: { description: { component: 'All primitive color scales, dynamically read from tokens/tokens.light.json.' } },
   },
 };
 

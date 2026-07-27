@@ -73,7 +73,7 @@ The Figma values land in the DTCG source files. Note which file does what:
 - **`tokens/tokens.{light,dark}.json` are the only files Style Dictionary
   compiles into `dist/`.** These are what the build, the CSS/JS outputs, and
   consuming UIs actually use. Edit these for any value that must reach `dist/`.
-- `tokens/color.json`, `tokens/typography.json`, and `tokens/size.json` feed
+- `tokens/tokens.light.json`, `tokens/tokens.light.json`, and `tokens/tokens.light.json` feed
   **Storybook** (the stories import them) and the **changelog snapshot**
   (`snapshot-tokens.mjs` tracks them) — they are not compiled into the CSS/JS build.
 - `tokens/guidelines.json` is a **reference file** read by people and agents (see
