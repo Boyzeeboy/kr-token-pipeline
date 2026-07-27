@@ -1,5 +1,374 @@
 [
   {
+    "id": 12,
+    "timestamp": "2026-07-27T14:39:03.675Z",
+    "isFirstRun": false,
+    "tokenCount": 664,
+    "changeCount": 60,
+    "changes": [
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/body/large",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/body/medium",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/body/small",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/display/large",
+        "before": null,
+        "after": "-0.0197em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/display/medium",
+        "before": null,
+        "after": "-0.015em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/display/small",
+        "before": null,
+        "after": "-0.0104em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/headline/large",
+        "before": null,
+        "after": "-0.01em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/headline/medium",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/headline/small",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/label/large",
+        "before": null,
+        "after": "0.1417em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/label/medium",
+        "before": null,
+        "after": "0.1818em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/label/small",
+        "before": null,
+        "after": "0.2em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/title/large",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/title/medium",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/letter-spacing-em/title/small",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/body/large",
+        "before": null,
+        "after": "1.8235"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/body/medium",
+        "before": null,
+        "after": "1.8"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/body/small",
+        "before": null,
+        "after": "1.7692"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/display/large",
+        "before": null,
+        "after": "1.0526"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/display/medium",
+        "before": null,
+        "after": "1.0833"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/display/small",
+        "before": null,
+        "after": "1.1042"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/headline/large",
+        "before": null,
+        "after": "1.125"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/headline/medium",
+        "before": null,
+        "after": "1.1471"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/headline/small",
+        "before": null,
+        "after": "1.2143"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/label/large",
+        "before": null,
+        "after": "1.4167"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/label/medium",
+        "before": null,
+        "after": "1.3636"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/label/small",
+        "before": null,
+        "after": "1.4"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/title/large",
+        "before": null,
+        "after": "1.2917"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/title/medium",
+        "before": null,
+        "after": "1.35"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/fonts/line-height-ratio/title/small",
+        "before": null,
+        "after": "1.3889"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/body/large",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/body/medium",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/body/small",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/display/large",
+        "before": null,
+        "after": "-0.0197em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/display/medium",
+        "before": null,
+        "after": "-0.015em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/display/small",
+        "before": null,
+        "after": "-0.0104em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/headline/large",
+        "before": null,
+        "after": "-0.01em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/headline/medium",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/headline/small",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/label/large",
+        "before": null,
+        "after": "0.1417em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/label/medium",
+        "before": null,
+        "after": "0.1818em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/label/small",
+        "before": null,
+        "after": "0.2em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/title/large",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/title/medium",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/letter-spacing-em/title/small",
+        "before": null,
+        "after": "0em"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/body/large",
+        "before": null,
+        "after": "1.8235"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/body/medium",
+        "before": null,
+        "after": "1.8"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/body/small",
+        "before": null,
+        "after": "1.7692"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/display/large",
+        "before": null,
+        "after": "1.0526"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/display/medium",
+        "before": null,
+        "after": "1.0833"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/display/small",
+        "before": null,
+        "after": "1.1042"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/headline/large",
+        "before": null,
+        "after": "1.125"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/headline/medium",
+        "before": null,
+        "after": "1.1471"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/headline/small",
+        "before": null,
+        "after": "1.2143"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/label/large",
+        "before": null,
+        "after": "1.4167"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/label/medium",
+        "before": null,
+        "after": "1.3636"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/label/small",
+        "before": null,
+        "after": "1.4"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/title/large",
+        "before": null,
+        "after": "1.2917"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/title/medium",
+        "before": null,
+        "after": "1.35"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/fonts/line-height-ratio/title/small",
+        "before": null,
+        "after": "1.3889"
+      }
+    ]
+  },
+  {
     "id": 11,
     "timestamp": "2026-07-26T21:36:50.184Z",
     "isFirstRun": false,
