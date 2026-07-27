@@ -18,6 +18,15 @@ on:
   pull_request:
     branches:
       - main
+    # `edited` is here so a PR that gets RETARGETED onto main picks up the gate.
+    # A stacked PR (base = another feature branch) never matches `branches: main`,
+    # so no check is queued. When its base branch merges, GitHub retargets it to
+    # main — but that emits `edited`, which is not one of the default types
+    # (opened, synchronize, reopened). Without this the PR sits BLOCKED on a
+    # required check that will never run, and the only way out is to close and
+    # reopen it. Cost: `edited` also fires on title/body edits, so an occasional
+    # redundant run — the job takes ~15s.
+    types: [opened, synchronize, reopened, edited]
   push:
     branches:
       - main
