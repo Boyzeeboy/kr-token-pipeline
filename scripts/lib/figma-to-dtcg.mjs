@@ -35,12 +35,17 @@ export const CONFIG = {
     (n) => /^letter-spacing\//.test(n), // bare (not Fonts/letter-spacing/…)
   ],
 
-  // Numbers → dimension+px, EXCEPT anything matching these paths, which stay
-  // unit-less (line-height ratios).
+  // Numbers → dimension+px, EXCEPT anything matching these paths.
+  //
+  // line-height and letter-spacing used to be listed here on the assumption that
+  // they were ratios/em. They are not — Figma stores them as absolute px, which
+  // the site's own CSS confirms: token display-large is 76px size / 80 lh / -1.5
+  // ls, and styles.css hand-writes `76px, 1.05, -0.02em` (= 80/76 and -1.5/76).
+  // Emitting them bare made `line-height: 80` mean 80× the font size, and left
+  // `letter-spacing: 2` invalid CSS outright. They now get px like every other
+  // dimension.
   unitlessNumber: [
-    (path) => /(^|\/)line-height(\/|$)/.test(path),
-    (path) => /(^|\/)weight(\/|$)/.test(path),          // font-weight is unit-less
-    (path) => /(^|\/)letter-spacing(\/|$)/.test(path),  // em-based; keep raw number
+    (path) => /(^|\/)weight(\/|$)/.test(path), // font-weight is genuinely unit-less
   ],
 };
 
