@@ -10,8 +10,16 @@ documents the tokens; `scripts/snapshot-tokens.mjs` diffs each build into
 **When creating or modifying any UI, read and follow `design.md` first.** Use the
 generated tokens in `dist/` as the source of truth — never hardcode hex values,
 px sizes, or font-family strings. Apply colors through semantic tokens, not
-primitives, and consult `tokens/guidelines.json` for each token's intended use and
+primitives, and read each token's `$description` for its intended use and
 contrast requirement.
+
+**Fluid type needs the ratio/em tokens, not the px ones.** Every type role ships
+both. If the font-size is fixed, use `--<prefix>-fonts-line-height-*` and
+`--<prefix>-fonts-letter-spacing-*` (px, as Figma stores them). If the font-size
+is set with `clamp()`, `vw`, or anything responsive, use
+`--<prefix>-fonts-line-height-ratio-*` (unitless) and
+`--<prefix>-fonts-letter-spacing-em-*` instead — px pins the leading, so a
+heading computing to 40px would get a fixed 80px line-height, i.e. 2× leading.
 
 ## Working with tokens
 
@@ -39,7 +47,7 @@ contrast requirement.
   second, unsynced copy that had drifted badly (71 of 150 shared values wrong)
   and were deleted on 2026-07-26 — do not reintroduce that shape.
 - **Descriptions live in Figma** and sync into `$description` on each token
-  (223 of 302 tokens carry one). They are fetched separately from the values —
+  (253 of 332 tokens carry one — 223 synced from Figma, plus the 30 derived fluid-type tokens described by the pipeline). They are fetched separately from the values —
   see `scripts/figma-fetch-descriptions.snippet.js` and `scripts/figma-sink.mjs`
   — because the text is ~70KB and exceeds the plugin bridge's response cap.
   `guidelines.json` is an older, partial reference file kept for humans; nothing
