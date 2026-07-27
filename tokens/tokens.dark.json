@@ -928,6 +928,93 @@
         }
       }
     },
+    "letter-spacing-em": {
+      "body": {
+        "large": {
+          "$description": "Em letter-spacing for fluid type: 0 ÷ 17. Use instead of fonts/letter-spacing/body/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0em"
+        },
+        "medium": {
+          "$description": "Em letter-spacing for fluid type: 0 ÷ 15. Use instead of fonts/letter-spacing/body/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0em"
+        },
+        "small": {
+          "$description": "Em letter-spacing for fluid type: 0 ÷ 13. Use instead of fonts/letter-spacing/body/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0em"
+        }
+      },
+      "display": {
+        "large": {
+          "$description": "Em letter-spacing for fluid type: -1.5 ÷ 76. Use instead of fonts/letter-spacing/display/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "-0.0197em"
+        },
+        "medium": {
+          "$description": "Em letter-spacing for fluid type: -0.9 ÷ 60. Use instead of fonts/letter-spacing/display/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "-0.015em"
+        },
+        "small": {
+          "$description": "Em letter-spacing for fluid type: -0.5 ÷ 48. Use instead of fonts/letter-spacing/display/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "-0.0104em"
+        }
+      },
+      "headline": {
+        "large": {
+          "$description": "Em letter-spacing for fluid type: -0.4 ÷ 40. Use instead of fonts/letter-spacing/headline/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "-0.01em"
+        },
+        "medium": {
+          "$description": "Em letter-spacing for fluid type: 0 ÷ 34. Use instead of fonts/letter-spacing/headline/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0em"
+        },
+        "small": {
+          "$description": "Em letter-spacing for fluid type: 0 ÷ 28. Use instead of fonts/letter-spacing/headline/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0em"
+        }
+      },
+      "label": {
+        "large": {
+          "$description": "Em letter-spacing for fluid type: 1.7 ÷ 12. Use instead of fonts/letter-spacing/label/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0.1417em"
+        },
+        "medium": {
+          "$description": "Em letter-spacing for fluid type: 2 ÷ 11. Use instead of fonts/letter-spacing/label/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0.1818em"
+        },
+        "small": {
+          "$description": "Em letter-spacing for fluid type: 2 ÷ 10. Use instead of fonts/letter-spacing/label/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0.2em"
+        }
+      },
+      "title": {
+        "large": {
+          "$description": "Em letter-spacing for fluid type: 0 ÷ 24. Use instead of fonts/letter-spacing/title/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0em"
+        },
+        "medium": {
+          "$description": "Em letter-spacing for fluid type: 0 ÷ 20. Use instead of fonts/letter-spacing/title/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0em"
+        },
+        "small": {
+          "$description": "Em letter-spacing for fluid type: 0 ÷ 18. Use instead of fonts/letter-spacing/title/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "dimension",
+          "$value": "0em"
+        }
+      }
+    },
     "line-height": {
       "body": {
         "large": {
@@ -997,6 +1084,93 @@
         "small": {
           "$type": "dimension",
           "$value": "25px"
+        }
+      }
+    },
+    "line-height-ratio": {
+      "body": {
+        "large": {
+          "$description": "Unitless line-height for fluid type: 31 ÷ 17. Use instead of fonts/line-height/body/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.8235
+        },
+        "medium": {
+          "$description": "Unitless line-height for fluid type: 27 ÷ 15. Use instead of fonts/line-height/body/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.8
+        },
+        "small": {
+          "$description": "Unitless line-height for fluid type: 23 ÷ 13. Use instead of fonts/line-height/body/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.7692
+        }
+      },
+      "display": {
+        "large": {
+          "$description": "Unitless line-height for fluid type: 80 ÷ 76. Use instead of fonts/line-height/display/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.0526
+        },
+        "medium": {
+          "$description": "Unitless line-height for fluid type: 65 ÷ 60. Use instead of fonts/line-height/display/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.0833
+        },
+        "small": {
+          "$description": "Unitless line-height for fluid type: 53 ÷ 48. Use instead of fonts/line-height/display/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.1042
+        }
+      },
+      "headline": {
+        "large": {
+          "$description": "Unitless line-height for fluid type: 45 ÷ 40. Use instead of fonts/line-height/headline/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.125
+        },
+        "medium": {
+          "$description": "Unitless line-height for fluid type: 39 ÷ 34. Use instead of fonts/line-height/headline/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.1471
+        },
+        "small": {
+          "$description": "Unitless line-height for fluid type: 34 ÷ 28. Use instead of fonts/line-height/headline/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.2143
+        }
+      },
+      "label": {
+        "large": {
+          "$description": "Unitless line-height for fluid type: 17 ÷ 12. Use instead of fonts/line-height/label/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.4167
+        },
+        "medium": {
+          "$description": "Unitless line-height for fluid type: 15 ÷ 11. Use instead of fonts/line-height/label/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.3636
+        },
+        "small": {
+          "$description": "Unitless line-height for fluid type: 14 ÷ 10. Use instead of fonts/line-height/label/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.4
+        }
+      },
+      "title": {
+        "large": {
+          "$description": "Unitless line-height for fluid type: 31 ÷ 24. Use instead of fonts/line-height/title/large when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.2917
+        },
+        "medium": {
+          "$description": "Unitless line-height for fluid type: 27 ÷ 20. Use instead of fonts/line-height/title/medium when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.35
+        },
+        "small": {
+          "$description": "Unitless line-height for fluid type: 25 ÷ 18. Use instead of fonts/line-height/title/small when the font-size is set with clamp() or otherwise varies.",
+          "$type": "number",
+          "$value": 1.3889
         }
       }
     },

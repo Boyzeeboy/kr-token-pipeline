@@ -34,24 +34,24 @@
 </head>
 <body>
 <h1>Kirsten Rossiter Token Report</h1>
-<p class="meta">302 tokens (light) · 302 tokens (dark) · site: /Users/warrenrossiter/Documents/Claude/Projects/Kirsten Rossiter</p>
+<p class="meta">332 tokens (light) · 332 tokens (dark) · site: /Users/warrenrossiter/Documents/Claude/Projects/Kirsten Rossiter</p>
 <p class="meta">No generation timestamp: this file is committed, and a clock reading would make every rebuild a diff. Use <code>git log dist/report.html</code> for when it last changed.</p>
 
 <h2>Health checks — 6/8 passing</h2>
 <details class="check pass" >
     <summary><span class="badge">✓</span> Build (light): source tokens → dist</summary>
-    <ul><li>302 source tokens all present in dist.</li></ul>
+    <ul><li>332 source tokens all present in dist.</li></ul>
   </details>
 <details class="check pass" >
     <summary><span class="badge">✓</span> Build (dark): source tokens → dist</summary>
-    <ul><li>302 source tokens all present in dist.</li></ul>
+    <ul><li>332 source tokens all present in dist.</li></ul>
   </details>
 <details class="check fail" open>
     <summary><span class="badge">✗</span> Site sync: dist/light/variables.css ↔ vendor/tokens.css</summary>
     <ul><li>Files differ — run scripts/sync-tokens.sh in the site repo.</li></ul>
   </details>
 <details class="check pass" >
-    <summary><span class="badge">✓</span> Consumer contract: 15 tokens referenced by the site</summary>
+    <summary><span class="badge">✓</span> Consumer contract: 30 tokens referenced by the site</summary>
     <ul><li>Every var(--kr-…) the site references is defined in vendor/tokens.css.</li></ul>
   </details>
 <details class="check pass" >
@@ -71,8 +71,8 @@
     <ul><li>#1a2235 — matches NO token (contact.html, functions/stripe-webhook.js, thank-you.html)</li><li>#1c1814 — matches NO token (functions/api/contact.js, functions/stripe-webhook.js, thank-you.html)</li><li>#e6ddcd — matches NO token (functions/api/contact.js, functions/stripe-webhook.js)</li><li>#9a938a — matches NO token (functions/api/contact.js, functions/stripe-webhook.js)</li><li>#fbf8f2 — matches NO token (contact.html)</li><li>#9a3b2e — matches NO token (contact.html)</li><li>#6b645c — matches NO token (functions/stripe-webhook.js)</li><li>#1a1310 — matches NO token (styles.css)</li><li>#2a2218 — matches NO token (styles.css)</li><li>#e8a0a0 — matches NO token (styles.css)</li></ul>
   </details>
 
-<h2>Tokens the site actually uses (15)</h2>
-<table><tr><th>Variable</th><th>Value (light)</th><th>Used in</th></tr><tr><td><code>--kr-colour-background-default</code></td><td><code>#f5f0e8</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-colour-text-secondary</code></td><td><code>#3d3830</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-colour-text-tertiary</code></td><td><code>#5c5040</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-fonts-family-base</code></td><td><code>Jost</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-family-display</code></td><td><code>Cormorant Garamond</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-family-serif-body</code></td><td><code>Lora</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-200</code></td><td><code>#d4bf94</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-400</code></td><td><code>#b28a50</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-500</code></td><td><code>#a07840</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-100</code></td><td><code>#e2d9c8</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-200</code></td><td><code>#d4c9b4</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-300</code></td><td><code>#b8a990</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-50</code></td><td><code>#ede6d8</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-900</code></td><td><code>#221c14</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-950</code></td><td><code>#1a1714</code></td><td>styles.css</td></tr></table>
+<h2>Tokens the site actually uses (30)</h2>
+<table><tr><th>Variable</th><th>Value (light)</th><th>Used in</th></tr><tr><td><code>--kr-colour-background-default</code></td><td><code>#f5f0e8</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-colour-text-secondary</code></td><td><code>#3d3830</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-colour-text-tertiary</code></td><td><code>#5c5040</code></td><td>building-the-nations.html</td></tr><tr><td><code>--kr-fonts-family-base</code></td><td><code>Jost</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-family-display</code></td><td><code>Cormorant Garamond</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-family-serif-body</code></td><td><code>Lora</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-body-large</code></td><td><code>17px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-body-medium</code></td><td><code>15px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-body-small</code></td><td><code>13px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-display-large</code></td><td><code>76px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-display-medium</code></td><td><code>60px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-display-small</code></td><td><code>48px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-headline-large</code></td><td><code>40px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-headline-medium</code></td><td><code>34px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-headline-small</code></td><td><code>28px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-label-large</code></td><td><code>12px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-label-medium</code></td><td><code>11px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-label-small</code></td><td><code>10px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-title-large</code></td><td><code>24px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-title-medium</code></td><td><code>20px</code></td><td>styles.css</td></tr><tr><td><code>--kr-fonts-size-title-small</code></td><td><code>18px</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-200</code></td><td><code>#d4bf94</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-400</code></td><td><code>#b28a50</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-gold-500</code></td><td><code>#a07840</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-100</code></td><td><code>#e2d9c8</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-200</code></td><td><code>#d4c9b4</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-300</code></td><td><code>#b8a990</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-50</code></td><td><code>#ede6d8</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-900</code></td><td><code>#221c14</code></td><td>styles.css</td></tr><tr><td><code>--kr-primitives-neutral-950</code></td><td><code>#1a1714</code></td><td>styles.css</td></tr></table>
 
 <h2>Colours — semantic</h2>
 <table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr><tr>

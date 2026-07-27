@@ -154,6 +154,65 @@ function toToken(concrete, path, cfg, resolvedType) {
   throw new Error(`Unhandled value at ${path}: ${JSON.stringify(concrete)}`);
 }
 
+/**
+ * Derive fluid-type companions for the px line-height / letter-spacing tokens.
+ *
+ * Figma stores both as absolute px, which is correct for a fixed type scale but
+ * wrong for a fluid one. A consumer sizing type with `clamp()` has a computed
+ * font-size that moves with the viewport, so it needs a UNITLESS ratio and an EM
+ * tracking — those scale with the text; px does not. The KR site hit exactly
+ * this and hand-maintained its own ratios as a result.
+ *
+ * For every `fonts/line-height/<role>` with a matching `fonts/size/<role>` we
+ * emit `fonts/line-height-ratio/<role>` = lh ÷ size, and likewise
+ * `fonts/letter-spacing-em/<role>` = ls ÷ size. Purely additive: the px tokens
+ * are untouched, so this cannot break an existing consumer.
+ *
+ * Roles with no matching size are skipped rather than guessed at.
+ */
+function deriveFluidTypeTokens(tree) {
+  const fonts = tree.fonts;
+  if (!fonts || !fonts.size) return;
+
+  const num = (node) => (node && node.$value !== undefined ? parseFloat(String(node.$value)) : null);
+
+  /** Walk `fonts.size` and yield [pathSegments, sizeValue] for every leaf. */
+  const sizeLeaves = [];
+  (function walk(node, path) {
+    if (!node || typeof node !== 'object') return;
+    if (node.$value !== undefined) { sizeLeaves.push([path, num(node)]); return; }
+    for (const [k, v] of Object.entries(node)) if (!k.startsWith('$')) walk(v, [...path, k]);
+  })(fonts.size, []);
+
+  const at = (branch, path) => path.reduce((o, k) => (o ? o[k] : undefined), fonts[branch]);
+
+  for (const [path, size] of sizeLeaves) {
+    if (!size) continue; // a 0 size would make the ratio meaningless
+
+    const lh = num(at('line-height', path));
+    if (lh !== null) {
+      setDeep(tree, ['fonts', 'line-height-ratio', ...path], {
+        $value: Math.round((lh / size) * 1e4) / 1e4,
+        $type: 'number',
+        $description:
+          `Unitless line-height for fluid type: ${lh} ÷ ${size}. Use instead of ` +
+          `fonts/line-height/${path.join('/')} when the font-size is set with clamp() or otherwise varies.`,
+      });
+    }
+
+    const ls = num(at('letter-spacing', path));
+    if (ls !== null) {
+      setDeep(tree, ['fonts', 'letter-spacing-em', ...path], {
+        $value: `${Math.round((ls / size) * 1e4) / 1e4}em`,
+        $type: 'dimension',
+        $description:
+          `Em letter-spacing for fluid type: ${ls} ÷ ${size}. Use instead of ` +
+          `fonts/letter-spacing/${path.join('/')} when the font-size is set with clamp() or otherwise varies.`,
+      });
+    }
+  }
+}
+
 /** Recursively sort object keys for deterministic output. */
 function sortDeep(o) {
   if (Array.isArray(o) || o === null || typeof o !== 'object') return o;
@@ -198,6 +257,9 @@ export function transform(dump, cfg = CONFIG, descriptions = {}) {
       for (const t of targets) setDeep(trees[t], segs, token);
     }
   }
+
+  deriveFluidTypeTokens(trees.light);
+  deriveFluidTypeTokens(trees.dark);
 
   return { light: sortDeep(trees.light), dark: sortDeep(trees.dark) };
 }

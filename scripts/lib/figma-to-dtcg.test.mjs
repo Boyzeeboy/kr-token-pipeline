@@ -228,6 +228,44 @@ test('transform works with no descriptions argument at all', () => {
   assert.ok(!('$description' in light.primitives.gold['500']));
 });
 
+test('fluid-type companions are derived from size (ratio + em)', () => {
+  const { light, dark } = transform(dump);
+  // fixture: size/body/medium = 16, line-height/body/medium = 24 → 1.5
+  assert.deepEqual(light.fonts['line-height-ratio'].body.medium.$value, 1.5);
+  assert.equal(light.fonts['line-height-ratio'].body.medium.$type, 'number');
+  // single-mode fonts land in both trees
+  assert.equal(dark.fonts['line-height-ratio'].body.medium.$value, 1.5);
+  // the px originals are untouched — this is additive
+  assert.equal(light.fonts['line-height'].body.medium.$value, '24px');
+});
+
+test('em letter-spacing is derived against the matching size', () => {
+  const d = { collections: [], variables: [
+    { name: 'Fonts/size/display/large', resolvedType: 'FLOAT',
+      variableCollectionId: 'VariableCollectionId:1:6836', valuesByMode: { '1:0': 76 } },
+    { name: 'Fonts/letter-spacing/display/large', resolvedType: 'FLOAT',
+      variableCollectionId: 'VariableCollectionId:1:6836', valuesByMode: { '1:0': -1.5 } },
+    { name: 'Fonts/line-height/display/large', resolvedType: 'FLOAT',
+      variableCollectionId: 'VariableCollectionId:1:6836', valuesByMode: { '1:0': 80 } },
+  ]};
+  const { light } = transform(d);
+  // -1.5 / 76 = -0.019736… → -0.0197em ; 80 / 76 = 1.0526…
+  assert.equal(light.fonts['letter-spacing-em'].display.large.$value, '-0.0197em');
+  assert.equal(light.fonts['letter-spacing-em'].display.large.$type, 'dimension');
+  assert.equal(light.fonts['line-height-ratio'].display.large.$value, 1.0526);
+});
+
+test('a role with no matching size is skipped, not guessed', () => {
+  const d = { collections: [], variables: [
+    // line-height with NO corresponding size token
+    { name: 'Fonts/line-height/orphan/role', resolvedType: 'FLOAT',
+      variableCollectionId: 'VariableCollectionId:1:6836', valuesByMode: { '1:0': 24 } },
+  ]};
+  const { light } = transform(d);
+  assert.ok(!light.fonts['line-height-ratio'], 'no ratio branch when size is absent');
+  assert.equal(light.fonts['line-height'].orphan.role.$value, '24px');
+});
+
 test('name-that-is-also-a-group collision fails loudly', () => {
   const collide = { collections: [], variables: [
     { id: 'a', name: 'input/border', resolvedType: 'COLOR',
