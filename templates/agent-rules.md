@@ -1,5 +1,26 @@
 # {{projectName}} Token Pipeline
 
+## Judgement calls defer to the Orin manifesto
+
+**Read `../Orin/MANIFESTO.md` before any decision that isn't purely mechanical.**
+It is the source of truth for every judgement call — what to build, what to
+refuse, what "good" means here. When something feels off, go back and ask:
+*does this fit?*
+
+The parts that bite most often in this repo:
+
+- **The system is the main thing**, not the artefact. Prefer fixing the
+  substrate over polishing an output.
+- **The measure is what happens after handoff** — defect rates, reuse, drift
+  caught. A check that would have caught a live bug beats a doc describing one.
+- **Ship incrementally.** Willingness to iterate beats the ability to plan.
+  Don't design an abstraction before there is a second case to learn from.
+- **No decks about work you could have done in the time.** If a document is
+  describing behaviour rather than being generated from it, question whether it
+  should exist. This repo has drifted that way before.
+
+---
+
 Design token pipeline for {{projectName}}: Figma → DTCG token files (`tokens/*.json`) →
 Style Dictionary (`sd.config.mjs`) → outputs in `dist/{light,dark}/`. Storybook
 documents the tokens; `scripts/snapshot-tokens.mjs` diffs each build into
