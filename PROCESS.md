@@ -39,9 +39,11 @@ actually consume.
 **Preferred: the scripted sync (deterministic, tested).** Rather than mapping by
 hand, use the two-part sync:
 
-1. **Fetch** — with the Figma file open, run `scripts/figma-fetch.snippet.js` via
-   the `use_figma` tool (fileKey in `pipeline.config.mjs`). Save the returned JSON
-   to `tokens/.figma-dump.json` (gitignored, transient).
+1. **Fetch** — with the Figma file open **and the Figma Desktop Bridge plugin
+   running**, execute `scripts/figma-fetch.snippet.js` in the plugin. Save the
+   returned JSON to `tokens/.figma-dump.json` (gitignored, transient).
+   The Desktop Bridge is the working route on a non-Enterprise plan; see the
+   warning below about the selection-based reader.
 2. **Transform** — `npm run sync:figma -- --dry-run` to review the diff, then
    `npm run sync:figma` to write `tokens.{light,dark}.json`.
 
@@ -85,9 +87,11 @@ The Figma values land in the DTCG source files. Note which file does what:
   straight to that local sink. `sync-from-figma.mjs` picks the file up
   automatically and writes `$description` onto each token; without it the sync
   still works, it just warns and produces no descriptions.
-- `tokens/guidelines.json` is a **reference file** read by people and agents (see
-  `design.md`). Nothing consumes it programmatically — not the build, not
-  Storybook, not the snapshot — so keep it in step with the tokens by hand.
+- `tokens/guidelines.json` is an **older, partial reference file** (~31% of
+  tokens, pre-rename paths). Nothing consumes it — not the build, not Storybook,
+  not the snapshot. Prefer the `$description` on each token; do not add new
+  guidance to `guidelines.json`. Its fate is undecided — see `COLOUR-GAPS.md`
+  for the same kind of open decision.
 
 Before building, review the diff so you can see exactly what changed:
 
@@ -104,10 +108,11 @@ One command does two things in sequence (see `package.json`):
 1. `node sd.config.mjs` — Style Dictionary compiles the DTCG tokens into
    `dist/light/` and `dist/dark/`:
    - `variables.css` — the `--<prefix>-…` custom properties (prefix from
-     `pipeline.config.mjs`). Note: token guideline prose is *not* emitted into
-     the CSS — the compiled `tokens.{light,dark}.json` carry no `$description`,
-     and `guidelines.json` is not wired into the build. Guidance lives in
-     `guidelines.json` / Storybook, consulted separately.
+     `pipeline.config.mjs`). Descriptions are **deliberately not** emitted as CSS
+     comments: Style Dictionary does so by default and it took this file from
+     12.5KB to 82KB, so it is suppressed via `formatting.commentStyle`. The
+     source `tokens.{light,dark}.json` *do* carry `$description` (253 of 332
+     tokens) — read guidance there or in Storybook.
    - `tokens.js` — ES6 named exports.
    - `tokens.flat.json` — flat `name: value` map.
 2. `node scripts/snapshot-tokens.mjs` — diffs the new build against the previous
@@ -144,10 +149,15 @@ rebuilt `dist/` outputs together, commit, and push:
 
 ```bash
 find .git -name '*.lock' -delete   # clear any stale lock from an interrupted git step
+git checkout -b sync/figma-$(date +%Y-%m-%d)
 git add tokens/ dist/
 git commit -m "sync: update tokens from Figma + rebuild"
-git push origin main
+git push -u origin HEAD                     # then open a PR
 ```
+
+> `main` is protected — a direct `git push origin main` is **rejected**. Every
+> change goes through a branch and a PR so the `build + verify` gate runs.
+> `CONTRIBUTING.md` is the authority on this flow; this is the short version.
 
 Also `git add sd.config.mjs` when the build config changed (e.g. a structural
 build fix). Pushing triggers Chromatic CI (Step 5). If git reports
@@ -201,9 +211,16 @@ When something is wrong, fix it where the rule lives so the fix propagates and
 survives the next Figma sync:
 
 - **Token-usage error** (hardcoded hex, primitive used directly, failed contrast)
-  → tighten the description in `tokens/guidelines.json` and the matching
-  `$description` in the source token file. The next `npm run build` re-emits that
-  prose into the `dist/` CSS comments, so the guidance travels with the value.
+  → tighten the `$description` on the token itself. It is synced from the
+  variable's description in Figma, so **fix it in Figma** and re-sync; editing
+  `tokens/*.json` by hand is overwritten on the next sync.
+  (`guidelines.json` is an older partial copy — ~31% coverage, pre-rename paths.
+  Do not add guidance there.)
+
+  Note the descriptions do **not** appear in the built CSS. Style Dictionary
+  emits them as comments by default, which took `variables.css` from 12.5KB to
+  82KB, so they are deliberately suppressed via `formatting.commentStyle` in
+  `sd.config.mjs`. Read them in `tokens/*.json` or Storybook.
 - **Component-composition error** → fix it in that component's metadata.
 - **Genuinely system-wide rule** → add it to `design.md`'s do/don't list.
 
@@ -227,6 +244,6 @@ prevent.
 | Review built output changes | `git diff dist/ tokens/changelog.json` |
 | Clear a stale git lock | `find .git -name '*.lock' -delete` |
 | Stage source + outputs | `git add tokens/ dist/` (add `sd.config.mjs` if build config changed) |
-| Commit & push | `git commit -m "…"` then `git push origin main` |
+| Commit & push | `git commit -m "…"` then `git push -u origin HEAD`, then open a PR (`main` is protected) |
 
 **Never hand-edit `dist/`.** It is auto-generated and overwritten on every build.

@@ -126,6 +126,59 @@ function buildCheck(src, dist, mode) {
 buildCheck(srcLight, distLight, 'light');
 buildCheck(srcDark, distDark, 'dark');
 
+// 1b. Mode parity BY VALUE — the check that was missing when it mattered.
+//
+// Key parity (same token names in both modes) already passes in the sync. That
+// is not the same as the modes actually differing. In July 2026 alias resolution
+// matched Figma's per-collection mode ids, so every cross-collection alias fell
+// back to Light: 148 of 150 dark semantic/component colours silently carried the
+// LIGHT value. Every gate passed, for months, because nothing compared values.
+//
+// Some tokens are identical across modes BY DESIGN — `*/inverse`, on-brand text,
+// a transparent border. Those are listed as expected rather than hidden, so the
+// list stays honest and a new one has to be justified.
+{
+  // Explicit and justified rather than a loose pattern: each entry has to earn
+  // its place, so a genuinely broken token can't slip in behind a wildcard.
+  // Keys are matched after the prefix is stripped.
+  const EXPECTED_IDENTICAL = {
+    'colour-text-inverse':          'text on an inverted surface — cream in both modes',
+    'colour-icon-inverse':          'icon on an inverted surface — cream in both modes',
+    'colour-on-background-inverse': 'foreground for the inverse surface',
+    'colour-on-background-brand':   'the brand surface is gold in both modes, so its foreground is cream in both',
+    'colour-on-background-promo':   'the promo surface is deep gold in both modes',
+    'colour-ink-on-brand':          'button-safe text on brand — cream in both modes',
+    'components-button-primary-text':   'sits on the gold brand fill in both modes',
+    'components-button-primary-border': 'transparent in both modes by design',
+    'components-badge-promo-text':      'sits on the promo fill in both modes',
+  };
+  const isExpected = (name) => Object.hasOwn(EXPECTED_IDENTICAL, name.slice(PREFIX.length + 1));
+
+  const colourTokens = Object.entries(distLight).filter(
+    ([k, v]) => typeof v === 'string' && /^(#|rgba?\()/.test(v) &&
+      (k.startsWith(`${PREFIX}-colour`) || k.startsWith(`${PREFIX}-components`))
+  );
+  const identical = colourTokens.filter(([k, v]) => distDark[k] === v);
+  const unexpected = identical.filter(([k]) => !isExpected(k));
+
+  checks.push({
+    id: 'mode-parity',
+    label: `Mode parity: ${colourTokens.length - identical.length}/${colourTokens.length} semantic colours differ between light and dark`,
+    pass: unexpected.length === 0,
+    detail: unexpected.length
+      ? [
+          `${unexpected.length} semantic/component colours resolve IDENTICALLY in both modes and are not on the expected list.`,
+          'That is the signature of broken alias resolution — the dark theme silently carrying light values.',
+          ...unexpected.slice(0, 10).map(([k, v]) => `  --${k} = ${v} in BOTH modes`),
+          'If a token is genuinely mode-independent, add it to EXPECTED_IDENTICAL in generate-report.mjs WITH A REASON.',
+        ]
+      : [
+          `${identical.length} tokens are identical in both modes, all expected (inverse / on-brand text / transparent).`,
+          'Cross-mode aliasing is resolving correctly.',
+        ],
+  });
+}
+
 // 2. Sync: dist/light/variables.css vs site vendor/tokens.css
 {
   const norm = (s) => s.replace(/\s+$/gm, '').trim();

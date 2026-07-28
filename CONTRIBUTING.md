@@ -114,9 +114,6 @@ if the build changes committed `dist/`, `snapshot.json` or `changelog.json`.
 If you *do* see those files modified after a build, a token genuinely changed;
 commit it.
 
-Only commit `tokens/changelog.json` / `snapshot.json` when a genuine token
-change produced them.
-
 ## Releasing tokens (how consumers get them)
 
 > This section starts *after* the token change exists. For the step before it —
@@ -227,5 +224,6 @@ devDependencies (Storybook, Chromatic, Vite…) to install on every consumer. Ke
 | Push the branch | `git push -u origin my-change` |
 | Merge | on GitHub: open PR → wait for green → **Merge** |
 | Sync local main after merge | `git checkout main && git pull` |
-| Re-fetch tokens from Figma | `node scripts/figma-sink.mjs tokens/.figma-dump.json`, run the fetch snippet, then `npm run sync:figma -- --dry-run` |
+| Re-fetch token VALUES | run `scripts/figma-fetch.snippet.js` in the Figma Desktop Bridge, save the result to `tokens/.figma-dump.json`, then `npm run sync:figma -- --dry-run` |
+| Re-fetch DESCRIPTIONS | `node scripts/figma-sink.mjs tokens/.figma-descriptions.json`, then run `scripts/figma-fetch-descriptions.snippet.js` in the plugin — it POSTs to the sink |
 | Clear a stale git lock | `find .git -name '*.lock' -delete` |
