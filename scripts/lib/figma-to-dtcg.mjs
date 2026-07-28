@@ -6,7 +6,8 @@
  * (`{ light, dark }`), matching the shape sd.config.mjs consumes.
  *
  * The per-client mapping lives in the CONFIG block below — the only part that
- * changes between clients. See SYNC-DATA-MODEL.md for how it was derived.
+ * changes between clients. The mapping was derived empirically from the live
+ * Figma file; the reasoning is archived in _archive/kr-token-pipeline-2026-07/.
  */
 
 // ─── Per-client config (KR) ──────────────────────────────────────────────────

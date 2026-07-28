@@ -50,7 +50,7 @@ hand, use the two-part sync:
 The mapping (collection→branch, alias resolution, colour→hex, unit policy, the
 `colour/` de-dup, Fonts selection) lives in `scripts/lib/figma-to-dtcg.mjs` and is
 unit-tested (`npm run test:unit`). The data model it implements is documented in
-`SYNC-DATA-MODEL.md`. The fetch stays manual because the Plugin API only runs
+the transform's own tests. The fetch stays manual because the Plugin API only runs
 inside Figma (REST is Enterprise-only) — but everything downstream is code.
 
 The prose below explains what the fetch snippet does under the hood.

@@ -6,7 +6,7 @@
  * every collection and variable and RETURNS a compact, pre-resolved dump.
  *
  * WHY manual: the Plugin API only runs inside Figma; it can't run in Node or CI
- * (the REST variables endpoint is Enterprise-only). See SYNC-SCOPE.md.
+ * (the REST variables endpoint is Enterprise-only).
  *
  * WHY pre-resolved: a raw dump of all ~345 variables (full-precision colour
  * floats + alias refs) is ~90KB and exceeds the tool's response cap. Resolving
