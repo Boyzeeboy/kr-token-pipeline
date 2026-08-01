@@ -24,6 +24,19 @@ semantic layer (aliases like `colour/background/default`, `colour/action/primary
 semantic token, which in turn aliases a primitive. Light and dark modes share the
 same semantic names with different resolved values.
 
+That rule is now **enforced, not just stated**: the `semantic-only` check in
+`dist/report.html` fails the build when the consuming site references a
+`--kr-primitives-*` token. It was written here long before anything verified it,
+and the site broke it in 9 places for months — 195 uses routed through local
+aliases that pointed at primitives, which looks like good CSS and reads like a
+token. A rule nothing checks is a preference.
+
+**One documented exception remains:** `--gold-pale` (`primitives/gold/200`), a
+single decorative numeral. No semantic token carries that value, so this is a gap
+in the layer rather than a lapse in the CSS — it needs a decision in Figma, and
+until then the check reports 1 and the build stays red. That is the honest state,
+and it is preferable to an exception list that quietly grows.
+
 ## Where to look (routing)
 
 This file stays lightweight. The detail lives in generated and source files —
