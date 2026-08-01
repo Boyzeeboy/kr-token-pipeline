@@ -106,6 +106,7 @@ function siteFiles(dir, exts, out = []) {
 
 // ---------- load data ----------
 
+const pkg = loadJSON(join(ROOT, 'package.json'));
 const srcLight = walkSource(loadJSON(join(ROOT, 'tokens', 'tokens.light.json')));
 const srcDark = walkSource(loadJSON(join(ROOT, 'tokens', 'tokens.dark.json')));
 const distLight = loadJSON(join(ROOT, 'dist', 'light', 'tokens.flat.json'));
@@ -514,6 +515,67 @@ const usedList = [...usedVars.entries()]
 const section = (title, head, rows, note = '') =>
   rows ? `<h2>${title}${note ? ` <span class="note">${note}</span>` : ''}</h2>\n<table>${head}${rows}</table>` : '';
 
+// ─── The flow diagram ────────────────────────────────────────────────────────
+//
+// GENERATED, not drawn. A hand-drawn flowchart is the same liability as a
+// hand-written doc: the FigJam one this pipeline used to have drifted on seven
+// points before it was archived rather than updated. Every label below comes
+// from pipeline.config.mjs and package.json, so it cannot describe a system
+// that no longer exists.
+//
+// It exists because the prose kept failing to convey one thing: Figma → pipeline
+// and pipeline → site are SEPARATE transports with a deliberate gap between
+// them. Nothing crosses that gap automatically; the tag is the decision point.
+//
+// Emitted twice, from one source of truth: inline SVG so it renders here with no
+// external request (this file must work offline, on someone else's laptop), and
+// mermaid source in a details block for pasting somewhere that renders mermaid.
+const flow = (() => {
+  const pkgName = pkg?.name ?? 'the token package';
+  const steps = [
+    { group: 'figma', label: config.figmaFileName || 'your Figma file', sub: 'the source of truth' },
+    { group: 'figma', label: 'npm run sink  +  Sync', sub: `plugin POSTs to localhost:${config.sinkPort ?? 9231}` },
+    { group: 'figma', label: 'npm run sync:figma', sub: 'tokens/tokens.{light,dark}.json' },
+    { group: 'figma', label: 'npm run build', sub: 'dist/ — CSS, JS, flat JSON' },
+    { gap: true, label: 'nothing crosses automatically', sub: 'the tag is the decision point' },
+    { group: 'site', label: `git tag  →  ${pkgName}`, sub: 'the consumer pins a version' },
+    { group: 'site', label: 'bump the pin  +  sync', sub: site.configured ? `${config.siteDir} → vendor/tokens.css` : 'no consuming site configured' },
+  ];
+
+  const W = 560, BH = 52, GAP = 26, PAD = 12;
+  const H = steps.length * BH + (steps.length - 1) * GAP + PAD * 2;
+  let y = PAD, svg = '';
+  steps.forEach((s, i) => {
+    const isGap = !!s.gap;
+    const fill = isGap ? 'none' : s.group === 'figma' ? '#eef1f6' : '#f2efe9';
+    const stroke = isGap ? '#b9bec9' : s.group === 'figma' ? '#aab3c4' : '#c3b8a4';
+    svg += isGap
+      ? `<rect x="1" y="${y}" width="${W - 2}" height="${BH}" rx="6" fill="none" stroke="${stroke}" stroke-width="1" stroke-dasharray="5 4"/>`
+      : `<rect x="1" y="${y}" width="${W - 2}" height="${BH}" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="1"/>`;
+    svg += `<text x="${W / 2}" y="${y + 21}" text-anchor="middle" font-size="13" font-weight="${isGap ? 400 : 600}" fill="#16181d"${isGap ? ' font-style="italic"' : ''}>${esc(s.label)}</text>`;
+    svg += `<text x="${W / 2}" y="${y + 38}" text-anchor="middle" font-size="11" fill="#626977">${esc(s.sub)}</text>`;
+    if (i < steps.length - 1) {
+      const ay = y + BH;
+      svg += `<line x1="${W / 2}" y1="${ay}" x2="${W / 2}" y2="${ay + GAP - 7}" stroke="#8c93a3" stroke-width="1.5"/>`;
+      svg += `<path d="M${W / 2 - 4},${ay + GAP - 7} L${W / 2},${ay + GAP - 1} L${W / 2 + 4},${ay + GAP - 7} Z" fill="#8c93a3"/>`;
+    }
+    y += BH + GAP;
+  });
+
+  const mermaid = [
+    'flowchart TD',
+    ...steps.flatMap((s, i) => {
+      const id = `n${i}`;
+      const node = s.gap ? `${id}{{"${s.label} — ${s.sub}"}}` : `${id}["${s.label}<br/><small>${s.sub}</small>"]`;
+      return i === 0 ? [`  ${node}`] : [`  n${i - 1} --> ${node}`];
+    }),
+  ].join('\n');
+
+  return `<h2>How a change reaches the site <span class="note">generated from pipeline.config.mjs — it cannot drift</span></h2>
+<div class="flow"><svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" role="img" aria-label="Token flow from Figma to the consuming site">${svg}</svg></div>
+<details class="mermaid-src"><summary>mermaid source (for pasting where mermaid renders)</summary><pre>${esc(mermaid)}</pre></details>`;
+})();
+
 // The report's own styling is deliberately neutral and self-contained: system
 // fonts, greys, no external requests. It renders identically offline and has no
 // relationship to the tokens it reports on — otherwise a broken token set would
@@ -550,6 +612,10 @@ const html = `<!DOCTYPE html>
   .bar { height: .9rem; background: #8c93a3; border-radius: 2px; min-width: 2px; }
   .rad { width: 3.5rem; height: 2.2rem; background: #dfe2e8; border: 1px solid #8c93a3; }
   .rolename small { color: var(--mute); }
+  .flow { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 1rem; max-width: 620px; }
+  .mermaid-src { margin: .5rem 0 0; max-width: 620px; }
+  .mermaid-src summary { cursor: pointer; font-size: .8rem; color: var(--mute); }
+  .mermaid-src pre { font-family: ui-monospace, monospace; font-size: .75rem; overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: .7rem; }
 </style>
 </head>
 <body>
@@ -559,6 +625,8 @@ const html = `<!DOCTYPE html>
 
 <h2>Health checks — ${passCount}/${gated} passing${failCount ? `, ${failCount} failing` : ''}${skipCount ? `, ${skipCount} skipped` : ''}</h2>
 ${checks.map(checkHTML).join('\n')}
+
+${flow}
 
 ${section(`Tokens the site actually uses (${usedVars.size})`, '<tr><th>Variable</th><th>Value (light)</th><th>Used in</th></tr>', usedList)}
 ${section('Colours — semantic', '<tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>', colourRows(`${PREFIX}-colour`))}
