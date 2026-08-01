@@ -17,6 +17,10 @@
         "$type": "color",
         "$value": "#886534"
       },
+      "primary-hover-on-inverse": {
+        "$type": "color",
+        "$value": "#c4a264"
+      },
       "primary-pressed": {
         "$description": "Purpose: The deepest brand-gold fill for primary action controls in a pressed or active state.\nUsage: Applied to primary button backgrounds on :active / pointer down.\nGuidelines: Must be visually distinct from both the resting and hover states to provide clear interaction feedback. Do not use for non-interactive brand fills.",
         "$type": "color",
@@ -286,6 +290,10 @@
         "$description": "Purpose: The foreground colour for content rendered on inverse (dark branded) surfaces.\nUsage: Applied to all text and icons on colour/background/inverse to ensure legibility on dark gold surfaces.\nGuidelines: Always pair with colour/background/inverse. Do not use on standard or brand surfaces — each surface requires its own pairing.",
         "$type": "color",
         "$value": "#f5f0e8"
+      },
+      "inverse-accent": {
+        "$type": "color",
+        "$value": "#c4a264"
       },
       "muted": {
         "$description": "Purpose: A tertiary foreground colour for reduced-emphasis content on any background.\nUsage: Applied to placeholder text, metadata, disabled foreground labels, and any content intentionally subordinated in the visual hierarchy.\nGuidelines: Do not use for interactive or actionable content. Ensure the visual reduction in prominence is intentional and that the information is non-critical.",

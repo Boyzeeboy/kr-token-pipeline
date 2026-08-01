@@ -5,6 +5,7 @@
 
 export const krColourActionPrimary = "#a07840";
 export const krColourActionPrimaryHover = "#886534";
+export const krColourActionPrimaryHoverOnInverse = "#c4a264";
 export const krColourActionPrimaryPressed = "#6e5229";
 export const krColourActionSecondary = "#d4c9b4";
 export const krColourActionSecondaryHover = "#b8a990";
@@ -57,6 +58,7 @@ export const krColourOnBackgroundDefault = "#221c14";
 export const krColourOnBackgroundError = "#8f1a1a";
 export const krColourOnBackgroundInfo = "#1d4ed8";
 export const krColourOnBackgroundInverse = "#f5f0e8";
+export const krColourOnBackgroundInverseAccent = "#c4a264";
 export const krColourOnBackgroundMuted = "#5c5040";
 export const krColourOnBackgroundPromo = "#f5f0e8";
 export const krColourOnBackgroundSubtle = "#3d3830";
