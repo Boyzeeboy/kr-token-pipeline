@@ -22,6 +22,15 @@ doesn't exist. It runs as part of `npm test`. It cannot tell you this file is
 > `npm run sync:figma -- --dry-run` → read the audit and the diff →
 > `npm run sync:figma` → `npm test` → commit source **and** `dist/` together
 
+**The order of the first two is a dependency, not a preference.** The sink must
+already be listening when you press Sync: the plugin POSTs to it and gets a
+connection refused otherwise. It is a listener you start first, not a receiver
+you run afterwards to collect what was sent.
+
+And pressing Sync changes no tokens. It writes a raw dump to disk; turning that
+into tokens is the separate `sync:figma` step, which is where the audit and the
+diff get read.
+
 The mechanics of each step are in `CLAUDE.md`. What follows is what to do when a
 step doesn't go cleanly.
 
@@ -152,6 +161,55 @@ Consumers pin this repo by tag, so the version is a promise about their build.
 
 A rename is not a PATCH because it looks small. The test is whether an existing
 `var(--…)` in a consumer stops resolving.
+
+---
+
+## Releasing
+
+Committing is not releasing. A consumer pins a **tag**, so nothing you merge
+reaches anyone until a tag exists and their pin moves to it. Both are deliberate
+acts.
+
+**1. Bump `package.json` BEFORE cutting the tag.**
+
+```bash
+node -p "require('./package.json').version"   # must equal the tag you are about to cut
+```
+
+Do this even though it feels redundant. A tag named `v2.3.0` containing a package
+that calls itself `2.2.0` is a lie that travels: the consumer installs it, reports
+the wrong version, and the mismatch is invisible in any diff of the built output —
+which will be perfectly correct. Every other drift-prone relationship in this repo
+has a check; this one does not, which is why it is written down here.
+
+**2. Tag annotated, with the reasoning.**
+
+```bash
+git tag -a v2.3.0 -m "…"
+git push origin v2.3.0
+```
+
+**3. Bump the consumer's pin — separately, and only when you mean to.**
+
+An unchanged `dist/` means the consumer *need not move at all*. That is a feature:
+a release that changes no shipped value cannot break anyone, so it can sit
+unadopted indefinitely.
+
+When you do bump it, verify **more than the diff**. `npm install` alone may not
+re-resolve a git dependency — it will honour a lockfile still pinned to the old
+commit, and report success. Check all of:
+
+- the installed package's own version
+- what the sync script reports
+- the diff in the consumer's vendored file
+- the commit the lockfile resolved to
+
+A correct diff and a wrong version is a state that has actually happened here.
+
+**Never move a published tag.** Consumers cache them; a moved tag means two people
+hold different code under one name. The only exception is a tag provably nobody
+has resolved yet — and "provably" means checked, not assumed. Otherwise supersede
+it with a new version and leave the mistake in the history.
 
 ---
 

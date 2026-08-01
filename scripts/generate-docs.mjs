@@ -25,12 +25,17 @@ const OUTPUTS = ['AGENTS.md', 'CLAUDE.md'];
 
 // {{key}} → config[key]. Throws on any unresolved placeholder so a missing
 // config value fails loudly instead of shipping a literal "{{...}}".
+//
+// An EMPTY value is different from a missing one: the unconfigured baseline has
+// no Figma file yet, and rendering that as `The file is ****, key ``.` reads as
+// a broken template rather than as "nobody has set this yet". Say so instead.
 function render(template, vars) {
   return template.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (match, key) => {
     if (!(key in vars)) {
       throw new Error(`generate-docs: no value for placeholder "{{${key}}}" in pipeline.config.mjs`);
     }
-    return String(vars[key]);
+    const value = String(vars[key]);
+    return value.trim() === '' ? '(not configured)' : value;
   });
 }
 

@@ -65,10 +65,13 @@ heading computing to 40px would keep a fixed 80px line-height, i.e. 2× leading.
 
 The file is **Kirsten Rossiter Token Pipeline**, key `M4EeBpB5Ez5cgTkwJnk4LK`.
 
-1. `npm run sink` — starts a one-shot listener on `127.0.0.1:9231`. It accepts
-   exactly one POST, writes it to disk, and exits.
+1. `npm run sink` — starts a one-shot listener. It accepts exactly one POST,
+   writes it to disk, and exits. **Start it BEFORE pressing Sync**: the plugin
+   POSTs to it, so it is a listener you start first, not a receiver you run
+   afterwards to collect what was sent.
 2. In Figma, open that file and run the **Token Sync** plugin (`plugin/`). Press
-   **Sync**. Values and descriptions arrive in one request.
+   **Sync**. Values and descriptions arrive in one request. This writes a raw
+   dump only — it changes no tokens.
 3. `npm run sync:figma -- --dry-run` — **read the collection audit and the diff**,
    then re-run without `--dry-run`.
 4. `npm test`.
