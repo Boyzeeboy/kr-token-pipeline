@@ -9,12 +9,12 @@
  * times the size of the value dump — which exceeds the bridge's response cap.
  *
  * WHY IT IS KEYED BY COLLECTION: Figma variable names are NOT unique across
- * collections. Spacing and Radius both define `scale/4`, `xs`, `s`, `m`, `l` and
- * `xl`, and their descriptions genuinely differ ("icon gaps, tight internal
- * spacing" vs "badges, tags, tooltips"). A flat name-keyed map silently drops 5
- * of the 223 descriptions — verified, not theoretical.
+ * collections. Spacing and Radius commonly both define `scale/4`, `xs`, `s`,
+ * `m`, `l` and `xl`, and their descriptions genuinely differ ("icon gaps, tight
+ * internal spacing" vs "badges, tags, tooltips"). A flat name-keyed map silently
+ * dropped 5 of one real file's 223 descriptions — verified, not theoretical.
  *
- * HOW TO RUN (see PROCESS.md):
+ * HOW TO RUN:
  *   1. node scripts/figma-sink.mjs tokens/.figma-descriptions.json
  *   2. Run this snippet in the Figma plugin (bridge connected to the token file).
  *   3. The sink writes the file and exits. Then: npm run sync:figma -- --dry-run

@@ -8,13 +8,19 @@
  * WHY manual: the Plugin API only runs inside Figma; it can't run in Node or CI
  * (the REST variables endpoint is Enterprise-only).
  *
- * WHY pre-resolved: a raw dump of all ~345 variables (full-precision colour
- * floats + alias refs) is ~90KB and exceeds the tool's response cap. Resolving
- * aliases and converting colours to hex HERE makes it ~5x smaller so it returns
- * in one shot. Division of labour: this file does Figma-specific extraction and
- * normalisation; scripts/lib/figma-to-dtcg.mjs makes the structural decisions
- * (branch mapping, colour/ de-dup, unit policy, Fonts selection) and is
- * unit-tested. The transform accepts raw OR resolved values, so both work.
+ * WHY pre-resolved: a raw dump of a few hundred variables (full-precision colour
+ * floats + alias refs) runs to ~90KB and exceeds the tool's response cap.
+ * Resolving aliases and converting colours to hex HERE makes it ~5x smaller so
+ * it returns in one shot. Division of labour: this file does Figma-specific
+ * extraction and normalisation; scripts/lib/figma-to-dtcg.mjs makes the
+ * structural decisions (branch mapping, colour/ de-dup, unit policy, Fonts
+ * selection) and is unit-tested. The transform accepts raw OR resolved values,
+ * so both work.
+ *
+ * Nothing here is per-client. It emits EVERY collection and mode it finds, with
+ * their names; which of them matter, and how their modes map to light/dark, is
+ * decided downstream by name in the transform. That is what makes this runnable
+ * against a Figma file you have never seen before.
  *
  * NOTE: `hex()` below mirrors `colourToHex` in scripts/lib/figma-to-dtcg.mjs
  * (the canonical, unit-tested copy). This snippet must be self-contained to run
@@ -27,18 +33,17 @@
  * entire dark theme silently shipped light values. Resolution now matches on
  * mode NAME. Treat any change here as high-risk and verify against real output.
  *
- * HOW TO RUN (see PROCESS.md):
+ * HOW TO RUN:
  *   1. Open the Figma file (key in pipeline.config.mjs → figmaFileKey).
  *   2. Run this snippet via the Figma plugin bridge against that file.
  *   3. Save the returned JSON to tokens/.figma-dump.json (gitignored).
- *   4. npm run sync:figma -- --dry-run   (review), then without --dry-run.
- *   5. VERIFY DARK MODE — the check the old code would have failed:
- *        node -e "const l=require('./tokens/tokens.light.json'),
- *          d=require('./tokens/tokens.dark.json');
- *          console.log(l.colour.action.primary.\$value,
- *                      d.colour.action.primary.\$value)"
- *      The two must DIFFER (light #a07840 / dark #c4a264). If they match,
- *      alias mode resolution is broken again.
+ *   4. npm run sync:figma -- --dry-run   (review the collection audit and the
+ *      diff), then again without --dry-run.
+ *   5. VERIFY DARK MODE. `npm run build` runs the mode-parity check, which fails
+ *      when semantic colours resolve identically in both modes — the exact
+ *      signature of the bug this file's mode-NAME matching fixed. Do not wave a
+ *      failure through by adding entries to modeParity.expectedIdentical unless
+ *      each one has a real reason.
  */
 
 const collections = await figma.variables.getLocalVariableCollectionsAsync();

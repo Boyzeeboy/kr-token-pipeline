@@ -3,23 +3,25 @@
  *
  * 1. Checks that `npm run build` produced all expected output files and that
  *    each one is non-empty.
- * 2. Consumer contract: every var(--<prefix>-…) referenced by the site repo must
- *    be defined in dist/light/variables.css. Skipped (with a warning) if the site
- *    repo is not present — e.g. on a CI checkout of this repo alone.
+ * 2. Consumer contract: every var(--<prefix>-…) referenced by the consuming site
+ *    repo must be defined in dist/light/variables.css. Skipped (with a note) when
+ *    no site is configured or checked out — e.g. a CI run of this repo alone, or
+ *    a fresh client with no site yet.
  *
  * Exits 0 on success, 1 on any failure.
  *
  * Usage: node scripts/verify-build.mjs
- * Site repo location: env KR_SITE_DIR, default ../Kirsten Rossiter
+ * Site repo location: env SITE_DIR, else pipeline.config.mjs → siteDir
  */
 
 import { existsSync, statSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import config from '../pipeline.config.mjs';
+import { resolveSiteDir } from './lib/site-dir.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const SITE = process.env.KR_SITE_DIR || join(ROOT, '..', 'Kirsten Rossiter');
+const site = resolveSiteDir(ROOT, config);
 
 // Token name prefix, matching sd.config.mjs.
 const PREFIX = process.env.TOKEN_PREFIX ?? config.prefix;
@@ -61,16 +63,18 @@ function siteFiles(dir, out = []) {
   return out;
 }
 
-if (!existsSync(SITE)) {
-  console.warn(`\nWARN  site repo not found at ${SITE} — consumer-contract check skipped.`);
+if (!site.present) {
+  // Not configured is normal; configured-but-missing is a setup mistake worth
+  // shouting about, but neither can prove anything about the build itself.
+  console.warn(`\n${site.configured ? 'WARN' : 'SKIP'}  ${site.reason} — consumer-contract check not run.`);
 } else {
   const css = readFileSync(join(ROOT, 'dist', 'light', 'variables.css'), 'utf8');
   const defined = new Set([...css.matchAll(new RegExp(`--(${P}-[a-z0-9-]+)\\s*:`, 'g'))].map((m) => m[1]));
   const used = new Map(); // name -> Set(files)
-  for (const p of siteFiles(SITE)) {
+  for (const p of siteFiles(site.path)) {
     for (const m of readFileSync(p, 'utf8').matchAll(new RegExp(`var\\(\\s*--(${P}-[a-z0-9-]+)`, 'g'))) {
       if (!used.has(m[1])) used.set(m[1], new Set());
-      used.get(m[1]).add(relative(SITE, p));
+      used.get(m[1]).add(relative(site.path, p));
     }
   }
   const undef = [...used.keys()].filter((n) => !defined.has(n));

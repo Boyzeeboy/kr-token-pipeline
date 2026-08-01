@@ -1,249 +1,182 @@
-# Token Pipeline — Work Process
+# Working process
 
-This is the working loop for the token pipeline: how a change moves from
-Figma through the build to the outputs that UIs and AI agents consume. The system
-is governed and one-directional — **Figma → `tokens/*.json` → `dist/`** — so the
-golden rule is to make every change and every fix at its correct source layer, so
-it survives the next Figma sync.
+The judgement calls. What to do when something is wrong, which layer to fix it
+at, and when a change is breaking.
 
-For the design rule itself, see `design.md` (the lightweight router) and
-`CLAUDE.md` / `AGENTS.md` (which tell agents to read `design.md` before any UI work).
+**What is deliberately not here.** The rules for working in this repo are in
+`CLAUDE.md`, which is generated from `templates/agent-rules.md` and carries this
+client's real Figma file and prefix — so it cannot drift. The state of the token
+set is in `dist/report.html`, generated on every build. Neither is restated here.
+A document that describes behaviour rots silently; this one describes decisions,
+which is the part a generator can't produce.
 
-## The condensed loop
-
-> edit in Figma → `npm run build` → spot-check `design.md` routing →
-> (as components arrive) add metadata + Storybook and link them from `design.md` →
-> correct mistakes at the token/guideline/metadata layer, not in the router.
+`npm run verify:docs` fails if this file names a command, a file, or a check that
+doesn't exist. It runs as part of `npm test`. It cannot tell you this file is
+*wrong* — only that it has stopped being *real*.
 
 ---
 
-## Step 1 — Edit tokens in Figma
+## The loop
 
-All token changes start in Figma (the file configured in `pipeline.config.mjs` —
-see `figmaFileName` / `figmaFileKey`, also surfaced in `CLAUDE.md` / `AGENTS.md`),
-never in code. Change a color, add a type size, adjust spacing, or rewrite a
-token's usage description there. Two things matter:
+> edit in Figma → `npm run sink` → press **Sync** in the plugin →
+> `npm run sync:figma -- --dry-run` → read the audit and the diff →
+> `npm run sync:figma` → `npm test` → commit source **and** `dist/` together
 
-- **The value** (e.g. `teal/500` = `#…`).
-- **The description prose** (Purpose / Usage / Guidelines). This isn't
-  decoration — it flows downstream and becomes the usage rule the AI reads later.
-  Write it as if instructing someone who has never seen the system.
+The mechanics of each step are in `CLAUDE.md`. What follows is what to do when a
+step doesn't go cleanly.
 
-Keep edits at the right layer: change a **primitive** only when the brand color
-genuinely changes; for most work you adjust **semantic** aliases
-(`colour/action/primary`, `colour/background/default`), which is what components
-actually consume.
+---
 
-## Step 2 — Sync into `tokens/*.json`
+## First sync against a file the pipeline has not seen
 
-**Preferred: the scripted sync (deterministic, tested).** Rather than mapping by
-hand, use the two-part sync:
-
-1. **Fetch** — with the Figma file open **and the Figma Desktop Bridge plugin
-   running**, execute `scripts/figma-fetch.snippet.js` in the plugin. Save the
-   returned JSON to `tokens/.figma-dump.json` (gitignored, transient).
-   The Desktop Bridge is the working route on a non-Enterprise plan; see the
-   warning below about the selection-based reader.
-2. **Transform** — `npm run sync:figma -- --dry-run` to review the diff, then
-   `npm run sync:figma` to write `tokens.{light,dark}.json`.
-
-The mapping (collection→branch, alias resolution, colour→hex, unit policy, the
-`colour/` de-dup, Fonts selection) lives in `scripts/lib/figma-to-dtcg.mjs` and is
-unit-tested (`npm run test:unit`). The data model it implements is documented in
-the transform's own tests. The fetch stays manual because the Plugin API only runs
-inside Figma (REST is Enterprise-only) — but everything downstream is code.
-
-The prose below explains what the fetch snippet does under the hood.
-
-**How the sync actually reads Figma.** Use the Figma **`use_figma`** tool, which
-runs the Figma Plugin API. Call
-`figma.variables.getLocalVariableCollectionsAsync()` and
-`getLocalVariablesAsync()` to read **every** local variable and collection —
-this works with **nothing selected** in Figma. Resolve aliases per mode and
-convert colors to hex, then diff against the source files.
-
-> ⚠️ **Do not use the selection-based reader** (`get_variable_defs` /
-> "get design context") for a full sync. It only returns variables used by the
-> layer *currently selected* in the Figma desktop app and errors with
-> `"nothing selected"`. This caused significant confusion during the
-> 2026-06-22 sync before switching to `use_figma`. Figma's Variables REST API
-> would read the whole panel too, but it is **Enterprise-only** — the Plugin API
-> path via `use_figma` works on any plan.
-
-The Figma values land in the DTCG source files. Note which file does what:
-
-- **`tokens/tokens.{light,dark}.json` are the only files Style Dictionary
-  compiles into `dist/`.** These are what the build, the CSS/JS outputs, and
-  consuming UIs actually use. Edit these for any value that must reach `dist/`.
-- The same two files also feed **Storybook** (the stories import
-  `tokens.light.json` directly) and the **changelog snapshot**
-  (`snapshot-tokens.mjs` tracks both). There is no separate copy: `color.json`,
-  `typography.json` and `size.json` were deleted on 2026-07-26 after drifting
-  from what actually shipped (71 of 150 shared values disagreed).
-- **Descriptions are fetched separately from values.** The prose is ~70KB, five
-  times the value dump, and exceeds the plugin bridge's response cap. Run
-  `node scripts/figma-sink.mjs tokens/.figma-descriptions.json`, then execute
-  `scripts/figma-fetch-descriptions.snippet.js` in the Figma plugin — it POSTs
-  straight to that local sink. `sync-from-figma.mjs` picks the file up
-  automatically and writes `$description` onto each token; without it the sync
-  still works, it just warns and produces no descriptions.
-- `tokens/guidelines.json` is an **older, partial reference file** (~31% of
-  tokens, pre-rename paths). Nothing consumes it — not the build, not Storybook,
-  not the snapshot. Prefer the `$description` on each token; do not add new
-  guidance to `guidelines.json`. Its fate is undecided — see `COLOUR-GAPS.md`
-  for the same kind of open decision.
-
-Before building, review the diff so you can see exactly what changed:
+Start the sink, press **Sync** in the plugin, then:
 
 ```bash
-git diff tokens/
+npm run sync:figma -- --dry-run
 ```
 
-Never hand-edit `dist/`.
+The audit prints before anything is transformed: which collections matched by
+name, which the convention expects and the file lacks, which modes could not be
+mapped. Read it before applying anything. Three things it surfaces, in order of
+how much they matter:
 
-## Step 3 — Run `npm run build`
+- **A collection the convention doesn't know.** Those variables live somewhere
+  this pipeline won't look. Either the collection is genuinely out of scope, or
+  the design system has a layer nothing downstream can reach.
+- **A mode that maps to nothing.** A theme that exists in Figma and cannot exist
+  in code. Worth establishing what was believed to be shipping.
+- **A collection that isn't there at all.** The layer is missing, not misnamed.
 
-One command does two things in sequence (see `package.json`):
+Fix it by **renaming in Figma** wherever possible. Overriding `figma` in
+`pipeline.config.mjs` is the fallback, and every entry there is a standing record
+that the file doesn't follow the convention — so it should feel slightly worse
+than renaming.
 
-1. `node sd.config.mjs` — Style Dictionary compiles the DTCG tokens into
-   `dist/light/` and `dist/dark/`:
-   - `variables.css` — the `--<prefix>-…` custom properties (prefix from
-     `pipeline.config.mjs`). Descriptions are **deliberately not** emitted as CSS
-     comments: Style Dictionary does so by default and it took this file from
-     12.5KB to 82KB, so it is suppressed via `formatting.commentStyle`. The
-     source `tokens.{light,dark}.json` *do* carry `$description` (253 of 332
-     tokens) — read guidance there or in Storybook.
-   - `tokens.js` — ES6 named exports.
-   - `tokens.flat.json` — flat `name: value` map.
-2. `node scripts/snapshot-tokens.mjs` — diffs the new build against the previous
-   snapshot and appends the change to `tokens/changelog.json`.
+Don't sync a file the audit is unhappy about just to reach a green build. What
+the audit says about the system is worth more than the green build is.
+
+### If it says "Wrong Figma file"
+
+The dump came from a file this pipeline is not for. Two ways that happens: the
+wrong file was open in Figma when you pressed Sync, or a sink for a different
+client was listening on the port. Nothing was written.
+
+Do not reach for a workaround. The plugin is not addressed per client — it reads
+whatever is open and POSTs to a port — so the file name is the only thing
+standing between two clients' token sets. The audit cannot help here: a file that
+follows the convention reports 6/6 whoever it belongs to.
+
+The only legitimate reason to change `figmaFileName` is that the file was renamed
+in Figma.
+
+---
+
+## When a check goes red
+
+`npm run build` regenerates `dist/report.html` and prints the failures. **`npm test`
+fails if any of them are red** — the report is a gate, not a bulletin.
+
+That split is deliberate: `build` stays advisory so you can always build in order
+to *look* at a problem; `test` is what decides whether something ships. Until
+2026-07-30 the report could not fail anything at all, which is how `mode-parity`
+could go red while `npm test` exited 0 — a red line written into a gitignored
+file that CI generated, logged and threw away.
+
+A skipped check is not a failure: with no consuming site checked out, the
+site-facing checks skip rather than block. Each check has one place it should be
+fixed, and it is almost never the place the symptom appears.
+
+<!-- verify-docs: check-ids -->
+
+| Check | What it actually means | Fix it at |
+| --- | --- | --- |
+| `build-light` | A source token didn't reach `dist/`, or `dist/` grew one from nowhere. Usually a name that is also a group prefix, which Style Dictionary drops silently | Figma — rename to parent-child (`input/border/default`, not `input/border`) |
+| `build-dark` | As above, for the dark tree. Failing on one mode only usually means a variable exists in one mode and not the other | Figma |
+| `mode-parity` | **Read this one carefully.** Semantic colours resolve identically in light and dark. That is the signature of broken alias resolution, not of a subtle palette | The transform, or `modeParity.expectedIdentical` — see below |
+| `sync` | The consuming site is running an older build than this repo produced | Re-run the site's token sync; never hand-edit its vendor file |
+| `contract` | The site uses a `var(--…)` this build doesn't define. A rename landed here but not there | Usually Figma (restore the name) or the site (adopt the new one). Decide which, don't patch both |
+| `fonts` | The site loads a webfont no token names, or names a family it never loads | The site's font link, or the family token — they must agree |
+| `lint-doubled` | A path segment repeats (`colour-colour-…`). The collection's variables already carry the branch name | `branch: null` for that collection in the transform config |
+| `lint-unitless` | A font token is a bare number. `font-size` and `letter-spacing` are invalid CSS without a unit; `line-height: 80` means 80× | The transform's `unitlessNumber` — and it changes shipped values, so MAJOR |
+| `hardcoded` | Informational, never a gate. Colours in the site with no token behind them | Nothing, until you decide one is a real gap in the system |
+
+### The one worth being stubborn about
+
+`mode-parity` is the check that exists because everything else passed. Alias
+resolution matched Figma's per-collection mode ids, so every cross-collection
+alias fell back to Light, and 148 of 150 dark colours silently carried their
+light values — for months, through green builds, because nothing compared the two
+modes by value.
+
+When it goes red, the question is *"why is dark the same as light?"* — not
+*"how do I make this green?"*. `modeParity.expectedIdentical` in
+`pipeline.config.mjs` exists for tokens that genuinely don't vary: text on an
+inverted surface, a foreground on a brand fill that is one colour in both modes,
+a transparent border. Each entry carries its reason. Never widen it to a pattern:
+a wildcard is precisely how a broken token gets back in.
+
+---
+
+## Which layer to fix at
+
+The rule is that a fix must survive the next sync. Anything downstream of Figma
+is overwritten.
+
+| Wrong thing | Fix at | Overwritten if you fix it downstream |
+| --- | --- | --- |
+| A value | The Figma variable | `tokens/*.json` — next sync |
+| A token's usage guidance | The Figma variable's description | `tokens/*.json` — next sync |
+| A name, or a name/group collision | Figma | anywhere else |
+| How names map to output paths | `scripts/lib/figma-to-dtcg.mjs`, or `figma` in `pipeline.config.mjs` | — |
+| Which outputs get built | `sd.config.mjs` | `dist/` — next build |
+| Anything at all in `dist/` | somewhere else, always | every build |
+
+**The anti-pattern:** patching a downstream artefact so the symptom goes away.
+It creates a second source of truth, it drifts from Figma, and the next sync
+silently reverts it — which is the exact failure this pipeline exists to prevent.
+
+---
+
+## Versioning
+
+Consumers pin this repo by tag, so the version is a promise about their build.
+
+- **MAJOR** — a token was renamed or removed, or a shipped value changed shape
+  (bare number → `px`, a mode's resolution changed). Anything where a consumer's
+  CSS silently stops resolving. The `colour/colour/…` de-duplication was one of
+  these; so is any change to `unitlessNumber`.
+- **MINOR** — tokens added. Existing names keep their meaning.
+- **PATCH** — a value changed within its existing name and type. A brand colour
+  moving two shades is a PATCH, however loud it looks.
+
+A rename is not a PATCH because it looks small. The test is whether an existing
+`var(--…)` in a consumer stops resolving.
+
+---
+
+## Committing
+
+Source and built outputs go in the same commit. CI checks that a fresh build
+reproduces the committed `dist/` exactly, so a stale artefact can't sail through:
 
 ```bash
-npm run build
-```
-
-**This step is the validation gate.** If a token is malformed or a reference is
-broken, the build fails here — do not ship it. A clean build means the values are
-structurally sound. Confirm the outputs and changelog match intent:
-
-```bash
-git diff dist/ tokens/changelog.json
-```
-
-> ⚠️ **Build gotcha — nested-on-token tokens are dropped.** Style Dictionary
-> only emits a token's value when its node is a leaf. If a node has its own
-> `$value` *and* nested children, only the parent is emitted; the children
-> never reach `dist/`. **Resolved 2026-07-04:** all such conflicts (8 groups /
-> 16 child tokens: `input/*` states, `colour/action/*` hover/pressed,
-> `button/*/focus-*`, `nav/text-active`, `colour/text/link-hover`) were renamed
-> to hyphenated siblings in both Figma and the token JSON. The naming
-> convention is `parent-child` (e.g. `input/border-focus`). When syncing from
-> Figma, verify no variable name is also a group prefix of another variable in
-> the same collection; if one appears, rename it in Figma first — do not
-> recreate the nested structure in the JSON.
-
-### Commit and push
-
-Once the build is clean and the diff matches intent, stage the source **and** the
-rebuilt `dist/` outputs together, commit, and push:
-
-```bash
-find .git -name '*.lock' -delete   # clear any stale lock from an interrupted git step
-git checkout -b sync/figma-$(date +%Y-%m-%d)
 git add tokens/ dist/
-git commit -m "sync: update tokens from Figma + rebuild"
-git push -u origin HEAD                     # then open a PR
+git commit -m "sync: update tokens from Figma"
 ```
 
-> `main` is protected — a direct `git push origin main` is **rejected**. Every
-> change goes through a branch and a PR so the `build + verify` gate runs.
-> `CONTRIBUTING.md` is the authority on this flow; this is the short version.
-
-Also `git add sd.config.mjs` when the build config changed (e.g. a structural
-build fix). Pushing triggers Chromatic CI (Step 5). If git reports
-`index.lock`/`HEAD.lock` exists, a previous git step was interrupted — the
-`find … -delete` line above clears the stale lock so the commit can proceed.
-
-## Step 4 — Spot-check `design.md` routing
-
-Do **not** regenerate `design.md` on every build — it is a router. It points at
-`dist/`, `tokens/guidelines.json`, and Storybook, so updated values flow through
-automatically without touching the file.
-
-Only edit `design.md` if the **structure** changed — e.g. a new token category, a
-renamed mode selector, an added font, or a change to the 4px spacing base.
-Routine value changes (a new teal shade, a tweaked contrast) need no edit at all.
-This keeps `design.md` stable and trustworthy instead of churning.
-
-## Step 5 — Verify visually in Storybook
-
-```bash
-npm run storybook   # port 6006
-```
-
-Look at the affected stories — Colors, Typography, Spacing, BorderRadius, or the
-Changelog story to confirm the diff rendered. This is the eyes-on check that
-values *look* right, not just that they built. Chromatic CI (`.github/workflows/
-chromatic.yml`) runs this automatically on push and flags visual regressions, so
-it is both your local check and an enforced gate on the PR.
-
-## Step 6 — (As components arrive) add metadata + Storybook, link from `design.md`
-
-This step activates once components are built on top of the tokens. For each new
-component:
-
-- Build it consuming **semantic tokens only** (CSS vars from `dist/`, never hex).
-- Write a **metadata file** beside it: variants, sizes, states, allowed
-  relationships, anti-patterns, do/don'ts — the "leave nothing to interpretation"
-  layer.
-- Add a **Storybook story** so it is visually documented alongside the token
-  stories.
-- Add **one line to `design.md`** that *points* to that metadata
-  (e.g. "open the button's metadata before composing a button") rather than
-  inlining the detail.
-
-This extends the routing pattern from the foundation level up to the component
-level, keeping `design.md` lightweight as the system grows.
-
-## Step 7 — Correct mistakes at the source layer, not the router
-
-When something is wrong, fix it where the rule lives so the fix propagates and
-survives the next Figma sync:
-
-- **Token-usage error** (hardcoded hex, primitive used directly, failed contrast)
-  → tighten the `$description` on the token itself. It is synced from the
-  variable's description in Figma, so **fix it in Figma** and re-sync; editing
-  `tokens/*.json` by hand is overwritten on the next sync.
-  (`guidelines.json` is an older partial copy — ~31% coverage, pre-rename paths.
-  Do not add guidance there.)
-
-  Note the descriptions do **not** appear in the built CSS. Style Dictionary
-  emits them as comments by default, which took `variables.css` from 12.5KB to
-  82KB, so they are deliberately suppressed via `formatting.commentStyle` in
-  `sd.config.mjs`. Read them in `tokens/*.json` or Storybook.
-- **Component-composition error** → fix it in that component's metadata.
-- **Genuinely system-wide rule** → add it to `design.md`'s do/don't list.
-
-**Anti-pattern:** patching `design.md` (or `dist/`) with a fix that belongs
-upstream. That creates a second source of truth that drifts from Figma and gets
-silently bypassed on the next build — exactly the drift this pipeline exists to
-prevent.
+Add `sd.config.mjs` or `pipeline.config.mjs` when the build config changed.
+`dist/report.html` is untracked deliberately — its content depends on whether a
+consuming site is checked out alongside, so it churns and cannot be reproduced in
+CI. It got swept into a release commit once; keep it out.
 
 ---
 
-## Quick reference
+## When this file is wrong
 
-| Action | Command |
-| --- | --- |
-| Rebuild tokens + changelog | `npm run build` |
-| Verify build outputs exist | `npm run verify` |
-| Build + verify (full test) | `npm test` |
-| Run Storybook locally | `npm run storybook` |
-| Build static Storybook | `npm run build-storybook` |
-| Review source token changes | `git diff tokens/` |
-| Review built output changes | `git diff dist/ tokens/changelog.json` |
-| Clear a stale git lock | `find .git -name '*.lock' -delete` |
-| Stage source + outputs | `git add tokens/ dist/` (add `sd.config.mjs` if build config changed) |
-| Commit & push | `git commit -m "…"` then `git push -u origin HEAD`, then open a PR (`main` is protected) |
+Fix it, or delete the part that is wrong. Do not leave prose standing because
+removing it feels like losing something — the lineage this came from accumulated
+1,599 lines of markdown against 332 tokens, and seven documents were stale before
+anyone noticed. Length was the symptom; nothing checking them was the cause.
 
-**Never hand-edit `dist/`.** It is auto-generated and overwritten on every build.
+If you find yourself wanting to document what the system *currently contains*,
+that belongs in the generated report, not here.

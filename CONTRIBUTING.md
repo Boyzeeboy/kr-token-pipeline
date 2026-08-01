@@ -224,6 +224,5 @@ devDependencies (Storybook, Chromatic, Vite…) to install on every consumer. Ke
 | Push the branch | `git push -u origin my-change` |
 | Merge | on GitHub: open PR → wait for green → **Merge** |
 | Sync local main after merge | `git checkout main && git pull` |
-| Re-fetch token VALUES | run `scripts/figma-fetch.snippet.js` in the Figma Desktop Bridge, save the result to `tokens/.figma-dump.json`, then `npm run sync:figma -- --dry-run` |
-| Re-fetch DESCRIPTIONS | `node scripts/figma-sink.mjs tokens/.figma-descriptions.json`, then run `scripts/figma-fetch-descriptions.snippet.js` in the plugin — it POSTs to the sink |
+| Re-fetch tokens from Figma | `npm run sink`, then press **Sync** in the Token Sync plugin — values and descriptions arrive together. Then `npm run sync:figma -- --dry-run`. See `PROCESS.md` |
 | Clear a stale git lock | `find .git -name '*.lock' -delete` |
