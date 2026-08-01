@@ -1,26 +1,44 @@
 /**
  * generate-report.mjs
  *
- * Generates a static HTML token report at dist/report.html:
- *   - Drift checks: source JSON → dist build → site vendor/tokens.css
- *   - Consumer contract: every var(--kr-*) used by the site must be defined
- *   - Font check: Google Fonts links on the site vs font-family tokens
+ * Generates a static HTML token report at dist/report.html. This is the
+ * CLIENT-FACING ARTEFACT of the pipeline — generated from the real system on
+ * every build, so unlike written prose it cannot go stale.
+ *
+ * Checks:
+ *   - Build integrity: every source token reaches dist, nothing appears from nowhere
+ *   - Mode parity BY VALUE: light and dark actually differ (see below)
+ *   - Site sync: dist/light/variables.css ↔ the consuming site's vendor/tokens.css
+ *   - Consumer contract: every var(--<prefix>-*) the site uses is defined
+ *   - Fonts: the site's webfont links ↔ the font-family tokens
  *   - Lint: doubled group names, unitless numeric font tokens
- *   - Hardcoded hex values in site CSS/HTML (off-pipeline colours)
- *   - Visual reference: colour swatches (light/dark), type scale, spacing, radius
+ *   - Colour audit: hardcoded hex in the site (informational, never a gate)
+ * Plus a visual reference: colour swatches (light/dark), type scale, spacing, radius.
+ *
+ * Site-facing checks report as SKIPPED, not failed, when no consuming site is
+ * configured or checked out. A permanently-red check teaches people to ignore red.
  *
  * Usage: node scripts/generate-report.mjs
- * Site repo location: env KR_SITE_DIR, default ../Kirsten Rossiter
+ * Site repo location: env SITE_DIR, else pipeline.config.mjs → siteDir
  */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import config from '../pipeline.config.mjs';
+import { resolveSiteDir } from './lib/site-dir.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const SITE = process.env.KR_SITE_DIR || join(ROOT, '..', 'Kirsten Rossiter');
+const site = resolveSiteDir(ROOT, config);
 const OUT = join(ROOT, 'dist', 'report.html');
+
+const reportCfg = config.report ?? {};
+// Paths (relative to the site root) where literal hex is legitimate and cannot
+// be tokenised — email templates being the usual case, since most mail clients
+// don't support CSS custom properties.
+const RAW_COLOUR_PATHS = reportCfg.rawColourPaths ?? [];
+// The string rendered in the type specimen. "Handgloves" is the traditional one.
+const SPECIMEN = reportCfg.specimenText ?? 'Handgloves';
 
 // Token name prefix, matching sd.config.mjs. Everything that greps for
 // `--<prefix>-…` builds its pattern from this rather than hardcoding it.
@@ -34,9 +52,9 @@ const varUseRe = () => new RegExp(`var\\(\\s*--(${P}-[a-z0-9-]+)`, 'g');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 /**
- * Token values carry their unit as a string ("16px") since the px migration.
- * `num` extracts the magnitude for sorting/scaling; `len` renders a CSS length,
- * appending px only to a bare number. Returns null for non-numeric values.
+ * Token values carry their unit as a string ("16px"). `num` extracts the
+ * magnitude for sorting/scaling; `len` renders a CSS length, appending px only
+ * to a bare number. Returns null for non-numeric values.
  */
 const num = (v) => {
   if (typeof v === 'number') return v;
@@ -94,15 +112,19 @@ const distLight = loadJSON(join(ROOT, 'dist', 'light', 'tokens.flat.json'));
 const distDark = loadJSON(join(ROOT, 'dist', 'dark', 'tokens.flat.json'));
 const distLightCSS = readFileSync(join(ROOT, 'dist', 'light', 'variables.css'), 'utf8');
 
-const vendorPath = join(SITE, 'vendor', 'tokens.css');
-const vendorCSS = existsSync(vendorPath) ? readFileSync(vendorPath, 'utf8') : null;
+const vendorPath = site.present ? join(site.path, 'vendor', 'tokens.css') : null;
+const vendorCSS = vendorPath && existsSync(vendorPath) ? readFileSync(vendorPath, 'utf8') : null;
 
-const files = siteFiles(SITE, ['.css', '.html', '.js']);
+const files = site.present ? siteFiles(site.path, ['.css', '.html', '.js']) : [];
 const fileText = new Map(files.map((p) => [p, readFileSync(p, 'utf8')]));
 
 // ---------- checks ----------
 
+// status: 'pass' | 'fail' | 'skip'. A skipped check is neither green nor red —
+// it states plainly that nothing was proven, which is the honest answer when
+// there is no site to check against.
 const checks = [];
+const add = (c) => checks.push({ ...c, status: c.status ?? (c.pass ? 'pass' : 'fail') });
 
 // 1. Build integrity: every source token must appear in the flat dist output.
 function buildCheck(src, dist, mode) {
@@ -110,7 +132,7 @@ function buildCheck(src, dist, mode) {
   const actual = new Set(Object.keys(dist));
   const missing = [...expected].filter((n) => !actual.has(n));
   const extra = [...actual].filter((n) => !expected.has(n));
-  checks.push({
+  add({
     id: `build-${mode}`,
     label: `Build (${mode}): source tokens → dist`,
     pass: missing.length === 0 && extra.length === 0,
@@ -134,92 +156,91 @@ buildCheck(srcDark, distDark, 'dark');
 // back to Light: 148 of 150 dark semantic/component colours silently carried the
 // LIGHT value. Every gate passed, for months, because nothing compared values.
 //
-// Some tokens are identical across modes BY DESIGN — `*/inverse`, on-brand text,
-// a transparent border. Those are listed as expected rather than hidden, so the
-// list stays honest and a new one has to be justified.
+// Some tokens are identical across modes BY DESIGN — text on an inverse surface,
+// a foreground on a brand fill that doesn't change, a transparent border. Those
+// are declared in pipeline.config.mjs → modeParity.expectedIdentical, each with
+// a reason, so the list stays honest and a new one has to be justified. Never
+// loosen this to a regex: a wildcard is exactly how a broken token gets through.
 {
-  // Explicit and justified rather than a loose pattern: each entry has to earn
-  // its place, so a genuinely broken token can't slip in behind a wildcard.
-  // Keys are matched after the prefix is stripped.
-  const EXPECTED_IDENTICAL = {
-    'colour-text-inverse':          'text on an inverted surface — cream in both modes',
-    'colour-icon-inverse':          'icon on an inverted surface — cream in both modes',
-    'colour-on-background-inverse': 'foreground for the inverse surface',
-    'colour-on-background-brand':   'the brand surface is gold in both modes, so its foreground is cream in both',
-    'colour-on-background-promo':   'the promo surface is deep gold in both modes',
-    'colour-ink-on-brand':          'button-safe text on brand — cream in both modes',
-    'components-button-primary-text':   'sits on the gold brand fill in both modes',
-    'components-button-primary-border': 'transparent in both modes by design',
-    'components-badge-promo-text':      'sits on the promo fill in both modes',
-  };
+  const EXPECTED_IDENTICAL = config.modeParity?.expectedIdentical ?? {};
   const isExpected = (name) => Object.hasOwn(EXPECTED_IDENTICAL, name.slice(PREFIX.length + 1));
 
   const colourTokens = Object.entries(distLight).filter(
     ([k, v]) => typeof v === 'string' && /^(#|rgba?\()/.test(v) &&
-      (k.startsWith(`${PREFIX}-colour`) || k.startsWith(`${PREFIX}-components`))
+      (k.startsWith(`${PREFIX}-colour`) || k.startsWith(`${PREFIX}-color`) || k.startsWith(`${PREFIX}-components`))
   );
   const identical = colourTokens.filter(([k, v]) => distDark[k] === v);
   const unexpected = identical.filter(([k]) => !isExpected(k));
 
-  checks.push({
+  add({
     id: 'mode-parity',
-    label: `Mode parity: ${colourTokens.length - identical.length}/${colourTokens.length} semantic colours differ between light and dark`,
-    pass: unexpected.length === 0,
-    detail: unexpected.length
-      ? [
-          `${unexpected.length} semantic/component colours resolve IDENTICALLY in both modes and are not on the expected list.`,
-          'That is the signature of broken alias resolution — the dark theme silently carrying light values.',
-          ...unexpected.slice(0, 10).map(([k, v]) => `  --${k} = ${v} in BOTH modes`),
-          'If a token is genuinely mode-independent, add it to EXPECTED_IDENTICAL in generate-report.mjs WITH A REASON.',
-        ]
-      : [
-          `${identical.length} tokens are identical in both modes, all expected (inverse / on-brand text / transparent).`,
-          'Cross-mode aliasing is resolving correctly.',
-        ],
+    label: colourTokens.length
+      ? `Mode parity: ${colourTokens.length - identical.length}/${colourTokens.length} semantic colours differ between light and dark`
+      : 'Mode parity: no semantic or component colours to compare',
+    status: colourTokens.length === 0 ? 'skip' : unexpected.length === 0 ? 'pass' : 'fail',
+    detail: colourTokens.length === 0
+      ? ['No tokens under the colour/ or components/ branches — nothing to compare.']
+      : unexpected.length
+        ? [
+            `${unexpected.length} semantic/component colours resolve IDENTICALLY in both modes and are not on the expected list.`,
+            'That is the signature of broken alias resolution — the dark theme silently carrying light values.',
+            ...unexpected.slice(0, 10).map(([k, v]) => `  --${k} = ${v} in BOTH modes`),
+            'If a token is genuinely mode-independent, add it to modeParity.expectedIdentical in pipeline.config.mjs WITH A REASON.',
+          ]
+        : [
+            `${identical.length} tokens are identical in both modes, all declared expected.`,
+            'Cross-mode aliasing is resolving correctly.',
+          ],
   });
 }
 
-// 2. Sync: dist/light/variables.css vs site vendor/tokens.css
+// 2. Sync: dist/light/variables.css vs the site's vendor/tokens.css
 {
   const norm = (s) => s.replace(/\s+$/gm, '').trim();
   const pass = vendorCSS !== null && norm(vendorCSS) === norm(distLightCSS);
-  checks.push({
+  add({
     id: 'sync',
     label: 'Site sync: dist/light/variables.css ↔ vendor/tokens.css',
-    pass,
+    status: !site.present ? 'skip' : pass ? 'pass' : 'fail',
     detail: [
-      vendorCSS === null
-        ? `vendor/tokens.css not found at ${vendorPath}`
-        : pass
-          ? 'Files identical — site is running the latest build.'
-          : 'Files differ — run scripts/sync-tokens.sh in the site repo.',
+      !site.present
+        ? site.reason
+        : vendorCSS === null
+          ? `vendor/tokens.css not found at ${vendorPath}`
+          : pass
+            ? 'Files identical — the site is running the latest build.'
+            : "Files differ — re-run the site's token sync.",
     ],
   });
 }
 
 // 3. Consumer contract: every var(--<prefix>-*) used by the site must be defined
-const usedVars = new Map(); // name -> [files]
+const usedVars = new Map(); // name -> Set(files)
 for (const [p, text] of fileText) {
   for (const m of text.matchAll(varUseRe())) {
     const name = m[1];
     if (!usedVars.has(name)) usedVars.set(name, new Set());
-    usedVars.get(name).add(relative(SITE, p));
+    usedVars.get(name).add(relative(site.path, p));
   }
 }
 {
   const defined = new Set([...(vendorCSS || '').matchAll(varDefRe())].map((m) => m[1]));
   const undef = [...usedVars.keys()].filter((n) => !defined.has(n));
-  checks.push({
+  add({
     id: 'contract',
-    label: `Consumer contract: ${usedVars.size} tokens referenced by the site`,
-    pass: undef.length === 0,
-    detail: undef.length
-      ? undef.map((n) => `UNDEFINED: --${n} (used in ${[...usedVars.get(n)].join(', ')})`)
-      : [`Every var(--${PREFIX}-…) the site references is defined in vendor/tokens.css.`],
+    label: site.present
+      ? `Consumer contract: ${usedVars.size} tokens referenced by the site`
+      : 'Consumer contract: no site to check',
+    status: !site.present ? 'skip' : undef.length === 0 ? 'pass' : 'fail',
+    detail: !site.present
+      ? [site.reason]
+      : undef.length
+        ? undef.map((n) => `UNDEFINED: --${n} (used in ${[...usedVars.get(n)].join(', ')})`)
+        : [`Every var(--${PREFIX}-…) the site references is defined in vendor/tokens.css.`],
   });
 }
 
-// 4. Fonts: Google Fonts links vs font-family tokens
+// 4. Fonts: the site's webfont links vs the font-family tokens
 {
   const links = new Set();
   for (const text of fileText.values()) {
@@ -234,16 +255,22 @@ for (const [p, text] of fileText) {
     .map(([k, v]) => ({ k, v: String(v).replace(/['"]/g, '') }));
   const notLoaded = tokenFamilies.filter(({ v }) => !loadedFamilies.has(v));
   const notTokenised = [...loadedFamilies].filter((f) => !tokenFamilies.some(({ v }) => v === f));
-  const variantWarn = links.size > 1 ? [`${links.size} distinct Google Fonts URLs found — should be one canonical link: ${[...links].map(esc).join(' | ')}`] : [];
-  checks.push({
+  const variantWarn = links.size > 1
+    ? [`${links.size} distinct Google Fonts URLs found — should be one canonical link: ${[...links].map(esc).join(' | ')}`]
+    : [];
+  add({
     id: 'fonts',
-    label: 'Fonts: site Google Fonts link ↔ font-family tokens',
-    pass: notLoaded.length === 0 && notTokenised.length === 0 && links.size <= 1,
-    detail: [
+    label: site.present ? 'Fonts: site webfont links ↔ font-family tokens' : 'Fonts: no site to check',
+    status: !site.present
+      ? 'skip'
+      : notLoaded.length === 0 && notTokenised.length === 0 && links.size <= 1 ? 'pass' : 'fail',
+    detail: !site.present ? [site.reason] : [
       ...notLoaded.map(({ k, v }) => `Token ${k} = "${v}" but that family is NOT loaded by the site.`),
       ...notTokenised.map((f) => `Site loads "${f}" but no font-family token uses it.`),
       ...variantWarn,
-      ...(notLoaded.length || notTokenised.length || links.size > 1 ? [] : [`Loaded families (${[...loadedFamilies].join(', ')}) match tokens exactly.`]),
+      ...(notLoaded.length || notTokenised.length || links.size > 1
+        ? []
+        : [`Loaded families (${[...loadedFamilies].join(', ')}) match tokens exactly.`]),
     ],
   });
 }
@@ -251,12 +278,14 @@ for (const [p, text] of fileText) {
 // 5. Lint: doubled adjacent path segments + unitless numeric font tokens
 {
   const doubled = srcLight.filter((t) => t.path.some((seg, i) => i > 0 && seg === t.path[i - 1]));
-  checks.push({
+  add({
     id: 'lint-doubled',
     label: `Lint: doubled group names (e.g. --${PREFIX}-colour-colour-…)`,
     pass: doubled.length === 0,
     detail: doubled.length
-      ? [`${doubled.length} tokens have a repeated path segment (fix in name transform or restructure source): e.g. ${doubled.slice(0, 5).map((t) => '--' + flatName(t.path)).join(', ')}${doubled.length > 5 ? ', …' : ''}`]
+      ? [
+          `${doubled.length} tokens have a repeated path segment. Usually a collection whose variables already carry the branch name — set that collection's \`branch\` to null in the transform config. e.g. ${doubled.slice(0, 5).map((t) => '--' + flatName(t.path)).join(', ')}${doubled.length > 5 ? ', …' : ''}`,
+        ]
       : ['No repeated path segments.'],
   });
 
@@ -275,7 +304,7 @@ for (const [p, text] of fileText) {
     (k) => new RegExp(`^${P}-fonts-line-height`).test(k) && bare(k) && Math.abs(distLight[k]) > RATIO_MAX
   );
   const sample = (ks) => ks.slice(0, 4).map((k) => `${k}=${distLight[k]}`).join(', ') + (ks.length > 4 ? ', …' : '');
-  checks.push({
+  add({
     id: 'lint-unitless',
     label: 'Lint: numeric font tokens without units',
     pass: needsUnit.length === 0 && ratioish.length === 0,
@@ -288,7 +317,7 @@ for (const [p, text] of fileText) {
         : '',
       !needsUnit.length && !ratioish.length ? 'All font tokens carry units or are credible ratios.' : '',
       needsUnit.length || ratioish.length
-        ? 'Fix at source: add the path to `unitlessNumber` exceptions in scripts/lib/figma-to-dtcg.mjs, or remove it so the value gets px. Changes shipped values — MAJOR bump.'
+        ? 'Fix at source: add the path to `unitlessNumber` in the transform config, or remove it so the value gets px. Changes shipped values — MAJOR bump.'
         : '',
     ].filter(Boolean),
   });
@@ -303,47 +332,46 @@ for (const [k, v] of Object.entries(distLight)) {
     hexToToken.get(key).push(k);
   }
 }
-// Email templates are a separate world: server-rendered HTML sent through
-// Resend, where CSS custom properties are unsupported by most clients. Hexes
-// there are correct and cannot be tokenised, so they are reported apart rather
-// than counted as defects.
-const isEmailTemplate = (rel) => rel.startsWith('functions/');
+// Some paths are a separate world — email templates being the usual one, where
+// CSS custom properties are unsupported by most clients. Hexes there are correct
+// and cannot be tokenised, so they are reported apart rather than as defects.
+const isRawColourPath = (rel) => RAW_COLOUR_PATHS.some((p) => rel.startsWith(p));
 
-const hardcoded = new Map(); // hex -> { files:Set, email:bool, tokens:[] }
+const hardcoded = new Map(); // hex -> { files:Set, tokens:[] }
 for (const [p, text] of fileText) {
-  const rel = relative(SITE, p);
+  const rel = relative(site.path, p);
   for (const m of text.matchAll(/#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g)) {
     let h = m[1].toLowerCase();
     if (h.length === 3) h = h.split('').map((c) => c + c).join('');
     const hex = '#' + h;
-    if (!hardcoded.has(hex)) hardcoded.set(hex, { files: new Set(), email: false, tokens: hexToToken.get(hex) || [] });
-    const row = hardcoded.get(hex);
-    row.files.add(rel);
-    if (isEmailTemplate(rel)) row.email = true;
+    if (!hardcoded.has(hex)) hardcoded.set(hex, { files: new Set(), tokens: hexToToken.get(hex) || [] });
+    hardcoded.get(hex).files.add(rel);
   }
 }
 {
   const rows = [...hardcoded.entries()].sort((a, b) => b[1].files.size - a[1].files.size);
-  const inPages = rows.filter(([, r]) => [...r.files].some((f) => !isEmailTemplate(f)));
-  const emailOnly = rows.filter(([, r]) => [...r.files].every(isEmailTemplate));
+  const inPages = rows.filter(([, r]) => [...r.files].some((f) => !isRawColourPath(f)));
+  const rawOnly = rows.filter(([, r]) => [...r.files].every(isRawColourPath));
   const noToken = inPages.filter(([, r]) => r.tokens.length === 0);
 
   // Informational, never a gate. An earlier version failed whenever any hex
-  // lacked a token, which it could never stop doing: most of them are in email
-  // templates, and "hex equals a token's value" is not the same as "that token
-  // is semantically right" — #ffffff matches components-button-primary-focus-text
-  // by coincidence, and swapping it in would be worse than the literal.
-  checks.push({
+  // lacked a token, which it could never stop doing: "hex equals a token's
+  // value" is not the same as "that token is semantically right" — #ffffff
+  // matches a dozen tokens by coincidence, and swapping one in would be worse
+  // than the literal.
+  add({
     id: 'hardcoded',
-    label: `Colour audit: ${inPages.length} hex values in pages, ${emailOnly.length} more only in email templates`,
-    pass: true,
-    detail: [
+    label: site.present
+      ? `Colour audit: ${inPages.length} hex values in pages${rawOnly.length ? `, ${rawOnly.length} more only in untokenisable paths` : ''}`
+      : 'Colour audit: no site to check',
+    status: site.present ? 'pass' : 'skip',
+    detail: !site.present ? [site.reason] : [
       noToken.length
         ? `${noToken.length} colours are used in pages but have NO token — candidates for the design system: ` +
-          noToken.map(([hex, r]) => `${hex} (${[...r.files].filter((f) => !isEmailTemplate(f)).slice(0, 2).join(', ')})`).join('; ')
+          noToken.map(([hex, r]) => `${hex} (${[...r.files].filter((f) => !isRawColourPath(f)).slice(0, 2).join(', ')})`).join('; ')
         : 'Every colour used in a page has a matching token.',
-      emailOnly.length
-        ? `${emailOnly.length} appear only in functions/ (Resend email HTML). CSS variables are unsupported in most mail clients, so literals are correct there.`
+      rawOnly.length
+        ? `${rawOnly.length} appear only under ${RAW_COLOUR_PATHS.join(', ')}, where literals are correct.`
         : '',
       'Value equality does not imply the token is the right one semantically — treat this as a prompt to look, not a defect list.',
     ].filter(Boolean),
@@ -352,11 +380,16 @@ for (const [p, text] of fileText) {
 
 // ---------- HTML ----------
 
-const passCount = checks.filter((c) => c.pass).length;
+const passCount = checks.filter((c) => c.status === 'pass').length;
+const failCount = checks.filter((c) => c.status === 'fail').length;
+const skipCount = checks.filter((c) => c.status === 'skip').length;
+const gated = checks.length - skipCount;
+
+const MARK = { pass: '✓', fail: '✗', skip: '–' };
 
 function checkHTML(c) {
-  return `<details class="check ${c.pass ? 'pass' : 'fail'}" ${c.pass ? '' : 'open'}>
-    <summary><span class="badge">${c.pass ? '✓' : '✗'}</span> ${esc(c.label)}</summary>
+  return `<details class="check ${c.status}" ${c.status === 'fail' ? 'open' : ''}>
+    <summary><span class="badge">${MARK[c.status]}</span> ${esc(c.label)}</summary>
     <ul>${c.detail.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
   </details>`;
 }
@@ -377,30 +410,29 @@ function colourRows(prefix) {
     .join('');
 }
 
-const typeRoles = ['display-large', 'display-medium', 'display-small', 'headline-large', 'headline-medium', 'headline-small', 'title-large', 'title-medium', 'title-small', 'body-large', 'body-medium', 'body-small', 'label-large', 'label-medium', 'label-small'];
-const famBase = String(distLight[`${PREFIX}-fonts-family-base`] ?? 'sans-serif');
-const famDisplay = String(distLight[`${PREFIX}-fonts-family-display`] ?? 'serif');
-const famSerifBody = String(distLight[`${PREFIX}-fonts-family-serif-body`] ?? 'serif');
-// Site convention (styles.css aliases): display/headline/title → --serif (display),
-// body → --serif-body (Lora), label → --sans (base = Jost).
-// NB: the tokens do NOT bind a family per role; this mapping mirrors actual site usage.
-function roleFamily(role) {
-  if (role.startsWith('body')) return { fam: famSerifBody, token: 'family-serif-body' };
-  if (role.startsWith('label')) return { fam: famBase, token: 'family-base' };
-  return { fam: famDisplay, token: 'family-display' };
-}
-// Values already carry their unit where they have one ("76px"); len() only adds
-// px to the bare numbers (line-height, letter-spacing — see the unitless lint).
-const typeRows = typeRoles
-  .map((role) => {
-    const size = distLight[`${PREFIX}-fonts-size-${role}`];
+// Type roles are DERIVED from the tokens, never listed here — a hardcoded role
+// list is a doc that rots the moment a client's scale differs from the last one.
+const familyTokens = Object.entries(distLight).filter(([k]) => k.startsWith(`${PREFIX}-fonts-family`));
+const specimenFamily = reportCfg.specimenFamilyToken
+  ? String(distLight[reportCfg.specimenFamilyToken] ?? '')
+  : String(familyTokens[0]?.[1] ?? '');
+
+const typeRows = Object.keys(distLight)
+  .filter((k) => k.startsWith(`${PREFIX}-fonts-size-`))
+  .map((k) => [k.slice(`${PREFIX}-fonts-size-`.length), distLight[k]])
+  .sort((a, b) => (num(b[1]) ?? 0) - (num(a[1]) ?? 0))
+  .map(([role, size]) => {
     const lh = distLight[`${PREFIX}-fonts-line-height-${role}`];
     const ls = distLight[`${PREFIX}-fonts-letter-spacing-${role}`];
-    if (size == null) return '';
-    const { fam, token } = roleFamily(role);
     const spec = [len(size), lh == null ? '—' : len(lh), ls == null ? '—' : len(ls)].join(' / ');
-    return `<tr><td class="rolename"><code>${role}</code><br><small>${esc(fam)} <code>(${token})</code> · ${spec}</small></td>
-      <td><span style="font-family:'${fam}';font-size:${len(size)};${lh == null ? '' : `line-height:${len(lh)};`}${ls == null ? '' : `letter-spacing:${len(ls)};`}">Building the Nations</span></td></tr>`;
+    const style = [
+      specimenFamily ? `font-family:'${specimenFamily}'` : '',
+      `font-size:${len(size)}`,
+      lh == null ? '' : `line-height:${len(lh)}`,
+      ls == null ? '' : `letter-spacing:${len(ls)}`,
+    ].filter(Boolean).join(';');
+    return `<tr><td class="rolename"><code>${esc(role)}</code><br><small>${esc(spec)}</small></td>
+      <td><span style="${style}">${esc(SPECIMEN)}</span></td></tr>`;
   })
   .join('');
 
@@ -422,73 +454,92 @@ const usedList = [...usedVars.entries()]
   .map(([n, fs]) => `<tr><td><code>--${n}</code></td><td><code>${esc(String(distLight[n] ?? '⚠ undefined'))}</code></td><td>${[...fs].join(', ')}</td></tr>`)
   .join('');
 
+/** Only render a section that has rows — an empty table says nothing. */
+const section = (title, head, rows, note = '') =>
+  rows ? `<h2>${title}${note ? ` <span class="note">${note}</span>` : ''}</h2>\n<table>${head}${rows}</table>` : '';
+
+// The report's own styling is deliberately neutral and self-contained: system
+// fonts, greys, no external requests. It renders identically offline and has no
+// relationship to the tokens it reports on — otherwise a broken token set would
+// break the report describing it.
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(config.projectName)} Token Report</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light; }
-  body { font: 15px/1.5 'Jost', sans-serif; color: #1a1714; background: #faf7f2; margin: 0; padding: 2rem clamp(1rem, 5vw, 4rem); }
-  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 2.4rem; margin: 0 0 .25rem; }
-  h2 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.7rem; margin: 2.5rem 0 .75rem; border-bottom: 1px solid #e2d9c8; padding-bottom: .3rem; }
-  .meta { color: #7a6c56; margin-bottom: 1.5rem; }
-  .summary { font-size: 1.1rem; margin: 1rem 0; }
-  .check { border: 1px solid #e2d9c8; border-radius: 6px; margin: .5rem 0; background: #fff; }
+  :root { color-scheme: light; --ink: #16181d; --mute: #626977; --line: #e3e5ea; --bg: #f7f8fa; --card: #fff; }
+  body { font: 15px/1.5 ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif; color: var(--ink); background: var(--bg); margin: 0; padding: 2rem clamp(1rem, 5vw, 4rem); }
+  h1 { font-size: 1.9rem; font-weight: 600; margin: 0 0 .25rem; letter-spacing: -.01em; }
+  h2 { font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 .75rem; border-bottom: 1px solid var(--line); padding-bottom: .3rem; }
+  .meta { color: var(--mute); margin-bottom: 1.5rem; font-size: .88rem; }
+  .note { font-weight: 400; font-size: .8rem; color: var(--mute); }
+  .check { border: 1px solid var(--line); border-radius: 6px; margin: .5rem 0; background: var(--card); }
   .check summary { padding: .6rem .9rem; cursor: pointer; font-weight: 500; }
   .check ul { margin: 0 0 .8rem; }
   .check li { margin: .15rem 0; font-family: ui-monospace, monospace; font-size: .82rem; }
   .badge { display: inline-block; width: 1.4rem; text-align: center; border-radius: 4px; margin-right: .4rem; font-weight: 700; }
-  .pass > summary .badge { background: #ccf3ef; color: #1e5751; }
-  .fail > summary .badge { background: #ffe3e3; color: #a03030; }
-  table { border-collapse: collapse; width: 100%; background: #fff; border: 1px solid #e2d9c8; border-radius: 6px; }
-  th, td { text-align: left; padding: .4rem .7rem; border-bottom: 1px solid #f5f0e8; vertical-align: middle; }
-  th { font-weight: 500; color: #7a6c56; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
-  code { font-size: .82rem; }
+  .pass > summary .badge { background: #d8f2e4; color: #14663f; }
+  .fail > summary .badge { background: #fbe0e0; color: #99282a; }
+  .skip > summary .badge { background: #eceef2; color: #626977; }
+  .skip > summary { color: var(--mute); }
+  table { border-collapse: collapse; width: 100%; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+  th, td { text-align: left; padding: .4rem .7rem; border-bottom: 1px solid #f1f2f5; vertical-align: middle; }
+  th { font-weight: 500; color: var(--mute); font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+  code { font-family: ui-monospace, monospace; font-size: .82rem; }
   .sw { display: inline-block; width: 2.2rem; height: 1.4rem; border-radius: 4px; border: 1px solid rgba(0,0,0,.15); vertical-align: middle; }
-  tr.used { background: #f7f0e4; }
-  .pill { font-size: .7rem; background: #886534; color: #fff; border-radius: 999px; padding: .1rem .5rem; vertical-align: middle; }
-  .bar { height: .9rem; background: #c4a264; border-radius: 2px; min-width: 2px; }
-  .rad { width: 3.5rem; height: 2.2rem; background: #e8d9bc; border: 1px solid #a07840; }
-  .rolename small { color: #7a6c56; }
-  .darknote { font-size: .8rem; color: #7a6c56; }
+  tr.used { background: #f4f6fa; }
+  .pill { font-size: .7rem; background: #3b4252; color: #fff; border-radius: 999px; padding: .1rem .5rem; vertical-align: middle; }
+  .bar { height: .9rem; background: #8c93a3; border-radius: 2px; min-width: 2px; }
+  .rad { width: 3.5rem; height: 2.2rem; background: #dfe2e8; border: 1px solid #8c93a3; }
+  .rolename small { color: var(--mute); }
 </style>
 </head>
 <body>
 <h1>${esc(config.projectName)} Token Report</h1>
-<p class="meta">${Object.keys(distLight).length} tokens (light) · ${Object.keys(distDark).length} tokens (dark) · site: ${esc(SITE)}</p>
-<p class="meta">No generation timestamp: this file is committed, and a clock reading would make every rebuild a diff. Use <code>git log dist/report.html</code> for when it last changed.</p>
+<p class="meta">${Object.keys(distLight).length} tokens (light) · ${Object.keys(distDark).length} tokens (dark) · site: ${esc(site.present ? site.path : 'none')}</p>
+<p class="meta">No generation timestamp: this is a build output, and a clock reading would make every rebuild a diff. Use <code>git log</code> for when it last changed.</p>
 
-<h2>Health checks — ${passCount}/${checks.length} passing</h2>
+<h2>Health checks — ${passCount}/${gated} passing${failCount ? `, ${failCount} failing` : ''}${skipCount ? `, ${skipCount} skipped` : ''}</h2>
 ${checks.map(checkHTML).join('\n')}
 
-<h2>Tokens the site actually uses (${usedVars.size})</h2>
-<table><tr><th>Variable</th><th>Value (light)</th><th>Used in</th></tr>${usedList}</table>
-
-<h2>Colours — semantic</h2>
-<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>${colourRows(`${PREFIX}-colour`)}</table>
-
-<h2>Colours — components</h2>
-<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>${colourRows(`${PREFIX}-components`)}</table>
-
-<h2>Colours — primitives <span class="darknote">(not for direct use per guidelines)</span></h2>
-<table><tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>${colourRows(`${PREFIX}-primitives`)}</table>
-
-<h2>Type scale <span class="darknote">(rendered assuming px — see unitless lint check. Families follow site convention: display/headline/title → Cormorant Garamond, body → Lora, label → Jost. The tokens don't bind a family per role — consider adding that in Figma.)</span></h2>
-<table>${typeRows}</table>
-
-<h2>Spacing</h2>
-<table><tr><th>Token</th><th>Value</th><th></th></tr>${spacingRows}</table>
-
-<h2>Radius</h2>
-<table><tr><th>Token</th><th>Value</th><th></th></tr>${radiusRows}</table>
+${section(`Tokens the site actually uses (${usedVars.size})`, '<tr><th>Variable</th><th>Value (light)</th><th>Used in</th></tr>', usedList)}
+${section('Colours — semantic', '<tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>', colourRows(`${PREFIX}-colour`))}
+${section('Colours — components', '<tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>', colourRows(`${PREFIX}-components`))}
+${section('Colours — primitives', '<tr><th>Light</th><th>Dark</th><th>Token</th><th>Light value</th><th>Dark value</th></tr>', colourRows(`${PREFIX}-primitives`), 'not for direct use — consume the semantic layer')}
+${section('Type scale', '', typeRows, 'roles derived from the tokens; rendered in the first font-family token')}
+${section('Spacing', '<tr><th>Token</th><th>Value</th><th></th></tr>', spacingRows)}
+${section('Radius', '<tr><th>Token</th><th>Value</th><th></th></tr>', radiusRows)}
 </body>
 </html>`;
 
 writeFileSync(OUT, html);
-const fails = checks.filter((c) => !c.pass);
+const fails = checks.filter((c) => c.status === 'fail');
 console.log(`Report written to ${relative(ROOT, OUT)}`);
-console.log(`${passCount}/${checks.length} checks passing${fails.length ? ':' : '.'}`);
+console.log(`${passCount}/${gated} checks passing${skipCount ? ` (${skipCount} skipped)` : ''}${fails.length ? ':' : '.'}`);
 for (const f of fails) console.log(`  ✗ ${f.label}`);
+
+// ─── The gate ────────────────────────────────────────────────────────────────
+//
+// Without --strict this is advisory, so `npm run build` always produces the
+// artefact — you need to be able to build in order to LOOK at what is wrong.
+// `npm test` passes --strict, so shipping is what's gated.
+//
+// WHY THIS EXISTS. Until 2026-07-30 the report could not fail anything. That is
+// how mode-parity — the check that exists precisely BECAUSE everything else was
+// green — could go red while `npm test` exited 0. Its red line went into
+// dist/report.html, which is gitignored, so in CI it was generated, logged and
+// thrown away. The dark-mode bug would have shipped a second time past a wall of
+// passing gates, which is exactly how it shipped the first time.
+//
+// A `skip` is not a failure: no consuming site checked out means the site checks
+// report skipped, so a fresh client is never blocked by a site it does not have.
+// The colour audit is informational by design and cannot fail. Everything left
+// that CAN fail is a real defect.
+if (process.argv.includes('--strict') && fails.length) {
+  console.error(`\n✗ ${fails.length} check(s) failed. This build is not shippable.`);
+  console.error('  Fix at the source layer — see PROCESS.md, "When a check goes red".');
+  console.error('  Do not silence a check to get to green; that is the failure mode this prevents.');
+  process.exit(1);
+}

@@ -1,0 +1,75 @@
+{
+  "_readme": [
+    "A SEED FIXTURE, not a design. It is the compact dump scripts/figma-fetch.snippet.js",
+    "returns, hand-written to exercise every rule in the transform: a two-mode collection,",
+    "a Semantic collection whose names already carry colour/, single-mode collections that",
+    "land in both outputs, the Fonts raw-layer exclusions, unitless weights, and a type",
+    "role pair that derives fluid-type companions.",
+    "",
+    "It exists so `npm test` is green on a fresh clone and so the whole sync chain can be",
+    "proved without opening Figma: `npm run seed` regenerates tokens/ from this file.",
+    "",
+    "The VALUES are deliberately characterless greys and one blue. This template",
+    "commoditises setup, never design judgement — the moment it ships opinions about what",
+    "tokens should exist, it has become the thing the manifesto refuses. A client's first",
+    "sync replaces all of it.",
+    "",
+    "Shape: c = [[collectionId, name, [[modeId, modeName], ...]], ...]",
+    "       v = [[variableName, collectionIndex, typeIndex, ...valuesInModeOrder], ...]",
+    "       typeIndex: 0 = COLOR, 1 = FLOAT, 2 = STRING"
+  ],
+  "f": "Example Token File (seed fixture)",
+  "c": [
+    ["VariableCollectionId:1:1", "Primitives", [["1:0", "Light"], ["1:1", "Dark"]]],
+    ["VariableCollectionId:2:1", "Semantic", [["2:0", "Light"], ["2:1", "Dark"]]],
+    ["VariableCollectionId:3:1", "Components", [["3:0", "Light"], ["3:1", "Dark"]]],
+    ["VariableCollectionId:4:1", "Fonts", [["4:0", "Default"]]],
+    ["VariableCollectionId:5:1", "Spacing", [["5:0", "Value"]]],
+    ["VariableCollectionId:6:1", "Radius", [["6:0", "Value"]]]
+  ],
+  "v": [
+    ["neutral/0", 0, 0, "#ffffff", "#ffffff"],
+    ["neutral/100", 0, 0, "#f4f5f7", "#2a2d33"],
+    ["neutral/300", 0, 0, "#e3e5ea", "#3a3e46"],
+    ["neutral/600", 0, 0, "#626977", "#8c93a3"],
+    ["neutral/900", 0, 0, "#16181d", "#f7f8fa"],
+    ["accent/500", 0, 0, "#3f6fd8", "#7fa2ec"],
+    ["transparent", 0, 0, "#00000000", "#00000000"],
+
+    ["colour/background/default", 1, 0, "#ffffff", "#16181d"],
+    ["colour/background/subtle", 1, 0, "#f4f5f7", "#2a2d33"],
+    ["colour/text/primary", 1, 0, "#16181d", "#f7f8fa"],
+    ["colour/text/secondary", 1, 0, "#626977", "#8c93a3"],
+    ["colour/border/default", 1, 0, "#e3e5ea", "#3a3e46"],
+    ["colour/action/primary", 1, 0, "#3f6fd8", "#7fa2ec"],
+
+    ["button/primary/background", 2, 0, "#3f6fd8", "#7fa2ec"],
+    ["button/primary/text", 2, 0, "#ffffff", "#16181d"],
+    ["button/primary/border", 2, 0, "#3f6fd8", "#7fa2ec"],
+
+    ["Fonts/family/base", 3, 2, "Inter"],
+    ["Fonts/family/display", 3, 2, "Inter"],
+    ["Fonts/weight/regular", 3, 1, 400],
+    ["Fonts/weight/bold", 3, 1, 700],
+    ["Fonts/size/body/medium", 3, 1, 16],
+    ["Fonts/line-height/body/medium", 3, 1, 24],
+    ["Fonts/letter-spacing/body/medium", 3, 1, 0],
+    ["Fonts/size/display/large", 3, 1, 48],
+    ["Fonts/line-height/display/large", 3, 1, 52],
+    ["Fonts/letter-spacing/display/large", 3, 1, -0.5],
+    ["Scale/100", 3, 1, 10],
+    ["Fonts/line-height/scale/400", 3, 1, 24],
+    ["letter-spacing/normal", 3, 1, 0],
+
+    ["scale/4", 4, 1, 4],
+    ["scale/8", 4, 1, 8],
+    ["scale/16", 4, 1, 16],
+    ["scale/24", 4, 1, 24],
+    ["scale/48", 4, 1, 48],
+
+    ["scale/4", 5, 1, 4],
+    ["scale/8", 5, 1, 8],
+    ["scale/16", 5, 1, 16]
+  ],
+  "w": []
+}

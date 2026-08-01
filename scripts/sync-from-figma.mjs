@@ -15,8 +15,13 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { transform } from './lib/figma-to-dtcg.mjs';
+import { transform, resolveCollections, CONFIG } from './lib/figma-to-dtcg.mjs';
+import { checkProvenance } from './lib/provenance.mjs';
 import config from '../pipeline.config.mjs';
+
+// The convention, plus whatever this client's Figma file needs bending to fit.
+// An empty `figma` block in pipeline.config.mjs means their file follows it.
+const cfg = { ...CONFIG, ...(config.figma ?? {}) };
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -82,12 +87,59 @@ if (existsSync(DESC_PATH)) {
   console.warn(`  warn  no ${relative(ROOT, DESC_PATH)} — tokens will have no $description.`);
 }
 
+// ─── Collection audit ────────────────────────────────────────────────────────
+// Collections and modes are matched by NAME, so this is the whole answer to
+// "does this file fit the pipeline?" — printed before anything is transformed,
+// because on an unfamiliar file it is the most useful thing on screen.
+{
+  const { byId, issues } = resolveCollections(dump, cfg);
+  const matched = Object.values(byId);
+  console.log(`\n  Collections: ${matched.length}/${Object.keys(cfg.collections).length} matched by name`);
+  for (const c of matched) {
+    const modes = Object.values(c.modes);
+    const shape = modes.includes('both') ? 'single mode → both outputs' : modes.join(' + ');
+    console.log(`    ✓ ${c.name} → ${c.branch ?? '(own path)'}  [${shape}]`);
+  }
+  const rank = { error: 0, warn: 1, info: 2 };
+  const mark = { error: '✗', warn: '!', info: '·' };
+  for (const i of [...issues].sort((a, b) => rank[a.level] - rank[b.level])) {
+    console.log(`    ${mark[i.level]} ${i.message}`);
+  }
+}
+
+// ─── Provenance ──────────────────────────────────────────────────────────────
+// Refuse a dump that came from a different Figma file than this pipeline is for.
+//
+// Nothing else in the chain is addressed per client. The plugin reads whichever
+// file happens to be open and POSTs to a port; the sink writes to whichever repo
+// it is running in. So "KR's file open, Acme's sink running" silently lands KR's
+// variables in Acme's repo — and the collection audit reports a happy 6/6,
+// because both files follow the convention. The only thing that can tell them
+// apart is the file name, which the plugin already sends.
+//
+// This used to be worse than unchecked: `fetchedFrom` was recorded and never
+// read, while the metadata header below asserted config.figmaFileName
+// unconditionally — so the wrong file's tokens shipped carrying a provenance
+// claim that was false, into git history.
+{
+  const verdict = checkProvenance({ fetched: dump.fetchedFrom, expected: config.figmaFileName });
+
+  if (!verdict.ok) {
+    console.error(`\n✗ ${verdict.lines[0]}`);
+    for (const l of verdict.lines.slice(1)) console.error(l);
+    process.exit(1);
+  }
+  const tag = verdict.level === 'warn' ? '  warn  ' : '  ok  ';
+  console.log(tag + verdict.lines[0]);
+  for (const l of verdict.lines.slice(1)) console.log(`        ${l}`);
+}
+
 // ─── Transform ───────────────────────────────────────────────────────────────
 let trees;
 try {
-  trees = transform(dump, undefined, descriptions); // throws loudly on collisions
+  trees = transform(dump, cfg, descriptions); // throws loudly on collisions
 } catch (e) {
-  console.error(`✗ Transform failed: ${e.message}`);
+  console.error(`\n✗ Transform failed: ${e.message}`);
   process.exit(1);
 }
 
@@ -97,7 +149,10 @@ function fileFor(mode) {
     $schema: 'https://design-tokens.github.io/community-group/format/',
     $version: '1.0',
     $metadata: {
-      source: `Figma — ${config.figmaFileName} (${config.figmaFileKey})`,
+      // The file the dump ACTUALLY came from, not the one we were configured to
+      // expect. The check above means they agree — but recording the fetched
+      // value is what makes this line a fact rather than a restatement of config.
+      source: `Figma — ${dump.fetchedFrom ?? config.figmaFileName} (${config.figmaFileKey})`,
       mode, // no timestamp: keeps output deterministic (no no-op churn)
     },
     ...trees[mode],

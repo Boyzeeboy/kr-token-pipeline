@@ -1,0 +1,128 @@
+<!--
+  plugin/ui.html — the plugin's UI iframe.
+
+  Two jobs: one Sync button, and the HTTP POST. The POST lives here rather than
+  in code.js because the iframe is the context guaranteed to have `fetch`.
+
+  Everything it sends goes to 127.0.0.1 — scripts/figma-sink.mjs, which writes
+  the payload to disk and exits. Values and descriptions travel in ONE request:
+  the ~70KB limit that forced them apart was the MCP bridge's response cap, and
+  a plugin POSTing to localhost is not subject to it.
+-->
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font: 12px/1.45 Inter, ui-sans-serif, -apple-system, sans-serif;
+    margin: 0; padding: 16px;
+    color: #16181d; background: #fff;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { color: #f7f8fa; background: #2c2c2c; }
+    .port { background: #3a3a3a; border-color: #555; color: inherit; }
+    .muted { color: #a0a5b0; }
+    .log { background: #242424; border-color: #444; }
+  }
+  h1 { font-size: 12px; font-weight: 600; margin: 0 0 4px; }
+  .muted { color: #626977; margin: 0 0 12px; }
+  .row { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+  label { flex: 0 0 auto; }
+  .port {
+    flex: 1 1 auto; min-width: 0;
+    font: inherit; padding: 5px 7px;
+    border: 1px solid #d5d8de; border-radius: 5px; background: #fff; color: inherit;
+  }
+  button {
+    width: 100%; padding: 9px 12px;
+    font: inherit; font-weight: 600;
+    color: #fff; background: #3f6fd8;
+    border: 0; border-radius: 6px; cursor: pointer;
+  }
+  button:hover:not(:disabled) { background: #3763c2; }
+  button:disabled { opacity: .55; cursor: default; }
+  .log {
+    margin-top: 12px; padding: 8px 10px; min-height: 62px;
+    font-family: ui-monospace, monospace; font-size: 11px; line-height: 1.5;
+    white-space: pre-wrap; word-break: break-word;
+    border: 1px solid #e3e5ea; border-radius: 5px; background: #f7f8fa;
+  }
+  .ok { color: #14663f; }
+  .bad { color: #99282a; }
+</style>
+
+<h1>Token Sync</h1>
+<p class="muted">Reads every local variable and sends it to the pipeline running on this machine.</p>
+
+<div class="row">
+  <label for="port">Sink port</label>
+  <input id="port" class="port" type="number" value="9231" min="1024" max="65535">
+</div>
+
+<button id="sync">Sync</button>
+<div class="log" id="log">Start the sink first:<br>npm run sink</div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const btn = $('sync');
+  const log = $('log');
+
+  const say = (html, cls) => { log.innerHTML = cls ? `<span class="${cls}">${html}</span>` : html; };
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+  btn.onclick = () => {
+    btn.disabled = true;
+    say('Reading variables…');
+    parent.postMessage({ pluginMessage: { type: 'sync' } }, '*');
+  };
+
+  onmessage = async (event) => {
+    const msg = event.data.pluginMessage;
+    if (!msg) return;
+
+    if (msg.type === 'error') {
+      say('Extraction failed:\n' + esc(msg.message), 'bad');
+      btn.disabled = false;
+      return;
+    }
+    if (msg.type !== 'payload') return;
+
+    const { values, descriptions, stats } = msg.payload;
+    const port = Number($('port').value) || 9231;
+    say(`Read ${stats.variables} variables in ${stats.collections} collections.\nSending to localhost:${port}…`);
+
+    try {
+      // Must be `localhost`, not 127.0.0.1: Figma's manifest validator rejects a
+      // raw IP in allowedDomains, and the request URL has to match what the
+      // manifest allows. The sink binds both loopback families to compensate.
+      const res = await fetch(`http://localhost:${port}/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ values, descriptions }),
+      });
+      if (!res.ok) throw new Error(`sink replied ${res.status}`);
+
+      const warn = stats.warnings
+        ? `\n${stats.warnings} warning(s) — check the sync output.`
+        : '';
+      // Name the file. The port is the only addressing between this plugin and
+      // a sink, so if two clients' pipelines are checked out, seeing WHICH file
+      // was just read is the difference between noticing and not. The sync
+      // refuses a mismatch too, but that is after the fact.
+      say(
+        `Sent “${esc(stats.file)}”.\n${stats.variables} variables, ${stats.described} descriptions.` +
+        esc(warn) +
+        '\n\nNext: npm run sync:figma -- --dry-run',
+        'ok'
+      );
+    } catch (e) {
+      // Overwhelmingly this is "the sink isn't running" — say so rather than
+      // making someone decode a bare TypeError from fetch.
+      say(
+        'Could not reach the sink on localhost:' + port + '.\n' +
+        'Is it running? Start it with:\nnpm run sink\n\n' + esc((e && e.message) || e),
+        'bad'
+      );
+    } finally {
+      btn.disabled = false;
+    }
+  };
+</script>
