@@ -240,6 +240,62 @@ for (const [p, text] of fileText) {
   });
 }
 
+// 3b. Semantic-only consumption: the surface must not reach past the semantic
+// layer into primitives.
+//
+// This is the invariant the whole two-layer split exists to protect. A primitive
+// is a value; a semantic token is a DECISION about where that value belongs. A
+// surface wired to `primitives/neutral/100` cannot be re-themed, cannot go dark,
+// and will not follow when the decision changes — because there is no decision,
+// only a number that happens to be right today.
+//
+// It is easy to violate invisibly: aliasing a primitive to a friendly local name
+// (`--cream: var(--<prefix>-primitives-neutral-100)`) looks like good CSS and
+// reads like a token. Nothing downstream can tell the difference, which is
+// precisely why it needs a check rather than a convention.
+//
+// Genuine exceptions go in report.allowedPrimitives in pipeline.config.mjs, each
+// with a reason — same discipline as modeParity.expectedIdentical. "We have not
+// migrated yet" is a deferral, not a reason.
+{
+  const allowed = reportCfg.allowedPrimitives ?? {};
+  const primitiveUses = [...usedVars.entries()]
+    .filter(([name]) => name.startsWith(`${PREFIX}-primitives`))
+    .filter(([name]) => !Object.hasOwn(allowed, name.slice(PREFIX.length + 1)));
+
+  // Where a semantic token already carries the same value, name it: that turns
+  // "stop doing this" into "do this instead", which is the difference between a
+  // finding and a fix.
+  const semanticByValue = new Map();
+  for (const [k, v] of Object.entries(distLight)) {
+    if (!/^#|^rgba?\(/.test(String(v))) continue;
+    if (k.startsWith(`${PREFIX}-colour`) || k.startsWith(`${PREFIX}-components`)) {
+      if (!semanticByValue.has(v)) semanticByValue.set(v, k);
+    }
+  }
+
+  add({
+    id: 'semantic-only',
+    label: site.present
+      ? `Semantic-only consumption: ${primitiveUses.length} primitive token(s) used directly by the site`
+      : 'Semantic-only consumption: no site to check',
+    status: !site.present ? 'skip' : primitiveUses.length === 0 ? 'pass' : 'fail',
+    detail: !site.present ? [site.reason] : primitiveUses.length
+      ? [
+          `The site reaches past the semantic layer into ${primitiveUses.length} primitive(s).`,
+          'A primitive is a value; a semantic token is a decision about where it belongs. Wiring a surface to a primitive means there is no decision to change.',
+          ...primitiveUses.slice(0, 12).map(([name, files]) => {
+            const swap = semanticByValue.get(distLight[name]);
+            const where = [...files].slice(0, 2).join(', ');
+            return `  --${name} (${where})${swap ? ` → use --${swap}` : ' → no semantic token carries this value; one may be missing'}`;
+          }),
+          ...(primitiveUses.length > 12 ? [`  … and ${primitiveUses.length - 12} more`] : []),
+          'Genuine exceptions go in report.allowedPrimitives in pipeline.config.mjs, with a reason each.',
+        ]
+      : ['The site consumes the semantic layer only.'],
+  });
+}
+
 // 4. Fonts: the site's webfont links vs the font-family tokens
 {
   const links = new Set();
