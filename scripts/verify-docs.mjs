@@ -30,7 +30,23 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // Docs to police. CLAUDE.md and AGENTS.md are generated, but a generated file
 // can still lie if its template does — check them too.
-const DOCS = ['PROCESS.md', 'CLAUDE.md', 'AGENTS.md', 'templates/agent-rules.md'];
+//
+// The last two are optional: a client repo that has grown a component library
+// tends to add them, and an unpoliced doc is how this lineage accumulated seven
+// stale ones. Absent files are skipped, so a repo without them is unaffected.
+const DOCS = [
+  'PROCESS.md', 'CLAUDE.md', 'AGENTS.md', 'templates/agent-rules.md',
+  'CONTRIBUTING.md', 'design.md',
+];
+
+/**
+ * npm scripts a doc may name that belong to a DIFFERENT repo — typically the
+ * consuming site, whose commands appear in a section about working there.
+ * Same rule as the path allowlist: every entry needs a reason.
+ */
+const EXTERNAL_SCRIPTS = {
+  'sync-tokens': 'a script in the CONSUMING site repo, not this one',
+};
 
 /**
  * Paths a doc may legitimately name that will not exist on disk. Every entry
@@ -41,7 +57,6 @@ const ABSENT_BY_DESIGN = {
   'tokens/.figma-dump.json': 'gitignored — written by the Figma fetch, transient',
   'tokens/.figma-descriptions.json': 'gitignored — written by the sink, transient',
   'dist/report.html': 'gitignored build output; present after a build, absent on a clean checkout',
-  'MANIFESTO.md': 'lives in the Orin repo, not this one — the pointer is deliberate',
   'vendor/tokens.css': 'lives in the CONSUMING site repo, not here',
 };
 
@@ -49,12 +64,43 @@ const CODE_EXT = ['.mjs', '.js', '.json', '.md', '.css', '.html', '.yml', '.yaml
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-/** Expand `{a,b}` alternatives. `x.{light,dark}.json` → two strings. */
+/**
+ * Expand `{a,b}` alternatives. `x.{light,dark}.json` → two strings.
+ *
+ * A brace with NO comma is a placeholder rather than a choice — docs write
+ * `dist/{mode}/tokens.js` to mean "either mode". Treat those as a wildcard, or
+ * every templated path in every doc reads as a missing file.
+ */
 function expandBraces(s) {
   const m = /\{([^{}]+)\}/.exec(s);
   if (!m) return [s];
-  return m[1].split(',').flatMap((alt) => expandBraces(s.slice(0, m.index) + alt + s.slice(m.index + m[0].length)));
+  const alternatives = m[1].includes(',') ? m[1].split(',') : ['*'];
+  return alternatives.flatMap((alt) => expandBraces(s.slice(0, m.index) + alt + s.slice(m.index + m[0].length)));
 }
+
+/**
+ * Every filename in the repo, for resolving a doc that names a file without its
+ * directory — `snapshot.json` rather than `tokens/snapshot.json`. Prose does
+ * this constantly and it is not wrong; demanding full paths would be pedantry
+ * that gets the check switched off.
+ *
+ * Built once. Generated and vendored trees are skipped: a match inside
+ * node_modules would prove nothing about this repo.
+ */
+const basenames = (() => {
+  const seen = new Set();
+  const SKIP = new Set(['node_modules', '.git', 'storybook-static', 'build']);
+  (function walk(dir) {
+    let entries;
+    try { entries = readdirSync(dir, { withFileTypes: true }); } catch { return; }
+    for (const e of entries) {
+      if (SKIP.has(e.name)) continue;
+      if (e.isDirectory()) walk(join(dir, e.name));
+      else seen.add(e.name);
+    }
+  })(ROOT);
+  return seen;
+})();
 
 /** Does any real file match this path, allowing `*` within a single segment? */
 function pathMatches(rel) {
@@ -122,6 +168,7 @@ for (const doc of DOCS) {
   // 1. npm scripts — from both prose and fenced blocks, since commands live in both.
   for (const m of md.matchAll(/\bnpm run ([a-z0-9:_-]+)/g)) {
     checkedSpans++;
+    if (m[1] in EXTERNAL_SCRIPTS) continue;
     if (!SCRIPTS.has(m[1])) failures.push(`${doc}: \`npm run ${m[1]}\` — no such script in package.json`);
   }
   if (/\bnpm test\b/.test(md) && !SCRIPTS.has('test')) failures.push(`${doc}: \`npm test\` — no "test" script in package.json`);
@@ -133,7 +180,9 @@ for (const doc of DOCS) {
     if (rel in ABSENT_BY_DESIGN) continue;
     checkedSpans++;
     const candidates = expandBraces(rel);
-    if (!candidates.some(pathMatches)) {
+    // A bare filename with no directory resolves against the repo's basenames.
+    const bare = !rel.includes('/') && basenames.has(rel);
+    if (!bare && !candidates.some(pathMatches)) {
       failures.push(`${doc}: \`${span}\` — no such file (add it, fix the reference, or allowlist it with a reason)`);
     }
   }

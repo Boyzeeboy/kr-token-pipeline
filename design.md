@@ -43,8 +43,10 @@ open the right one for the task:
 - **Source token definitions (edit only via Figma sync, see below):**
   `tokens/tokens.{light,dark}.json` are the **only** token files. They are
   compiled into `dist/`, read by the Storybook stories, and tracked by the
-  changelog snapshot. (`color.json` / `typography.json` / `size.json` were a
-  second, unsynced copy that had drifted badly; deleted 2026-07-26.)
+  changelog snapshot. (A second, unsynced set — color.json, typography.json and
+  size.json — had drifted badly from what shipped and was deleted on
+  2026-07-26. Named here in plain text, not as file references, because they no
+  longer exist: don't reintroduce that shape.)
 - **Health & drift report:** `dist/report.html` (regenerated on every
   `npm run build`) — build/sync/consumer-contract checks, the colour audit,
   swatches for both modes, type scale, spacing, and radius, plus which tokens
