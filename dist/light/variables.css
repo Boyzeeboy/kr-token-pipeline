@@ -5,6 +5,7 @@
 :root {
   --kr-colour-action-primary: #a07840;
   --kr-colour-action-primary-hover: #886534;
+  --kr-colour-action-primary-hover-on-inverse: #c4a264;
   --kr-colour-action-primary-pressed: #6e5229;
   --kr-colour-action-secondary: #d4c9b4;
   --kr-colour-action-secondary-hover: #b8a990;
@@ -57,6 +58,7 @@
   --kr-colour-on-background-error: #8f1a1a;
   --kr-colour-on-background-info: #1d4ed8;
   --kr-colour-on-background-inverse: #f5f0e8;
+  --kr-colour-on-background-inverse-accent: #c4a264;
   --kr-colour-on-background-muted: #5c5040;
   --kr-colour-on-background-promo: #f5f0e8;
   --kr-colour-on-background-subtle: #3d3830;

@@ -1,5 +1,71 @@
 [
   {
+    "id": 14,
+    "timestamp": "2026-08-01T14:18:48.367Z",
+    "isFirstRun": false,
+    "tokenCount": 668,
+    "changeCount": 4,
+    "changes": [
+      {
+        "type": "modified",
+        "token": "tokens.dark/colour/action/primary-hover-on-inverse",
+        "before": "#a07840",
+        "after": "#886534"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.dark/colour/onBackground/inverse-accent",
+        "before": "#a07840",
+        "after": "#886534"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/colour/action/primary-hover-on-inverse",
+        "before": "#b28a50",
+        "after": "#c4a264"
+      },
+      {
+        "type": "modified",
+        "token": "tokens.light/colour/onBackground/inverse-accent",
+        "before": "#b28a50",
+        "after": "#c4a264"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "timestamp": "2026-08-01T14:06:14.914Z",
+    "isFirstRun": false,
+    "tokenCount": 668,
+    "changeCount": 4,
+    "changes": [
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/action/primary-hover-on-inverse",
+        "before": null,
+        "after": "#a07840"
+      },
+      {
+        "type": "added",
+        "token": "tokens.dark/colour/onBackground/inverse-accent",
+        "before": null,
+        "after": "#a07840"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/action/primary-hover-on-inverse",
+        "before": null,
+        "after": "#b28a50"
+      },
+      {
+        "type": "added",
+        "token": "tokens.light/colour/onBackground/inverse-accent",
+        "before": null,
+        "after": "#b28a50"
+      }
+    ]
+  },
+  {
     "id": 12,
     "timestamp": "2026-07-27T14:39:03.675Z",
     "isFirstRun": false,

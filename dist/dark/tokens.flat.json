@@ -1,6 +1,7 @@
 {
   "kr-colour-action-primary": "#c4a264",
   "kr-colour-action-primary-hover": "#d4bf94",
+  "kr-colour-action-primary-hover-on-inverse": "#886534",
   "kr-colour-action-primary-pressed": "#e8d9bc",
   "kr-colour-action-secondary": "#3d3830",
   "kr-colour-action-secondary-hover": "#5c5040",
@@ -53,6 +54,7 @@
   "kr-colour-on-background-error": "#ffaaaa",
   "kr-colour-on-background-info": "#90c4f5",
   "kr-colour-on-background-inverse": "#f5f0e8",
+  "kr-colour-on-background-inverse-accent": "#886534",
   "kr-colour-on-background-muted": "#b8a990",
   "kr-colour-on-background-promo": "#f5f0e8",
   "kr-colour-on-background-subtle": "#d4c9b4",
