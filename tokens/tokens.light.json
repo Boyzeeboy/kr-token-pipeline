@@ -1757,6 +1757,21 @@
       "104": {
         "$type": "dimension",
         "$value": "104px"
+      },
+      "120": {
+        "$description": "120px — section padding",
+        "$type": "dimension",
+        "$value": "120px"
+      },
+      "144": {
+        "$description": "144px — hero and large section padding",
+        "$type": "dimension",
+        "$value": "144px"
+      },
+      "168": {
+        "$description": "168px — largest section padding",
+        "$type": "dimension",
+        "$value": "168px"
       }
     },
     "xl": {
