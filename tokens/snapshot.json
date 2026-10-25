@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-01T14:18:48.367Z",
-  "tokenCount": 668,
+  "generatedAt": "2026-10-25T08:36:56.858Z",
+  "tokenCount": 674,
   "tokens": {
     "tokens.light/colour/action/primary": "#a07840",
     "tokens.light/colour/action/primary-hover": "#886534",
@@ -334,6 +334,9 @@
     "tokens.light/spacing/scale/64": "64px",
     "tokens.light/spacing/scale/80": "80px",
     "tokens.light/spacing/scale/104": "104px",
+    "tokens.light/spacing/scale/120": "120px",
+    "tokens.light/spacing/scale/144": "144px",
+    "tokens.light/spacing/scale/168": "168px",
     "tokens.light/spacing/xl": "40px",
     "tokens.light/spacing/xs": "4px",
     "tokens.dark/colour/action/primary": "#c4a264",
@@ -668,6 +671,9 @@
     "tokens.dark/spacing/scale/64": "64px",
     "tokens.dark/spacing/scale/80": "80px",
     "tokens.dark/spacing/scale/104": "104px",
+    "tokens.dark/spacing/scale/120": "120px",
+    "tokens.dark/spacing/scale/144": "144px",
+    "tokens.dark/spacing/scale/168": "168px",
     "tokens.dark/spacing/xl": "40px",
     "tokens.dark/spacing/xs": "4px"
   }
